@@ -4,7 +4,7 @@ async function copyPrompt(button) {
   try {
     await navigator.clipboard.writeText(code.textContent || "");
     const original = button.textContent;
-    button.textContent = "Copied";
+    button.textContent = "已复制 / Copied";
     window.setTimeout(() => {
       button.textContent = original;
     }, 1200);

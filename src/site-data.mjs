@@ -28,19 +28,19 @@ export const heroWall = [
     size: "hero"
   },
   {
-    screenshot: "pentagram.png",
-    alt: "Pentagram homepage",
-    label: "Swiss Grid",
-    meta: "typographic systems",
-    href: "/families/swiss-typographic-grid",
+    screenshot: "fictivekin-work.png",
+    alt: "Fictive Kin work page",
+    label: "Fictive Kin",
+    meta: "studio case index",
+    href: "/families/monochrome-studio-systems",
     size: "tall"
   },
   {
-    screenshot: "gumroad-live.png",
-    alt: "Gumroad homepage",
-    label: "Raw Postmodern",
-    meta: "anti-grid commerce",
-    href: "/families/playful-postmodern-anti-grid",
+    screenshot: "signal-a-studio.png",
+    alt: "Signal-A Studio homepage",
+    label: "Signal-A",
+    meta: "radical swiss archive",
+    href: "/families/monochrome-studio-systems",
     size: "standard"
   },
   {
@@ -74,6 +74,14 @@ export const heroWall = [
     meta: "calm prestige",
     href: "/families/quiet-lifestyle-editorial",
     size: "standard"
+  },
+  {
+    screenshot: "pentagram.png",
+    alt: "Pentagram homepage",
+    label: "Pentagram",
+    meta: "swiss systems",
+    href: "/families/swiss-typographic-grid",
+    size: "standard"
   }
 ];
 
@@ -90,7 +98,7 @@ export const browseModes = [
     id: "families",
     title: "Contemporary Web Families",
     count: "9",
-    summary: "从 editorial、Swiss、product precision、raw anti-grid 到 neon futurism，看今天网站最常见的表现家族。",
+    summary: "从杂志特稿 Magazine Editorial、瑞士网格 Swiss Grid、黑白工作室 Monochrome Studio、精密产品 Product Precision 到后现代反网格 Anti-Grid，看今天网站最常见的网页家族。",
     href: "/families",
     detail: "适合先找网页呈现方式和参考网站。"
   },
@@ -98,9 +106,9 @@ export const browseModes = [
     id: "use-cases",
     title: "Use Cases",
     count: "7",
-    summary: "按内容形状和任务选风格：出版、工具、品牌、图库、研究、发布页、灵感库。",
+    summary: "按内容形状和任务选风格：出版、工作室、工具、品牌、图库、研究、发布页、灵感库。",
     href: "#selection-matrix",
-    detail: "适合先从场景反推 family 和 structure。"
+    detail: "适合先从场景反推网页家族 Web Family 和结构 Structure。"
   }
 ];
 
@@ -171,10 +179,11 @@ export const historicalMovements = [
     whyItMatters: "如果你想做可扫描、可扩展、可归档的知识系统，Swiss 比“简单好看”更重要。",
     signatures: ["grid-first composition", "alignment as primary device", "type-led hierarchy", "metadata clarity"],
     watchFor: ["别把网格误解成呆板", "不能靠纯色块替代真正的秩序"],
-    webFamilyIds: ["swiss-typographic-grid", "evidence-dense-knowledge-surface"],
+    webFamilyIds: ["swiss-typographic-grid", "monochrome-studio-systems", "evidence-dense-knowledge-surface"],
     samples: [
       { screenshot: "pentagram.png", alt: "Pentagram homepage", label: "Pentagram" },
-      { screenshot: "studio-feixen.png", alt: "Studio Feixen homepage", label: "Studio Feixen" }
+      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" },
+      { screenshot: "fictivekin-work.png", alt: "Fictive Kin work page", label: "Fictive Kin / Work" }
     ],
     references: [
       { label: "Cooper Hewitt: Swiss Style", href: "https://www.cooperhewitt.org/2015/06/11/design-dictionary-swiss-style/" },
@@ -303,6 +312,29 @@ export const visualFamilies = [
       { label: "Cooper Hewitt: Swiss Style", href: "https://www.cooperhewitt.org/2015/06/11/design-dictionary-swiss-style/" }
     ],
     prompt: "Use a Swiss typographic grid: modular alignment, visible metadata, tight typographic hierarchy, and structure carried by the grid rather than decoration."
+  },
+  {
+    id: "monochrome-studio-systems",
+    title: "Monochrome Studio Systems",
+    summary: "Black-and-white studio surfaces where typography, restraint, and project indexing create identity without decorative excess.",
+    ancestors: ["swiss-international-typography", "minimalism", "mid-century-modern"],
+    structureIds: ["catalog-explorer", "archive-stack"],
+    samples: [
+      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" },
+      { screenshot: "fictivekin-work.png", alt: "Fictive Kin work page", label: "Fictive Kin / Work" },
+      { screenshot: "bureau-borsche.png", alt: "Bureau Borsche homepage", label: "Bureau Borsche" }
+    ],
+    signature: ["monochrome restraint", "type-led identity", "studio case index", "authored but controlled art direction"],
+    borrow: ["bold black-white typography", "portfolio indexing that still feels editorial", "clear studio point of view without visual clutter"],
+    bestFor: ["design studios", "creative consultancies", "identity-led portfolios", "culture-tech agencies"],
+    avoidWhen: ["the brand needs warmth first", "the page depends on color-coded wayfinding", "complex tool behaviors outrank identity"],
+    references: [
+      { label: "Signal-A Studio", href: "https://signal-a.studio/" },
+      { label: "Fictive Kin / Work", href: "https://fictivekin.com/work" },
+      { label: "Bureau Borsche", href: "https://bureauborsche.com/" },
+      { label: "OK-RM", href: "https://www.ok-rm.co.uk/" }
+    ],
+    prompt: "Use a monochrome studio systems family: black-and-white restraint, type-led identity, editorial pacing, and a project index that feels authored rather than templated."
   },
   {
     id: "product-precision-interface",

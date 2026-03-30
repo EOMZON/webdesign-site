@@ -8,6 +8,7 @@ export const familyMeta = {
   "magazine-editorial": { zh: "杂志特稿型", en: "Magazine Editorial" },
   "quiet-lifestyle-editorial": { zh: "静奢生活方式型", en: "Quiet Lifestyle Editorial" },
   "swiss-typographic-grid": { zh: "瑞士排印网格型", en: "Swiss Typographic Grid" },
+  "monochrome-studio-systems": { zh: "黑白工作室系统型", en: "Monochrome Studio Systems" },
   "product-precision-interface": { zh: "精密产品界面型", en: "Product Precision Interface" },
   "stage-driven-showcase": { zh: "舞台叙事展示型", en: "Stage-Driven Showcase" },
   "curated-reference-directory": { zh: "策展目录索引型", en: "Curated Reference Directory" },
@@ -28,6 +29,7 @@ export const structureMeta = {
 export const useCaseMeta = {
   "style-atlas-reference-library": { zh: "风格图谱与参考库", en: "Style Atlas / Reference Library" },
   "cultural-publishing": { zh: "文化出版首页", en: "Cultural Publishing / Editorial Front Page" },
+  "design-studio-identity-portfolio": { zh: "设计工作室与识别作品集", en: "Design Studio / Identity Portfolio" },
   "product-tool-platform": { zh: "产品与工具平台", en: "Product / Tool / Platform" },
   "research-knowledge-system": { zh: "研究与知识系统", en: "Research / Knowledge System" },
   "premium-lifestyle-brand": { zh: "高级生活方式品牌", en: "Premium Lifestyle / Cultural Brand" },
@@ -236,7 +238,7 @@ export const extraHistoricalMovements = [
     whyItMatters: "它解释了今天很多生活方式、高级品牌和产品型网站里那种克制、现代、亲和但不冷淡的气质。",
     signatures: ["现代日常", "轻盈比例", "功能与舒适并重", "开放空间感"],
     watchFor: ["容易被误做成单纯复古家居风", "不应只剩木色与怀旧滤镜"],
-    webFamilyIds: ["quiet-lifestyle-editorial", "product-precision-interface", "evidence-dense-knowledge-surface"],
+    webFamilyIds: ["quiet-lifestyle-editorial", "monochrome-studio-systems", "product-precision-interface", "evidence-dense-knowledge-surface"],
     samples: [
       { screenshot: "apple-macbook.png", alt: "Apple MacBook Pro page", label: "Apple MacBook Pro" },
       { screenshot: "kinfolk-live.png", alt: "Kinfolk homepage", label: "Kinfolk" }
@@ -256,10 +258,11 @@ export const extraHistoricalMovements = [
     whyItMatters: "今天很多高级感、安静感、科技感网站，都在不同程度上借极简主义建立秩序与克制。",
     signatures: ["元素最少化", "比例关系", "重复秩序", "结构自明"],
     watchFor: ["不要把空白误当成完成度", "简不等于信息不足"],
-    webFamilyIds: ["quiet-lifestyle-editorial", "evidence-dense-knowledge-surface", "product-precision-interface"],
+    webFamilyIds: ["quiet-lifestyle-editorial", "monochrome-studio-systems", "evidence-dense-knowledge-surface", "product-precision-interface"],
     samples: [
-      { screenshot: "apple-macbook.png", alt: "Apple MacBook Pro page", label: "Apple MacBook Pro" },
-      { screenshot: "kinfolk-live.png", alt: "Kinfolk homepage", label: "Kinfolk" }
+      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" },
+      { screenshot: "ok-rm.png", alt: "OK-RM homepage", label: "OK-RM" },
+      { screenshot: "apple-macbook.png", alt: "Apple MacBook Pro page", label: "Apple MacBook Pro" }
     ],
     references: [{ label: "Britannica: Minimalism", href: "https://www.britannica.com/art/Minimalism-art" }],
     webFit: "strong"

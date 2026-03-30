@@ -43,6 +43,7 @@ const familySummaryZh = {
   "magazine-editorial": "以封面感和主稿节奏为核心的杂志型页面，首屏像一期杂志的 lead spread，而不是通用 SaaS hero。",
   "quiet-lifestyle-editorial": "更安静、更慢、更像收藏刊物或气质目录的生活方式页面，强调质感与留白而不是强操作感。",
   "swiss-typographic-grid": "以网格、排印和对齐关系组织信息的系统型页面，适合会持续生长的档案、参考库和知识站。",
+  "monochrome-studio-systems": "以黑白排印、工作室语气和项目索引为核心的极简页面，克制但有明确作者性，特别适合设计工作室与识别作品集。",
   "product-precision-interface": "强调状态、层级和界面清晰度的产品型页面，气质服从任务，精度高于氛围。",
   "stage-driven-showcase": "首屏像舞台或镜头，一张图或一个场景先建立世界，再把内容逐层展开。",
   "curated-reference-directory": "以索引、缩略图和分类入口为核心的参考目录型页面，先让用户浏览，再让用户钻取。",
@@ -111,6 +112,18 @@ const rawUseCases = [
     structureIds: ["dossier", "archive-stack"],
     avoid: ["用 SaaS feature grid 讲文化内容", "过度 CTA 化", "图像太小"],
     note: selectionMatrix[1]?.note || "如果目标是让人读，而不是让人操作，用 dossier。"
+  },
+  {
+    id: "design-studio-identity-portfolio",
+    title: "Design Studio / Identity Portfolio",
+    summary: "适合设计工作室、创意顾问、识别系统与黑白极简作品集。重点不是卖功能，而是先建立工作室语气，再把项目做成可浏览索引。",
+    contentShape: "Case-led work index, strong studio statement, selective project detail, restrained visual identity.",
+    userGoal: "让访客先感受到工作室方法和视觉判断，再快速浏览代表项目、客户与案例方向。",
+    primaryFamilyId: "monochrome-studio-systems",
+    secondaryFamilyIds: ["swiss-typographic-grid", "magazine-editorial"],
+    structureIds: ["catalog-explorer", "archive-stack"],
+    avoid: ["把作品集做成纯 SaaS hero", "只有漂亮排版没有项目索引", "为了极简牺牲信息入口"],
+    note: "先建立工作室的 typographic voice，再把项目组织成清楚可浏览的索引。"
   },
   {
     id: "product-tool-platform",
@@ -196,6 +209,47 @@ const routeHref = {
   families: "/families",
   "use-cases": "/use-cases"
 };
+
+const movementYearMap = {
+  "arts-and-crafts": { start: 1860, end: 1900 },
+  "art-nouveau": { start: 1890, end: 1910 },
+  futurism: { start: 1909, end: 1916 },
+  suprematism: { start: 1913, end: 1919 },
+  constructivism: { start: 1913, end: 1930 },
+  dada: { start: 1916, end: 1924 },
+  "de-stijl": { start: 1917, end: 1932 },
+  "bauhaus-functional-modernism": { start: 1919, end: 1933 },
+  "new-typography": { start: 1923, end: 1938 },
+  "art-deco-streamlined-luxury": { start: 1925, end: 1939 },
+  "mid-century-modern": { start: 1945, end: 1969 },
+  "swiss-international-typography": { start: 1950, end: 1970 },
+  "brutalism-neo-brutalism": { start: 1954, end: 2025 },
+  "pop-art": { start: 1958, end: 1970 },
+  minimalism: { start: 1960, end: 1978 },
+  "postmodern-memphis": { start: 1981, end: 1990 },
+  "cyberpunk-techno-futurism": { start: 1982, end: 2025 }
+};
+
+const familyFieldMap = {
+  "swiss-typographic-grid": { x: 22, y: 70, shortZh: "瑞士网格", shortEn: "Swiss Grid" },
+  "evidence-dense-knowledge-surface": { x: 20, y: 48, shortZh: "证据知识", shortEn: "Evidence Dense" },
+  "product-precision-interface": { x: 30, y: 44, shortZh: "精密产品", shortEn: "Product Precision" },
+  "curated-reference-directory": { x: 42, y: 62, shortZh: "策展目录", shortEn: "Curated Directory" },
+  "monochrome-studio-systems": { x: 44, y: 50, shortZh: "黑白工作室", shortEn: "Monochrome Studio" },
+  "quiet-lifestyle-editorial": { x: 50, y: 28, shortZh: "静奢生活", shortEn: "Quiet Lifestyle" },
+  "magazine-editorial": { x: 56, y: 42, shortZh: "杂志特稿", shortEn: "Magazine Editorial" },
+  "stage-driven-showcase": { x: 76, y: 24, shortZh: "舞台展示", shortEn: "Stage Showcase" },
+  "playful-postmodern-anti-grid": { x: 84, y: 56, shortZh: "后现代反网格", shortEn: "Anti-Grid" },
+  "neon-techno-futurist-interface": { x: 90, y: 18, shortZh: "霓虹未来", shortEn: "Techno-Futurist" }
+};
+
+function movementYears(item) {
+  return movementYearMap[item.id] || { start: 1900, end: 1905 };
+}
+
+function percentBetween(value, min, max) {
+  return ((value - min) / (max - min)) * 100;
+}
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -284,9 +338,54 @@ function displayTitle(item) {
   return bilingualText(item?.titleZh, item?.titleEn || item?.title);
 }
 
+const phraseMeta = {
+  "cultural publishing": { zh: "文化出版", en: "Cultural Publishing" },
+  "feature homepages": { zh: "特稿首页", en: "Feature Homepages" },
+  "brand magazines": { zh: "品牌杂志", en: "Brand Magazines" },
+  "essay archives": { zh: "文章档案", en: "Essay Archives" },
+  fashion: { zh: "时尚", en: "Fashion" },
+  lifestyle: { zh: "生活方式", en: "Lifestyle" },
+  "cultural brands": { zh: "文化品牌", en: "Cultural Brands" },
+  "calmer portfolio shells": { zh: "安静作品集外壳", en: "Calmer Portfolio Shells" },
+  archives: { zh: "档案站", en: "Archives" },
+  "identity studios": { zh: "识别工作室", en: "Identity Studios" },
+  "reference libraries": { zh: "参考资料库", en: "Reference Libraries" },
+  "design system sites": { zh: "设计系统站", en: "Design System Sites" },
+  "design studios": { zh: "设计工作室", en: "Design Studios" },
+  "creative consultancies": { zh: "创意顾问机构", en: "Creative Consultancies" },
+  "identity-led portfolios": { zh: "识别导向作品集", en: "Identity-Led Portfolios" },
+  "culture-tech agencies": { zh: "文化科技机构", en: "Culture-Tech Agencies" },
+  "AI tools": { zh: "AI 工具", en: "AI Tools" },
+  "technical products": { zh: "技术产品", en: "Technical Products" },
+  "platform homepages": { zh: "平台首页", en: "Platform Homepages" },
+  "operator-facing tools": { zh: "操作员工具", en: "Operator-Facing Tools" },
+  campaigns: { zh: "Campaign 页面", en: "Campaigns" },
+  "flagship launches": { zh: "旗舰发布", en: "Flagship Launches" },
+  "film and entertainment": { zh: "电影与娱乐", en: "Film and Entertainment" },
+  "portfolio hero moments": { zh: "作品集首屏展示", en: "Portfolio Hero Moments" },
+  "reference atlases": { zh: "参考图谱", en: "Reference Atlases" },
+  "template libraries": { zh: "模板库", en: "Template Libraries" },
+  "inspiration directories": { zh: "灵感目录", en: "Inspiration Directories" },
+  "collection sites": { zh: "合集站", en: "Collection Sites" },
+  "research hubs": { zh: "研究中心", en: "Research Hubs" },
+  guides: { zh: "指南", en: "Guides" },
+  "knowledge and decision surfaces": { zh: "知识与决策界面", en: "Knowledge and Decision Surfaces" },
+  "creator brands": { zh: "创作者品牌", en: "Creator Brands" },
+  "experimental commerce": { zh: "实验型商业", en: "Experimental Commerce" },
+  "identity-led products": { zh: "识别导向产品", en: "Identity-Led Products" },
+  "anti-template launches": { zh: "反模板发布页", en: "Anti-Template Launches" },
+  gaming: { zh: "游戏", en: "Gaming" },
+  "hardware launches": { zh: "硬件发布", en: "Hardware Launches" },
+  "immersive tech brands": { zh: "沉浸式科技品牌", en: "Immersive Tech Brands" },
+  "futurist campaign pages": { zh: "未来主义 Campaign 页", en: "Futurist Campaign Pages" },
+  "product marketing": { zh: "产品营销", en: "Product Marketing" },
+  "knowledge surfaces": { zh: "知识界面", en: "Knowledge Surfaces" },
+  "technical platforms": { zh: "技术平台", en: "Technical Platforms" }
+};
+
 function normalizePill(item) {
   if (typeof item === "string") {
-    return { zh: item, en: "" };
+    return phraseMeta[item] || { zh: item, en: "" };
   }
 
   if (item && typeof item === "object") {
@@ -390,7 +489,7 @@ function renderTopbar() {
         <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
         <a href="/use-cases">${escapeHtml(bilingualText("使用场景", "Use Cases"))}</a>
       </nav>
-      <span class="status-pill">atlas v0.6</span>
+      <span class="status-pill">atlas v0.7</span>
     </div>
   </header>`;
 }
@@ -484,6 +583,84 @@ function renderBrowseModes() {
           </article>`;
         })
         .join("")}
+    </div>
+  </section>`;
+}
+
+function renderTimelineAtlasSection(options = {}) {
+  const {
+    title = bilingualText("设计谱系时间轴", "Lineage Timeline"),
+    kicker = bilingualText("历史演变", "Historical Evolution"),
+    summary = "用一条可浏览的编年轨道，把历史流派、时间跨度和今天网页里仍然活着的语言串起来。",
+    sectionId = "timeline-atlas"
+  } = options;
+
+  const ordered = [...movements].sort((a, b) => movementYears(a).start - movementYears(b).start);
+  const minYear = 1860;
+  const maxYear = 2025;
+  const ticks = [1860, 1900, 1950, 2000, 2025];
+
+  return `<section class="section" id="${escapeHtml(sectionId)}">
+    ${renderSectionHead(kicker, title, summary)}
+    <div class="atlas-scroller">
+      <div class="timeline-atlas card-surface">
+        <div class="timeline-track"></div>
+        ${ticks
+          .map((year) => {
+            const left = percentBetween(year, minYear, maxYear);
+            return `<span class="timeline-tick" style="left:${left}%;">
+              <span class="timeline-tick-line"></span>
+              <span class="timeline-tick-label">${escapeHtml(String(year))}</span>
+            </span>`;
+          })
+          .join("")}
+        ${ordered
+          .map((item, index) => {
+            const years = movementYears(item);
+            const left = percentBetween(years.start, minYear, maxYear);
+            const lane = index % 2 === 0 ? "top" : "bottom";
+            return `<a ${linkAttrs(movementHref(item.id), `timeline-node timeline-node--${lane} timeline-node--${item.webFit || "medium"}`)} style="left:${left}%;">
+              <span class="timeline-node-stem"></span>
+              <span class="timeline-node-dot"></span>
+              <span class="timeline-node-year">${escapeHtml(String(years.start))}</span>
+              <span class="timeline-node-label">${renderBilingualStack(item.titleZh, item.titleEn || item.title, "timeline-label-stack")}</span>
+            </a>`;
+          })
+          .join("")}
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderFamilyCoordinateSection() {
+  const plottedFamilies = families
+    .map((item) => ({ ...item, coords: familyFieldMap[item.id] }))
+    .filter((item) => item.coords);
+
+  return `<section class="section" id="style-field">
+    ${renderSectionHead(
+      bilingualText("风格坐标场", "Style Coordinate Field"),
+      bilingualText("不是按时间，而是按气质和结构选", "Choose by temperament, not only by chronology"),
+      "横轴从系统与档案走向舞台与表现，纵轴从安静克制走向强烈张力。"
+    )}
+    <div class="atlas-scroller">
+      <div class="field-atlas card-surface">
+        <div class="field-axis field-axis--x"></div>
+        <div class="field-axis field-axis--y"></div>
+        <div class="field-axis-label field-axis-label--left">${escapeHtml(bilingualText("系统与档案", "System + Archive"))}</div>
+        <div class="field-axis-label field-axis-label--right">${escapeHtml(bilingualText("舞台与表现", "Stage + Expression"))}</div>
+        <div class="field-axis-label field-axis-label--top">${escapeHtml(bilingualText("强烈张力", "Intense"))}</div>
+        <div class="field-axis-label field-axis-label--bottom">${escapeHtml(bilingualText("安静克制", "Quiet"))}</div>
+        ${plottedFamilies
+          .map((item) => {
+            const { x, y, shortZh, shortEn } = item.coords;
+            return `<a ${linkAttrs(familyHref(item.id), "field-point")} style="left:${x}%; top:${y}%;">
+              <span class="field-point-dot"></span>
+              <span class="field-point-label">${renderBilingualStack(shortZh || item.titleZh, shortEn || item.titleEn || item.title, "field-label-stack")}</span>
+            </a>`;
+          })
+          .join("")}
+      </div>
     </div>
   </section>`;
 }
@@ -930,6 +1107,8 @@ function buildHomePage() {
     body: [
       renderHeroStage(),
       renderBrowseModes(),
+      renderTimelineAtlasSection(),
+      renderFamilyCoordinateSection(),
       renderFamilyGridSection({ familiesList: families.slice(0, 6) }),
       renderUseCaseSection({ useCasesList: useCases }),
       renderMovementGridSection()
@@ -948,7 +1127,7 @@ function buildFamiliesPage() {
         kicker: bilingualText("网页家族", "Web Families"),
         title: bilingualText("按网页家族浏览", "Browse by Web Family"),
         summary: "这里看的是今天网站最常见的呈现家族，适合直接找站型参考。",
-        detail: "从 Editorial、Swiss、Directory、Product、Stage 到 Anti-Grid，先看类型，再下钻细节。",
+        detail: "从 Editorial、Swiss、Monochrome Studio、Directory、Product、Stage 到 Anti-Grid，先看类型，再下钻细节。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/movements", "button")}>${escapeHtml(bilingualText("查看历史流派", "Open Movements"))}</a></div>`
       }),
       renderFamilyGridSection({
@@ -977,6 +1156,12 @@ function buildMovementsPage() {
         detail: "从 Arts and Crafts、Art Nouveau、Bauhaus、Swiss、Mid-Century Modern 到 Brutalism、Memphis、Cyberpunk，先识别祖先语言。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
+      renderTimelineAtlasSection({
+        title: bilingualText("历史流派时间轴", "Historical Timeline"),
+        kicker: bilingualText("流派轨道", "Movement Timeline"),
+        summary: "先看时间上的先后关系，再回到下方逐条浏览，会更容易理解谁是谁的祖先语言。",
+        sectionId: "movement-timeline"
+      }),
       renderMovementGridSection({
         title: bilingualText("全部历史流派", "All Historical Movements"),
         kicker: bilingualText("历史索引", "History Index"),
@@ -1000,13 +1185,13 @@ function buildUseCasesPage() {
         kicker: bilingualText("使用场景", "Use Cases"),
         title: bilingualText("按内容和任务反推风格", "Work backward from the job"),
         summary: "如果你不是在做审美研究，而是在准备一个具体网站，这一层通常会更快。",
-        detail: "把我要做什么内容直接映射到 family、structure 和 prompt packet。",
+        detail: "把我要做什么内容直接映射到更合适的网页家族、结构方式和参考组合。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
       renderUseCaseSection({
         title: bilingualText("全部使用场景", "All Use Cases"),
         kicker: bilingualText("任务索引", "Task Index"),
-        summary: "从 style atlas、文化出版、研究知识站、AI 工具到 future-tech launch，都能直接找到推荐组合。",
+        summary: "从 style atlas、文化出版、设计工作室、研究知识站、AI 工具到 future-tech launch，都能直接找到推荐组合。",
         useCasesList: useCases,
         sectionId: "all-use-cases",
         actionMarkup: ""
