@@ -2,13 +2,13 @@
 
 :root {
   color-scheme: light;
-  --bg: #f5f4ef;
-  --panel: #fcfbf8;
+  --bg: #f4f4f3;
+  --panel: #fbfbfa;
   --panel-strong: #ffffff;
-  --panel-muted: #ece8df;
+  --panel-muted: #ebebea;
   --ink: #111111;
-  --ink-soft: #4e4a44;
-  --muted: #7a746b;
+  --ink-soft: #4d4d49;
+  --muted: #72726d;
   --line: #151515;
   --line-soft: rgba(17, 17, 17, 0.12);
   --max: 1560px;
@@ -63,7 +63,7 @@ code {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(245, 244, 239, 0.96);
+  background: rgba(244, 244, 243, 0.96);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
 }
@@ -206,6 +206,33 @@ code {
 .card-title {
   font-size: 1.5rem;
   line-height: 1.05;
+}
+
+.bilingual-inline {
+  display: inline;
+}
+
+.bilingual-stack {
+  display: grid;
+  gap: 0.14rem;
+}
+
+.bilingual-stack-zh,
+.bilingual-stack-en {
+  display: block;
+}
+
+.bilingual-stack-en {
+  font-family: var(--sans);
+  font-size: 0.72em;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+.detail-bilingual-title .bilingual-stack-en,
+.card-overlay-title .bilingual-stack-en {
+  color: inherit;
+  opacity: 0.82;
 }
 
 .section-summary,
@@ -460,6 +487,10 @@ code {
   line-height: 1.05;
 }
 
+.card-overlay-title .bilingual-stack {
+  gap: 0.1rem;
+}
+
 .route-grid,
 .family-grid,
 .movement-grid,
@@ -586,6 +617,10 @@ code {
   white-space: pre-wrap;
   font-size: 0.84rem;
   line-height: 1.7;
+}
+
+.pill-text {
+  white-space: normal;
 }
 
 .back-link {

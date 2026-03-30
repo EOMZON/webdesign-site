@@ -11,6 +11,14 @@ import {
   structurePatterns,
   visualFamilies
 } from "../src/site-data.mjs";
+import {
+  browseModeMeta,
+  extraHistoricalMovements,
+  familyMeta,
+  movementMeta,
+  structureMeta,
+  useCaseMeta
+} from "../src/atlas-taxonomy.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,25 +26,68 @@ const root = path.resolve(__dirname, "..");
 const distRoot = path.join(root, "dist");
 const srcRoot = path.join(root, "src");
 
-const families = visualFamilies.map((item) => ({
-  ...item,
-  cover: item.samples[0]?.screenshot || "",
-  movementIds: item.ancestors || []
-}));
+function addBilingualFields(item, meta = {}, fallbackZh = "") {
+  const titleEn = meta.en || item.titleEn || item.title || "";
+  const titleZh = meta.zh || item.titleZh || fallbackZh || item.title || titleEn;
+  return {
+    ...item,
+    titleEn,
+    titleZh,
+    title: titleEn
+  };
+}
 
-const movements = historicalMovements.map((item) => ({
-  ...item,
-  era: item.period,
-  familyIds: item.webFamilyIds || [],
-  principles: item.signatures || [],
-  watchouts: item.watchFor || []
-}));
+const structures = structurePatterns.map((item) => addBilingualFields(item, structureMeta[item.id]));
 
-const familyMap = new Map(families.map((item) => [item.id, item]));
-const movementMap = new Map(movements.map((item) => [item.id, item]));
-const structureMap = new Map(structurePatterns.map((item) => [item.id, item]));
+const familySummaryZh = {
+  "magazine-editorial": "以封面感和主稿节奏为核心的杂志型页面，首屏像一期杂志的 lead spread，而不是通用 SaaS hero。",
+  "quiet-lifestyle-editorial": "更安静、更慢、更像收藏刊物或气质目录的生活方式页面，强调质感与留白而不是强操作感。",
+  "swiss-typographic-grid": "以网格、排印和对齐关系组织信息的系统型页面，适合会持续生长的档案、参考库和知识站。",
+  "product-precision-interface": "强调状态、层级和界面清晰度的产品型页面，气质服从任务，精度高于氛围。",
+  "stage-driven-showcase": "首屏像舞台或镜头，一张图或一个场景先建立世界，再把内容逐层展开。",
+  "curated-reference-directory": "以索引、缩略图和分类入口为核心的参考目录型页面，先让用户浏览，再让用户钻取。",
+  "evidence-dense-knowledge-surface": "论点、证据、导航和标签并存的知识型页面，密度高但必须保持可信和可扫描。",
+  "playful-postmodern-anti-grid": "带着反模板态度的后现代页面，通过反网格、强形状和少量冲突打破同质化。",
+  "neon-techno-futurist-interface": "黑底霓虹、世界观先行的未来科技页面，更接近游戏、硬件或沉浸式 tech launch。"
+};
 
-const useCases = [
+const families = visualFamilies.map((item) =>
+  addBilingualFields(
+    {
+      ...item,
+      cover: item.samples[0]?.screenshot || "",
+      movementIds: item.ancestors || [],
+      summaryZh: familySummaryZh[item.id] || ""
+    },
+    familyMeta[item.id]
+  )
+);
+
+const movementSeed = new Map();
+
+for (const item of historicalMovements) {
+  movementSeed.set(item.id, item);
+}
+
+for (const item of extraHistoricalMovements) {
+  if (!movementSeed.has(item.id)) {
+    movementSeed.set(item.id, item);
+  }
+}
+
+const movements = Array.from(movementSeed.values()).map((item) => {
+  const withTitles = addBilingualFields(item, movementMeta[item.id]);
+  return {
+    ...withTitles,
+    era: item.period,
+    familyIds: item.webFamilyIds || [],
+    principles: item.signatures || [],
+    watchouts: item.watchFor || [],
+    webFit: item.webFit || movementMeta[item.id]?.webFit || ""
+  };
+});
+
+const rawUseCases = [
   {
     id: "style-atlas-reference-library",
     title: "Style Atlas / Reference Library",
@@ -123,34 +174,28 @@ const useCases = [
   }
 ];
 
+const useCases = rawUseCases.map((item) => addBilingualFields(item, useCaseMeta[item.id]));
+
+const routes = browseModes.map((item) => {
+  const bilingual = addBilingualFields(item, browseModeMeta[item.id]);
+  let count = item.count;
+
+  if (item.id === "movements") count = String(movements.length);
+  if (item.id === "families") count = String(families.length);
+  if (item.id === "use-cases") count = String(useCases.length);
+
+  return { ...bilingual, count };
+});
+
+const familyMap = new Map(families.map((item) => [item.id, item]));
+const movementMap = new Map(movements.map((item) => [item.id, item]));
+const structureMap = new Map(structures.map((item) => [item.id, item]));
+
 const routeHref = {
   movements: "/movements",
   families: "/families",
   "use-cases": "/use-cases"
 };
-
-const operatingSteps = [
-  {
-    step: "01",
-    title: "Choose A Movement",
-    detail: "先判断历史语言。Swiss、Bauhaus、Memphis、Art Deco、Cyberpunk 分别会把网站带向不同语法。"
-  },
-  {
-    step: "02",
-    title: "Choose A Family",
-    detail: "再判断当代网页家族。editorial、directory、product precision、stage-driven 不该混成一层。"
-  },
-  {
-    step: "03",
-    title: "Choose A Structure",
-    detail: "最后决定它是 catalog、dossier、archive 还是 immersive stage。结构必须单独选。"
-  },
-  {
-    step: "04",
-    title: "Ship A Packet",
-    detail: "详情页最后输出 borrow、avoid、sample links 和 prompt DNA，方便你以后直接交给 agent。"
-  }
-];
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -216,31 +261,76 @@ function canonicalFor(pathname) {
   return pathname === "/" ? `${origin}/` : `${origin}${pathname}`;
 }
 
+function bilingualText(zh, en) {
+  if (!zh && !en) return "";
+  if (!zh) return en;
+  if (!en) return zh;
+  return `${zh} / ${en}`;
+}
+
+function renderBilingualInline(zh, en, className = "") {
+  const text = bilingualText(zh, en);
+  return `<span class="${escapeHtml(className || "bilingual-inline")}">${escapeHtml(text)}</span>`;
+}
+
+function renderBilingualStack(zh, en, className = "") {
+  return `<span class="bilingual-stack${className ? ` ${escapeHtml(className)}` : ""}">
+    <span class="bilingual-stack-zh">${escapeHtml(zh || en || "")}</span>
+    ${en ? `<span class="bilingual-stack-en">${escapeHtml(en)}</span>` : ""}
+  </span>`;
+}
+
+function displayTitle(item) {
+  return bilingualText(item?.titleZh, item?.titleEn || item?.title);
+}
+
+function normalizePill(item) {
+  if (typeof item === "string") {
+    return { zh: item, en: "" };
+  }
+
+  if (item && typeof item === "object") {
+    return {
+      zh: item.zh || item.titleZh || item.labelZh || item.title || item.en || item.titleEn || "",
+      en: item.en || item.titleEn || item.labelEn || ""
+    };
+  }
+
+  return { zh: "", en: "" };
+}
+
 function renderList(items = []) {
-  if (!items.length) return `<p class="empty-note">Pending curation.</p>`;
+  if (!items.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补充", "Pending"))}</p>`;
   return `<ul class="bullet-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
 
 function renderStaticPills(items = []) {
-  if (!items.length) return `<p class="empty-note">Pending curation.</p>`;
-  return `<div class="pill-row">${items.map((item) => `<span class="pill is-static">${escapeHtml(item)}</span>`).join("")}</div>`;
+  if (!items.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补充", "Pending"))}</p>`;
+  return `<div class="pill-row">
+    ${items
+      .map((item) => {
+        const pill = normalizePill(item);
+        return `<span class="pill is-static">${renderBilingualInline(pill.zh, pill.en, "pill-text")}</span>`;
+      })
+      .join("")}
+  </div>`;
 }
 
 function renderLinkedPills(ids = [], sourceMap, hrefFor) {
-  if (!ids.length) return `<p class="empty-note">Pending links.</p>`;
+  if (!ids.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补链接", "Pending Links"))}</p>`;
   return `<div class="pill-row">
     ${ids
       .map((id) => {
         const item = sourceMap.get(id);
         if (!item) return "";
-        return `<a ${linkAttrs(hrefFor(id), "pill")}>${escapeHtml(item.title)}</a>`;
+        return `<a ${linkAttrs(hrefFor(id), "pill")}>${renderBilingualInline(item.titleZh, item.titleEn || item.title, "pill-text")}</a>`;
       })
       .join("")}
   </div>`;
 }
 
 function renderExternalLinks(items = []) {
-  if (!items.length) return `<p class="empty-note">Pending links.</p>`;
+  if (!items.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补链接", "Pending Links"))}</p>`;
   return `<ul class="reference-list">
     ${items
       .map(
@@ -253,12 +343,12 @@ function renderExternalLinks(items = []) {
 
 function renderImageFrame(fileName, altText, className = "") {
   if (!fileName) {
-    return `<div class="image-placeholder ${escapeHtml(className)}">Image pending</div>`;
+    return `<div class="image-placeholder ${escapeHtml(className)}">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`;
   }
 
   const absolute = path.join(srcRoot, "screenshots", fileName);
   if (!fs.existsSync(absolute)) {
-    return `<div class="image-placeholder ${escapeHtml(className)}">Missing screenshot<br />${escapeHtml(fileName)}</div>`;
+    return `<div class="image-placeholder ${escapeHtml(className)}">${escapeHtml(bilingualText("截图缺失", "Missing Screenshot"))}<br />${escapeHtml(fileName)}</div>`;
   }
 
   const cls = className ? ` ${className}` : "";
@@ -295,12 +385,12 @@ function renderTopbar() {
         <strong class="brand-name">Zondev</strong>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/families">Families</a>
-        <a href="/movements">Movements</a>
-        <a href="/use-cases">Use Cases</a>
+        <a href="/">${escapeHtml(bilingualText("首页", "Home"))}</a>
+        <a href="/families">${escapeHtml(bilingualText("网页家族", "Web Families"))}</a>
+        <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
+        <a href="/use-cases">${escapeHtml(bilingualText("使用场景", "Use Cases"))}</a>
       </nav>
-      <span class="status-pill">atlas v0.5</span>
+      <span class="status-pill">atlas v0.6</span>
     </div>
   </header>`;
 }
@@ -326,7 +416,7 @@ function layout({ title, description, pathname = "/", body, pageClass = "" }) {
       <main class="page">${body}</main>
       <footer class="footer">
         <div class="footer-inner">
-          <p>Design Zondev is a design-style atlas: movement → family → structure → prompt packet.</p>
+          <p>${escapeHtml(bilingualText("设计风格图谱：历史流派、网页家族、使用场景与真实参考", "Design atlas: movements, web families, use cases, and live references"))}</p>
           <p>Updated ${escapeHtml(siteMeta.updatedAt)} · ${escapeHtml(siteMeta.origin.replace(/^https?:\/\//, ""))}</p>
         </div>
       </footer>
@@ -336,11 +426,15 @@ function layout({ title, description, pathname = "/", body, pageClass = "" }) {
 }
 
 function renderHeroTile(item) {
+  const familyId = item.href && item.href.startsWith("/families/") ? item.href.split("/").filter(Boolean).pop() : "";
+  const family = familyMap.get(familyId);
+  const metaLabel = family ? displayTitle(family) : item.meta;
+
   return `<a ${linkAttrs(item.href, `hero-tile hero-tile--${item.size || "standard"}`)}>
     ${renderImageFrame(item.screenshot, item.alt)}
     <div class="hero-caption">
       <span class="hero-caption-label">${escapeHtml(item.label)}</span>
-      <span class="hero-caption-meta">${escapeHtml(item.meta)}</span>
+      <span class="hero-caption-meta">${escapeHtml(metaLabel)}</span>
     </div>
   </a>`;
 }
@@ -352,24 +446,14 @@ function renderHeroStage() {
         ${heroWall.map((item) => renderHeroTile(item)).join("")}
       </div>
       <aside class="hero-aside hero-aside-dark card-surface">
-        <p class="eyebrow">${escapeHtml(hero.eyebrow)}</p>
+        <p class="eyebrow">${escapeHtml(bilingualText("风格图谱首页", "Design Atlas"))}</p>
         <h1 class="hero-title">${escapeHtml(hero.title)}</h1>
-        <p class="hero-intro">${escapeHtml(hero.intro)}</p>
-        <p class="hero-support">${escapeHtml(hero.support)}</p>
-        <div class="hero-mini-steps">
-          ${operatingSteps
-            .map(
-              (item) => `<div class="hero-step-line">
-                <span class="step-number">${escapeHtml(item.step)}</span>
-                <p>${escapeHtml(item.title)}</p>
-              </div>`
-            )
-            .join("")}
-        </div>
-        <p class="hero-note">${escapeHtml(hero.note)}</p>
+        <p class="hero-intro">先看图，再选类，再下钻到真实参考页。</p>
+        <p class="hero-support">历史流派 / Historical Movements、网页家族 / Web Families、使用场景 / Use Cases 三条路径并行存在，不再被一种固定模板绑死。</p>
         <div class="hero-actions">
-          <a ${linkAttrs(hero.primaryCta.href, "button")}>${escapeHtml(hero.primaryCta.label)}</a>
-          <a ${linkAttrs("/use-cases", "ghost-button")}>Browse Use Cases</a>
+          <a ${linkAttrs("/movements", "ghost-button")}>${escapeHtml(bilingualText("浏览历史流派", "Browse Movements"))}</a>
+          <a ${linkAttrs(hero.primaryCta.href, "button")}>${escapeHtml(bilingualText("浏览网页家族", "Browse Families"))}</a>
+          <a ${linkAttrs("/use-cases", "ghost-button")}>${escapeHtml(bilingualText("浏览使用场景", "Browse Use Cases"))}</a>
         </div>
       </aside>
     </div>
@@ -379,23 +463,23 @@ function renderHeroStage() {
 function renderBrowseModes() {
   return `<section class="section" id="browse-modes">
     ${renderSectionHead(
-      "Entry Routes",
-      "先按你最有把握的维度进去",
-      "首页只负责定调和导流。真正的解释要下钻到 families、movements 和 use cases。"
+      bilingualText("浏览入口", "Entry Routes"),
+      bilingualText("先从你最熟悉的维度进入", "Start from the dimension you recognize first"),
+      "先做选择，再进详情页，不把整套理论都堆在首页。"
     )}
     <div class="route-grid">
-      ${browseModes
+      ${routes
         .map((item) => {
           const href = routeHref[item.id] || item.href || "/";
           return `<article class="route-card card-surface">
             <div class="card-body">
               <div class="route-card-top">
-                <p class="card-kicker">${escapeHtml(item.title)}</p>
+                <p class="card-kicker">${escapeHtml(bilingualText(item.titleZh, item.titleEn || item.title))}</p>
                 <span class="route-count">${escapeHtml(item.count)}</span>
               </div>
               <h3 class="card-title">${escapeHtml(item.summary)}</h3>
               <p class="card-summary">${escapeHtml(item.detail)}</p>
-              <a ${linkAttrs(href, "text-link")}>Open route</a>
+              <a ${linkAttrs(href, "text-link")}>${escapeHtml(bilingualText("进入分类", "Open Route"))}</a>
             </div>
           </article>`;
         })
@@ -407,35 +491,35 @@ function renderBrowseModes() {
 function renderFamilyCard(item) {
   return `<article class="family-card card-surface">
     <a ${linkAttrs(familyHref(item.id), "card-media family-card-media")}>
-      ${renderImageFrame(item.cover, item.title)}
+      ${renderImageFrame(item.cover, displayTitle(item))}
       <div class="card-overlay">
-        <span class="card-overlay-label">Web Family</span>
-        <h3 class="card-overlay-title">${escapeHtml(item.title)}</h3>
+        <span class="card-overlay-label">${escapeHtml(bilingualText("网页家族", "Web Family"))}</span>
+        <h3 class="card-overlay-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
       </div>
     </a>
     <div class="card-body">
-      <p class="card-summary">${escapeHtml(item.summary)}</p>
+      <p class="card-summary">${escapeHtml(item.summaryZh || item.summary)}</p>
       <div class="meta-block">
-        <h4>Historical Roots</h4>
+        <h4>${escapeHtml(bilingualText("历史源头", "Historical Roots"))}</h4>
         ${renderLinkedPills(item.movementIds, movementMap, movementHref)}
       </div>
       <div class="meta-block">
-        <h4>Best For</h4>
+        <h4>${escapeHtml(bilingualText("适合内容", "Best For"))}</h4>
         ${renderStaticPills(item.bestFor.slice(0, 3))}
       </div>
-      <a ${linkAttrs(familyHref(item.id), "text-link")}>Open family</a>
+      <a ${linkAttrs(familyHref(item.id), "text-link")}>${escapeHtml(bilingualText("查看详情", "Open Family"))}</a>
     </div>
   </article>`;
 }
 
 function renderFamilyGridSection(options = {}) {
   const {
-    title = "Contemporary Web Families",
-    kicker = "Current Families",
-    summary = "今天网页里已经稳定成型的风格家族。它们回答的是‘现在的网站长什么样’，而不是历史谱系本身。",
+    title = bilingualText("网页家族", "Web Families"),
+    kicker = bilingualText("当代网页类型", "Current Families"),
+    summary = "今天网站里已经稳定成型的呈现家族。它们回答的是网页现在怎么长，而不是历史祖先本身。",
     familiesList = families,
     sectionId = "featured-families",
-    actionMarkup = `<a ${linkAttrs("/families", "text-link")}>All families</a>`
+    actionMarkup = `<a ${linkAttrs("/families", "text-link")}>${escapeHtml(bilingualText("全部家族", "All Families"))}</a>`
   } = options;
 
   return `<section class="section" id="${escapeHtml(sectionId)}">
@@ -459,25 +543,25 @@ function renderMovementCard(item) {
         <p class="card-kicker">${escapeHtml(item.era)}</p>
         <span class="micro-note">${escapeHtml(item.origin)}</span>
       </div>
-      <h3 class="card-title">${escapeHtml(item.title)}</h3>
+      <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
       <p class="card-summary">${escapeHtml(item.summary)}</p>
       <div class="meta-block">
-        <h4>Descendant Families</h4>
+        <h4>${escapeHtml(bilingualText("后代网页家族", "Descendant Families"))}</h4>
         ${renderLinkedPills(item.familyIds, familyMap, familyHref)}
       </div>
-      <a ${linkAttrs(movementHref(item.id), "text-link")}>Open movement</a>
+      <a ${linkAttrs(movementHref(item.id), "text-link")}>${escapeHtml(bilingualText("查看详情", "Open Movement"))}</a>
     </div>
   </article>`;
 }
 
 function renderMovementGridSection(options = {}) {
   const {
-    title = "Historical Movements",
-    kicker = "Design History",
-    summary = "把历史谱系和网页家族拆开之后，风格判断才会稳定。这里看的是祖先语言，而不是现成模板。",
+    title = bilingualText("历史流派", "Historical Movements"),
+    kicker = bilingualText("设计史谱系", "Design History"),
+    summary = "把历史谱系和网页家族拆开后，风格判断才会稳定。这里看的是祖先语言，不是现成网页模板。",
     movementsList = movements,
     sectionId = "historical-movements",
-    actionMarkup = `<a ${linkAttrs("/movements", "text-link")}>All movements</a>`
+    actionMarkup = `<a ${linkAttrs("/movements", "text-link")}>${escapeHtml(bilingualText("全部流派", "All Movements"))}</a>`
   } = options;
 
   return `<section class="section" id="${escapeHtml(sectionId)}">
@@ -490,39 +574,39 @@ function renderMovementGridSection(options = {}) {
 
 function renderUseCaseCard(item) {
   const primaryFamily = familyMap.get(item.primaryFamilyId);
-  const structureTitles = item.structureIds.map((id) => structureMap.get(id)?.title).filter(Boolean);
+  const structureTitles = item.structureIds.map((id) => structureMap.get(id)).filter(Boolean);
 
   return `<article class="usecase-card card-surface">
     <a ${linkAttrs(useCaseHref(item.id), "card-media usecase-media")}>
-      ${renderImageFrame(primaryFamily?.cover || "", primaryFamily?.title || item.title)}
+      ${renderImageFrame(primaryFamily?.cover || "", displayTitle(primaryFamily) || displayTitle(item))}
       <div class="card-overlay">
-        <span class="card-overlay-label">Use Case</span>
-        <h3 class="card-overlay-title">${escapeHtml(item.title)}</h3>
+        <span class="card-overlay-label">${escapeHtml(bilingualText("使用场景", "Use Case"))}</span>
+        <h3 class="card-overlay-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
       </div>
     </a>
     <div class="card-body">
       <p class="card-summary">${escapeHtml(item.summary)}</p>
       <div class="meta-block">
-        <h4>Primary Family</h4>
-        <p>${escapeHtml(primaryFamily?.title || "Pending")}</p>
+        <h4>${escapeHtml(bilingualText("主家族", "Primary Family"))}</h4>
+        <p>${escapeHtml(displayTitle(primaryFamily) || bilingualText("待补充", "Pending"))}</p>
       </div>
       <div class="meta-block">
-        <h4>Structure</h4>
+        <h4>${escapeHtml(bilingualText("结构", "Structure"))}</h4>
         ${renderStaticPills(structureTitles)}
       </div>
-      <a ${linkAttrs(useCaseHref(item.id), "text-link")}>Open use case</a>
+      <a ${linkAttrs(useCaseHref(item.id), "text-link")}>${escapeHtml(bilingualText("查看详情", "Open Use Case"))}</a>
     </div>
   </article>`;
 }
 
 function renderUseCaseSection(options = {}) {
   const {
-    title = "Use Cases",
-    kicker = "Task Fit",
-    summary = "如果你不是从审美出发，而是从‘我要做什么内容’出发，这一层会更快把你带到正确的 family 和 structure。",
+    title = bilingualText("使用场景", "Use Cases"),
+    kicker = bilingualText("任务匹配", "Task Fit"),
+    summary = "如果你不是从审美出发，而是从我要做什么内容出发，这一层会更快带你选对 family 和 structure。",
     useCasesList = useCases,
     sectionId = "use-cases",
-    actionMarkup = `<a ${linkAttrs("/use-cases", "text-link")}>All use cases</a>`
+    actionMarkup = `<a ${linkAttrs("/use-cases", "text-link")}>${escapeHtml(bilingualText("全部场景", "All Use Cases"))}</a>`
   } = options;
 
   return `<section class="section" id="${escapeHtml(sectionId)}">
@@ -556,76 +640,96 @@ function renderFamilyDetail(item) {
   const relatedStructures = item.structureIds.map((id) => structureMap.get(id)).filter(Boolean);
 
   return layout({
-    title: `${item.title} · ${siteMeta.title}`,
-    description: item.summary,
+    title: `${displayTitle(item)} · ${siteMeta.title}`,
+    description: item.summaryZh || item.summary,
     pathname: familyHref(item.id),
     pageClass: "detail-page family-detail-page",
     body: [
       `<section class="detail-hero">
         <div class="detail-media">
-          ${renderImageFigure(item.cover, item.title, item.title)}
+          ${renderImageFigure(item.cover, displayTitle(item), displayTitle(item))}
         </div>
         <div class="detail-copy card-surface">
-          ${renderBackLink("/families", "Back To Families")}
-          <p class="eyebrow">Contemporary Web Family</p>
-          <h1 class="detail-title">${escapeHtml(item.title)}</h1>
-          <p class="detail-summary">${escapeHtml(item.summary)}</p>
+          ${renderBackLink("/families", bilingualText("返回网页家族", "Back To Families"))}
+          <p class="eyebrow">${escapeHtml(bilingualText("网页家族", "Contemporary Web Family"))}</p>
+          <h1 class="detail-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title, "detail-bilingual-title")}</h1>
+          <p class="detail-summary">${escapeHtml(item.summaryZh || item.summary)}</p>
           <div class="detail-meta-grid">
             <div class="meta-block">
-              <h4>Historical Roots</h4>
+              <h4>${escapeHtml(bilingualText("历史源头", "Historical Roots"))}</h4>
               ${renderLinkedPills(item.movementIds, movementMap, movementHref)}
             </div>
             <div class="meta-block">
-              <h4>Structure Fit</h4>
-              ${renderStaticPills(relatedStructures.map((structure) => structure.title))}
+              <h4>${escapeHtml(bilingualText("适配结构", "Structure Fit"))}</h4>
+              ${renderStaticPills(relatedStructures)}
             </div>
           </div>
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Interpretation", "怎么借这条家族，而不是只模仿表面", "")}
-        <div class="detail-section-grid">
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Signature</p>${renderList(
-            item.signature
-          )}</div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Borrow</p>${renderList(
-            item.borrow
-          )}</div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Best For</p>${renderList(
-            item.bestFor
-          )}</div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Avoid When</p>${renderList(
-            item.avoidWhen
-          )}</div></article>
-        </div>
-      </section>`,
-      `<section class="section">
-        ${renderSectionHead("Sample Gallery", "真实网站样本", "从真实站点看这条家族是怎样落地的。")}
+        ${renderSectionHead(
+          bilingualText("真实样本", "Sample Gallery"),
+          bilingualText("真实网站样本", "Live Website Samples"),
+          "从真实站点看这条家族是怎样落地的。"
+        )}
         <div class="gallery-grid">
           ${item.samples.map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label)).join("")}
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Historical Roots", "它从哪些更早的语言长出来", "")}
+        ${renderSectionHead(
+          bilingualText("借法", "Interpretation"),
+          bilingualText("借这条家族的语法，不只模仿表面", "Borrow the grammar, not only the surface"),
+          ""
+        )}
+        <div class="detail-section-grid">
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("识别特征", "Signature"))}</p>${renderList(
+            item.signature
+          )}</div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("可借语法", "Borrow"))}</p>${renderList(
+            item.borrow
+          )}</div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("适合内容", "Best For"))}</p>${renderList(
+            item.bestFor
+          )}</div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("不适合时机", "Avoid When"))}</p>${renderList(
+            item.avoidWhen
+          )}</div></article>
+        </div>
+      </section>`,
+      `<section class="section">
+        ${renderSectionHead(
+          bilingualText("历史源头", "Historical Roots"),
+          bilingualText("它从哪些更早的语言长出来", "Which earlier languages shaped it"),
+          ""
+        )}
         <div class="movement-grid">
           ${relatedMovements.map((movement) => renderMovementCard(movement)).join("")}
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Prompt DNA", "可以直接给 agent 的风格 packet", "")}
+        ${renderSectionHead(
+          bilingualText("Prompt 风格包", "Prompt DNA"),
+          bilingualText("可以直接给 agent 的风格包", "A ready-to-use prompt packet"),
+          ""
+        )}
         <article class="detail-card card-surface">
           <div class="card-body">
-            <p class="card-kicker">Prompt DNA</p>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
+            <p class="card-kicker">${escapeHtml(bilingualText("Prompt 风格包", "Prompt DNA"))}</p>
+            <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
             <code>${escapeHtml(item.prompt)}</code>
             <div class="hero-actions">
-              <button class="copy-button" type="button" data-copy-prompt>Copy</button>
+              <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
             </div>
           </div>
         </article>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Reference Packet", "继续打开真实站点看细节", "")}
+        ${renderSectionHead(
+          bilingualText("参考链接", "Reference Packet"),
+          bilingualText("继续打开真实站点看细节", "Open the live references"),
+          ""
+        )}
         <article class="detail-card card-surface">
           <div class="card-body">${renderExternalLinks(item.references)}</div>
         </article>
@@ -639,61 +743,77 @@ function renderMovementDetail(item) {
   const leadSample = item.samples[0];
 
   return layout({
-    title: `${item.title} · ${siteMeta.title}`,
+    title: `${displayTitle(item)} · ${siteMeta.title}`,
     description: item.summary,
     pathname: movementHref(item.id),
     pageClass: "detail-page movement-detail-page",
     body: [
       `<section class="detail-hero">
         <div class="detail-media">
-          ${leadSample ? renderImageFigure(leadSample.screenshot, leadSample.alt, leadSample.label) : `<div class="image-placeholder">Image pending</div>`}
+          ${leadSample ? renderImageFigure(leadSample.screenshot, leadSample.alt, leadSample.label) : `<div class="image-placeholder">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`}
         </div>
         <div class="detail-copy card-surface">
-          ${renderBackLink("/movements", "Back To Movements")}
-          <p class="eyebrow">Historical Movement</p>
-          <h1 class="detail-title">${escapeHtml(item.title)}</h1>
+          ${renderBackLink("/movements", bilingualText("返回历史流派", "Back To Movements"))}
+          <p class="eyebrow">${escapeHtml(bilingualText("历史流派", "Historical Movement"))}</p>
+          <h1 class="detail-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title, "detail-bilingual-title")}</h1>
           <p class="detail-summary">${escapeHtml(item.summary)}</p>
           <div class="detail-meta-grid">
             <div class="meta-block">
-              <h4>Period</h4>
+              <h4>${escapeHtml(bilingualText("时期", "Period"))}</h4>
               <p>${escapeHtml(item.era)}</p>
             </div>
             <div class="meta-block">
-              <h4>Origin</h4>
+              <h4>${escapeHtml(bilingualText("起源", "Origin"))}</h4>
               <p>${escapeHtml(item.origin)}</p>
             </div>
           </div>
           <div class="meta-block">
-            <h4>Why It Matters</h4>
+            <h4>${escapeHtml(bilingualText("网页中的意义", "Why It Matters"))}</h4>
             <p>${escapeHtml(item.whyItMatters)}</p>
           </div>
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Core Traits", "先理解这条语言本身", "")}
-        <div class="detail-section-grid">
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Principles</p>${renderList(
-            item.principles
-          )}</div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Watchouts</p>${renderList(
-            item.watchouts
-          )}</div></article>
-        </div>
-      </section>`,
-      `<section class="section">
-        ${renderSectionHead("Sample Gallery", "历史语言在今天的网页里如何现身", "")}
+        ${renderSectionHead(
+          bilingualText("真实样本", "Sample Gallery"),
+          bilingualText("历史语言在今天的网页里如何现身", "How it appears in the web today"),
+          ""
+        )}
         <div class="gallery-grid">
           ${item.samples.map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label)).join("")}
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Descendant Families", "今天在网页里更接近哪些家族", "")}
+        ${renderSectionHead(
+          bilingualText("核心特征", "Core Traits"),
+          bilingualText("先理解这条语言本身", "Understand the language itself"),
+          ""
+        )}
+        <div class="detail-section-grid">
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("原则", "Principles"))}</p>${renderList(
+            item.principles
+          )}</div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("误用提醒", "Watchouts"))}</p>${renderList(
+            item.watchouts
+          )}</div></article>
+        </div>
+      </section>`,
+      `<section class="section">
+        ${renderSectionHead(
+          bilingualText("后代网页家族", "Descendant Families"),
+          bilingualText("今天在网页里更接近哪些家族", "Which web families carry it today"),
+          ""
+        )}
         <div class="family-grid">
           ${relatedFamilies.map((family) => renderFamilyCard(family)).join("")}
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Reference Links", "继续读历史和看案例", "")}
+        ${renderSectionHead(
+          bilingualText("参考链接", "Reference Links"),
+          bilingualText("继续读历史和看案例", "Keep reading and compare references"),
+          ""
+        )}
         <article class="detail-card card-surface">
           <div class="card-body">${renderExternalLinks(item.references)}</div>
         </article>
@@ -707,13 +827,13 @@ function renderUseCasePrompt(item) {
   const secondaryFamilies = item.secondaryFamilyIds.map((id) => familyMap.get(id)).filter(Boolean);
   const structures = item.structureIds.map((id) => structureMap.get(id)).filter(Boolean);
 
-  return `Content type: ${item.title}
-IA layer: ${structures.map((entry) => entry.title).join(" / ")}
-Visual family: ${primaryFamily?.title || "Pending"}${secondaryFamilies.length ? ` + ${secondaryFamilies.map((entry) => entry.title).join(" / ")}` : ""}
-Reference packet: ${[primaryFamily, ...secondaryFamilies].filter(Boolean).map((entry) => entry.title).join(" / ")}
-Mood: ${item.summary}
-Required traits: ${item.userGoal}
-Avoid: ${item.avoid.join(" / ")}`;
+  return `内容类型 Content Type: ${displayTitle(item)}
+信息结构 IA Layer: ${structures.map((entry) => displayTitle(entry)).join(" / ")}
+视觉家族 Visual Family: ${displayTitle(primaryFamily) || bilingualText("待补充", "Pending")}${secondaryFamilies.length ? ` + ${secondaryFamilies.map((entry) => displayTitle(entry)).join(" / ")}` : ""}
+参考组合 Reference Packet: ${[primaryFamily, ...secondaryFamilies].filter(Boolean).map((entry) => displayTitle(entry)).join(" / ")}
+场景气质 Mood: ${item.summary}
+关键要求 Required Traits: ${item.userGoal}
+避免 Avoid: ${item.avoid.join(" / ")}`;
 }
 
 function renderUseCaseDetail(item) {
@@ -723,64 +843,76 @@ function renderUseCaseDetail(item) {
   const referenceFamilies = [primaryFamily, ...secondaryFamilies].filter(Boolean);
 
   return layout({
-    title: `${item.title} · ${siteMeta.title}`,
+    title: `${displayTitle(item)} · ${siteMeta.title}`,
     description: item.summary,
     pathname: useCaseHref(item.id),
     pageClass: "detail-page usecase-detail-page",
     body: [
       `<section class="detail-hero">
         <div class="detail-media">
-          ${renderImageFigure(primaryFamily?.cover || "", primaryFamily?.title || item.title, primaryFamily?.title || item.title)}
+          ${renderImageFigure(primaryFamily?.cover || "", displayTitle(primaryFamily) || displayTitle(item), displayTitle(primaryFamily) || displayTitle(item))}
         </div>
         <div class="detail-copy card-surface">
-          ${renderBackLink("/use-cases", "Back To Use Cases")}
-          <p class="eyebrow">Use Case</p>
-          <h1 class="detail-title">${escapeHtml(item.title)}</h1>
+          ${renderBackLink("/use-cases", bilingualText("返回使用场景", "Back To Use Cases"))}
+          <p class="eyebrow">${escapeHtml(bilingualText("使用场景", "Use Case"))}</p>
+          <h1 class="detail-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title, "detail-bilingual-title")}</h1>
           <p class="detail-summary">${escapeHtml(item.summary)}</p>
           <div class="detail-meta-grid">
             <div class="meta-block">
-              <h4>Primary Family</h4>
-              <p>${escapeHtml(primaryFamily?.title || "Pending")}</p>
+              <h4>${escapeHtml(bilingualText("主家族", "Primary Family"))}</h4>
+              <p>${escapeHtml(displayTitle(primaryFamily) || bilingualText("待补充", "Pending"))}</p>
             </div>
             <div class="meta-block">
-              <h4>Structures</h4>
-              ${renderStaticPills(structures.map((entry) => entry.title))}
+              <h4>${escapeHtml(bilingualText("结构", "Structures"))}</h4>
+              ${renderStaticPills(structures)}
             </div>
           </div>
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Why This Fit Works", "从任务反推视觉和结构", "")}
+        ${renderSectionHead(
+          bilingualText("为什么适配", "Why This Fit Works"),
+          bilingualText("从任务反推视觉和结构", "Work backward from task to style and structure"),
+          ""
+        )}
         <div class="detail-section-grid">
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Content Shape</p><p>${escapeHtml(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("内容形状", "Content Shape"))}</p><p>${escapeHtml(
             item.contentShape
           )}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">User Goal</p><p>${escapeHtml(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("用户目标", "User Goal"))}</p><p>${escapeHtml(
             item.userGoal
           )}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Why</p><p>${escapeHtml(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("为什么", "Why"))}</p><p>${escapeHtml(
             item.note
           )}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">Avoid</p>${renderList(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("避免", "Avoid"))}</p>${renderList(
             item.avoid
           )}</div></article>
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Recommended Families", "这个场景最适合借哪几条家族", "")}
+        ${renderSectionHead(
+          bilingualText("推荐家族", "Recommended Families"),
+          bilingualText("这个场景最适合借哪几条家族", "The families that fit this job"),
+          ""
+        )}
         <div class="family-grid">
           ${referenceFamilies.map((family) => renderFamilyCard(family)).join("")}
         </div>
       </section>`,
       `<section class="section">
-        ${renderSectionHead("Prompt Packet", "可以直接复制给 agent 的场景提示", "")}
+        ${renderSectionHead(
+          bilingualText("Prompt 场景包", "Prompt Packet"),
+          bilingualText("可以直接复制给 agent 的场景提示", "A ready-to-copy prompt packet"),
+          ""
+        )}
         <article class="detail-card card-surface">
           <div class="card-body">
-            <p class="card-kicker">Prompt Packet</p>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
+            <p class="card-kicker">${escapeHtml(bilingualText("Prompt 场景包", "Prompt Packet"))}</p>
+            <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
             <code>${escapeHtml(renderUseCasePrompt(item))}</code>
             <div class="hero-actions">
-              <button class="copy-button" type="button" data-copy-prompt>Copy</button>
+              <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
             </div>
           </div>
         </article>
@@ -807,22 +939,22 @@ function buildHomePage() {
 
 function buildFamiliesPage() {
   return layout({
-    title: `Families · ${siteMeta.title}`,
-    description: "Contemporary web families for the Design Zondev style atlas.",
+    title: `${bilingualText("网页家族", "Web Families")} · ${siteMeta.title}`,
+    description: "Contemporary web families for the Design Zondev atlas.",
     pathname: "/families",
     pageClass: "index-page families-page",
     body: [
       renderPageLead({
-        kicker: "Contemporary Web Families",
-        title: "按网页呈现家族浏览",
-        summary: "这一层解决“现在的网站长什么样”。它讲的是网页表现语言、适用任务和可借鉴语法。",
-        detail: "如果你已经知道自己喜欢的是 editorial、Swiss、product precision 或 anti-grid，就从这里直接下钻。",
-        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>Back home</a><a ${linkAttrs("/movements", "button")}>Open movements</a></div>`
+        kicker: bilingualText("网页家族", "Web Families"),
+        title: bilingualText("按网页家族浏览", "Browse by Web Family"),
+        summary: "这里看的是今天网站最常见的呈现家族，适合直接找站型参考。",
+        detail: "从 Editorial、Swiss、Directory、Product、Stage 到 Anti-Grid，先看类型，再下钻细节。",
+        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/movements", "button")}>${escapeHtml(bilingualText("查看历史流派", "Open Movements"))}</a></div>`
       }),
       renderFamilyGridSection({
-        title: "All Families",
-        kicker: "Atlas Index",
-        summary: "把今天网页里最常见的风格家族单独列出来，不再和设计史层混在一起。",
+        title: bilingualText("全部网页家族", "All Web Families"),
+        kicker: bilingualText("Atlas 索引", "Atlas Index"),
+        summary: "把今天网页里最常见的家族单独列出来，不再和设计史层混在一起。",
         familiesList: families,
         sectionId: "all-families",
         actionMarkup: ""
@@ -833,22 +965,22 @@ function buildFamiliesPage() {
 
 function buildMovementsPage() {
   return layout({
-    title: `Movements · ${siteMeta.title}`,
-    description: "Historical movements for the Design Zondev style atlas.",
+    title: `${bilingualText("历史流派", "Historical Movements")} · ${siteMeta.title}`,
+    description: "Historical movements for the Design Zondev atlas.",
     pathname: "/movements",
     pageClass: "index-page movements-page",
     body: [
       renderPageLead({
-        kicker: "Historical Movements",
-        title: "按设计谱系浏览",
-        summary: "这一层看的是语言来源，而不是网页模板。它帮助你把“我喜欢这种味道”接回更稳定的历史语境。",
-        detail: "如果你想知道某种网页风格究竟更像 Swiss、Bauhaus、Memphis 还是 Cyberpunk，就从这里开始。",
-        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>Back home</a><a ${linkAttrs("/families", "button")}>Open families</a></div>`
+        kicker: bilingualText("历史流派", "Historical Movements"),
+        title: bilingualText("按设计谱系浏览", "Browse by Design Lineage"),
+        summary: "这里看的是语言来源，不是网页模板。它帮助你把喜欢的味道接回更稳定的历史语境。",
+        detail: "从 Arts and Crafts、Art Nouveau、Bauhaus、Swiss、Mid-Century Modern 到 Brutalism、Memphis、Cyberpunk，先识别祖先语言。",
+        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
       renderMovementGridSection({
-        title: "All Movements",
-        kicker: "History Index",
-        summary: "从 Bauhaus、Swiss、Memphis 到 Cyberpunk，这一层帮助你识别网页视觉语言背后的祖先。",
+        title: bilingualText("全部历史流派", "All Historical Movements"),
+        kicker: bilingualText("历史索引", "History Index"),
+        summary: "从工艺美术、新艺术、包豪斯、瑞士风格、世纪中期现代主义到后现代、粗野主义、赛博朋克，识别网页视觉背后的祖先。",
         movementsList: movements,
         sectionId: "all-movements",
         actionMarkup: ""
@@ -859,21 +991,21 @@ function buildMovementsPage() {
 
 function buildUseCasesPage() {
   return layout({
-    title: `Use Cases · ${siteMeta.title}`,
+    title: `${bilingualText("使用场景", "Use Cases")} · ${siteMeta.title}`,
     description: "Use cases for matching content types to design families.",
     pathname: "/use-cases",
     pageClass: "index-page usecases-page",
     body: [
       renderPageLead({
-        kicker: "Use Cases",
-        title: "按内容和任务反推风格",
-        summary: "如果你不是在做审美研究，而是在准备一个具体网站，这一层会比先看设计史更快。",
-        detail: "它把‘我要做什么内容’直接映射到 family、structure 和 prompt packet。",
-        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>Back home</a><a ${linkAttrs("/families", "button")}>Open families</a></div>`
+        kicker: bilingualText("使用场景", "Use Cases"),
+        title: bilingualText("按内容和任务反推风格", "Work backward from the job"),
+        summary: "如果你不是在做审美研究，而是在准备一个具体网站，这一层通常会更快。",
+        detail: "把我要做什么内容直接映射到 family、structure 和 prompt packet。",
+        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
       renderUseCaseSection({
-        title: "All Use Cases",
-        kicker: "Task Index",
+        title: bilingualText("全部使用场景", "All Use Cases"),
+        kicker: bilingualText("任务索引", "Task Index"),
         summary: "从 style atlas、文化出版、研究知识站、AI 工具到 future-tech launch，都能直接找到推荐组合。",
         useCasesList: useCases,
         sectionId: "all-use-cases",
