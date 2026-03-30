@@ -1,0 +1,223 @@
+{
+  "generatedAt": "2026-03-26T16:25:11.239Z",
+  "spreadsheetToken": "V9vssjG90hwM3ltUNu5cedgXn3f",
+  "sheetId": "be10be",
+  "sheetTitle": "Sheet1",
+  "header": [
+    "采集时间",
+    "平台",
+    "标题",
+    "作者/来源",
+    "原始链接",
+    "最终链接",
+    "消息片段",
+    "状态",
+    "message_id",
+    "",
+    "",
+    ""
+  ],
+  "totalRows": 90,
+  "matchedRows": 13,
+  "items": [
+    {
+      "id": "fa696ff3e22c",
+      "timestamp": "2026-03-04 16:17:57",
+      "platform": "微信公众号",
+      "title": "你参考skills 看看怎么获取这里面的详情。我想实现这个效果，怎么实现？",
+      "source": "微信公众号",
+      "originalLink": "https://mp.weixin.qq.com/s/c-pNykaAGdYjAP9PIk9thw",
+      "finalLink": "https://mp.weixin.qq.com/s/c-pNykaAGdYjAP9PIk9thw",
+      "excerpt": "你参考skills 看看怎么获取这里面的详情。我想实现这个效果，怎么实现？",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b554ae598c890c10f52c34e31868",
+      "tags": [
+        "reference"
+      ]
+    },
+    {
+      "id": "05c28c758c01",
+      "timestamp": "2026-03-04 21:22:14",
+      "platform": "小红书",
+      "title": "用xhs skills 获取 一句话，让你的🦞可以全网抓信息 传统的方法让 OpenCl... 复制后打开【小红书】查看笔记！",
+      "source": "小红书",
+      "originalLink": "http://xhslink.com/o/3fYaqBy1UXi",
+      "finalLink": "http://xhslink.com/o/3fYaqBy1UXi",
+      "excerpt": "用xhs skills 获取 一句话，让你的🦞可以全网抓信息 传统的方法让 OpenCl... 复制后打开【小红书】查看笔记！",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b55b76e9354a0c3ba810825cd19a",
+      "tags": [
+        "ux-flow"
+      ]
+    },
+    {
+      "id": "d7c8a179d37b",
+      "timestamp": "2026-03-05 16:11:28",
+      "platform": "小红书",
+      "title": "xhs skills 获取这个 Neo：让AI Agent直接调用任何网站的API 做Agent开发的... 复制后打开【小红书】查看笔记！",
+      "source": "小红书",
+      "originalLink": "http://xhslink.com/o/8kAtQqi3LV4",
+      "finalLink": "http://xhslink.com/o/8kAtQqi3LV4",
+      "excerpt": "xhs skills 获取这个 Neo：让AI Agent直接调用任何网站的API 做Agent开发的... 复制后打开【小红书】查看笔记！",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b55a7e436b4a0c26453e92169506",
+      "tags": [
+        "layout"
+      ]
+    },
+    {
+      "id": "01cd8e73a24b",
+      "timestamp": "2026-03-06 21:30:07",
+      "platform": "微信公众号",
+      "title": "参考这个能配置outlook邮箱",
+      "source": "微信公众号",
+      "originalLink": "https://mp.weixin.qq.com/s/hgMKIWcB71ZTsClzUCDUBw",
+      "finalLink": "https://mp.weixin.qq.com/s/hgMKIWcB71ZTsClzUCDUBw",
+      "excerpt": "参考这个能配置outlook邮箱",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b559923263ca8c44ebb41337fe97",
+      "tags": [
+        "reference"
+      ]
+    },
+    {
+      "id": "da4e0ac30b11",
+      "timestamp": "2026-03-12 01:07:56",
+      "platform": "小红书",
+      "title": "Openclaw挣钱项目，可以参考。 刚发现一个网站，非常... 复制后打开【小红书】查看笔记！",
+      "source": "小红书",
+      "originalLink": "http://xhslink.com/o/8pt8bBjMSGQ",
+      "finalLink": "http://xhslink.com/o/8pt8bBjMSGQ",
+      "excerpt": "Openclaw挣钱项目，可以参考。 刚发现一个网站，非常... 复制后打开【小红书】查看笔记！",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b542e586e38a4b36f49295612ee8",
+      "tags": [
+        "reference",
+        "layout"
+      ]
+    },
+    {
+      "id": "c8bd95587dba",
+      "timestamp": "2026-03-16 18:18:18",
+      "platform": "drrreistein.github.io",
+      "title": "大佬删库前我部署翻译了中文网站，看这里",
+      "source": "drrreistein.github.io",
+      "originalLink": "https://drrreistein.github.io/jobs-cn/",
+      "finalLink": "https://drrreistein.github.io/jobs-cn/",
+      "excerpt": "大佬删库前我部署翻译了中文网站，看这里",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b5449c05760b0c4275816d4ab9d2",
+      "tags": [
+        "layout"
+      ]
+    },
+    {
+      "id": "4a9989400fd8",
+      "timestamp": "2026-03-25 17:27:56",
+      "platform": "微信公众号",
+      "title": "3.7k星星！爆火开源网站GEO检测工具，老外靠教别人玩这个工具赚麻了",
+      "source": "原创 懂AI 开源AI项目落地",
+      "originalLink": "https://mp.weixin.qq.com/s/ZyF8UnRdODYg_wY-97MVHQ",
+      "finalLink": "https://mp.weixin.qq.com/s/ZyF8UnRdODYg_wY-97MVHQ",
+      "excerpt": "微信公众号 链接",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b530ee772cc48c10c8b4ad29774e",
+      "tags": [
+        "layout"
+      ]
+    },
+    {
+      "id": "5cf17509ae8b",
+      "timestamp": "2026-03-26 10:15:24",
+      "platform": "微信公众号",
+      "title": "聊聊我怎么设计 自动 Review 流程",
+      "source": "我本地的开发环境是 codex（GPT-5.4）+ 自己魔改的 Superpowers（在 sp 基础 Skill 上组合 + 编排其他场景的 Skill，见：将 Skill 当作「可复用的模块」来设...）",
+      "originalLink": "https://mp.weixin.qq.com/s/aBRr5UecTHYCbGNGfDfCYQ",
+      "finalLink": "https://mp.weixin.qq.com/s/aBRr5UecTHYCbGNGfDfCYQ",
+      "excerpt": "微信公众号 链接",
+      "status": "已重建（历史）",
+      "messageId": "om_x100b537d16c690a8c4daf0360e7036e",
+      "tags": [
+        "ux-flow"
+      ]
+    },
+    {
+      "id": "e709ab840f22",
+      "timestamp": "2026-03-26 17:51:40",
+      "platform": "小红书",
+      "title": "从PRD生成UX设计文档和User flow的提示词 分享一个让A",
+      "source": "鹿桃桃的AI百宝箱",
+      "originalLink": "http://xhslink.com/o/1DH3k1HHuHH",
+      "finalLink": "https://www.xiaohongshu.com/discovery/item/69a55f490000000022021d79?app_platform=ios&app_version=9.22.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CB03GlgG9J_SylSisSM58o5RvtAJ9mXnG_8haqrPzVanc=&author_share=1&xhsshare=CopyLink&shareRedId=N0k3MUQ1RUs2NzUyOTgwNjczOTo4STZB&apptime=1774518694&share_id=d7b79e172fe849c281152bbeab2cc24e",
+      "excerpt": "",
+      "status": "已提取（HTTP）",
+      "messageId": "om_x100b53645476fcb0c4f41b71b0617e5",
+      "tags": [
+        "ux-flow",
+        "prompt-dna"
+      ]
+    },
+    {
+      "id": "d7979d35ce87",
+      "timestamp": "2026-03-26 17:53:18",
+      "platform": "小红书",
+      "title": "【AI作品集】30个UI风格提示词 最近在研究怎么用vibe",
+      "source": "存点有的没的（AI版）",
+      "originalLink": "http://xhslink.com/o/JHfd9wktXp",
+      "finalLink": "https://www.xiaohongshu.com/discovery/item/69af9566000000002602ca93?app_platform=ios&app_version=9.22.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CB9H79rfoMn0UIpdU44tRNmZp0VRR5g81bTYwyeKaAep4=&author_share=1&xhsshare=CopyLink&shareRedId=N0k3MUQ1RUs2NzUyOTgwNjczOTo4STZB&apptime=1774518794&share_id=0780cfd712ca40b293139a6c3a3b1ac3",
+      "excerpt": "",
+      "status": "已提取（HTTP）",
+      "messageId": "om_x100b53646e17f49cc3ea0d4597226dc",
+      "tags": [
+        "ui-style",
+        "prompt-dna"
+      ]
+    },
+    {
+      "id": "9068d0169133",
+      "timestamp": "2026-03-26 17:54:21",
+      "platform": "小红书",
+      "title": "将一万部电影做成星图 用vibe coding做了一个方便过年",
+      "source": "麻省理工Rui同学",
+      "originalLink": "http://xhslink.com/o/25GFfZCSiRc",
+      "finalLink": "https://www.xiaohongshu.com/discovery/item/698c9a1a000000001b01653b?app_platform=ios&app_version=9.22.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CB1CpvcgUS377er7lvUJp838tgFf1AlatDJ_Nn1_MV8Ic=&author_share=1&xhsshare=CopyLink&shareRedId=N0k3MUQ1RUs2NzUyOTgwNjczOTo4STZB&apptime=1774518856&share_id=2e4be3788a474b24aea0cdbdd32eb5e2",
+      "excerpt": "",
+      "status": "已提取（HTTP）",
+      "messageId": "om_x100b53646a08e48cc4d8051ee7a00f3",
+      "tags": [
+        "ui-style"
+      ]
+    },
+    {
+      "id": "888e35b0abbb",
+      "timestamp": "2026-03-26 17:56:05",
+      "platform": "小红书",
+      "title": "vibecoding邪修·设计灵感应用＋微调 基于前面帖子分",
+      "source": "秒秒Guo",
+      "originalLink": "http://xhslink.com/o/70ZV21xP3pU",
+      "finalLink": "https://www.xiaohongshu.com/discovery/item/6980bede000000000a033064?app_platform=ios&app_version=9.22.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CBuKbccINvEJAZW17FzXB8VjE11mAWzEkiiseMcvBkA9U=&author_share=1&xhsshare=CopyLink&shareRedId=N0k3MUQ1RUs2NzUyOTgwNjczOTo4STZB&apptime=1774518961&share_id=6caaca4e2c144a7f84e96e8424922fbd",
+      "excerpt": "",
+      "status": "已提取（HTTP）",
+      "messageId": "om_x100b536465870940c3ede788ae27d06",
+      "tags": [
+        "reference"
+      ]
+    },
+    {
+      "id": "f2c225125cf2",
+      "timestamp": "2026-03-26 17:56:23",
+      "platform": "小红书",
+      "title": "vibe coding 的界面太丑",
+      "source": "Rekota",
+      "originalLink": "http://xhslink.com/o/9CwruzUeBwa",
+      "finalLink": "https://www.xiaohongshu.com/discovery/item/69bff6e4000000001d01c004?app_platform=ios&app_version=9.22.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CB8qDRpZDau0K0pT12K-J8fvcUZymOJ0W9mxFo61LfV1w=&author_share=1&xhsshare=CopyLink&shareRedId=N0k3MUQ1RUs2NzUyOTgwNjczOTo4STZB&apptime=1774518977&share_id=1836bd0066014df39bd50fa2e134a282",
+      "excerpt": "",
+      "status": "已提取（HTTP）",
+      "messageId": "om_x100b536462b9a8a8c221278f64e6c65",
+      "tags": [
+        "ui-style",
+        "anti-template"
+      ]
+    }
+  ]
+}
