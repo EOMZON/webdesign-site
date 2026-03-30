@@ -2,8 +2,3 @@
 .playwright-cli
 output/
 output-design-*.png
-.playwright-cli
-dist
-output
-output-*.png
-node_modules
