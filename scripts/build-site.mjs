@@ -189,6 +189,208 @@ const rawUseCases = [
 
 const useCases = rawUseCases.map((item) => addBilingualFields(item, useCaseMeta[item.id]));
 
+function visualAsset(screenshot, label, alt = label) {
+  return { screenshot, label, alt };
+}
+
+const primaryVisualMap = {
+  "bauhaus-functional-modernism": visualAsset(
+    "atlassian-foundations.png",
+    "Atlassian Foundations",
+    "Atlassian Foundations page"
+  ),
+  "art-deco-streamlined-luxury": visualAsset("tmagazine.png", "T Magazine", "The New York Times Style Magazine homepage"),
+  "swiss-international-typography": visualAsset(
+    "signal-a-studio.png",
+    "Signal-A Studio",
+    "Signal-A Studio homepage"
+  ),
+  "postmodern-memphis": visualAsset("memphis-milano.png", "Memphis Milano", "Memphis Milano homepage"),
+  "brutalism-neo-brutalism": visualAsset("gumroad-live.png", "Gumroad", "Gumroad homepage"),
+  "cyberpunk-techno-futurism": visualAsset("cyberpunk-net.png", "Cyberpunk", "Cyberpunk homepage"),
+  "arts-and-crafts": visualAsset("kinfolk-live.png", "Kinfolk", "Kinfolk homepage"),
+  "art-nouveau": visualAsset("gentlewoman-cover-live.png", "The Gentlewoman", "The Gentlewoman homepage"),
+  futurism: visualAsset("razer.png", "Razer", "Razer homepage"),
+  dada: visualAsset("arena-live.png", "Are.na", "Are.na page"),
+  suprematism: visualAsset("studio-feixen.png", "Studio Feixen", "Studio Feixen homepage"),
+  constructivism: visualAsset("stripe.png", "Stripe", "Stripe homepage"),
+  "de-stijl": visualAsset("swiss-institute.png", "Swiss Institute", "Swiss Institute homepage"),
+  "new-typography": visualAsset("pair-guidebook.png", "People + AI Guidebook", "People + AI Guidebook homepage"),
+  "pop-art": visualAsset("behance.png", "Behance", "Behance homepage"),
+  "mid-century-modern": visualAsset("apple-macbook.png", "Apple MacBook Pro", "Apple MacBook Pro page"),
+  minimalism: visualAsset("ok-rm.png", "OK-RM", "OK-RM homepage"),
+  "magazine-editorial": visualAsset("frieze.png", "Frieze", "Frieze homepage"),
+  "quiet-lifestyle-editorial": visualAsset(
+    "gentlewoman.png",
+    "The Gentlewoman",
+    "The Gentlewoman homepage"
+  ),
+  "swiss-typographic-grid": visualAsset("pentagram.png", "Pentagram", "Pentagram homepage"),
+  "monochrome-studio-systems": visualAsset(
+    "fictivekin-work.png",
+    "Fictive Kin / Work",
+    "Fictive Kin work page"
+  ),
+  "product-precision-interface": visualAsset("linear.png", "Linear", "Linear homepage"),
+  "stage-driven-showcase": visualAsset("a24.png", "A24", "A24 homepage"),
+  "curated-reference-directory": visualAsset(
+    "awwwards-websites-live.png",
+    "Awwwards / Websites",
+    "Awwwards websites directory"
+  ),
+  "evidence-dense-knowledge-surface": visualAsset(
+    "ourworldindata-live.png",
+    "Our World In Data",
+    "Our World In Data homepage"
+  ),
+  "playful-postmodern-anti-grid": visualAsset(
+    "bureau-borsche.png",
+    "Bureau Borsche",
+    "Bureau Borsche homepage"
+  ),
+  "neon-techno-futurist-interface": visualAsset(
+    "playstation-ps5-live.png",
+    "PlayStation 5",
+    "PlayStation 5 homepage"
+  ),
+  "style-atlas-reference-library": visualAsset(
+    "siteinspire-live.png",
+    "SiteInspire",
+    "SiteInspire homepage"
+  ),
+  "cultural-publishing": visualAsset("newyorker.png", "The New Yorker", "The New Yorker homepage"),
+  "design-studio-identity-portfolio": visualAsset(
+    "fictivekin-home-live.png",
+    "Fictive Kin",
+    "Fictive Kin homepage"
+  ),
+  "product-tool-platform": visualAsset("vercel.png", "Vercel", "Vercel homepage"),
+  "research-knowledge-system": visualAsset("carbon-for-ai.png", "Carbon for AI", "Carbon for AI page"),
+  "premium-lifestyle-brand": visualAsset("monocle.png", "Monocle", "Monocle homepage"),
+  "creator-anti-template-launch": visualAsset("arena-home-live.png", "Are.na", "Are.na homepage"),
+  "gaming-hardware-future-tech": visualAsset(
+    "xbox-series-x-live.png",
+    "Xbox Series X",
+    "Xbox Series X homepage"
+  )
+};
+
+const invalidScreenshotSet = new Set([
+  "apartamento-live.png",
+  "monocle-travel-live.png",
+  "mubi-live.png",
+  "mubi.png",
+  "nothing-tech-live.png",
+  "siteinspire-home-live.png"
+]);
+
+function isUsableScreenshot(fileName) {
+  if (!fileName || invalidScreenshotSet.has(fileName)) return false;
+  return fs.existsSync(path.join(srcRoot, "screenshots", fileName));
+}
+
+function dedupeVisuals(visuals = []) {
+  const seen = new Set();
+  return visuals.filter((visual) => {
+    const screenshot = visual?.screenshot;
+    if (!isUsableScreenshot(screenshot) || seen.has(screenshot)) return false;
+    seen.add(screenshot);
+    return true;
+  });
+}
+
+function itemVisualCandidates(item) {
+  const baseLabel = item.coverLabel || item.titleEn || item.titleZh || item.title || "";
+  const baseAlt = item.coverAlt || item.titleEn || item.titleZh || item.title || "";
+
+  return dedupeVisuals([
+    item.primaryVisual,
+    item.cover ? visualAsset(item.cover, baseLabel, baseAlt) : null,
+    ...(item.samples || []).map((sample) =>
+      visualAsset(sample.screenshot, sample.label || baseLabel, sample.alt || sample.label || baseAlt)
+    )
+  ]);
+}
+
+function galleryCandidateScreenshots(item) {
+  return new Set(
+    itemVisualCandidates(item)
+      .map((visual) => visual.screenshot)
+      .filter((screenshot) => screenshot && screenshot !== item.cover)
+  );
+}
+
+function pickContextualVisual(item, usedScreenshots = new Set(), options = {}) {
+  const { avoidScreenshots = new Set() } = options;
+  const candidates = itemVisualCandidates(item);
+
+  const preferred = candidates.find(
+    (visual) => !usedScreenshots.has(visual.screenshot) && !avoidScreenshots.has(visual.screenshot)
+  );
+  if (preferred) return preferred;
+
+  const unique = candidates.find((visual) => !usedScreenshots.has(visual.screenshot));
+  if (unique) return unique;
+
+  return candidates[0] || null;
+}
+
+function resolveContextualCardVisuals(items, usedScreenshots = new Set(), avoidScreenshots = new Set()) {
+  const visualMap = new Map();
+
+  for (const item of items) {
+    const visual = pickContextualVisual(item, usedScreenshots, { avoidScreenshots });
+    visualMap.set(item.id, visual);
+    if (visual?.screenshot) usedScreenshots.add(visual.screenshot);
+  }
+
+  return visualMap;
+}
+
+function resolveGalleryVisuals(item, usedScreenshots = new Set()) {
+  const visuals = [];
+
+  for (const visual of itemVisualCandidates(item)) {
+    if (!visual?.screenshot || visual.screenshot === item.cover || usedScreenshots.has(visual.screenshot)) continue;
+    visuals.push(visual);
+    usedScreenshots.add(visual.screenshot);
+  }
+
+  return visuals;
+}
+
+function fallbackVisual(item) {
+  const sample = item.samples?.find((entry) => isUsableScreenshot(entry.screenshot));
+  if (sample) {
+    return visualAsset(
+      sample.screenshot,
+      sample.label || item.titleEn || item.titleZh || item.title || "",
+      sample.alt || sample.label || item.titleEn || item.titleZh || item.title || ""
+    );
+  }
+
+  return visualAsset(
+    isUsableScreenshot(item.cover) ? item.cover : "",
+    item.titleEn || item.titleZh || item.title || "",
+    item.titleEn || item.titleZh || item.title || ""
+  );
+}
+
+function attachPrimaryVisual(item) {
+  const visual = isUsableScreenshot(primaryVisualMap[item.id]?.screenshot)
+    ? primaryVisualMap[item.id]
+    : fallbackVisual(item);
+  item.primaryVisual = visual;
+  item.cover = visual.screenshot || item.cover || "";
+  item.coverLabel = visual.label || "";
+  item.coverAlt = visual.alt || visual.label || item.titleEn || item.titleZh || item.title || "";
+  return item;
+}
+
+families.forEach(attachPrimaryVisual);
+movements.forEach(attachPrimaryVisual);
+useCases.forEach(attachPrimaryVisual);
+
 const routes = browseModes.map((item) => {
   const bilingual = addBilingualFields(item, browseModeMeta[item.id]);
   let count = item.count;
@@ -543,6 +745,57 @@ function renderImageFigure(fileName, altText, caption = "", className = "") {
   </figure>`;
 }
 
+function uniqueSamples(samples = [], excluded = new Set()) {
+  const seen = new Set();
+  return samples.filter((sample) => {
+    const screenshot = sample?.screenshot;
+    if (!screenshot || seen.has(screenshot) || excluded.has(screenshot)) return false;
+    seen.add(screenshot);
+    return true;
+  });
+}
+
+function visualCandidates(item) {
+  const candidates = [];
+  const pushCandidate = (screenshot, altText = "", label = "") => {
+    if (!screenshot || candidates.some((entry) => entry.screenshot === screenshot)) return;
+    candidates.push({
+      screenshot,
+      alt: altText || label || displayTitle(item),
+      label: label || displayTitle(item)
+    });
+  };
+
+  pushCandidate(item.cover, item.coverAlt || displayTitle(item), item.coverLabel || displayTitle(item));
+
+  for (const sample of uniqueSamples(item.samples || [])) {
+    pushCandidate(sample.screenshot, sample.alt, sample.label);
+  }
+
+  return candidates;
+}
+
+function pickUniqueVisual(item, usedScreenshots = null) {
+  const candidates = visualCandidates(item);
+  if (!candidates.length) {
+    return {
+      screenshot: "",
+      alt: displayTitle(item),
+      label: displayTitle(item)
+    };
+  }
+
+  const selected = usedScreenshots
+    ? candidates.find((entry) => !usedScreenshots.has(entry.screenshot)) || candidates[0]
+    : candidates[0];
+
+  if (usedScreenshots && selected?.screenshot) {
+    usedScreenshots.add(selected.screenshot);
+  }
+
+  return selected;
+}
+
 function renderSectionHead(kicker, title, summary = "", actionMarkup = "") {
   return `<div class="section-head">
     <div class="section-head-main">
@@ -569,7 +822,7 @@ function renderTopbar() {
         <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
         <a href="/use-cases">${escapeHtml(bilingualText("使用场景", "Use Cases"))}</a>
       </nav>
-      <span class="status-pill">atlas v0.7</span>
+      <span class="status-pill">atlas v0.8</span>
     </div>
   </header>`;
 }
@@ -668,8 +921,7 @@ function renderBrowseModes() {
 }
 
 function renderTimelineStreamItem(item, isOpen = false) {
-  const leadSample = item.samples?.[0];
-  const extraSamples = item.samples?.slice(1, 3) || [];
+  const leadVisual = item.primaryVisual || fallbackVisual(item);
   const relatedFamilies = item.familyIds.map((id) => familyMap.get(id)).filter(Boolean);
   const visibleFamilies = relatedFamilies.slice(0, 3);
   const guide = movementGuide(item);
@@ -687,8 +939,8 @@ function renderTimelineStreamItem(item, isOpen = false) {
       <div class="timeline-stream-preview">
         <div class="timeline-stream-preview-media">
           ${
-            leadSample
-              ? renderImageFigure(leadSample.screenshot, leadSample.alt, leadSample.label, "timeline-stream-figure")
+            leadVisual?.screenshot
+              ? renderImageFigure(leadVisual.screenshot, leadVisual.alt, leadVisual.label, "timeline-stream-figure")
               : `<div class="image-placeholder">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`
           }
         </div>
@@ -702,12 +954,12 @@ function renderTimelineStreamItem(item, isOpen = false) {
           <p class="timeline-stream-hook">${escapeHtml(guide.hook)}</p>
           <p class="timeline-stream-common">${escapeHtml(guide.common)}</p>
           <div class="meta-block timeline-stream-preview-families">
-            <h4>${escapeHtml(bilingualText("常见网页类型", "Common Web Families"))}</h4>
+            <h4>${escapeHtml(bilingualText("下一步去看哪类网站", "Next Stops"))}</h4>
             ${renderStaticPills(visibleFamilies)}
           </div>
           <span class="timeline-stream-toggle">
-            <span class="timeline-stream-toggle-closed">${escapeHtml(bilingualText("展开看特征与参考", "Open Traits + References"))}</span>
-            <span class="timeline-stream-toggle-open">${escapeHtml(bilingualText("收起这条流派", "Close This Movement"))}</span>
+            <span class="timeline-stream-toggle-closed">${escapeHtml(bilingualText("点开看这种感觉怎么用", "Open How It Shows Up"))}</span>
+            <span class="timeline-stream-toggle-open">${escapeHtml(bilingualText("收起这一支", "Close This Chapter"))}</span>
           </span>
         </div>
       </div>
@@ -718,35 +970,23 @@ function renderTimelineStreamItem(item, isOpen = false) {
       <div class="timeline-stream-body-main">
         <div class="timeline-stream-meta-grid">
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("今天常见网页类型", "Common Web Families Today"))}</h4>
+            <h4>${escapeHtml(bilingualText("你常会在哪类网站看到它", "Where You'll See It"))}</h4>
             ${renderLinkedPills(visibleFamilies.map((entry) => entry.id), familyMap, familyHref)}
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("如果你想做这类网站", "Good If You Want This Web Feel"))}</h4>
+            <h4>${escapeHtml(bilingualText("如果你也想做这种感觉", "Good If You Want This Feel"))}</h4>
             <p>${escapeHtml(item.whyItMatters || item.summary || guide.common)}</p>
           </div>
         </div>
-        ${
-          extraSamples.length
-            ? `<details class="timeline-media-details">
-                <summary>${escapeHtml(bilingualText("再看更多参考图", "See More Reference Views"))}</summary>
-                <div class="timeline-preview-strip">
-                  ${extraSamples
-                    .map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label, "timeline-strip-figure"))
-                    .join("")}
-                </div>
-              </details>`
-            : ""
-        }
         <details class="timeline-details">
-          <summary>${escapeHtml(bilingualText("展开看特征与避坑", "Open Traits + Watchouts"))}</summary>
+          <summary>${escapeHtml(bilingualText("点开看它最抓人的地方", "Open Clues + Watchouts"))}</summary>
           <div class="timeline-details-grid">
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("先抓这几个特征", "Traits to Start With"))}</h4>
+              <h4>${escapeHtml(bilingualText("你会先看到什么", "What You'll Spot Fast"))}</h4>
               ${renderList(item.principles.slice(0, 4))}
             </div>
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("最容易做乱的地方", "Easy Ways to Lose the Feel"))}</h4>
+              <h4>${escapeHtml(bilingualText("最容易做坏的地方", "Easy Ways to Lose It"))}</h4>
               ${renderList(item.watchouts.slice(0, 3))}
             </div>
           </div>
@@ -823,10 +1063,16 @@ function renderFamilyCoordinateSection() {
   </section>`;
 }
 
-function renderFamilyCard(item) {
+function renderFamilyCard(item, options = {}) {
+  const visual =
+    options.visual || pickUniqueVisual(item) || {
+      screenshot: item.cover,
+      alt: item.coverAlt || displayTitle(item)
+    };
+
   return `<article class="family-card card-surface">
     <a ${linkAttrs(familyHref(item.id), "card-media family-card-media")}>
-      ${renderImageFrame(item.cover, displayTitle(item))}
+      ${renderImageFrame(visual.screenshot, visual.alt || item.coverAlt || displayTitle(item))}
       <div class="card-overlay">
         <span class="card-overlay-label">${escapeHtml(bilingualText("网页家族", "Web Family"))}</span>
         <h3 class="card-overlay-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
@@ -865,14 +1111,17 @@ function renderFamilyGridSection(options = {}) {
   </section>`;
 }
 
-function renderMovementCard(item) {
+function renderMovementCard(item, options = {}) {
+  const visual =
+    options.visual || pickUniqueVisual(item) || {
+      screenshot: item.cover,
+      alt: item.coverAlt || displayTitle(item)
+    };
+
   return `<article class="movement-card card-surface">
-    <div class="movement-strip">
-      ${item.samples
-        .slice(0, 2)
-        .map((sample) => renderImageFrame(sample.screenshot, sample.alt, "movement-thumb"))
-        .join("")}
-    </div>
+    <a ${linkAttrs(movementHref(item.id), "card-media movement-card-media")}>
+      ${renderImageFrame(visual.screenshot, visual.alt || item.coverAlt || displayTitle(item))}
+    </a>
     <div class="card-body">
       <div class="movement-meta">
         <p class="card-kicker">${escapeHtml(item.era)}</p>
@@ -885,6 +1134,39 @@ function renderMovementCard(item) {
         ${renderLinkedPills(item.familyIds, familyMap, familyHref)}
       </div>
       <a ${linkAttrs(movementHref(item.id), "text-link")}>${escapeHtml(bilingualText("查看详情", "Open Movement"))}</a>
+    </div>
+  </article>`;
+}
+
+function renderFamilyReferenceCard(item) {
+  return `<article class="detail-card relation-card card-surface">
+    <div class="card-body">
+      <p class="card-kicker">${escapeHtml(bilingualText("网页家族", "Web Family"))}</p>
+      <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
+      <p class="card-summary">${escapeHtml(item.summaryZh || item.summary)}</p>
+      <div class="meta-block">
+        <h4>${escapeHtml(bilingualText("适合内容", "Best For"))}</h4>
+        ${renderStaticPills(item.bestFor.slice(0, 3))}
+      </div>
+      <a ${linkAttrs(familyHref(item.id), "text-link")}>${escapeHtml(bilingualText("查看家族", "Open Family"))}</a>
+    </div>
+  </article>`;
+}
+
+function renderMovementReferenceCard(item) {
+  return `<article class="detail-card relation-card card-surface">
+    <div class="card-body">
+      <div class="movement-meta">
+        <p class="card-kicker">${escapeHtml(item.era)}</p>
+        <span class="micro-note">${escapeHtml(item.origin)}</span>
+      </div>
+      <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
+      <p class="card-summary">${escapeHtml(item.whyItMatters || item.summary)}</p>
+      <div class="meta-block">
+        <h4>${escapeHtml(bilingualText("今天会在网页里变成", "Shows Up In"))}</h4>
+        ${renderLinkedPills(item.familyIds, familyMap, familyHref)}
+      </div>
+      <a ${linkAttrs(movementHref(item.id), "text-link")}>${escapeHtml(bilingualText("查看流派", "Open Movement"))}</a>
     </div>
   </article>`;
 }
@@ -907,13 +1189,18 @@ function renderMovementGridSection(options = {}) {
   </section>`;
 }
 
-function renderUseCaseCard(item) {
+function renderUseCaseCard(item, options = {}) {
   const primaryFamily = familyMap.get(item.primaryFamilyId);
   const structureTitles = item.structureIds.map((id) => structureMap.get(id)).filter(Boolean);
+  const visual =
+    options.visual || pickUniqueVisual(item) || {
+      screenshot: item.cover,
+      alt: item.coverAlt || displayTitle(item)
+    };
 
   return `<article class="usecase-card card-surface">
     <a ${linkAttrs(useCaseHref(item.id), "card-media usecase-media")}>
-      ${renderImageFrame(primaryFamily?.cover || "", displayTitle(primaryFamily) || displayTitle(item))}
+      ${renderImageFrame(visual.screenshot, visual.alt || item.coverAlt || displayTitle(item))}
       <div class="card-overlay">
         <span class="card-overlay-label">${escapeHtml(bilingualText("使用场景", "Use Case"))}</span>
         <h3 class="card-overlay-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
@@ -973,6 +1260,8 @@ function renderBackLink(href, label) {
 function renderFamilyDetail(item) {
   const relatedMovements = item.movementIds.map((id) => movementMap.get(id)).filter(Boolean);
   const relatedStructures = item.structureIds.map((id) => structureMap.get(id)).filter(Boolean);
+  const gallerySamples = uniqueSamples(item.samples || [], new Set(item.cover ? [item.cover] : []));
+  const visibleSamples = gallerySamples.length ? gallerySamples : uniqueSamples(item.samples || []);
 
   return layout({
     title: `${displayTitle(item)} · ${siteMeta.title}`,
@@ -982,7 +1271,7 @@ function renderFamilyDetail(item) {
     body: [
       `<section class="detail-hero">
         <div class="detail-media">
-          ${renderImageFigure(item.cover, displayTitle(item), displayTitle(item))}
+          ${renderImageFigure(item.cover, item.coverAlt || displayTitle(item), item.coverLabel || displayTitle(item))}
         </div>
         <div class="detail-copy card-surface">
           ${renderBackLink("/families", bilingualText("返回网页家族", "Back To Families"))}
@@ -1008,7 +1297,7 @@ function renderFamilyDetail(item) {
           "从真实站点看这条家族是怎样落地的。"
         )}
         <div class="gallery-grid">
-          ${item.samples.map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label)).join("")}
+          ${visibleSamples.map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label)).join("")}
         </div>
       </section>`,
       `<section class="section">
@@ -1035,11 +1324,11 @@ function renderFamilyDetail(item) {
       `<section class="section">
         ${renderSectionHead(
           bilingualText("历史源头", "Historical Roots"),
-          bilingualText("它从哪些更早的语言长出来", "Which earlier languages shaped it"),
+          bilingualText("如果你喜欢这类网页，往前追会遇到哪几支", "Trace the earlier lineages behind it"),
           ""
         )}
-        <div class="movement-grid">
-          ${relatedMovements.map((movement) => renderMovementCard(movement)).join("")}
+        <div class="relation-grid">
+          ${relatedMovements.map((movement) => renderMovementReferenceCard(movement)).join("")}
         </div>
       </section>`,
       `<section class="section">
@@ -1075,7 +1364,8 @@ function renderFamilyDetail(item) {
 
 function renderMovementDetail(item) {
   const relatedFamilies = item.familyIds.map((id) => familyMap.get(id)).filter(Boolean);
-  const leadSample = item.samples[0];
+  const gallerySamples = uniqueSamples(item.samples || [], new Set(item.cover ? [item.cover] : []));
+  const visibleSamples = gallerySamples.length ? gallerySamples : uniqueSamples(item.samples || []);
 
   return layout({
     title: `${displayTitle(item)} · ${siteMeta.title}`,
@@ -1085,7 +1375,11 @@ function renderMovementDetail(item) {
     body: [
       `<section class="detail-hero">
         <div class="detail-media">
-          ${leadSample ? renderImageFigure(leadSample.screenshot, leadSample.alt, leadSample.label) : `<div class="image-placeholder">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`}
+          ${
+            item.cover
+              ? renderImageFigure(item.cover, item.coverAlt || displayTitle(item), item.coverLabel || displayTitle(item))
+              : `<div class="image-placeholder">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`
+          }
         </div>
         <div class="detail-copy card-surface">
           ${renderBackLink("/movements", bilingualText("返回历史流派", "Back To Movements"))}
@@ -1115,7 +1409,7 @@ function renderMovementDetail(item) {
           ""
         )}
         <div class="gallery-grid">
-          ${item.samples.map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label)).join("")}
+          ${visibleSamples.map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label)).join("")}
         </div>
       </section>`,
       `<section class="section">
@@ -1135,12 +1429,12 @@ function renderMovementDetail(item) {
       </section>`,
       `<section class="section">
         ${renderSectionHead(
-          bilingualText("后代网页家族", "Descendant Families"),
-          bilingualText("今天在网页里更接近哪些家族", "Which web families carry it today"),
+          bilingualText("下一步去看哪类网页", "What to open next"),
+          bilingualText("如果你喜欢这一支，下一步去看哪类网页", "The web families to open next"),
           ""
         )}
-        <div class="family-grid">
-          ${relatedFamilies.map((family) => renderFamilyCard(family)).join("")}
+        <div class="relation-grid">
+          ${relatedFamilies.map((family) => renderFamilyReferenceCard(family)).join("")}
         </div>
       </section>`,
       `<section class="section">
@@ -1176,6 +1470,11 @@ function renderUseCaseDetail(item) {
   const secondaryFamilies = item.secondaryFamilyIds.map((id) => familyMap.get(id)).filter(Boolean);
   const structures = item.structureIds.map((id) => structureMap.get(id)).filter(Boolean);
   const referenceFamilies = [primaryFamily, ...secondaryFamilies].filter(Boolean);
+  const usedScreenshots = new Set(item.cover ? [item.cover] : []);
+  const referenceFamilyCards = referenceFamilies.map((family) => ({
+    family,
+    visual: pickUniqueVisual(family, usedScreenshots)
+  }));
 
   return layout({
     title: `${displayTitle(item)} · ${siteMeta.title}`,
@@ -1185,7 +1484,7 @@ function renderUseCaseDetail(item) {
     body: [
       `<section class="detail-hero">
         <div class="detail-media">
-          ${renderImageFigure(primaryFamily?.cover || "", displayTitle(primaryFamily) || displayTitle(item), displayTitle(primaryFamily) || displayTitle(item))}
+          ${renderImageFigure(item.cover, item.coverAlt || displayTitle(item), item.coverLabel || displayTitle(item))}
         </div>
         <div class="detail-copy card-surface">
           ${renderBackLink("/use-cases", bilingualText("返回使用场景", "Back To Use Cases"))}
@@ -1232,7 +1531,7 @@ function renderUseCaseDetail(item) {
           ""
         )}
         <div class="family-grid">
-          ${referenceFamilies.map((family) => renderFamilyCard(family)).join("")}
+          ${referenceFamilyCards.map(({ family, visual }) => renderFamilyCard(family, { visual })).join("")}
         </div>
       </section>`,
       `<section class="section">
@@ -1264,7 +1563,7 @@ function buildHomePage() {
     pageClass: "home-page",
     body: [
       renderTimelineAtlasSection({
-        titleZh: "按年代找你喜欢的网页源头",
+        titleZh: "你喜欢的页面感觉，从哪条历史线长出来",
         titleEn: "Find the lineage behind the web feel you like",
         kicker: bilingualText("历史流派", "Historical Timeline"),
         summary: "",
@@ -1275,8 +1574,7 @@ function buildHomePage() {
       renderBrowseModes(),
       renderFamilyCoordinateSection(),
       renderFamilyGridSection({ familiesList: families.slice(0, 6) }),
-      renderUseCaseSection({ useCasesList: useCases }),
-      renderMovementGridSection()
+      renderUseCaseSection({ useCasesList: useCases })
     ].join("")
   });
 }
@@ -1327,14 +1625,6 @@ function buildMovementsPage() {
         kicker: bilingualText("按年代浏览", "Browse by Period"),
         summary: "按时间往下看，先抓住你想继续看的那条设计线。",
         sectionId: "movement-timeline"
-      }),
-      renderMovementGridSection({
-        title: bilingualText("全部历史流派", "All Historical Movements"),
-        kicker: bilingualText("历史索引", "History Index"),
-        summary: "从工艺美术、新艺术、包豪斯、瑞士风格、世纪中期现代主义到后现代、粗野主义、赛博朋克，识别网页视觉背后的祖先。",
-        movementsList: movements,
-        sectionId: "all-movements",
-        actionMarkup: ""
       })
     ].join("")
   });
@@ -1390,6 +1680,55 @@ function build() {
   for (const useCase of useCases) {
     writePage(["use-cases", useCase.id], renderUseCaseDetail(useCase));
   }
+
+  assertNoDuplicateImagesPerPage();
+}
+
+function duplicateImageSrcsForPage(html) {
+  const matches = [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map((match) => match[1]);
+  const counts = new Map();
+
+  for (const src of matches) {
+    counts.set(src, (counts.get(src) || 0) + 1);
+  }
+
+  return [...counts.entries()].filter(([, count]) => count > 1);
+}
+
+function walkHtmlFiles(dirPath) {
+  const pages = [];
+
+  for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+    const fullPath = path.join(dirPath, entry.name);
+
+    if (entry.isDirectory()) {
+      pages.push(...walkHtmlFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith(".html")) {
+      pages.push(fullPath);
+    }
+  }
+
+  return pages;
+}
+
+function assertNoDuplicateImagesPerPage() {
+  const failures = walkHtmlFiles(distRoot)
+    .map((filePath) => ({
+      filePath,
+      duplicates: duplicateImageSrcsForPage(fs.readFileSync(filePath, "utf8"))
+    }))
+    .filter((entry) => entry.duplicates.length);
+
+  if (!failures.length) return;
+
+  const message = failures
+    .map(
+      ({ filePath, duplicates }) =>
+        `${path.relative(distRoot, filePath)} => ${duplicates.map(([src, count]) => `${count}x ${src}`).join(", ")}`
+    )
+    .join("; ");
+
+  throw new Error(`Per-page duplicate screenshot check failed: ${message}`);
 }
 
 build();

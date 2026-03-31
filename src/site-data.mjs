@@ -3,7 +3,7 @@ export const siteMeta = {
   description:
     "An external style atlas for historical design movements, contemporary web families, and scenario-fit website references.",
   origin: process.env.DESIGN_SITE_ORIGIN || "https://design.zondev.top",
-  updatedAt: "2026-03-30"
+  updatedAt: "2026-04-01"
 };
 
 export const hero = {
@@ -202,7 +202,8 @@ export const historicalMovements = [
     webFamilyIds: ["playful-postmodern-anti-grid", "curated-reference-directory"],
     samples: [
       { screenshot: "memphis-milano.png", alt: "Memphis Milano homepage", label: "Memphis Milano" },
-      { screenshot: "gumroad-live.png", alt: "Gumroad homepage", label: "Gumroad" }
+      { screenshot: "gumroad-live.png", alt: "Gumroad homepage", label: "Gumroad" },
+      { screenshot: "behance.png", alt: "Behance homepage", label: "Behance" }
     ],
     references: [
       { label: "Memphis Milano", href: "https://memphis.it/en/" },
@@ -240,7 +241,8 @@ export const historicalMovements = [
     webFamilyIds: ["neon-techno-futurist-interface", "stage-driven-showcase"],
     samples: [
       { screenshot: "cyberpunk-net.png", alt: "Cyberpunk homepage", label: "Cyberpunk" },
-      { screenshot: "razer.png", alt: "Razer homepage", label: "Razer" }
+      { screenshot: "razer.png", alt: "Razer homepage", label: "Razer" },
+      { screenshot: "xbox-series-x-live.png", alt: "Xbox Series X homepage", label: "Xbox Series X" }
     ],
     references: [
       { label: "Britannica: Cyberpunk", href: "https://www.britannica.com/art/cyberpunk" },
@@ -300,7 +302,8 @@ export const visualFamilies = [
     structureIds: ["catalog-explorer", "archive-stack"],
     samples: [
       { screenshot: "pentagram.png", alt: "Pentagram homepage", label: "Pentagram" },
-      { screenshot: "studio-feixen.png", alt: "Studio Feixen homepage", label: "Studio Feixen" }
+      { screenshot: "studio-feixen.png", alt: "Studio Feixen homepage", label: "Studio Feixen" },
+      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" }
     ],
     signature: ["grid-first composition", "hard alignment", "labels and metadata matter", "type as structure"],
     borrow: ["explicit alignment logic", "consistent margins and modular spacing", "clear category and metadata roles"],
