@@ -243,12 +243,92 @@ const familyFieldMap = {
   "neon-techno-futurist-interface": { x: 90, y: 18, shortZh: "霓虹未来", shortEn: "Techno-Futurist" }
 };
 
+const movementGuideMap = {
+  "arts-and-crafts": {
+    hook: "如果你喜欢材料感、手作感和慢节奏品牌页面，可以从这里开始。",
+    common: "今天更常出现在生活方式、工艺品牌和纸本感很强的页面里。"
+  },
+  "art-nouveau": {
+    hook: "如果你喜欢有机曲线、装饰线条和更感性的优雅气质，可以先看这一支。",
+    common: "它经常在时尚、电影、文化品牌里变成更柔和的曲线和装饰节奏。"
+  },
+  futurism: {
+    hook: "如果你想要速度感、推进感和强烈的未来能量，这里会更对味。",
+    common: "今天常见在硬件发布、游戏页面和高动势的科技视觉里。"
+  },
+  suprematism: {
+    hook: "如果你喜欢抽象几何、强留白和极端简化的构图，可以从这里看。",
+    common: "它更像很多几何抽象型排版系统的深层来源。"
+  },
+  constructivism: {
+    hook: "如果你想让页面更像一个有力的传播系统，而不是装饰画面，这一支值得先看。",
+    common: "今天很多高效率信息页面、品牌系统页和几何构图都还在借它。"
+  },
+  dada: {
+    hook: "如果你喜欢拼贴、反规则和故意不太听话的页面语气，可以先看这里。",
+    common: "它更适合做灵感来源，不太适合直接变成整站默认风格。"
+  },
+  "de-stijl": {
+    hook: "如果你喜欢垂直水平、明确边界和抽象秩序感，可以从风格派开始。",
+    common: "今天很多网格、色块和模块化系统都能看到它的影子。"
+  },
+  "bauhaus-functional-modernism": {
+    hook: "如果你喜欢功能清楚、几何克制、不过度装饰的页面，这里很适合先看。",
+    common: "产品站、设计系统站和很多现代主义网页语言都从这里长出来。"
+  },
+  "new-typography": {
+    hook: "如果你在意排版节奏、对齐、留白和信息清晰度，这一支很关键。",
+    common: "很多你觉得高级又清楚的 editorial 页面，本质上都在借它。"
+  },
+  "art-deco-streamlined-luxury": {
+    hook: "如果你想要更有舞台感、精致感和高级节奏的页面，可以从这里开始。",
+    common: "文化、时尚和高感知品牌页面，经常会借它的对称与节奏。"
+  },
+  "mid-century-modern": {
+    hook: "如果你喜欢现代、温和、克制但不冷的页面气质，这一支会很有帮助。",
+    common: "它常出现在生活方式品牌、黑白工作室页和一些产品型极简页面里。"
+  },
+  "swiss-international-typography": {
+    hook: "如果你喜欢网格、秩序、强排版和档案感，这通常是最该先看的入口。",
+    common: "设计工作室、参考库、知识站和很多黑白极简页面都与它关系很深。"
+  },
+  "brutalism-neo-brutalism": {
+    hook: "如果你厌倦了太平滑的模板，想要更硬、更直接、更有态度的页面，可以先看这里。",
+    common: "它适合做反模板和强观点，但不适合默认所有内容都这样做。"
+  },
+  "pop-art": {
+    hook: "如果你喜欢高对比、流行文化和强识别的表面能量，这里会更接近。",
+    common: "更适合品牌表达和文化感，不太适合需要安静信任感的页面。"
+  },
+  minimalism: {
+    hook: "如果你喜欢空白、比例、节制和更安静的高级感，可以先看极简主义。",
+    common: "今天很多你觉得‘黑白简洁但不无聊’的页面，核心都和它有关。"
+  },
+  "postmodern-memphis": {
+    hook: "如果你想摆脱模板感，接受一点冲突、俏皮和反网格，可以从这里开始。",
+    common: "它适合创作者、实验品牌和想要更有态度的页面。"
+  },
+  "cyberpunk-techno-futurism": {
+    hook: "如果你想要黑底、霓虹、世界观和更强烈的未来科技感，这一支最直接。",
+    common: "它适合游戏、未来科技和沉浸式发布页，不适合所有内容。"
+  }
+};
+
 function movementYears(item) {
   return movementYearMap[item.id] || { start: 1900, end: 1905 };
 }
 
 function percentBetween(value, min, max) {
   return ((value - min) / (max - min)) * 100;
+}
+
+function movementGuide(item) {
+  return (
+    movementGuideMap[item.id] || {
+      hook: "如果你喜欢这种视觉气质，可以先从这里开始。",
+      common: "常见在设计工作室、品牌页和文化内容站。"
+    }
+  );
 }
 
 function ensureDir(dirPath) {
@@ -587,47 +667,125 @@ function renderBrowseModes() {
   </section>`;
 }
 
+function renderTimelineStreamItem(item, isOpen = false) {
+  const leadSample = item.samples?.[0];
+  const extraSamples = item.samples?.slice(1, 3) || [];
+  const relatedFamilies = item.familyIds.map((id) => familyMap.get(id)).filter(Boolean);
+  const visibleFamilies = relatedFamilies.slice(0, 3);
+  const guide = movementGuide(item);
+  const years = movementYears(item);
+
+  return `<details class="timeline-stream-item card-surface"${isOpen ? " open" : ""}>
+    <summary class="timeline-stream-summary">
+      <span class="timeline-stream-years" aria-hidden="true">
+        <span class="timeline-stream-year-start">${escapeHtml(String(years.start))}</span>
+        <span class="timeline-stream-year-end">${escapeHtml(String(years.end))}</span>
+      </span>
+      <span class="timeline-stream-marker" aria-hidden="true">
+        <span class="timeline-stream-dot"></span>
+      </span>
+      <div class="timeline-stream-preview">
+        <div class="timeline-stream-preview-media">
+          ${
+            leadSample
+              ? renderImageFigure(leadSample.screenshot, leadSample.alt, leadSample.label, "timeline-stream-figure")
+              : `<div class="image-placeholder">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`
+          }
+        </div>
+        <div class="timeline-stream-preview-copy">
+          <p class="eyebrow">${escapeHtml(item.origin)}</p>
+          <h2 class="detail-title timeline-stream-title">${renderBilingualStack(
+            item.titleZh,
+            item.titleEn || item.title,
+            "detail-bilingual-title"
+          )}</h2>
+          <p class="timeline-stream-hook">${escapeHtml(guide.hook)}</p>
+          <p class="timeline-stream-common">${escapeHtml(guide.common)}</p>
+          <div class="meta-block timeline-stream-preview-families">
+            <h4>${escapeHtml(bilingualText("常见网页类型", "Common Web Families"))}</h4>
+            ${renderStaticPills(visibleFamilies)}
+          </div>
+          <span class="timeline-stream-toggle">
+            <span class="timeline-stream-toggle-closed">${escapeHtml(bilingualText("展开看特征与参考", "Open Traits + References"))}</span>
+            <span class="timeline-stream-toggle-open">${escapeHtml(bilingualText("收起这条流派", "Close This Movement"))}</span>
+          </span>
+        </div>
+      </div>
+    </summary>
+    <div class="timeline-stream-body">
+      <span class="timeline-stream-body-spacer" aria-hidden="true"></span>
+      <span class="timeline-stream-body-track" aria-hidden="true"></span>
+      <div class="timeline-stream-body-main">
+        <div class="timeline-stream-meta-grid">
+          <div class="meta-block">
+            <h4>${escapeHtml(bilingualText("今天常见网页类型", "Common Web Families Today"))}</h4>
+            ${renderLinkedPills(visibleFamilies.map((entry) => entry.id), familyMap, familyHref)}
+          </div>
+          <div class="meta-block">
+            <h4>${escapeHtml(bilingualText("如果你想做这类网站", "Good If You Want This Web Feel"))}</h4>
+            <p>${escapeHtml(item.whyItMatters || item.summary || guide.common)}</p>
+          </div>
+        </div>
+        ${
+          extraSamples.length
+            ? `<details class="timeline-media-details">
+                <summary>${escapeHtml(bilingualText("再看更多参考图", "See More Reference Views"))}</summary>
+                <div class="timeline-preview-strip">
+                  ${extraSamples
+                    .map((sample) => renderImageFigure(sample.screenshot, sample.alt, sample.label, "timeline-strip-figure"))
+                    .join("")}
+                </div>
+              </details>`
+            : ""
+        }
+        <details class="timeline-details">
+          <summary>${escapeHtml(bilingualText("展开看特征与避坑", "Open Traits + Watchouts"))}</summary>
+          <div class="timeline-details-grid">
+            <div class="meta-block">
+              <h4>${escapeHtml(bilingualText("先抓这几个特征", "Traits to Start With"))}</h4>
+              ${renderList(item.principles.slice(0, 4))}
+            </div>
+            <div class="meta-block">
+              <h4>${escapeHtml(bilingualText("最容易做乱的地方", "Easy Ways to Lose the Feel"))}</h4>
+              ${renderList(item.watchouts.slice(0, 3))}
+            </div>
+          </div>
+        </details>
+        <div class="hero-actions">
+          <a ${linkAttrs(movementHref(item.id), "button")}>${escapeHtml(bilingualText("查看完整流派", "Full Movement"))}</a>
+        </div>
+      </div>
+    </div>
+  </details>`;
+}
+
 function renderTimelineAtlasSection(options = {}) {
   const {
-    title = bilingualText("设计谱系时间轴", "Lineage Timeline"),
-    kicker = bilingualText("历史演变", "Historical Evolution"),
-    summary = "用一条可浏览的编年轨道，把历史流派、时间跨度和今天网页里仍然活着的语言串起来。",
-    sectionId = "timeline-atlas"
+    title = bilingualText("历史流派时间轴", "Historical Timeline"),
+    titleZh = "",
+    titleEn = "",
+    kicker = bilingualText("历史流派", "Historical Timeline"),
+    summary = "",
+    sectionId = "timeline-atlas",
+    featuredId = "swiss-international-typography",
+    heroMode = false
   } = options;
 
   const ordered = [...movements].sort((a, b) => movementYears(a).start - movementYears(b).start);
-  const minYear = 1860;
-  const maxYear = 2025;
-  const ticks = [1860, 1900, 1950, 2000, 2025];
+  const defaultId = ordered.some((item) => item.id === featuredId) ? featuredId : ordered[0]?.id;
+  const titleMarkup =
+    titleZh || titleEn
+      ? renderBilingualStack(titleZh || title, titleEn || "", "timeline-feature-title-stack")
+      : escapeHtml(title);
 
-  return `<section class="section" id="${escapeHtml(sectionId)}">
-    ${renderSectionHead(kicker, title, summary)}
-    <div class="atlas-scroller">
-      <div class="timeline-atlas card-surface">
-        <div class="timeline-track"></div>
-        ${ticks
-          .map((year) => {
-            const left = percentBetween(year, minYear, maxYear);
-            return `<span class="timeline-tick" style="left:${left}%;">
-              <span class="timeline-tick-line"></span>
-              <span class="timeline-tick-label">${escapeHtml(String(year))}</span>
-            </span>`;
-          })
-          .join("")}
-        ${ordered
-          .map((item, index) => {
-            const years = movementYears(item);
-            const left = percentBetween(years.start, minYear, maxYear);
-            const lane = index % 2 === 0 ? "top" : "bottom";
-            return `<a ${linkAttrs(movementHref(item.id), `timeline-node timeline-node--${lane} timeline-node--${item.webFit || "medium"}`)} style="left:${left}%;">
-              <span class="timeline-node-stem"></span>
-              <span class="timeline-node-dot"></span>
-              <span class="timeline-node-year">${escapeHtml(String(years.start))}</span>
-              <span class="timeline-node-label">${renderBilingualStack(item.titleZh, item.titleEn || item.title, "timeline-label-stack")}</span>
-            </a>`;
-          })
-          .join("")}
-      </div>
+  return `<section class="section timeline-feature${heroMode ? " timeline-feature--hero" : ""}" id="${escapeHtml(sectionId)}">
+    <div class="timeline-feature-head">
+      <p class="eyebrow">${escapeHtml(kicker)}</p>
+      <h1 class="${heroMode ? "hero-title" : "section-title"} timeline-feature-title">${titleMarkup}</h1>
+      ${summary ? `<p class="timeline-feature-intro">${escapeHtml(summary)}</p>` : ""}
+    </div>
+    <div class="timeline-stream" aria-label="${escapeHtml(bilingualText("历史流派", "Historical Timeline"))}">
+      ${ordered.map((item) => renderTimelineStreamItem(item, item.id === defaultId)).join("")}
     </div>
   </section>`;
 }
@@ -1105,9 +1263,16 @@ function buildHomePage() {
     pathname: "/",
     pageClass: "home-page",
     body: [
-      renderHeroStage(),
+      renderTimelineAtlasSection({
+        titleZh: "按年代找你喜欢的网页源头",
+        titleEn: "Find the lineage behind the web feel you like",
+        kicker: bilingualText("历史流派", "Historical Timeline"),
+        summary: "",
+        sectionId: "top",
+        featuredId: "arts-and-crafts",
+        heroMode: true
+      }),
       renderBrowseModes(),
-      renderTimelineAtlasSection(),
       renderFamilyCoordinateSection(),
       renderFamilyGridSection({ familiesList: families.slice(0, 6) }),
       renderUseCaseSection({ useCasesList: useCases }),
@@ -1157,9 +1322,10 @@ function buildMovementsPage() {
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
       renderTimelineAtlasSection({
-        title: bilingualText("历史流派时间轴", "Historical Timeline"),
-        kicker: bilingualText("流派轨道", "Movement Timeline"),
-        summary: "先看时间上的先后关系，再回到下方逐条浏览，会更容易理解谁是谁的祖先语言。",
+        titleZh: "历史流派时间轴",
+        titleEn: "Historical Timeline",
+        kicker: bilingualText("按年代浏览", "Browse by Period"),
+        summary: "按时间往下看，先抓住你想继续看的那条设计线。",
         sectionId: "movement-timeline"
       }),
       renderMovementGridSection({
