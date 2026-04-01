@@ -960,25 +960,31 @@ function renderFieldAtlas(options = {}) {
 function renderHomeOverviewHero() {
   return `<section class="home-hero section" id="top">
     <div class="home-hero-inner">
-      <p class="eyebrow">${escapeHtml(bilingualText("设计风格图谱", "Design Atlas"))}</p>
-      <h1 class="hero-title home-hero-title">${renderBilingualStack(
-        "先看风格地图，再进时间线",
-        "Map the field before you enter the timeline",
-        "hero-title-stack"
-      )}</h1>
-      <p class="home-hero-stats">${escapeHtml(
-        `${movements.length}个历史流派 · ${families.length}个网页家族 · ${useCases.length}个使用场景`
-      )}</p>
-      <div class="hero-route-buttons">
-        <a ${linkAttrs("/movements", "hero-route-button")}>${escapeHtml(
-          bilingualText("历史流派", "Historical Movements")
-        )}</a>
-        <a ${linkAttrs("/families", "hero-route-button hero-route-button--primary")}>${escapeHtml(
-          bilingualText("网页家族", "Web Families")
-        )}</a>
-        <a ${linkAttrs("/use-cases", "hero-route-button")}>${escapeHtml(
-          bilingualText("使用场景", "Use Cases")
-        )}</a>
+      <div class="home-hero-copy">
+        <p class="eyebrow">${escapeHtml(bilingualText("设计风格图谱", "Design Atlas"))}</p>
+        <h1 class="hero-title home-hero-title">
+          <span class="home-hero-title-zh">
+            <span>先看风格地图</span>
+            <span>再进时间线</span>
+          </span>
+          <span class="home-hero-title-en">Map the field before you enter the timeline</span>
+        </h1>
+      </div>
+      <div class="home-hero-deck">
+        <p class="home-hero-stats">${escapeHtml(
+          `${movements.length}个历史流派 · ${families.length}个网页家族 · ${useCases.length}个使用场景`
+        )}</p>
+        <div class="hero-route-buttons">
+          <a ${linkAttrs("/movements", "hero-route-button")}>${escapeHtml(
+            bilingualText("历史流派", "Historical Movements")
+          )}</a>
+          <a ${linkAttrs("/families", "hero-route-button hero-route-button--primary")}>${escapeHtml(
+            bilingualText("网页家族", "Web Families")
+          )}</a>
+          <a ${linkAttrs("/use-cases", "hero-route-button")}>${escapeHtml(
+            bilingualText("使用场景", "Use Cases")
+          )}</a>
+        </div>
       </div>
     </div>
   </section>`;
@@ -1033,20 +1039,22 @@ function renderTimelineNavigator(items = []) {
   return `<nav class="timeline-nav card-surface" aria-label="${escapeHtml(
     bilingualText("时间轴总览导航", "Timeline overview")
   )}">
-    <p class="timeline-nav-scale">
-      <span>${escapeHtml(String(firstYear))}</span>
-      <span>${escapeHtml(String(lastYear))}</span>
-    </p>
+    <div class="timeline-nav-head">
+      <p class="timeline-nav-scale">
+        <span>${escapeHtml(String(firstYear))}</span>
+        <span>${escapeHtml(String(lastYear))}</span>
+      </p>
+      <a ${linkAttrs("#top", "timeline-nav-back")}>${escapeHtml(bilingualText("回到封面", "Back to cover"))}</a>
+    </div>
     <div class="timeline-nav-scroll">
       <div class="timeline-nav-track">
       ${ordered
         .map((item) => {
           const years = movementYears(item);
           const position = firstYear === lastYear ? 50 : 5 + ((years.start - firstYear) / (lastYear - firstYear)) * 90;
-          return `<a class="timeline-nav-stop" href="#${escapeHtml(movementAnchorId(item.id))}" style="left:${position}%;">
+          return `<a class="timeline-nav-stop" href="#${escapeHtml(movementAnchorId(item.id))}" style="left:${position}%;" aria-label="${escapeHtml(displayTitle(item))}" title="${escapeHtml(displayTitle(item))}">
             <span class="timeline-nav-stop-dot"></span>
             <span class="timeline-nav-stop-year">${escapeHtml(String(years.start))}</span>
-            <span class="timeline-nav-stop-label">${renderBilingualStack(item.titleZh, item.titleEn || item.title, "timeline-nav-stop-stack")}</span>
           </a>`;
         })
         .join("")}
@@ -1103,6 +1111,8 @@ function renderTimelineAtlasSection(options = {}) {
   } = options;
 
   const ordered = [...movements].sort((a, b) => movementYears(a).start - movementYears(b).start);
+  const firstYear = ordered[0] ? movementYears(ordered[0]).start : 0;
+  const lastYear = ordered.length ? movementYears(ordered[ordered.length - 1]).end : 0;
   const titleMarkup =
     titleZh || titleEn
       ? renderBilingualStack(titleZh || title, titleEn || "", "timeline-feature-title-stack")
@@ -1110,10 +1120,18 @@ function renderTimelineAtlasSection(options = {}) {
 
   return `<section class="section timeline-feature${heroMode ? " timeline-feature--hero" : ""}" id="${escapeHtml(sectionId)}">
     <div class="timeline-feature-head">
-      <p class="eyebrow">${escapeHtml(kicker)}</p>
-      <h1 class="${heroMode ? "hero-title" : "section-title"} timeline-feature-title">${titleMarkup}</h1>
-      ${summary ? `<p class="timeline-feature-intro">${escapeHtml(summary)}</p>` : ""}
+      <div class="timeline-feature-period">
+        <span class="timeline-feature-period-start">${escapeHtml(String(firstYear))}</span>
+        <span class="timeline-feature-period-divider"></span>
+        <span class="timeline-feature-period-end">${escapeHtml(String(lastYear))}</span>
+      </div>
+      <div class="timeline-feature-head-main">
+        <p class="eyebrow">${escapeHtml(kicker)}</p>
+        <h1 class="${heroMode ? "hero-title" : "section-title"} timeline-feature-title">${titleMarkup}</h1>
+        ${summary ? `<p class="timeline-feature-intro">${escapeHtml(summary)}</p>` : ""}
+      </div>
     </div>
+    ${renderTimelineNavigator(ordered)}
     <div class="timeline-stream" data-timeline-stream aria-label="${escapeHtml(
       bilingualText("历史流派", "Historical Timeline")
     )}">
@@ -1634,8 +1652,8 @@ function buildHomePage() {
     body: [
       renderHomeOverviewHero(),
       renderTimelineAtlasSection({
-        titleZh: "想追溯出处，就看历史线",
-        titleEn: "Open the historical line when you want the source",
+        titleZh: "按年代往下看",
+        titleEn: "Browse by era",
         kicker: bilingualText("历史流派", "Historical Timeline"),
         summary: "",
         sectionId: "historical-timeline",
