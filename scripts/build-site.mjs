@@ -209,7 +209,7 @@ const primaryVisualMap = {
   "brutalism-neo-brutalism": visualAsset("gumroad-live.png", "Gumroad", "Gumroad homepage"),
   "cyberpunk-techno-futurism": visualAsset("cyberpunk-net.png", "Cyberpunk", "Cyberpunk homepage"),
   "arts-and-crafts": visualAsset("kinfolk-live.png", "Kinfolk", "Kinfolk homepage"),
-  "art-nouveau": visualAsset("gentlewoman-cover-live.png", "The Gentlewoman", "The Gentlewoman homepage"),
+  "art-nouveau": visualAsset("gentlewoman-live.png", "The Gentlewoman", "The Gentlewoman homepage"),
   futurism: visualAsset("razer.png", "Razer", "Razer homepage"),
   dada: visualAsset("arena-live.png", "Are.na", "Are.na page"),
   suprematism: visualAsset("studio-feixen.png", "Studio Feixen", "Studio Feixen homepage"),
@@ -892,6 +892,33 @@ function renderHeroStage() {
   </section>`;
 }
 
+function renderRouteCards(options = {}) {
+  const { className = "route-grid", compact = false } = options;
+
+  return `<div class="${escapeHtml(className)}">
+    ${routes
+      .map((item) => {
+        const href = routeHref[item.id] || item.href || "/";
+        return `<article class="route-card card-surface${compact ? " route-card--compact" : ""}">
+          <div class="card-body">
+            <div class="route-card-top">
+              <p class="card-kicker">${escapeHtml(bilingualText(item.titleZh, item.titleEn || item.title))}</p>
+              <span class="route-count">${escapeHtml(item.count)}</span>
+            </div>
+            <h3 class="card-title">${
+              compact
+                ? renderBilingualStack(item.titleZh, item.titleEn || item.title)
+                : escapeHtml(item.summary)
+            }</h3>
+            <p class="card-summary">${escapeHtml(compact ? item.detail : item.detail)}</p>
+            <a ${linkAttrs(href, "text-link")}>${escapeHtml(bilingualText("进入分类", "Open Route"))}</a>
+          </div>
+        </article>`;
+      })
+      .join("")}
+  </div>`;
+}
+
 function renderBrowseModes() {
   return `<section class="section" id="browse-modes">
     ${renderSectionHead(
@@ -899,35 +926,141 @@ function renderBrowseModes() {
       bilingualText("先从你最熟悉的维度进入", "Start from the dimension you recognize first"),
       "先做选择，再进详情页，不把整套理论都堆在首页。"
     )}
-    <div class="route-grid">
-      ${routes
+    ${renderRouteCards()}
+  </section>`;
+}
+
+function renderFieldAtlas(options = {}) {
+  const { compact = false } = options;
+  const plottedFamilies = families
+    .map((item) => ({ ...item, coords: familyFieldMap[item.id] }))
+    .filter((item) => item.coords);
+
+  return `<div class="atlas-scroller${compact ? " atlas-scroller--compact" : ""}">
+    <div class="field-atlas card-surface${compact ? " field-atlas--compact" : ""}">
+      <div class="field-axis field-axis--x"></div>
+      <div class="field-axis field-axis--y"></div>
+      <div class="field-axis-label field-axis-label--left">${escapeHtml(bilingualText("系统与档案", "System + Archive"))}</div>
+      <div class="field-axis-label field-axis-label--right">${escapeHtml(bilingualText("舞台与表现", "Stage + Expression"))}</div>
+      <div class="field-axis-label field-axis-label--top">${escapeHtml(bilingualText("强烈张力", "Intense"))}</div>
+      <div class="field-axis-label field-axis-label--bottom">${escapeHtml(bilingualText("安静克制", "Quiet"))}</div>
+      ${plottedFamilies
         .map((item) => {
-          const href = routeHref[item.id] || item.href || "/";
-          return `<article class="route-card card-surface">
-            <div class="card-body">
-              <div class="route-card-top">
-                <p class="card-kicker">${escapeHtml(bilingualText(item.titleZh, item.titleEn || item.title))}</p>
-                <span class="route-count">${escapeHtml(item.count)}</span>
-              </div>
-              <h3 class="card-title">${escapeHtml(item.summary)}</h3>
-              <p class="card-summary">${escapeHtml(item.detail)}</p>
-              <a ${linkAttrs(href, "text-link")}>${escapeHtml(bilingualText("进入分类", "Open Route"))}</a>
-            </div>
-          </article>`;
+          const { x, y, shortZh, shortEn } = item.coords;
+          return `<a ${linkAttrs(familyHref(item.id), "field-point")} style="left:${x}%; top:${y}%;">
+            <span class="field-point-dot"></span>
+            <span class="field-point-label">${renderBilingualStack(shortZh || item.titleZh, shortEn || item.titleEn || item.title, "field-label-stack")}</span>
+          </a>`;
         })
         .join("")}
+    </div>
+  </div>`;
+}
+
+function renderHomeOverviewHero() {
+  return `<section class="home-overview section" id="top">
+    <div class="home-overview-grid">
+      <div class="home-overview-copy">
+        <p class="eyebrow">${escapeHtml(bilingualText("风格聚合入口", "Atlas Overview"))}</p>
+        <h1 class="hero-title home-overview-title">${renderBilingualStack(
+          "先看全局，再决定从哪条路进去",
+          "See the whole map before you choose a route",
+          "timeline-feature-title-stack"
+        )}</h1>
+        <p class="hero-intro home-overview-intro">${escapeHtml(
+          bilingualText(
+            "这里不是固定模板库，而是一个帮你按历史、按网页类型、按任务去找设计方向的风格聚合站。",
+            "This is not one fixed template. It is a design atlas for choosing direction by lineage, web family, or job."
+          )
+        )}</p>
+        <p class="hero-support home-overview-support">${escapeHtml(
+          bilingualText(
+            "先选入口，再下钻细节；先知道自己要找什么感觉，再决定要不要进入时间轴。",
+            "Choose a route first, then dive deeper. Know the kind of feel you want before dropping into the timeline."
+          )
+        )}</p>
+        ${renderRouteCards({ className: "route-grid route-grid--overview", compact: true })}
+      </div>
+      <aside class="home-overview-map card-surface">
+        <div class="card-body">
+          <p class="card-kicker">${escapeHtml(bilingualText("风格坐标场", "Style Coordinate Field"))}</p>
+          <h2 class="card-title">${escapeHtml(bilingualText("也可以先按气质找方向", "Or start by the feel you want"))}</h2>
+          <p class="card-summary">${escapeHtml(
+            bilingualText(
+              "越往左越系统与档案，越往右越舞台与表现；越往上越张力强，越往下越安静克制。",
+              "Further left feels more systematic and archival. Further right feels more staged and expressive. Up is more intense, down is quieter."
+            )
+          )}</p>
+        </div>
+        ${renderFieldAtlas({ compact: true })}
+      </aside>
     </div>
   </section>`;
 }
 
-function renderTimelineStreamItem(item, isOpen = false) {
+function movementAnchorId(id) {
+  return `movement-${id}`;
+}
+
+function movementKeyword(item) {
+  return item.principles?.[0] || item.signatures?.[0] || item.origin || "";
+}
+
+function renderTimelineNavigator(items = []) {
+  const ordered = [...items];
+  const firstYear = ordered[0] ? movementYears(ordered[0]).start : 0;
+  const lastYear = ordered.length ? movementYears(ordered[ordered.length - 1]).end : 0;
+
+  return `<nav class="timeline-nav card-surface" aria-label="${escapeHtml(
+    bilingualText("时间轴总览导航", "Timeline overview")
+  )}">
+    <div class="timeline-nav-head">
+      <div>
+        <p class="eyebrow">${escapeHtml(bilingualText("时间俯视图", "Timeline Overview"))}</p>
+        <h2 class="card-title timeline-nav-title">${escapeHtml(
+          bilingualText("先看全貌，再打开其中一支", "See the whole arc before opening a chapter")
+        )}</h2>
+      </div>
+      <p class="timeline-nav-scale">
+        <span>${escapeHtml(String(firstYear))}</span>
+        <span>${escapeHtml(String(lastYear))}</span>
+      </p>
+    </div>
+    <div class="timeline-nav-scroll">
+      <div class="timeline-nav-track">
+      ${ordered
+        .map((item) => {
+          const years = movementYears(item);
+          const position = firstYear === lastYear ? 50 : 5 + ((years.start - firstYear) / (lastYear - firstYear)) * 90;
+          return `<a class="timeline-nav-stop" href="#${escapeHtml(movementAnchorId(item.id))}" style="left:${position}%;">
+            <span class="timeline-nav-stop-dot"></span>
+            <span class="timeline-nav-stop-year">${escapeHtml(String(years.start))}</span>
+            <span class="timeline-nav-stop-label">${renderBilingualStack(
+              item.titleZh,
+              item.titleEn || item.title,
+              "timeline-nav-stop-stack"
+            )}</span>
+          </a>`;
+        })
+        .join("")}
+      </div>
+    </div>
+  </nav>`;
+}
+
+function renderTimelineStreamItem(item, index, isOpen = false) {
   const leadVisual = item.primaryVisual || fallbackVisual(item);
   const relatedFamilies = item.familyIds.map((id) => familyMap.get(id)).filter(Boolean);
-  const visibleFamilies = relatedFamilies.slice(0, 3);
+  const visibleFamilies = relatedFamilies.slice(0, 2);
   const guide = movementGuide(item);
   const years = movementYears(item);
+  const keyword = movementKeyword(item);
+  const side = index % 2 === 0 ? "right" : "left";
+  const lookFor = item.principles.slice(0, 2).join(" · ");
 
-  return `<details class="timeline-stream-item card-surface"${isOpen ? " open" : ""}>
+  return `<details class="timeline-stream-item timeline-stream-item--${side}" id="${escapeHtml(movementAnchorId(item.id))}"${
+    isOpen ? " open" : ""
+  }>
     <summary class="timeline-stream-summary">
       <span class="timeline-stream-years" aria-hidden="true">
         <span class="timeline-stream-year-start">${escapeHtml(String(years.start))}</span>
@@ -940,7 +1073,14 @@ function renderTimelineStreamItem(item, isOpen = false) {
         <div class="timeline-stream-preview-media">
           ${
             leadVisual?.screenshot
-              ? renderImageFigure(leadVisual.screenshot, leadVisual.alt, leadVisual.label, "timeline-stream-figure")
+              ? `${renderImageFigure(leadVisual.screenshot, leadVisual.alt, leadVisual.label, "timeline-stream-figure")}
+                ${
+                  lookFor
+                    ? `<p class="timeline-stream-visual-note"><span class="micro-note">${escapeHtml(
+                        bilingualText("看这里", "Look For")
+                      )}</span>${escapeHtml(lookFor)}</p>`
+                    : ""
+                }`
               : `<div class="image-placeholder">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`
           }
         </div>
@@ -951,14 +1091,14 @@ function renderTimelineStreamItem(item, isOpen = false) {
             item.titleEn || item.title,
             "detail-bilingual-title"
           )}</h2>
+          ${keyword ? `<p class="timeline-stream-keyword">${escapeHtml(keyword)}</p>` : ""}
           <p class="timeline-stream-hook">${escapeHtml(guide.hook)}</p>
-          <p class="timeline-stream-common">${escapeHtml(guide.common)}</p>
           <div class="meta-block timeline-stream-preview-families">
-            <h4>${escapeHtml(bilingualText("下一步去看哪类网站", "Next Stops"))}</h4>
+            <h4>${escapeHtml(bilingualText("今天常会变成", "Often shows up as"))}</h4>
             ${renderStaticPills(visibleFamilies)}
           </div>
           <span class="timeline-stream-toggle">
-            <span class="timeline-stream-toggle-closed">${escapeHtml(bilingualText("点开看这种感觉怎么用", "Open How It Shows Up"))}</span>
+            <span class="timeline-stream-toggle-closed">${escapeHtml(bilingualText("点开看这一支", "Open This Chapter"))}</span>
             <span class="timeline-stream-toggle-open">${escapeHtml(bilingualText("收起这一支", "Close This Chapter"))}</span>
           </span>
         </div>
@@ -968,6 +1108,7 @@ function renderTimelineStreamItem(item, isOpen = false) {
       <span class="timeline-stream-body-spacer" aria-hidden="true"></span>
       <span class="timeline-stream-body-track" aria-hidden="true"></span>
       <div class="timeline-stream-body-main">
+        <p class="timeline-stream-common timeline-stream-body-intro">${escapeHtml(guide.common)}</p>
         <div class="timeline-stream-meta-grid">
           <div class="meta-block">
             <h4>${escapeHtml(bilingualText("你常会在哪类网站看到它", "Where You'll See It"))}</h4>
@@ -1007,12 +1148,12 @@ function renderTimelineAtlasSection(options = {}) {
     kicker = bilingualText("历史流派", "Historical Timeline"),
     summary = "",
     sectionId = "timeline-atlas",
-    featuredId = "swiss-international-typography",
+    defaultOpenId = "",
     heroMode = false
   } = options;
 
   const ordered = [...movements].sort((a, b) => movementYears(a).start - movementYears(b).start);
-  const defaultId = ordered.some((item) => item.id === featuredId) ? featuredId : ordered[0]?.id;
+  const defaultId = ordered.some((item) => item.id === defaultOpenId) ? defaultOpenId : "";
   const titleMarkup =
     titleZh || titleEn
       ? renderBilingualStack(titleZh || title, titleEn || "", "timeline-feature-title-stack")
@@ -1024,42 +1165,21 @@ function renderTimelineAtlasSection(options = {}) {
       <h1 class="${heroMode ? "hero-title" : "section-title"} timeline-feature-title">${titleMarkup}</h1>
       ${summary ? `<p class="timeline-feature-intro">${escapeHtml(summary)}</p>` : ""}
     </div>
+    ${renderTimelineNavigator(ordered)}
     <div class="timeline-stream" aria-label="${escapeHtml(bilingualText("历史流派", "Historical Timeline"))}">
-      ${ordered.map((item) => renderTimelineStreamItem(item, item.id === defaultId)).join("")}
+      ${ordered.map((item, index) => renderTimelineStreamItem(item, index, item.id === defaultId)).join("")}
     </div>
   </section>`;
 }
 
 function renderFamilyCoordinateSection() {
-  const plottedFamilies = families
-    .map((item) => ({ ...item, coords: familyFieldMap[item.id] }))
-    .filter((item) => item.coords);
-
   return `<section class="section" id="style-field">
     ${renderSectionHead(
       bilingualText("风格坐标场", "Style Coordinate Field"),
-      bilingualText("不是按时间，而是按气质和结构选", "Choose by temperament, not only by chronology"),
-      "横轴从系统与档案走向舞台与表现，纵轴从安静克制走向强烈张力。"
+      bilingualText("如果你先知道自己想要什么气质，从这里进", "If you know the tone you want, start here"),
+      "横轴看页面更偏系统还是更偏舞台，纵轴看它更安静还是更有张力。"
     )}
-    <div class="atlas-scroller">
-      <div class="field-atlas card-surface">
-        <div class="field-axis field-axis--x"></div>
-        <div class="field-axis field-axis--y"></div>
-        <div class="field-axis-label field-axis-label--left">${escapeHtml(bilingualText("系统与档案", "System + Archive"))}</div>
-        <div class="field-axis-label field-axis-label--right">${escapeHtml(bilingualText("舞台与表现", "Stage + Expression"))}</div>
-        <div class="field-axis-label field-axis-label--top">${escapeHtml(bilingualText("强烈张力", "Intense"))}</div>
-        <div class="field-axis-label field-axis-label--bottom">${escapeHtml(bilingualText("安静克制", "Quiet"))}</div>
-        ${plottedFamilies
-          .map((item) => {
-            const { x, y, shortZh, shortEn } = item.coords;
-            return `<a ${linkAttrs(familyHref(item.id), "field-point")} style="left:${x}%; top:${y}%;">
-              <span class="field-point-dot"></span>
-              <span class="field-point-label">${renderBilingualStack(shortZh || item.titleZh, shortEn || item.titleEn || item.title, "field-label-stack")}</span>
-            </a>`;
-          })
-          .join("")}
-      </div>
-    </div>
+    ${renderFieldAtlas()}
   </section>`;
 }
 
@@ -1562,17 +1682,19 @@ function buildHomePage() {
     pathname: "/",
     pageClass: "home-page",
     body: [
+      renderHomeOverviewHero(),
       renderTimelineAtlasSection({
-        titleZh: "你喜欢的页面感觉，从哪条历史线长出来",
-        titleEn: "Find the lineage behind the web feel you like",
+        titleZh: "想追溯出处，就看历史线",
+        titleEn: "Open the historical line when you want the source",
         kicker: bilingualText("历史流派", "Historical Timeline"),
-        summary: "",
-        sectionId: "top",
-        featuredId: "arts-and-crafts",
-        heroMode: true
+        summary: bilingualText(
+          "先看 1860 到今天的全貌，再点开你想继续追的那一支，不用一上来就掉进细节里。",
+          "Scan the whole line from 1860 to today, then open the chapter you want instead of dropping into detail immediately."
+        ),
+        sectionId: "historical-timeline",
+        defaultOpenId: "",
+        heroMode: false
       }),
-      renderBrowseModes(),
-      renderFamilyCoordinateSection(),
       renderFamilyGridSection({ familiesList: families.slice(0, 6) }),
       renderUseCaseSection({ useCasesList: useCases })
     ].join("")
@@ -1623,8 +1745,9 @@ function buildMovementsPage() {
         titleZh: "历史流派时间轴",
         titleEn: "Historical Timeline",
         kicker: bilingualText("按年代浏览", "Browse by Period"),
-        summary: "按时间往下看，先抓住你想继续看的那条设计线。",
-        sectionId: "movement-timeline"
+        summary: "先看整条线，再点开你想追的那一支。",
+        sectionId: "movement-timeline",
+        defaultOpenId: ""
       })
     ].join("")
   });

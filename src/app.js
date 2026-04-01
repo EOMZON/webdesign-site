@@ -17,4 +17,19 @@ function setupCopyButtons() {
   });
 }
 
+function openTimelineItemFromHash() {
+  const id = window.location.hash.replace(/^#/, "");
+  if (!id) return;
+  const item = document.getElementById(id);
+  if (item instanceof HTMLDetailsElement) {
+    item.open = true;
+  }
+}
+
+function setupTimelineHashOpen() {
+  openTimelineItemFromHash();
+  window.addEventListener("hashchange", openTimelineItemFromHash);
+}
+
 setupCopyButtons();
+setupTimelineHashOpen();
