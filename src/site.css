@@ -2230,24 +2230,18 @@ code {
     --timeline-spine-x: 95px;
   }
 
-  .timeline-feature-head {
+  .timeline-feature-head,
+  .home-hero-grid {
     grid-template-columns: 1fr;
     gap: 22px;
   }
 
   .home-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 22px;
     max-width: none;
   }
 
-  .home-hero-deck {
+  .home-hero-guide {
     max-width: none;
-    min-height: auto;
-    padding-left: 0;
-    padding-top: 14px;
-    border-left: 0;
-    border-top: 1px solid var(--line);
   }
 
   .hero-route-buttons {
@@ -2271,6 +2265,7 @@ code {
     padding-top: 18px;
   }
 
+  .home-hero-grid,
   .home-hero-inner {
     gap: 16px;
   }
@@ -2288,14 +2283,21 @@ code {
     font-size: 0.96rem;
   }
 
-  .home-hero-summary {
-    max-width: none;
-    font-size: 0.92rem;
+  .home-hero-guide {
+    padding: 16px;
   }
 
-  .home-hero-deck {
-    gap: 16px;
-    padding-top: 14px;
+  .home-hero-guide-row {
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+
+  .home-hero-guide-count {
+    font-size: 1.5rem;
+  }
+
+  .home-hero-guide-rank {
+    justify-self: start;
   }
 
   .home-hero-stats {

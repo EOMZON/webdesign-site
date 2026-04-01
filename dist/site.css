@@ -1398,14 +1398,12 @@ code {
 
 .home-hero {
   border-top: 0;
-  display: grid;
-  align-items: end;
   padding-top: clamp(36px, 6vh, 84px);
   padding-bottom: clamp(20px, 4vh, 48px);
-  min-height: clamp(420px, 52vh, 620px);
+  min-height: auto;
 }
 
-.home-hero-inner {
+.home-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
   gap: clamp(28px, 4vw, 72px);
@@ -1414,22 +1412,22 @@ code {
   margin: 0 auto;
 }
 
-.home-hero-copy {
+.home-hero-inner {
   display: grid;
-  gap: 14px;
+  gap: 18px;
+  max-width: 44rem;
 }
 
 .home-hero-title {
   display: grid;
   gap: 10px;
-  max-width: none;
+  max-width: 11ch;
 }
 
 .home-hero-title-line {
   display: block;
   font-size: clamp(4rem, 7.2vw, 6.9rem);
   line-height: 0.84;
-  white-space: nowrap;
 }
 
 .home-hero-title-en {
@@ -1442,24 +1440,6 @@ code {
   white-space: normal;
 }
 
-.home-hero-deck {
-  display: grid;
-  gap: 18px;
-  align-content: end;
-  max-width: 28rem;
-  min-height: 100%;
-  padding-left: 24px;
-  border-left: 1px solid var(--line);
-}
-
-.home-hero-summary {
-  margin: 0;
-  max-width: 26ch;
-  color: var(--ink);
-  font-size: 0.98rem;
-  line-height: 1.55;
-}
-
 .home-hero-stats {
   margin: 0;
   color: var(--ink-soft);
@@ -1470,11 +1450,126 @@ code {
   text-transform: uppercase;
 }
 
-.hero-route-buttons {
+.home-hero-guide {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  min-height: 100%;
+  padding: 20px 22px;
+}
+
+.home-hero-guide-list {
+  display: grid;
+  gap: 0;
+}
+
+.home-hero-guide-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.home-hero-guide-row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.home-hero-guide-count,
+.home-hero-guide-rank,
+.timeline-nav-back {
+  font-family: var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.home-hero-guide-count {
+  margin: 0;
+  color: #555555;
+  font-family: var(--serif);
+  font-size: 2rem;
+  line-height: 0.88;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.home-hero-guide-row.is-primary .home-hero-guide-count,
+.home-hero-guide-row.is-primary .home-hero-guide-rank {
+  color: var(--ink);
+}
+
+.home-hero-guide-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.home-hero-guide-title,
+.home-hero-guide-note {
+  margin: 0;
+}
+
+.home-hero-guide-title {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.home-hero-guide-note {
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.home-hero-guide-rank {
+  display: inline-flex;
+  align-items: center;
+  align-self: start;
+  min-height: 28px;
+  padding: 0 8px;
+  border: 1px solid #555555;
+  font-size: 0.62rem;
+}
+
+.home-hero-range {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: 12px;
   align-items: center;
+  padding-top: 6px;
+}
+
+.home-hero-range-start,
+.home-hero-range-end {
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 3.2vw, 3.4rem);
+  line-height: 0.88;
+}
+
+.home-hero-range-rule {
+  height: 1px;
+  background: var(--line);
+}
+
+.home-hero-jump {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.home-hero-jump:hover,
+.home-hero-jump:focus-visible {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.hero-route-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, max-content));
+  gap: 12px;
+  justify-content: start;
 }
 
 .hero-route-button {
@@ -2135,24 +2230,18 @@ code {
     --timeline-spine-x: 95px;
   }
 
-  .timeline-feature-head {
+  .timeline-feature-head,
+  .home-hero-grid {
     grid-template-columns: 1fr;
     gap: 22px;
   }
 
   .home-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 22px;
     max-width: none;
   }
 
-  .home-hero-deck {
+  .home-hero-guide {
     max-width: none;
-    min-height: auto;
-    padding-left: 0;
-    padding-top: 14px;
-    border-left: 0;
-    border-top: 1px solid var(--line);
   }
 
   .hero-route-buttons {
@@ -2176,6 +2265,7 @@ code {
     padding-top: 18px;
   }
 
+  .home-hero-grid,
   .home-hero-inner {
     gap: 16px;
   }
@@ -2193,14 +2283,21 @@ code {
     font-size: 0.96rem;
   }
 
-  .home-hero-summary {
-    max-width: none;
-    font-size: 0.92rem;
+  .home-hero-guide {
+    padding: 16px;
   }
 
-  .home-hero-deck {
-    gap: 16px;
-    padding-top: 14px;
+  .home-hero-guide-row {
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+
+  .home-hero-guide-count {
+    font-size: 1.5rem;
+  }
+
+  .home-hero-guide-rank {
+    justify-self: start;
   }
 
   .home-hero-stats {
