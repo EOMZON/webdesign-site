@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js-enhanced");
+
 async function copyPrompt(button) {
   const code = button.closest(".prompt-card, .prompt-panel")?.querySelector("code");
   if (!code) return;
@@ -17,19 +19,28 @@ function setupCopyButtons() {
   });
 }
 
-function openTimelineItemFromHash() {
-  const id = window.location.hash.replace(/^#/, "");
-  if (!id) return;
-  const item = document.getElementById(id);
-  if (item instanceof HTMLDetailsElement) {
-    item.open = true;
-  }
-}
+function setupTimelineReveal() {
+  const items = document.querySelectorAll(".timeline-node");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function setupTimelineHashOpen() {
-  openTimelineItemFromHash();
-  window.addEventListener("hashchange", openTimelineItemFromHash);
+  if (!items.length || prefersReducedMotion || !("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  items.forEach((item) => observer.observe(item));
 }
 
 setupCopyButtons();
-setupTimelineHashOpen();
+setupTimelineReveal();
