@@ -26,6 +26,18 @@ export const structureMeta = {
   "immersive-stage": { zh: "沉浸舞台型", en: "Immersive Stage" }
 };
 
+export const patternMeta = {
+  "cover-led-editorial": { zh: "封面主稿型", en: "Cover-Led Editorial Fold" },
+  "story-led-secondary-stack": { zh: "次级故事堆栈型", en: "Story-Led Secondary Stack" },
+  "thumbnail-directory-wall": { zh: "缩略图目录墙型", en: "Thumbnail Directory Wall" },
+  "metadata-grid-index": { zh: "元数据网格索引型", en: "Metadata Grid Index" },
+  "product-demo-explainer": { zh: "产品演示说明型", en: "Product Demo Explainer" },
+  "evidence-module-stack": { zh: "证据模块堆栈型", en: "Evidence Module Stack" },
+  "immersive-stage-scene": { zh: "沉浸场景首屏型", en: "Immersive Stage Scene" },
+  "anti-grid-attitude-board": { zh: "反网格态度板型", en: "Anti-Grid Attitude Board" },
+  "calm-collector-catalog": { zh: "安静收藏目录型", en: "Calm Collector Catalog" }
+};
+
 export const useCaseMeta = {
   "style-atlas-reference-library": { zh: "风格图谱与参考库", en: "Style Atlas / Reference Library" },
   "cultural-publishing": { zh: "文化出版首页", en: "Cultural Publishing / Editorial Front Page" },
