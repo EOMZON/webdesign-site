@@ -459,6 +459,43 @@ const structureLeadFamilyMap = {
   "immersive-stage": "stage-driven-showcase"
 };
 
+const selectorToneOptions = [
+  { id: "auto", titleZh: "自动", titleEn: "Auto" },
+  { id: "quiet", titleZh: "安静克制", titleEn: "Quiet" },
+  { id: "balanced", titleZh: "平衡中性", titleEn: "Balanced" },
+  { id: "bold", titleZh: "强烈表达", titleEn: "Bold" }
+];
+
+const selectorModeOptions = [
+  { id: "auto", titleZh: "自动", titleEn: "Auto" },
+  { id: "browse", titleZh: "浏览索引", titleEn: "Browse / Index" },
+  { id: "story", titleZh: "主叙事", titleEn: "Story / Feature" },
+  { id: "tool", titleZh: "工具操作", titleEn: "Tool / Workbench" },
+  { id: "immersive", titleZh: "沉浸舞台", titleEn: "Immersive / Stage" }
+];
+
+const familyToneMap = {
+  "magazine-editorial": "balanced",
+  "quiet-lifestyle-editorial": "quiet",
+  "swiss-typographic-grid": "balanced",
+  "monochrome-studio-systems": "quiet",
+  "product-precision-interface": "balanced",
+  "stage-driven-showcase": "bold",
+  "curated-reference-directory": "balanced",
+  "evidence-dense-knowledge-surface": "balanced",
+  "playful-postmodern-anti-grid": "bold",
+  "neon-techno-futurist-interface": "bold"
+};
+
+const structureModeMap = {
+  dossier: "story",
+  "catalog-explorer": "browse",
+  "archive-stack": "browse",
+  "network-graph": "browse",
+  workbench: "tool",
+  "immersive-stage": "immersive"
+};
+
 const movementGuideMap = {
   "arts-and-crafts": {
     hook: "如果你喜欢材料感、手作感和慢节奏品牌页面，可以从这里开始。",
@@ -604,6 +641,10 @@ function structureHref(id) {
   return sitePath("structures", id);
 }
 
+function selectorHref() {
+  return sitePath("selector");
+}
+
 function linkAttrs(href, className = "") {
   const classAttr = className ? ` class="${className}"` : "";
   const external = /^https?:\/\//.test(href) ? ` target="_blank" rel="noreferrer noopener"` : "";
@@ -701,6 +742,17 @@ function normalizePill(item) {
 function renderList(items = []) {
   if (!items.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补充", "Pending"))}</p>`;
   return `<ul class="bullet-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
+function dedupeStrings(items = []) {
+  return [...new Set(items.filter(Boolean))];
+}
+
+function serializeJsonForHtml(value) {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }
 
 function renderStaticPills(items = []) {
@@ -839,9 +891,10 @@ function renderTopbar() {
         <a href="/families">${escapeHtml(bilingualText("网页家族", "Web Families"))}</a>
         <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
         <a href="/structures">${escapeHtml(bilingualText("信息结构", "Structure Patterns"))}</a>
+        <a href="${escapeHtml(selectorHref())}">${escapeHtml(bilingualText("选型器", "Style Selector"))}</a>
         <a href="/use-cases">${escapeHtml(bilingualText("使用场景", "Use Cases"))}</a>
       </nav>
-      <span class="status-pill">atlas v0.8</span>
+      <span class="status-pill">atlas v0.9</span>
     </div>
   </header>`;
 }
@@ -1298,6 +1351,411 @@ function renderPatternReferenceCard(item) {
       </div>
     </div>
   </article>`;
+}
+
+function selectorToneLabel(id = "auto") {
+  const option = selectorToneOptions.find((entry) => entry.id === id) || selectorToneOptions[0];
+  return bilingualText(option?.titleZh, option?.titleEn);
+}
+
+function selectorModeLabel(id = "auto") {
+  const option = selectorModeOptions.find((entry) => entry.id === id) || selectorModeOptions[0];
+  return bilingualText(option?.titleZh, option?.titleEn);
+}
+
+function selectorFamilyCandidates(useCase) {
+  return dedupeStrings([useCase?.primaryFamilyId, ...(useCase?.secondaryFamilyIds || [])])
+    .map((id) => familyMap.get(id))
+    .filter(Boolean);
+}
+
+function selectorStructureCandidates(useCase, family = null) {
+  const useCaseIds = useCase?.structureIds || [];
+  const familyIds = family?.structureIds || [];
+  const intersected = family ? useCaseIds.filter((id) => familyIds.includes(id)) : useCaseIds;
+  const fallbackIds = intersected.length ? intersected : familyIds.length ? familyIds : useCaseIds;
+
+  return dedupeStrings(fallbackIds)
+    .map((id) => structureMap.get(id))
+    .filter(Boolean);
+}
+
+function selectorResolveFamily({ useCase, familyId = "", tone = "auto" }) {
+  const candidates = selectorFamilyCandidates(useCase);
+  if (!candidates.length) return null;
+
+  const explicit = familyId ? candidates.find((entry) => entry.id === familyId) : null;
+  if (explicit) return explicit;
+
+  if (tone && tone !== "auto") {
+    const toned = candidates.find((entry) => familyToneMap[entry.id] === tone);
+    if (toned) return toned;
+  }
+
+  return candidates[0];
+}
+
+function selectorResolveStructure({ useCase, family, structureId = "", mode = "auto" }) {
+  const candidates = selectorStructureCandidates(useCase, family);
+  if (!candidates.length) return null;
+
+  const explicit = structureId ? candidates.find((entry) => entry.id === structureId) : null;
+  if (explicit) return explicit;
+
+  if (mode && mode !== "auto") {
+    const matched = candidates.find((entry) => structureModeMap[entry.id] === mode);
+    if (matched) return matched;
+  }
+
+  return candidates[0];
+}
+
+function selectorResolveMovement(family) {
+  if (!family) return null;
+  return family.movementIds?.map((id) => movementMap.get(id)).filter(Boolean)[0] || null;
+}
+
+function selectorReferenceEntries(family) {
+  if (!family) return [];
+
+  const visuals = uniqueSamples(family.samples || []).slice(0, 3);
+  const references = family.references || [];
+  const normalizedReferences = references.map((reference) => ({
+    ...reference,
+    normalizedLabel: String(reference.label || "").toLowerCase().replace(/[^a-z0-9]+/g, "")
+  }));
+
+  return visuals.map((sample, index) => {
+    const sampleKey = String(sample.label || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    const matchedReference =
+      normalizedReferences.find((reference) => sampleKey && reference.normalizedLabel.includes(sampleKey)) ||
+      normalizedReferences.find((reference) => sampleKey && sampleKey.includes(reference.normalizedLabel)) ||
+      references[index] ||
+      null;
+
+    return {
+      label: matchedReference?.label || sample.label || displayTitle(family),
+      href: matchedReference?.href || familyHref(family.id),
+      screenshot: sample.screenshot,
+      alt: sample.alt || matchedReference?.label || sample.label || displayTitle(family)
+    };
+  });
+}
+
+function renderSelectorPrompt(packet) {
+  const referencePacket = packet.references.length
+    ? packet.references.map((item) => `${item.label}: ${item.href}`).join(" / ")
+    : bilingualText("待补充", "Pending");
+
+  return `内容类型 Content Type: ${displayTitle(packet.useCase)}
+历史线索 Historical Movement: ${displayTitle(packet.movement) || bilingualText("按家族自动匹配", "Auto from family")}
+网页家族 Visual Family: ${displayTitle(packet.family)}
+信息结构 IA Layer: ${displayTitle(packet.structure)}
+参考网站 Reference Packet: ${referencePacket}
+内容形状 Content Shape: ${packet.useCase.contentShape}
+用户目标 User Goal: ${packet.useCase.userGoal}
+场景气质 Tone: ${selectorToneLabel(packet.state.tone)}
+交互倾向 Mode: ${selectorModeLabel(packet.state.mode)}
+可借 Borrow: ${packet.borrow.join(" / ")}
+避免 Avoid: ${packet.avoid.join(" / ")}
+风格提示 Family Prompt: ${packet.family?.prompt || ""}`;
+}
+
+function resolveSelectorPacket(state = {}) {
+  const tone = selectorToneOptions.some((entry) => entry.id === state.tone) ? state.tone : "auto";
+  const mode = selectorModeOptions.some((entry) => entry.id === state.mode) ? state.mode : "auto";
+  const useCase = useCaseMap.get(state.useCaseId) || useCases[0] || null;
+  const family = selectorResolveFamily({ useCase, familyId: state.familyId || "", tone });
+  const structure = selectorResolveStructure({
+    useCase,
+    family,
+    structureId: state.structureId || "",
+    mode
+  });
+  const movement = selectorResolveMovement(family);
+  const references = selectorReferenceEntries(family);
+  const borrow = dedupeStrings([...(family?.borrow || []), ...(structure?.signals || [])]).slice(0, 4);
+  const avoid = dedupeStrings([...(useCase?.avoid || []), ...(family?.avoidWhen || []), ...(structure?.watchouts || [])]).slice(
+    0,
+    4
+  );
+  const alternatives = selectorFamilyCandidates(useCase).filter((entry) => entry.id !== family?.id);
+  const structureAlternatives = selectorStructureCandidates(useCase, family).filter((entry) => entry.id !== structure?.id);
+
+  const packet = {
+    state: {
+      useCaseId: useCase?.id || "",
+      familyId: state.familyId || "",
+      structureId: state.structureId || "",
+      tone,
+      mode
+    },
+    useCase,
+    family,
+    structure,
+    movement,
+    references,
+    borrow,
+    avoid,
+    alternatives,
+    structureAlternatives
+  };
+
+  packet.prompt = renderSelectorPrompt(packet);
+  return packet;
+}
+
+const selectorDefaultState = {
+  useCaseId: useCases[0]?.id || "",
+  familyId: "",
+  structureId: "",
+  tone: "auto",
+  mode: "auto"
+};
+
+function renderSelectorField({
+  name,
+  labelZh,
+  labelEn,
+  options,
+  selected = "",
+  allowAuto = false,
+  autoLabel = bilingualText("自动匹配", "Auto")
+}) {
+  const autoOption = allowAuto ? `<option value="">${escapeHtml(autoLabel)}</option>` : "";
+
+  return `<label class="selector-field">
+    <span class="selector-label">${escapeHtml(bilingualText(labelZh, labelEn))}</span>
+    <select class="selector-select" name="${escapeHtml(name)}" data-selector-field="${escapeHtml(name)}">
+      ${autoOption}
+      ${options
+        .map((item) => {
+          const value = item.id || "";
+          const text = item.titleZh || item.titleEn ? bilingualText(item.titleZh, item.titleEn) : item.label || value;
+          return `<option value="${escapeHtml(value)}"${value === selected ? " selected" : ""}>${escapeHtml(text)}</option>`;
+        })
+        .join("")}
+    </select>
+  </label>`;
+}
+
+function renderSelectorChoiceCard({ kickerZh, kickerEn, item, href, summary, metaMarkup = "", emptyLabel = "" }) {
+  if (!item) {
+    return `<article class="detail-card relation-card selector-choice-card card-surface">
+      <div class="card-body">
+        <p class="card-kicker">${escapeHtml(bilingualText(kickerZh, kickerEn))}</p>
+        <h3 class="card-title">${escapeHtml(emptyLabel || bilingualText("待补充", "Pending"))}</h3>
+      </div>
+    </article>`;
+  }
+
+  return `<article class="detail-card relation-card selector-choice-card card-surface">
+    <div class="card-body">
+      <p class="card-kicker">${escapeHtml(bilingualText(kickerZh, kickerEn))}</p>
+      <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
+      <p class="card-summary">${escapeHtml(summary || item.summary || item.summaryZh || "")}</p>
+      ${metaMarkup}
+      <a ${linkAttrs(href, "text-link")}>${escapeHtml(bilingualText("查看详情", "Open Detail"))}</a>
+    </div>
+  </article>`;
+}
+
+function renderSelectorReferenceCard(item) {
+  return `<article class="selector-reference-card card-surface">
+    <a ${linkAttrs(item.href, "card-media selector-reference-media")}>
+      ${renderImageFrame(item.screenshot, item.alt || item.label)}
+      <div class="card-overlay">
+        <span class="card-overlay-label">${escapeHtml(bilingualText("真实参考", "Live Reference"))}</span>
+        <h3 class="card-overlay-title">${escapeHtml(item.label)}</h3>
+      </div>
+    </a>
+    <div class="card-body">
+      <a ${linkAttrs(item.href, "text-link")}>${escapeHtml(bilingualText("打开网站", "Open Site"))}</a>
+    </div>
+  </article>`;
+}
+
+function renderSelectorResults(packet) {
+  const alternativeFamilies = packet.alternatives.slice(0, 2).map((entry) => entry.id);
+  const alternativeStructures = packet.structureAlternatives.slice(0, 2).map((entry) => entry.id);
+
+  return `<div class="selector-results" data-selector-results>
+    <article class="selector-summary card-surface">
+      <div class="card-body">
+        <p class="card-kicker">${escapeHtml(bilingualText("当前结果", "Current Packet"))}</p>
+        <h2 class="section-title">${renderBilingualStack(packet.useCase.titleZh, packet.useCase.titleEn || packet.useCase.title)}</h2>
+        <p class="section-summary">${escapeHtml(packet.useCase.summary)}</p>
+        <div class="selector-summary-grid">
+          <div class="meta-block">
+            <h4>${escapeHtml(bilingualText("内容形状", "Content Shape"))}</h4>
+            <p>${escapeHtml(packet.useCase.contentShape)}</p>
+          </div>
+          <div class="meta-block">
+            <h4>${escapeHtml(bilingualText("用户目标", "User Goal"))}</h4>
+            <p>${escapeHtml(packet.useCase.userGoal)}</p>
+          </div>
+          <div class="meta-block">
+            <h4>${escapeHtml(bilingualText("场景气质", "Tone"))}</h4>
+            <p>${escapeHtml(selectorToneLabel(packet.state.tone))}</p>
+          </div>
+          <div class="meta-block">
+            <h4>${escapeHtml(bilingualText("交互倾向", "Mode"))}</h4>
+            <p>${escapeHtml(selectorModeLabel(packet.state.mode))}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <div class="selector-choice-grid">
+      ${renderSelectorChoiceCard({
+        kickerZh: "历史线索",
+        kickerEn: "Historical Movement",
+        item: packet.movement,
+        href: packet.movement ? movementHref(packet.movement.id) : movementHref("swiss-international-typography"),
+        summary: packet.movement?.whyItMatters || packet.movement?.summary || "",
+        metaMarkup: packet.movement
+          ? `<div class="meta-block">
+              <h4>${escapeHtml(bilingualText("时期", "Period"))}</h4>
+              <p>${escapeHtml(packet.movement.era)}</p>
+            </div>`
+          : "",
+        emptyLabel: bilingualText("按家族自动匹配", "Auto from family")
+      })}
+      ${renderSelectorChoiceCard({
+        kickerZh: "网页家族",
+        kickerEn: "Visual Family",
+        item: packet.family,
+        href: packet.family ? familyHref(packet.family.id) : familyHref("magazine-editorial"),
+        summary: packet.family?.summaryZh || packet.family?.summary || "",
+        metaMarkup: packet.family
+          ? `<div class="meta-block">
+              <h4>${escapeHtml(bilingualText("适合内容", "Best For"))}</h4>
+              ${renderStaticPills(packet.family.bestFor?.slice(0, 3) || [])}
+            </div>`
+          : ""
+      })}
+      ${renderSelectorChoiceCard({
+        kickerZh: "信息结构",
+        kickerEn: "Structure Pattern",
+        item: packet.structure,
+        href: packet.structure ? structureHref(packet.structure.id) : structureHref("catalog-explorer"),
+        summary: packet.structure?.summary || "",
+        metaMarkup: packet.structure
+          ? `<div class="meta-block">
+              <h4>${escapeHtml(bilingualText("识别信号", "Signals"))}</h4>
+              ${renderStaticPills(packet.structure.signals?.slice(0, 3) || [])}
+            </div>`
+          : ""
+      })}
+    </div>
+    <div class="selector-meta-grid">
+      <article class="detail-card card-surface">
+        <div class="card-body">
+          <p class="card-kicker">${escapeHtml(bilingualText("借法", "Borrow"))}</p>
+          ${renderList(packet.borrow)}
+        </div>
+      </article>
+      <article class="detail-card card-surface">
+        <div class="card-body">
+          <p class="card-kicker">${escapeHtml(bilingualText("避免", "Avoid"))}</p>
+          ${renderList(packet.avoid)}
+        </div>
+      </article>
+      <article class="detail-card card-surface">
+        <div class="card-body">
+          <p class="card-kicker">${escapeHtml(bilingualText("备选路径", "Alternatives"))}</p>
+          <div class="selector-alternative-stack">
+            <div class="meta-block">
+              <h4>${escapeHtml(bilingualText("备选家族", "Family Alternatives"))}</h4>
+              ${alternativeFamilies.length ? renderLinkedPills(alternativeFamilies, familyMap, familyHref) : `<p>${escapeHtml(bilingualText("当前已是最直接匹配", "Current match is already the primary fit"))}</p>`}
+            </div>
+            <div class="meta-block">
+              <h4>${escapeHtml(bilingualText("备选结构", "Structure Alternatives"))}</h4>
+              ${alternativeStructures.length ? renderLinkedPills(alternativeStructures, structureMap, structureHref) : `<p>${escapeHtml(bilingualText("当前结构已是最直接匹配", "Current structure is already the primary fit"))}</p>`}
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <section class="selector-reference-section">
+      ${renderSectionHead(
+        bilingualText("真实参考", "Live References"),
+        bilingualText("直接打开真实站点", "Open the closest real websites"),
+        ""
+      )}
+      <div class="selector-reference-grid">
+        ${packet.references.map((item) => renderSelectorReferenceCard(item)).join("")}
+      </div>
+    </section>
+    <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
+      <div class="card-body">
+        <p class="card-kicker">${escapeHtml(bilingualText("Prompt 包", "Prompt Packet"))}</p>
+        <h3 class="card-title">${escapeHtml(bilingualText("可直接给 agent 的组合", "Ready-to-copy packet"))}</h3>
+        <code>${escapeHtml(packet.prompt)}</code>
+        <div class="hero-actions">
+          <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
+        </div>
+      </div>
+    </article>
+  </div>`;
+}
+
+function selectorPayload() {
+  return {
+    initialState: selectorDefaultState,
+    toneOptions: selectorToneOptions,
+    modeOptions: selectorModeOptions,
+    familyToneMap,
+    structureModeMap,
+    useCases: useCases.map((item) => ({
+      id: item.id,
+      titleZh: item.titleZh,
+      titleEn: item.titleEn || item.title,
+      summary: item.summary,
+      contentShape: item.contentShape,
+      userGoal: item.userGoal,
+      primaryFamilyId: item.primaryFamilyId,
+      secondaryFamilyIds: item.secondaryFamilyIds || [],
+      structureIds: item.structureIds || [],
+      avoid: item.avoid || [],
+      note: item.note || "",
+      href: useCaseHref(item.id)
+    })),
+    families: families.map((item) => ({
+      id: item.id,
+      titleZh: item.titleZh,
+      titleEn: item.titleEn || item.title,
+      summary: item.summary,
+      summaryZh: item.summaryZh || item.summary,
+      movementIds: item.movementIds || [],
+      structureIds: item.structureIds || [],
+      borrow: item.borrow || [],
+      avoidWhen: item.avoidWhen || [],
+      bestFor: item.bestFor || [],
+      prompt: item.prompt || "",
+      references: item.references || [],
+      samples: uniqueSamples(item.samples || []),
+      href: familyHref(item.id)
+    })),
+    structures: structures.map((item) => ({
+      id: item.id,
+      titleZh: item.titleZh,
+      titleEn: item.titleEn || item.title,
+      summary: item.summary,
+      suitedFor: item.suitedFor || [],
+      signals: item.signals || [],
+      watchouts: item.watchouts || [],
+      href: structureHref(item.id)
+    })),
+    movements: movements.map((item) => ({
+      id: item.id,
+      titleZh: item.titleZh,
+      titleEn: item.titleEn || item.title,
+      summary: item.summary,
+      whyItMatters: item.whyItMatters || "",
+      era: item.era || "",
+      href: movementHref(item.id)
+    }))
+  };
 }
 
 function renderMovementGridSection(options = {}) {
@@ -2018,6 +2476,87 @@ function buildUseCasesPage() {
   });
 }
 
+function buildSelectorPage() {
+  const packet = resolveSelectorPacket(selectorDefaultState);
+  const familyOptions = selectorFamilyCandidates(packet.useCase);
+  const structureOptions = selectorStructureCandidates(packet.useCase, packet.family);
+  const payload = serializeJsonForHtml(selectorPayload());
+
+  return layout({
+    title: `${bilingualText("选型器", "Style Selector")} · ${siteMeta.title}`,
+    description: "A scenario-first selector that turns use cases into movement, family, structure, references, and prompt packets.",
+    pathname: selectorHref(),
+    pageClass: "index-page selector-page",
+    body: [
+      renderPageLead({
+        kicker: bilingualText("选型器", "Style Selector"),
+        title: bilingualText("先选网站任务，再拿走一套组合", "Start with the job, leave with a packet"),
+        summary: "先说你要做什么网站，再用气质和结构偏好微调。页面会直接给你 movement、family、structure、真实参考和可复制 prompt。",
+        detail: "这一页不是自由拼装器，而是场景优先的决策工具。先把 job 选对，再决定气质和结构，结果会更稳定，也更适合继续交给 agent。",
+        actions: `<div class="hero-actions"><a ${linkAttrs("/use-cases", "ghost-button")}>${escapeHtml(
+          bilingualText("浏览全部场景", "Browse Use Cases")
+        )}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(
+          bilingualText("浏览网页家族", "Browse Families")
+        )}</a></div>`
+      }),
+      `<section class="section selector-shell" id="selector">
+        <div class="selector-layout" data-style-selector>
+          <aside class="selector-panel card-surface">
+            <div class="selector-panel-copy">
+              <p class="eyebrow">${escapeHtml(bilingualText("输入条件", "Inputs"))}</p>
+              <h2 class="section-title">${escapeHtml(bilingualText("从场景开始", "Start from the use case"))}</h2>
+              <p class="section-summary">${escapeHtml(
+                "先选 use case。family 和 structure 只做覆盖，不建议先跳过场景直接拼视觉。"
+              )}</p>
+            </div>
+            <form class="selector-form" data-selector-form>
+              ${renderSelectorField({
+                name: "useCaseId",
+                labelZh: "我要做什么",
+                labelEn: "Use Case",
+                options: useCases,
+                selected: packet.state.useCaseId
+              })}
+              ${renderSelectorField({
+                name: "familyId",
+                labelZh: "网页家族覆盖",
+                labelEn: "Family Override",
+                options: familyOptions,
+                selected: packet.state.familyId,
+                allowAuto: true
+              })}
+              ${renderSelectorField({
+                name: "structureId",
+                labelZh: "结构覆盖",
+                labelEn: "Structure Override",
+                options: structureOptions,
+                selected: packet.state.structureId,
+                allowAuto: true
+              })}
+              ${renderSelectorField({
+                name: "tone",
+                labelZh: "气质偏好",
+                labelEn: "Tone",
+                options: selectorToneOptions,
+                selected: packet.state.tone
+              })}
+              ${renderSelectorField({
+                name: "mode",
+                labelZh: "交互偏好",
+                labelEn: "Mode",
+                options: selectorModeOptions,
+                selected: packet.state.mode
+              })}
+            </form>
+          </aside>
+          ${renderSelectorResults(packet)}
+        </div>
+        <script id="selector-data" type="application/json">${payload}</script>
+      </section>`
+    ].join("")
+  });
+}
+
 function build() {
   fs.rmSync(distRoot, { recursive: true, force: true });
   ensureDir(distRoot);
@@ -2030,6 +2569,7 @@ function build() {
   writePage(["families"], buildFamiliesPage());
   writePage(["movements"], buildMovementsPage());
   writePage(["structures"], buildStructuresPage());
+  writePage(["selector"], buildSelectorPage());
   writePage(["use-cases"], buildUseCasesPage());
 
   for (const family of families) {

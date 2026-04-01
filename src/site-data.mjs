@@ -3,7 +3,7 @@ export const siteMeta = {
   description:
     "An external style atlas for historical design movements, contemporary web families, and scenario-fit website references.",
   origin: process.env.DESIGN_SITE_ORIGIN || "https://design.zondev.top",
-  updatedAt: "2026-04-01"
+  updatedAt: "2026-04-02"
 };
 
 export const hero = {
