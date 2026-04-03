@@ -1,21 +1,21 @@
 export const siteMeta = {
   title: "Design Zondev",
   description:
-    "An external style atlas for historical design movements, contemporary web families, and scenario-fit website references.",
+    "A style-to-site atlas for AI builders: choose the right web direction, structure, references, and prompt packet.",
   origin: process.env.DESIGN_SITE_ORIGIN || "https://design.zondev.top",
-  updatedAt: "2026-04-02"
+  updatedAt: "2026-04-03"
 };
 
 export const hero = {
-  eyebrow: "External Style Atlas",
-  title: "先被图像抓住，再被分类带走",
+  eyebrow: "Style-To-Site Atlas",
+  title: "先按网站类型，再决定页面感觉",
   intro:
-    "这是一个风格聚合站，不是说明文档首页。首屏先给足够强的图像定调，再把人带到三个真正有用的入口：历史流派、当代网页家族、适用场景。",
+    "这不是给设计史学生看的首页，而是给想用 AI 做站的人准备的风格入口。先确定你要做什么网站，再去看页面感觉、结构和历史来源。",
   support:
-    "以后做站，不要只说“做成杂志感”或“做成黑白”。先选 movement，再选 web family，再选 structure，最后才写 prompt。",
-  primaryCta: { label: "Browse Families", href: "/families" },
-  secondaryCta: { label: "Browse Movements", href: "/movements" },
-  note: "Image-first shell. Neutral chrome. Drill down by movement, family, or use case."
+    "先用 use case 缩小方向，再用 web family 和 structure 修正结果，最后拿走真实参考和 prompt。",
+  primaryCta: { label: "Start Selector", href: "/selector" },
+  secondaryCta: { label: "Browse Families", href: "/families" },
+  note: "Use-case first. Family and structure second. History after the direction is clear."
 };
 
 export const heroWall = [
@@ -87,28 +87,28 @@ export const heroWall = [
 
 export const browseModes = [
   {
-    id: "movements",
-    title: "Historical Movements",
-    count: "6",
-    summary: "从 Bauhaus、Swiss、Memphis 到 Cyberpunk，看设计谱系如何演化到今天的网站语言。",
-    href: "/movements",
-    detail: "适合先看历史来源、核心特征和后代分支。"
+    id: "use-cases",
+    title: "Use Cases",
+    count: "7",
+    summary: "如果你不知道自己喜欢什么，从这里开始：先按网站类型选，再看最合适的风格和结构。",
+    href: "/use-cases",
+    detail: "最适合第一次进入。先从任务出发，再继续进入选型器。"
   },
   {
     id: "families",
     title: "Contemporary Web Families",
     count: "9",
-    summary: "从杂志特稿 Magazine Editorial、瑞士网格 Swiss Grid、黑白工作室 Monochrome Studio、精密产品 Product Precision 到后现代反网格 Anti-Grid，看今天网站最常见的网页家族。",
+    summary: "直接看今天网站最常见的页面感觉和组织方式，判断自己想做成哪一类站。",
     href: "/families",
-    detail: "适合先找网页呈现方式和参考网站。"
+    detail: "适合先找页面感觉和真实参考站。"
   },
   {
-    id: "use-cases",
-    title: "Use Cases",
-    count: "7",
-    summary: "按内容形状和任务选风格：出版、工作室、工具、品牌、图库、研究、发布页、灵感库。",
-    href: "#selection-matrix",
-    detail: "适合先从场景反推网页家族 Web Family 和结构 Structure。"
+    id: "movements",
+    title: "Historical Movements",
+    count: "6",
+    summary: "当你已经知道自己想做出某种感觉，再回来看它的历史来源和常见误用。",
+    href: "/movements",
+    detail: "适合补背景，不适合当第一次入口。"
   }
 ];
 
@@ -815,7 +815,7 @@ export const entryRoutes = browseModes.map((item) => ({
       ? "/families"
       : item.id === "movements"
         ? "/movements"
-        : "/#selection-matrix"
+        : "/use-cases"
 }));
 
 for (const family of visualFamilies) {

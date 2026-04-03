@@ -22,11 +22,11 @@
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="/">首页 / Home</a>
-        <a href="/families">网页家族 / Web Families</a>
-        <a href="/movements">历史流派 / Historical Movements</a>
-        <a href="/structures">信息结构 / Structure Patterns</a>
         <a href="/selector">选型器 / Style Selector</a>
         <a href="/use-cases">使用场景 / Use Cases</a>
+        <a href="/families">网页家族 / Web Families</a>
+        <a href="/structures">信息结构 / Structure Patterns</a>
+        <a href="/movements">历史流派 / Historical Movements</a>
       </nav>
       <span class="status-pill">atlas v0.9</span>
     </div>
@@ -34,11 +34,11 @@
       <main class="page"><section class="page-lead">
     <div class="page-lead-copy">
       <p class="eyebrow">选型器 / Style Selector</p>
-      <h1 class="hero-title">先选网站任务，再拿走一套组合 / Start with the job, leave with a packet</h1>
-      <p class="hero-intro">先说你要做什么网站，再用气质和结构偏好微调。页面会直接给你 movement、family、structure、真实参考和可复制 prompt。</p>
+      <h1 class="hero-title">先说你要做什么网站 / Start with the site you need</h1>
+      <p class="hero-intro">这页是给用 AI 做站的人用的。先选网站类型，再微调页面感觉和组织方式，最后直接拿走参考站和 prompt。</p>
     </div>
     <aside class="page-lead-aside card-surface">
-      <p>这一页不是自由拼装器，而是场景优先的决策工具。先把 job 选对，再决定气质和结构，结果会更稳定，也更适合继续交给 agent。</p>
+      <p>这里不是设计史阅读器，也不是自由拼装器。它的工作是把你从“我想做成这种感觉”带到“我现在就知道该怎么让 AI 开始做”。</p>
       <div class="hero-actions"><a  class="ghost-button" href="/use-cases">浏览全部场景 / Browse Use Cases</a><a  class="button" href="/families">浏览网页家族 / Browse Families</a></div>
     </aside>
   </section><section class="section selector-shell" id="selector">
@@ -46,26 +46,26 @@
           <aside class="selector-panel card-surface">
             <div class="selector-panel-copy">
               <p class="eyebrow">输入条件 / Inputs</p>
-              <h2 class="section-title">从场景开始 / Start from the use case</h2>
-              <p class="section-summary">先选 use case。family 和 structure 只做覆盖，不建议先跳过场景直接拼视觉。</p>
+              <h2 class="section-title">先从网站类型开始 / Start from the use case</h2>
+              <p class="section-summary">不需要先懂设计史。先选网站类型，系统会先缩小范围，再让你微调页面感觉和页面组织。</p>
             </div>
             <form class="selector-form" data-selector-form>
               <label class="selector-field">
-    <span class="selector-label">我要做什么 / Use Case</span>
+    <span class="selector-label">我要做什么网站 / Use Case</span>
     <select class="selector-select" name="useCaseId" data-selector-field="useCaseId">
       
       <option value="style-atlas-reference-library" selected>风格图谱与参考库 / Style Atlas / Reference Library</option><option value="cultural-publishing">文化出版首页 / Cultural Publishing / Editorial Front Page</option><option value="design-studio-identity-portfolio">设计工作室与识别作品集 / Design Studio / Identity Portfolio</option><option value="product-tool-platform">产品与工具平台 / Product / Tool / Platform</option><option value="research-knowledge-system">研究与知识系统 / Research / Knowledge System</option><option value="premium-lifestyle-brand">高级生活方式品牌 / Premium Lifestyle / Cultural Brand</option><option value="creator-anti-template-launch">创作者反模板发布 / Creator / Anti-Template Launch</option><option value="gaming-hardware-future-tech">游戏硬件未来科技发布 / Gaming / Hardware / Future-Tech Launch</option>
     </select>
   </label>
               <label class="selector-field">
-    <span class="selector-label">网页家族覆盖 / Family Override</span>
+    <span class="selector-label">页面感觉覆盖 / Family Override</span>
     <select class="selector-select" name="familyId" data-selector-field="familyId">
       <option value="">自动匹配 / Auto</option>
       <option value="curated-reference-directory">策展目录索引型 / Curated Reference Directory</option><option value="swiss-typographic-grid">瑞士排印网格型 / Swiss Typographic Grid</option>
     </select>
   </label>
               <label class="selector-field">
-    <span class="selector-label">结构覆盖 / Structure Override</span>
+    <span class="selector-label">页面组织覆盖 / Structure Override</span>
     <select class="selector-select" name="structureId" data-selector-field="structureId">
       <option value="">自动匹配 / Auto</option>
       <option value="catalog-explorer">目录索引型 / Catalog Explorer</option>
@@ -90,7 +90,7 @@
           <div class="selector-results" data-selector-results>
     <article class="selector-summary card-surface">
       <div class="card-body">
-        <p class="card-kicker">当前结果 / Current Packet</p>
+        <p class="card-kicker">推荐建站方案 / Recommended Packet</p>
         <h2 class="section-title"><span class="bilingual-stack">
     <span class="bilingual-stack-zh">风格图谱与参考库</span>
     <span class="bilingual-stack-en">Style Atlas / Reference Library</span>
@@ -119,7 +119,7 @@
     <div class="selector-choice-grid">
       <article class="detail-card relation-card selector-choice-card card-surface">
     <div class="card-body">
-      <p class="card-kicker">历史线索 / Historical Movement</p>
+      <p class="card-kicker">风格来源 / Historical Movement</p>
       <h3 class="card-title"><span class="bilingual-stack">
     <span class="bilingual-stack-zh">瑞士风格</span>
     <span class="bilingual-stack-en">Swiss Style</span>
@@ -134,7 +134,7 @@
   </article>
       <article class="detail-card relation-card selector-choice-card card-surface">
     <div class="card-body">
-      <p class="card-kicker">网页家族 / Visual Family</p>
+      <p class="card-kicker">页面感觉 / Visual Family</p>
       <h3 class="card-title"><span class="bilingual-stack">
     <span class="bilingual-stack-zh">策展目录索引型</span>
     <span class="bilingual-stack-en">Curated Reference Directory</span>
@@ -151,7 +151,7 @@
   </article>
       <article class="detail-card relation-card selector-choice-card card-surface">
     <div class="card-body">
-      <p class="card-kicker">信息结构 / Structure Pattern</p>
+      <p class="card-kicker">页面组织 / Structure Pattern</p>
       <h3 class="card-title"><span class="bilingual-stack">
     <span class="bilingual-stack-zh">目录索引型</span>
     <span class="bilingual-stack-en">Catalog Explorer</span>
@@ -195,6 +195,12 @@
               <p>当前结构已是最直接匹配 / Current structure is already the primary fit</p>
             </div>
           </div>
+        </div>
+      </article>
+      <article class="detail-card card-surface">
+        <div class="card-body">
+          <p class="card-kicker">接下来这样做 / Next Steps</p>
+          <ul class="bullet-list"><li>先打开 2 到 3 个真实参考站，确认图像大小、导航和留白是不是你要的感觉。</li><li>复制下面的 Prompt 包给 AI，先让它出首页草图，不要一开始就做全站。</li><li>如果结果太花、太冷或太像模板，再回来切换页面感觉或页面组织。</li></ul>
         </div>
       </article>
     </div>
@@ -242,7 +248,7 @@
     <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
       <div class="card-body">
         <p class="card-kicker">Prompt 包 / Prompt Packet</p>
-        <h3 class="card-title">可直接给 agent 的组合 / Ready-to-copy packet</h3>
+        <h3 class="card-title">这就是可以直接交给 AI 的版本 / This is the AI-ready packet</h3>
         <code>内容类型 Content Type: 风格图谱与参考库 / Style Atlas / Reference Library
 历史线索 Historical Movement: 瑞士风格 / Swiss Style
 网页家族 Visual Family: 策展目录索引型 / Curated Reference Directory
@@ -266,8 +272,8 @@
       </section></main>
       <footer class="footer">
         <div class="footer-inner">
-          <p>设计风格图谱：历史流派、网页家族、信息结构、使用场景与真实参考 / Design atlas: movements, web families, structure patterns, use cases, and live references</p>
-          <p>Updated 2026-04-02 · design.zondev.top</p>
+          <p>给用 AI 做站的人：历史线索、页面感觉、结构模式、建站场景与真实参考 / For AI site builders: movements, page families, structure patterns, use cases, and live references</p>
+          <p>Updated 2026-04-03 · design.zondev.top</p>
         </div>
       </footer>
     </div>

@@ -498,71 +498,71 @@ const structureModeMap = {
 
 const movementGuideMap = {
   "arts-and-crafts": {
-    hook: "如果你喜欢材料感、手作感和慢节奏品牌页面，可以从这里开始。",
+    hook: "常见在工艺品牌、家居生活方式和纸本感更强的网站。",
     common: "今天更常出现在生活方式、工艺品牌和纸本感很强的页面里。"
   },
   "art-nouveau": {
-    hook: "如果你喜欢有机曲线、装饰线条和更感性的优雅气质，可以先看这一支。",
+    hook: "常见在时尚文化、电影专题和装饰感更强的品牌网站。",
     common: "它经常在时尚、电影、文化品牌里变成更柔和的曲线和装饰节奏。"
   },
   futurism: {
-    hook: "如果你想要速度感、推进感和强烈的未来能量，这里会更对味。",
+    hook: "适合硬件发布、游戏专题和速度感更强的科技页面。",
     common: "今天常见在硬件发布、游戏页面和高动势的科技视觉里。"
   },
   suprematism: {
-    hook: "如果你喜欢抽象几何、强留白和极端简化的构图，可以从这里看。",
+    hook: "适合几何极简首页、海报感专题和强留白的品牌页。",
     common: "它更像很多几何抽象型排版系统的深层来源。"
   },
   constructivism: {
-    hook: "如果你想让页面更像一个有力的传播系统，而不是装饰画面，这一支值得先看。",
+    hook: "适合品牌系统页、传播型专题和高效信息页。",
     common: "今天很多高效率信息页面、品牌系统页和几何构图都还在借它。"
   },
   dada: {
-    hook: "如果你喜欢拼贴、反规则和故意不太听话的页面语气，可以先看这里。",
+    hook: "更适合实验项目、拼贴创作页和反模板表达。",
     common: "它更适合做灵感来源，不太适合直接变成整站默认风格。"
   },
   "de-stijl": {
-    hook: "如果你喜欢垂直水平、明确边界和抽象秩序感，可以从风格派开始。",
+    hook: "适合模块化品牌页、色块系统和边界明确的首页。",
     common: "今天很多网格、色块和模块化系统都能看到它的影子。"
   },
   "bauhaus-functional-modernism": {
-    hook: "如果你喜欢功能清楚、几何克制、不过度装饰的页面，这里很适合先看。",
+    hook: "适合产品官网、设计系统和功能优先的现代页面。",
     common: "产品站、设计系统站和很多现代主义网页语言都从这里长出来。"
   },
   "new-typography": {
-    hook: "如果你在意排版节奏、对齐、留白和信息清晰度，这一支很关键。",
+    hook: "适合内容站、编辑型首页和强调排版清晰度的页面。",
     common: "很多你觉得高级又清楚的 editorial 页面，本质上都在借它。"
   },
   "art-deco-streamlined-luxury": {
-    hook: "如果你想要更有舞台感、精致感和高级节奏的页面，可以从这里开始。",
+    hook: "适合文化品牌、高级发布页和舞台感更强的首页。",
     common: "文化、时尚和高感知品牌页面，经常会借它的对称与节奏。"
   },
   "mid-century-modern": {
-    hook: "如果你喜欢现代、温和、克制但不冷的页面气质，这一支会很有帮助。",
+    hook: "适合生活方式品牌、温和现代的工作室页和不过冷的极简页面。",
     common: "它常出现在生活方式品牌、黑白工作室页和一些产品型极简页面里。"
   },
   "swiss-international-typography": {
-    hook: "如果你喜欢网格、秩序、强排版和档案感，这通常是最该先看的入口。",
+    hook: "适合档案站、工作室网站、参考库和知识系统。",
     common: "设计工作室、参考库、知识站和很多黑白极简页面都与它关系很深。"
   },
   "brutalism-neo-brutalism": {
-    hook: "如果你厌倦了太平滑的模板，想要更硬、更直接、更有态度的页面，可以先看这里。",
+    hook: "适合反模板主页、强观点品牌和更直接的创作者站。",
     common: "它适合做反模板和强观点，但不适合默认所有内容都这样做。"
   },
   "pop-art": {
-    hook: "如果你喜欢高对比、流行文化和强识别的表面能量，这里会更接近。",
+    hook: "适合潮流品牌、活动页和需要强识别的文化项目。",
     common: "更适合品牌表达和文化感，不太适合需要安静信任感的页面。"
   },
   minimalism: {
-    hook: "如果你喜欢空白、比例、节制和更安静的高级感，可以先看极简主义。",
+    hook: "适合极简作品集、高端品牌和安静克制的首页。",
     common: "今天很多你觉得‘黑白简洁但不无聊’的页面，核心都和它有关。"
   },
   "postmodern-memphis": {
-    hook: "如果你想摆脱模板感，接受一点冲突、俏皮和反网格，可以从这里开始。",
+    hook: "适合创作者主页、实验品牌和想打破模板感的发布页。",
     common: "它适合创作者、实验品牌和想要更有态度的页面。"
   },
   "cyberpunk-techno-futurism": {
-    hook: "如果你想要黑底、霓虹、世界观和更强烈的未来科技感，这一支最直接。",
+    hook: "适合游戏、未来科技和沉浸式发布页。",
     common: "它适合游戏、未来科技和沉浸式发布页，不适合所有内容。"
   }
 };
@@ -578,7 +578,7 @@ function percentBetween(value, min, max) {
 function movementGuide(item) {
   return (
     movementGuideMap[item.id] || {
-      hook: "如果你喜欢这种视觉气质，可以先从这里开始。",
+      hook: "常见在创作者站、品牌页和需要鲜明气质的内容网站。",
       common: "常见在设计工作室、品牌页和文化内容站。"
     }
   );
@@ -721,7 +721,18 @@ const phraseMeta = {
   "futurist campaign pages": { zh: "未来主义 Campaign 页", en: "Futurist Campaign Pages" },
   "product marketing": { zh: "产品营销", en: "Product Marketing" },
   "knowledge surfaces": { zh: "知识界面", en: "Knowledge Surfaces" },
-  "technical platforms": { zh: "技术平台", en: "Technical Platforms" }
+  "technical platforms": { zh: "技术平台", en: "Technical Platforms" },
+  "premium brands": { zh: "高级品牌", en: "Premium Brands" },
+  "fashion storytelling": { zh: "时尚叙事", en: "Fashion Storytelling" },
+  "hero-led launches": { zh: "首屏主导发布页", en: "Hero-Led Launches" },
+  "identity systems": { zh: "识别系统", en: "Identity Systems" },
+  "editorial indexes": { zh: "编辑型索引页", en: "Editorial Indexes" },
+  "playful commerce": { zh: "趣味商业站", en: "Playful Commerce" },
+  "template-breaking launches": { zh: "打破模板的发布页", en: "Template-Breaking Launches" },
+  "creative tools": { zh: "创意工具", en: "Creative Tools" },
+  "attitude-heavy homepages": { zh: "态度强的首页", en: "Attitude-Heavy Homepages" },
+  "immersive AI pages": { zh: "沉浸式 AI 页面", en: "Immersive AI Pages" },
+  "future-tech campaigns": { zh: "未来科技活动页", en: "Future-Tech Campaigns" }
 };
 
 function normalizePill(item) {
@@ -888,11 +899,11 @@ function renderTopbar() {
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="/">${escapeHtml(bilingualText("首页", "Home"))}</a>
-        <a href="/families">${escapeHtml(bilingualText("网页家族", "Web Families"))}</a>
-        <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
-        <a href="/structures">${escapeHtml(bilingualText("信息结构", "Structure Patterns"))}</a>
         <a href="${escapeHtml(selectorHref())}">${escapeHtml(bilingualText("选型器", "Style Selector"))}</a>
         <a href="/use-cases">${escapeHtml(bilingualText("使用场景", "Use Cases"))}</a>
+        <a href="/families">${escapeHtml(bilingualText("网页家族", "Web Families"))}</a>
+        <a href="/structures">${escapeHtml(bilingualText("信息结构", "Structure Patterns"))}</a>
+        <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
       </nav>
       <span class="status-pill">atlas v0.9</span>
     </div>
@@ -922,8 +933,8 @@ function layout({ title, description, pathname = "/", body, pageClass = "" }) {
         <div class="footer-inner">
           <p>${escapeHtml(
             bilingualText(
-              "设计风格图谱：历史流派、网页家族、信息结构、使用场景与真实参考",
-              "Design atlas: movements, web families, structure patterns, use cases, and live references"
+              "给用 AI 做站的人：历史线索、页面感觉、结构模式、建站场景与真实参考",
+              "For AI site builders: movements, page families, structure patterns, use cases, and live references"
             )
           )}</p>
           <p>Updated ${escapeHtml(siteMeta.updatedAt)} · ${escapeHtml(siteMeta.origin.replace(/^https?:\/\//, ""))}</p>
@@ -1000,8 +1011,8 @@ function renderBrowseModes() {
   return `<section class="section" id="browse-modes">
     ${renderSectionHead(
       bilingualText("浏览入口", "Entry Routes"),
-      bilingualText("先从你最熟悉的维度进入", "Start from the dimension you recognize first"),
-      "先做选择，再进详情页，不把整套理论都堆在首页。"
+      bilingualText("先选入口，再进细节", "Pick an entry, then go deeper"),
+      "如果你只是想先把网站方向选对，就从最接近你的任务那条路进去。"
     )}
     ${renderRouteCards()}
   </section>`;
@@ -1038,28 +1049,29 @@ function renderHomeOverviewHero() {
   return `<section class="home-hero section" id="top">
     <div class="home-hero-inner">
       <div class="home-hero-copy">
-        <p class="eyebrow">${escapeHtml(bilingualText("设计风格图谱", "Design Atlas"))}</p>
+        <p class="eyebrow">${escapeHtml(bilingualText("AI 建站风格选型", "Style-To-Site Atlas"))}</p>
         <h1 class="hero-title home-hero-title">
           <span class="home-hero-title-zh">
-            <span>先看风格地图</span>
-            <span>再进时间线</span>
+            <span>先按网站类型</span>
+            <span>找到合适方向</span>
           </span>
-          <span class="home-hero-title-en">Map the field before you enter the timeline</span>
+          <span class="home-hero-title-en">Start with the site you need, then choose the right direction</span>
         </h1>
+        <p class="hero-support">给用 AI 做站但不确定审美方向的人。先看你要做个人站、品牌页、工具页还是作品集，再拿走参考站、页面结构和 prompt。</p>
       </div>
       <div class="home-hero-deck">
         <p class="home-hero-stats">${escapeHtml(
-          `${movements.length}个历史流派 · ${families.length}个网页家族 · ${useCases.length}个使用场景`
+          `${movements.length}条历史线索 · ${families.length}种网站感觉 · ${useCases.length}类建站场景`
         )}</p>
         <div class="hero-route-buttons">
+          <a ${linkAttrs("/use-cases", "hero-route-button hero-route-button--primary")}>${escapeHtml(
+            bilingualText("先按网站类型开始", "Start With Use Cases")
+          )}</a>
+          <a ${linkAttrs("/families", "hero-route-button")}>${escapeHtml(
+            bilingualText("再看页面感觉", "Browse Web Families")
+          )}</a>
           <a ${linkAttrs("/movements", "hero-route-button")}>${escapeHtml(
-            bilingualText("历史流派", "Historical Movements")
-          )}</a>
-          <a ${linkAttrs("/families", "hero-route-button hero-route-button--primary")}>${escapeHtml(
-            bilingualText("网页家族", "Web Families")
-          )}</a>
-          <a ${linkAttrs("/use-cases", "hero-route-button")}>${escapeHtml(
-            bilingualText("使用场景", "Use Cases")
+            bilingualText("最后补历史来源", "Open Movements")
           )}</a>
         </div>
       </div>
@@ -1072,23 +1084,23 @@ function movementAnchorId(id) {
 }
 
 const movementCompactBlurbMap = {
-  "arts-and-crafts": "材料诚实与手作感",
-  "art-nouveau": "有机曲线与装饰性",
-  futurism: "速度崇拜与推进感",
-  suprematism: "极简抽象与留白",
-  constructivism: "传播构图与几何力",
-  dada: "拼贴反规则",
-  "de-stijl": "水平垂直的秩序",
-  "bauhaus-functional-modernism": "功能先于装饰",
-  "new-typography": "排版秩序与清晰性",
-  "art-deco-streamlined-luxury": "对称华丽与流线感",
-  "mid-century-modern": "温和现代与比例感",
-  "swiss-international-typography": "网格秩序与清晰性",
-  "brutalism-neo-brutalism": "粗粝直接与反模板",
-  "pop-art": "流行色块与高识别",
-  minimalism: "克制留白与精比例",
-  "postmodern-memphis": "冲突俏皮与反网格",
-  "cyberpunk-techno-futurism": "霓虹暗能量与世界观"
+  "arts-and-crafts": "工艺品牌与纸本感网站",
+  "art-nouveau": "时尚文化与装饰线条网站",
+  futurism: "硬件发布与速度感科技页",
+  suprematism: "几何极简与海报感首页",
+  constructivism: "品牌系统与高效信息页",
+  dada: "实验项目与拼贴感创作页",
+  "de-stijl": "模块化品牌页与色块系统",
+  "bauhaus-functional-modernism": "产品官网与设计系统",
+  "new-typography": "内容站与高可读排版",
+  "art-deco-streamlined-luxury": "文化品牌与高级发布页",
+  "mid-century-modern": "生活方式与温和现代品牌",
+  "swiss-international-typography": "档案站与工作室网站",
+  "brutalism-neo-brutalism": "反模板主页与强态度品牌",
+  "pop-art": "潮流品牌与高识别活动页",
+  minimalism: "极简作品集与高端品牌",
+  "postmodern-memphis": "创作者主页与反模板发布",
+  "cyberpunk-techno-futurism": "游戏硬件与未来科技页"
 };
 
 function movementCompactBlurb(item) {
@@ -1221,8 +1233,8 @@ function renderFamilyCoordinateSection() {
   return `<section class="section" id="style-field">
     ${renderSectionHead(
       bilingualText("风格坐标场", "Style Coordinate Field"),
-      bilingualText("如果你先知道自己想要什么气质，从这里进", "If you know the tone you want, start here"),
-      "横轴看页面更偏系统还是更偏舞台，纵轴看它更安静还是更有张力。"
+      bilingualText("先按页面感觉筛一轮", "Compare page tones first"),
+      "拿不准时，就先看它更偏系统还是舞台、更安静还是更有张力。"
     )}
     ${renderFieldAtlas()}
   </section>`;
@@ -1582,7 +1594,7 @@ function renderSelectorResults(packet) {
   return `<div class="selector-results" data-selector-results>
     <article class="selector-summary card-surface">
       <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText("当前结果", "Current Packet"))}</p>
+        <p class="card-kicker">${escapeHtml(bilingualText("推荐建站方案", "Recommended Packet"))}</p>
         <h2 class="section-title">${renderBilingualStack(packet.useCase.titleZh, packet.useCase.titleEn || packet.useCase.title)}</h2>
         <p class="section-summary">${escapeHtml(packet.useCase.summary)}</p>
         <div class="selector-summary-grid">
@@ -1607,7 +1619,7 @@ function renderSelectorResults(packet) {
     </article>
     <div class="selector-choice-grid">
       ${renderSelectorChoiceCard({
-        kickerZh: "历史线索",
+        kickerZh: "风格来源",
         kickerEn: "Historical Movement",
         item: packet.movement,
         href: packet.movement ? movementHref(packet.movement.id) : movementHref("swiss-international-typography"),
@@ -1621,7 +1633,7 @@ function renderSelectorResults(packet) {
         emptyLabel: bilingualText("按家族自动匹配", "Auto from family")
       })}
       ${renderSelectorChoiceCard({
-        kickerZh: "网页家族",
+        kickerZh: "页面感觉",
         kickerEn: "Visual Family",
         item: packet.family,
         href: packet.family ? familyHref(packet.family.id) : familyHref("magazine-editorial"),
@@ -1634,7 +1646,7 @@ function renderSelectorResults(packet) {
           : ""
       })}
       ${renderSelectorChoiceCard({
-        kickerZh: "信息结构",
+        kickerZh: "页面组织",
         kickerEn: "Structure Pattern",
         item: packet.structure,
         href: packet.structure ? structureHref(packet.structure.id) : structureHref("catalog-explorer"),
@@ -1675,6 +1687,16 @@ function renderSelectorResults(packet) {
           </div>
         </div>
       </article>
+      <article class="detail-card card-surface">
+        <div class="card-body">
+          <p class="card-kicker">${escapeHtml(bilingualText("接下来这样做", "Next Steps"))}</p>
+          ${renderList([
+            "先打开 2 到 3 个真实参考站，确认图像大小、导航和留白是不是你要的感觉。",
+            "复制下面的 Prompt 包给 AI，先让它出首页草图，不要一开始就做全站。",
+            "如果结果太花、太冷或太像模板，再回来切换页面感觉或页面组织。"
+          ])}
+        </div>
+      </article>
     </div>
     <section class="selector-reference-section">
       ${renderSectionHead(
@@ -1689,7 +1711,7 @@ function renderSelectorResults(packet) {
     <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
       <div class="card-body">
         <p class="card-kicker">${escapeHtml(bilingualText("Prompt 包", "Prompt Packet"))}</p>
-        <h3 class="card-title">${escapeHtml(bilingualText("可直接给 agent 的组合", "Ready-to-copy packet"))}</h3>
+        <h3 class="card-title">${escapeHtml(bilingualText("这就是可以直接交给 AI 的版本", "This is the AI-ready packet"))}</h3>
         <code>${escapeHtml(packet.prompt)}</code>
         <div class="hero-actions">
           <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
@@ -1967,7 +1989,7 @@ function renderFamilyDetail(item) {
       `<section class="section">
         ${renderSectionHead(
           bilingualText("历史源头", "Historical Roots"),
-          bilingualText("如果你喜欢这类网页，往前追会遇到哪几支", "Trace the earlier lineages behind it"),
+          bilingualText("这类网页常从哪些历史流派长出来", "The earlier lineages behind this kind of site"),
           ""
         )}
         <div class="relation-grid">
@@ -2035,12 +2057,12 @@ function renderMovementDetail(item) {
               <p>${escapeHtml(item.era)}</p>
             </div>
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("起源", "Origin"))}</h4>
-              <p>${escapeHtml(item.origin)}</p>
+              <h4>${escapeHtml(bilingualText("适合做什么网站", "Good For"))}</h4>
+              ${renderStaticPills((item.bestFor || []).slice(0, 3))}
             </div>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("网页中的意义", "Why It Matters"))}</h4>
+            <h4>${escapeHtml(bilingualText("放到网站里会是什么效果", "Why It Matters On The Web"))}</h4>
             <p>${escapeHtml(item.whyItMatters)}</p>
           </div>
         </div>
@@ -2057,11 +2079,14 @@ function renderMovementDetail(item) {
       </section>`,
       `<section class="section">
         ${renderSectionHead(
-          bilingualText("核心特征", "Core Traits"),
-          bilingualText("先理解这条语言本身", "Understand the language itself"),
+          bilingualText("拿它做什么网站", "How It Translates Into Sites"),
+          bilingualText("先看适合场景，再看核心语法和风险", "Start with the site fit, then learn the language"),
           ""
         )}
         <div class="detail-section-grid">
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("适合", "Best For"))}</p>${renderStaticPills(
+            item.bestFor || []
+          )}</div></article>
           <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("原则", "Principles"))}</p>${renderList(
             item.principles
           )}</div></article>
@@ -2072,8 +2097,8 @@ function renderMovementDetail(item) {
       </section>`,
       `<section class="section">
         ${renderSectionHead(
-          bilingualText("下一步去看哪类网页", "What to open next"),
-          bilingualText("如果你喜欢这一支，下一步去看哪类网页", "The web families to open next"),
+          bilingualText("下一步去看哪类网站", "What to Open Next"),
+          bilingualText("先去看它今天最常落成的页面类型", "Open the current site families that best express it"),
           ""
         )}
         <div class="relation-grid">
@@ -2356,11 +2381,13 @@ function buildHomePage() {
     pageClass: "home-page",
     body: [
       renderHomeOverviewHero(),
+      renderBrowseModes(),
+      renderFamilyCoordinateSection(),
       renderTimelineAtlasSection({
         titleZh: "按年代往下看",
         titleEn: "Browse by era",
         kicker: bilingualText("历史流派", "Historical Timeline"),
-        summary: "",
+        summary: "如果你想知道这些网站感觉从哪来，再往下看它们的历史来源和今天的常见落点。",
         sectionId: "historical-timeline",
         heroMode: false
       })
@@ -2459,15 +2486,15 @@ function buildUseCasesPage() {
     body: [
       renderPageLead({
         kicker: bilingualText("使用场景", "Use Cases"),
-        title: bilingualText("按内容和任务反推风格", "Work backward from the job"),
-        summary: "如果你不是在做审美研究，而是在准备一个具体网站，这一层通常会更快。",
-        detail: "把我要做什么内容直接映射到更合适的网页家族、结构方式和参考组合。",
+        title: bilingualText("先按网站类型开始", "Start with the site you need"),
+        summary: "如果你不知道自己喜欢什么风格，从这里开始会最快。不用先懂设计史，先看你要做什么网站。",
+        detail: "把个人站、品牌页、工具官网、研究站、作品集这些真实任务，直接映射到更合适的页面感觉、结构方式和参考组合。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/structures", "button")}>${escapeHtml(bilingualText("查看信息结构", "Open Structures"))}</a></div>`
       }),
       renderUseCaseSection({
-        title: bilingualText("全部使用场景", "All Use Cases"),
-        kicker: bilingualText("任务索引", "Task Index"),
-        summary: "从 style atlas、文化出版、设计工作室、研究知识站、AI 工具到 future-tech launch，都能直接找到推荐组合。",
+        title: bilingualText("全部建站场景", "All Use Cases"),
+        kicker: bilingualText("任务入口", "Task Index"),
+        summary: "从设计参考库、文化出版、设计工作室、研究知识站、AI 工具到 future-tech launch，都能直接找到更稳的起点。",
         useCasesList: useCases,
         sectionId: "all-use-cases",
         actionMarkup: ""
@@ -2490,9 +2517,9 @@ function buildSelectorPage() {
     body: [
       renderPageLead({
         kicker: bilingualText("选型器", "Style Selector"),
-        title: bilingualText("先选网站任务，再拿走一套组合", "Start with the job, leave with a packet"),
-        summary: "先说你要做什么网站，再用气质和结构偏好微调。页面会直接给你 movement、family、structure、真实参考和可复制 prompt。",
-        detail: "这一页不是自由拼装器，而是场景优先的决策工具。先把 job 选对，再决定气质和结构，结果会更稳定，也更适合继续交给 agent。",
+        title: bilingualText("先说你要做什么网站", "Start with the site you need"),
+        summary: "这页是给用 AI 做站的人用的。先选网站类型，再微调页面感觉和组织方式，最后直接拿走参考站和 prompt。",
+        detail: "它的工作很直接：把你要做的网站类型，转成更稳的页面方向、结构方式和可立即开工的 AI 输入。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/use-cases", "ghost-button")}>${escapeHtml(
           bilingualText("浏览全部场景", "Browse Use Cases")
         )}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(
@@ -2504,22 +2531,22 @@ function buildSelectorPage() {
           <aside class="selector-panel card-surface">
             <div class="selector-panel-copy">
               <p class="eyebrow">${escapeHtml(bilingualText("输入条件", "Inputs"))}</p>
-              <h2 class="section-title">${escapeHtml(bilingualText("从场景开始", "Start from the use case"))}</h2>
+              <h2 class="section-title">${escapeHtml(bilingualText("先从网站类型开始", "Start from the use case"))}</h2>
               <p class="section-summary">${escapeHtml(
-                "先选 use case。family 和 structure 只做覆盖，不建议先跳过场景直接拼视觉。"
+                "不需要先懂设计史。先选网站类型，系统会先缩小范围，再让你微调页面感觉和页面组织。"
               )}</p>
             </div>
             <form class="selector-form" data-selector-form>
               ${renderSelectorField({
                 name: "useCaseId",
-                labelZh: "我要做什么",
+                labelZh: "我要做什么网站",
                 labelEn: "Use Case",
                 options: useCases,
                 selected: packet.state.useCaseId
               })}
               ${renderSelectorField({
                 name: "familyId",
-                labelZh: "网页家族覆盖",
+                labelZh: "页面感觉覆盖",
                 labelEn: "Family Override",
                 options: familyOptions,
                 selected: packet.state.familyId,
@@ -2527,7 +2554,7 @@ function buildSelectorPage() {
               })}
               ${renderSelectorField({
                 name: "structureId",
-                labelZh: "结构覆盖",
+                labelZh: "页面组织覆盖",
                 labelEn: "Structure Override",
                 options: structureOptions,
                 selected: packet.state.structureId,

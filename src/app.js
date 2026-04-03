@@ -321,7 +321,7 @@ function renderSelectorResults(data, packet) {
   return `<div class="selector-results" data-selector-results>
     <article class="selector-summary card-surface">
       <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText("当前结果", "Current Packet"))}</p>
+        <p class="card-kicker">${escapeHtml(bilingualText("推荐建站方案", "Recommended Packet"))}</p>
         <h2 class="section-title">${renderBilingualStack(packet.useCase.titleZh, packet.useCase.titleEn || packet.useCase.title)}</h2>
         <p class="section-summary">${escapeHtml(packet.useCase.summary)}</p>
         <div class="selector-summary-grid">
@@ -346,7 +346,7 @@ function renderSelectorResults(data, packet) {
     </article>
     <div class="selector-choice-grid">
       ${renderSelectorChoiceCard({
-        kickerZh: "历史线索",
+        kickerZh: "风格来源",
         kickerEn: "Historical Movement",
         item: packet.movement,
         href: packet.movement?.href || "/movements",
@@ -360,7 +360,7 @@ function renderSelectorResults(data, packet) {
         emptyLabel: bilingualText("按家族自动匹配", "Auto from family")
       })}
       ${renderSelectorChoiceCard({
-        kickerZh: "网页家族",
+        kickerZh: "页面感觉",
         kickerEn: "Visual Family",
         item: packet.family,
         href: packet.family?.href || "/families",
@@ -373,7 +373,7 @@ function renderSelectorResults(data, packet) {
           : ""
       })}
       ${renderSelectorChoiceCard({
-        kickerZh: "信息结构",
+        kickerZh: "页面组织",
         kickerEn: "Structure Pattern",
         item: packet.structure,
         href: packet.structure?.href || "/structures",
@@ -422,6 +422,16 @@ function renderSelectorResults(data, packet) {
           </div>
         </div>
       </article>
+      <article class="detail-card card-surface">
+        <div class="card-body">
+          <p class="card-kicker">${escapeHtml(bilingualText("接下来这样做", "Next Steps"))}</p>
+          ${renderList([
+            "先打开 2 到 3 个真实参考站，确认图像大小、导航和留白是不是你要的感觉。",
+            "复制下面的 Prompt 包给 AI，先让它出首页草图，不要一开始就做全站。",
+            "如果结果太花、太冷或太像模板，再回来切换页面感觉或页面组织。"
+          ])}
+        </div>
+      </article>
     </div>
     <section class="selector-reference-section">
       <div class="section-head">
@@ -437,7 +447,7 @@ function renderSelectorResults(data, packet) {
     <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
       <div class="card-body">
         <p class="card-kicker">${escapeHtml(bilingualText("Prompt 包", "Prompt Packet"))}</p>
-        <h3 class="card-title">${escapeHtml(bilingualText("可直接给 agent 的组合", "Ready-to-copy packet"))}</h3>
+        <h3 class="card-title">${escapeHtml(bilingualText("这就是可以直接交给 AI 的版本", "This is the AI-ready packet"))}</h3>
         <code>${escapeHtml(packet.prompt)}</code>
         <div class="hero-actions">
           <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
