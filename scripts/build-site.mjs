@@ -1508,12 +1508,22 @@ function movementVisualCueLine(item) {
   return (item.principles || []).slice(0, 3).join(" · ");
 }
 
+function linkedStyleLabel(item) {
+  const browseStyle = styleFamilyMap.get(item.id);
+  return browseStyle?.nameZh || browseStyle?.titleZh || item.styleNameZh || item.nameZh || item.titleZh || item.title || "";
+}
+
+function linkedStyleHref(item) {
+  const browseStyle = styleFamilyMap.get(item.id);
+  return browseStyle ? browseHref(browseStyle.slug) : familyHref(item.id);
+}
+
 function movementWebUseLine(item, relatedFamilies = []) {
   const bestForLine = renderPlainPhraseList(item.bestFor || [], 3);
   if (bestForLine) return bestForLine;
   return relatedFamilies
     .slice(0, 3)
-    .map((entry) => entry.nameZh || entry.titleZh || entry.title)
+    .map((entry) => linkedStyleLabel(entry))
     .filter(Boolean)
     .join(" · ");
 }
@@ -1525,7 +1535,7 @@ function renderTimelineFamilyTags(items = []) {
       .slice(0, 2)
       .map(
         (item) =>
-          `<a ${linkAttrs(familyHref(item.id), "timeline-node-tag")}>${escapeHtml(`→ ${item.titleZh || item.title}`)}</a>`
+          `<a ${linkAttrs(linkedStyleHref(item), "timeline-node-tag")}>${escapeHtml(`→ ${linkedStyleLabel(item)}`)}</a>`
       )
       .join("")}
   </div>`;
