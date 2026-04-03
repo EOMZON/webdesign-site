@@ -259,8 +259,27 @@ export const visualFamilies = [
     ancestors: ["art-deco-streamlined-luxury", "swiss-international-typography"],
     structureIds: ["dossier", "archive-stack"],
     samples: [
-      { screenshot: "frieze.png", alt: "Frieze homepage", label: "Frieze" },
-      { screenshot: "tmagazine.png", alt: "T Magazine homepage", label: "T Magazine" }
+      {
+        screenshot: "frieze.png",
+        alt: "Frieze homepage",
+        label: "Frieze",
+        href: "https://www.frieze.com/",
+        note: "封面式首屏和主稿节奏"
+      },
+      {
+        screenshot: "itsnicethat-live.png",
+        alt: "It's Nice That homepage",
+        label: "It's Nice That",
+        href: "https://www.itsnicethat.com/",
+        note: "编辑内容堆叠和栏目感"
+      },
+      {
+        screenshot: "mubi-live.png",
+        alt: "MUBI homepage",
+        label: "MUBI",
+        href: "https://mubi.com/",
+        note: "电影出版感和图文张力"
+      }
     ],
     signature: ["feature-first hierarchy", "headline-image tension", "cover-story rhythm", "secondary stories feel curated"],
     borrow: ["strong lead image or cover block", "decks, bylines, captions, section labels", "clear editorial pacing from lead to secondary stories"],
@@ -268,6 +287,8 @@ export const visualFamilies = [
     avoidWhen: ["users need fast task completion", "the page depends on heavy filtering", "there are too few stories to justify a magazine frame"],
     references: [
       { label: "Frieze", href: "https://www.frieze.com/" },
+      { label: "It's Nice That", href: "https://www.itsnicethat.com/" },
+      { label: "MUBI", href: "https://mubi.com/" },
       { label: "T Magazine", href: "https://www.nytimes.com/section/t-magazine" },
       { label: "The New Yorker", href: "https://www.newyorker.com/" }
     ],
@@ -280,16 +301,37 @@ export const visualFamilies = [
     ancestors: ["art-deco-streamlined-luxury"],
     structureIds: ["dossier", "catalog-explorer"],
     samples: [
-      { screenshot: "gentlewoman.png", alt: "The Gentlewoman homepage", label: "The Gentlewoman" },
-      { screenshot: "kinfolk-live.png", alt: "Kinfolk homepage", label: "Kinfolk" }
+      {
+        screenshot: "apartamento-live.png",
+        alt: "Apartamento homepage",
+        label: "Apartamento",
+        href: "https://www.apartamentomagazine.com/",
+        note: "慢节奏、收藏感、杂志式图片呼吸"
+      },
+      {
+        screenshot: "kinfolk-live.png",
+        alt: "Kinfolk homepage",
+        label: "Kinfolk",
+        href: "https://kinfolk.com/",
+        note: "安静留白和生活方式语气"
+      },
+      {
+        screenshot: "monocle-travel-live.png",
+        alt: "Monocle Travel homepage",
+        label: "Monocle Travel",
+        href: "https://monocle.com/travel/",
+        note: "目录感与文化品牌气质"
+      }
     ],
     signature: ["slow pacing", "generous whitespace", "soft prestige", "minimal navigation chrome"],
     borrow: ["quiet image-led hierarchy", "subtle premium tone without loud CTAs", "refined serif or fashion-led typography"],
     bestFor: ["fashion", "lifestyle", "cultural brands", "calmer portfolio shells"],
     avoidWhen: ["high-frequency product tasks", "dense evidence pages", "multi-step operations need top priority"],
     references: [
-      { label: "The Gentlewoman", href: "https://thegentlewoman.co.uk/" },
+      { label: "Apartamento", href: "https://www.apartamentomagazine.com/" },
       { label: "Kinfolk", href: "https://kinfolk.com/" },
+      { label: "Monocle Travel", href: "https://monocle.com/travel/" },
+      { label: "The Gentlewoman", href: "https://thegentlewoman.co.uk/" },
       { label: "Monocle", href: "https://monocle.com/" }
     ],
     prompt: "Use a quiet lifestyle editorial family: spacious composition, restrained premium tone, image-first pacing, and typography that feels collectible rather than merely readable."
@@ -301,18 +343,36 @@ export const visualFamilies = [
     ancestors: ["swiss-international-typography"],
     structureIds: ["catalog-explorer", "archive-stack"],
     samples: [
-      { screenshot: "pentagram.png", alt: "Pentagram homepage", label: "Pentagram" },
-      { screenshot: "studio-feixen.png", alt: "Studio Feixen homepage", label: "Studio Feixen" },
-      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" }
+      {
+        screenshot: "signal-a-studio.png",
+        alt: "Signal-A Studio homepage",
+        label: "Signal-A Studio",
+        href: "https://signal-a.studio/",
+        note: "极简网格、留白和索引感"
+      },
+      {
+        screenshot: "pentagram.png",
+        alt: "Pentagram homepage",
+        label: "Pentagram",
+        href: "https://www.pentagram.com/",
+        note: "经典工作室网格系统"
+      },
+      {
+        screenshot: "studio-feixen.png",
+        alt: "Studio Feixen homepage",
+        label: "Studio Feixen",
+        href: "https://www.studiofeixen.ch/",
+        note: "排印秩序和几何结构"
+      }
     ],
     signature: ["grid-first composition", "hard alignment", "labels and metadata matter", "type as structure"],
     borrow: ["explicit alignment logic", "consistent margins and modular spacing", "clear category and metadata roles"],
     bestFor: ["archives", "identity studios", "reference libraries", "design system sites"],
     avoidWhen: ["the page needs emotional looseness", "image mood matters more than taxonomy", "the brand needs softness first"],
     references: [
+      { label: "Signal-A Studio", href: "https://signal-a.studio/" },
       { label: "Pentagram", href: "https://www.pentagram.com/" },
-      { label: "Studio Feixen", href: "https://www.studiofeixen.ch/" },
-      { label: "Cooper Hewitt: Swiss Style", href: "https://www.cooperhewitt.org/2015/06/11/design-dictionary-swiss-style/" }
+      { label: "Studio Feixen", href: "https://www.studiofeixen.ch/" }
     ],
     prompt: "Use a Swiss typographic grid: modular alignment, visible metadata, tight typographic hierarchy, and structure carried by the grid rather than decoration."
   },
@@ -323,9 +383,27 @@ export const visualFamilies = [
     ancestors: ["swiss-international-typography", "minimalism", "mid-century-modern"],
     structureIds: ["catalog-explorer", "archive-stack"],
     samples: [
-      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" },
-      { screenshot: "fictivekin-work.png", alt: "Fictive Kin work page", label: "Fictive Kin / Work" },
-      { screenshot: "bureau-borsche.png", alt: "Bureau Borsche homepage", label: "Bureau Borsche" }
+      {
+        screenshot: "fictivekin-work.png",
+        alt: "Fictive Kin work page",
+        label: "Fictive Kin / Work",
+        href: "https://fictivekin.com/work",
+        note: "黑白工作室项目索引"
+      },
+      {
+        screenshot: "signal-a-studio.png",
+        alt: "Signal-A Studio homepage",
+        label: "Signal-A Studio",
+        href: "https://signal-a.studio/",
+        note: "极简黑白、作者感强"
+      },
+      {
+        screenshot: "bureau-borsche.png",
+        alt: "Bureau Borsche homepage",
+        label: "Bureau Borsche",
+        href: "https://bureauborsche.com/",
+        note: "更个性但仍克制的工作室语气"
+      }
     ],
     signature: ["monochrome restraint", "type-led identity", "studio case index", "authored but controlled art direction"],
     borrow: ["bold black-white typography", "portfolio indexing that still feels editorial", "clear studio point of view without visual clutter"],
@@ -346,8 +424,27 @@ export const visualFamilies = [
     ancestors: ["bauhaus-functional-modernism"],
     structureIds: ["workbench", "catalog-explorer"],
     samples: [
-      { screenshot: "linear.png", alt: "Linear homepage", label: "Linear" },
-      { screenshot: "stripe.png", alt: "Stripe homepage", label: "Stripe" }
+      {
+        screenshot: "linear.png",
+        alt: "Linear homepage",
+        label: "Linear",
+        href: "https://linear.app/",
+        note: "高精度产品层级和节奏"
+      },
+      {
+        screenshot: "stripe.png",
+        alt: "Stripe homepage",
+        label: "Stripe",
+        href: "https://stripe.com/",
+        note: "复杂产品说明的清晰组织"
+      },
+      {
+        screenshot: "vercel.png",
+        alt: "Vercel homepage",
+        label: "Vercel",
+        href: "https://vercel.com/",
+        note: "产品官网与文档感之间的平衡"
+      }
     ],
     signature: ["tight spacing", "clear CTA hierarchy", "engineered polish", "task-first framing"],
     borrow: ["precise spacing and copy discipline", "screenshots that explain behavior", "clear task and state hierarchy"],
@@ -356,6 +453,7 @@ export const visualFamilies = [
     references: [
       { label: "Linear", href: "https://linear.app/" },
       { label: "Stripe", href: "https://stripe.com/" },
+      { label: "Vercel", href: "https://vercel.com/" },
       { label: "Atlassian Foundations", href: "https://atlassian.design/foundations/" }
     ],
     prompt: "Use a product-precision family: engineered hierarchy, crisp screenshots, strict spacing, and copy that frames tasks and outcomes before atmosphere."
@@ -367,8 +465,27 @@ export const visualFamilies = [
     ancestors: ["art-deco-streamlined-luxury", "cyberpunk-techno-futurism"],
     structureIds: ["immersive-stage", "dossier"],
     samples: [
-      { screenshot: "a24.png", alt: "A24 homepage", label: "A24" },
-      { screenshot: "apple-macbook.png", alt: "Apple MacBook Pro page", label: "Apple MacBook Pro" }
+      {
+        screenshot: "a24.png",
+        alt: "A24 homepage",
+        label: "A24",
+        href: "https://a24films.com/",
+        note: "一张图先定调的舞台感"
+      },
+      {
+        screenshot: "mubi-live.png",
+        alt: "MUBI homepage",
+        label: "MUBI",
+        href: "https://mubi.com/",
+        note: "电影品牌的首屏戏剧性"
+      },
+      {
+        screenshot: "apple-macbook.png",
+        alt: "Apple MacBook Pro page",
+        label: "Apple MacBook Pro",
+        href: "https://www.apple.com/macbook-pro/",
+        note: "产品发布的镜头化呈现"
+      }
     ],
     signature: ["single-scene drama", "low-density first fold", "strong visual memory", "clear reveal into deeper layers"],
     borrow: ["one dominant scene at the top", "sparse copy over a strong image", "clear exits into deeper content"],
@@ -388,8 +505,27 @@ export const visualFamilies = [
     ancestors: ["swiss-international-typography", "postmodern-memphis"],
     structureIds: ["catalog-explorer", "network-graph"],
     samples: [
-      { screenshot: "siteinspire-live.png", alt: "SiteInspire homepage", label: "SiteInspire" },
-      { screenshot: "behance.png", alt: "Behance homepage", label: "Behance" }
+      {
+        screenshot: "siteinspire-home-live.png",
+        alt: "SiteInspire homepage",
+        label: "SiteInspire",
+        href: "https://www.siteinspire.com/",
+        note: "风格聚合与筛选入口"
+      },
+      {
+        screenshot: "notion-templates-live.png",
+        alt: "Notion templates page",
+        label: "Notion Templates",
+        href: "https://www.notion.com/templates",
+        note: "模板库式目录组织"
+      },
+      {
+        screenshot: "awwwards-websites-live.png",
+        alt: "Awwwards websites directory",
+        label: "Awwwards",
+        href: "https://www.awwwards.com/websites/",
+        note: "缩略图高密度浏览"
+      }
     ],
     signature: ["scan-first cards", "taxonomy near the top", "thumbnail density", "index-detail split"],
     borrow: ["visible browse and filter paths", "directory framing", "high sample density without losing scannability"],
@@ -397,7 +533,8 @@ export const visualFamilies = [
     avoidWhen: ["a strong single narrative matters most", "there are too few entries to justify a directory"],
     references: [
       { label: "SiteInspire", href: "https://www.siteinspire.com/" },
-      { label: "Behance", href: "https://www.behance.net/" },
+      { label: "Notion Templates", href: "https://www.notion.com/templates" },
+      { label: "Awwwards", href: "https://www.awwwards.com/websites/" },
       { label: "Godly", href: "https://godly.website/" }
     ],
     prompt: "Use a curated reference directory family: category-forward browsing, visible filters, dense but breathable thumbnails, and a clear separation between index and detail pages."
@@ -409,8 +546,27 @@ export const visualFamilies = [
     ancestors: ["bauhaus-functional-modernism", "swiss-international-typography"],
     structureIds: ["archive-stack", "catalog-explorer"],
     samples: [
-      { screenshot: "ourworldindata-live.png", alt: "Our World in Data homepage", label: "Our World in Data" },
-      { screenshot: "atlassian-foundations.png", alt: "Atlassian Foundations page", label: "Atlassian Foundations" }
+      {
+        screenshot: "ourworldindata-live.png",
+        alt: "Our World in Data homepage",
+        label: "Our World in Data",
+        href: "https://ourworldindata.org/",
+        note: "高密度信息仍可扫描"
+      },
+      {
+        screenshot: "carbon-for-ai.png",
+        alt: "Carbon for AI page",
+        label: "Carbon for AI",
+        href: "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+        note: "知识模块和设计系统结合"
+      },
+      {
+        screenshot: "atlassian-foundations.png",
+        alt: "Atlassian Foundations page",
+        label: "Atlassian Foundations",
+        href: "https://atlassian.design/foundations/",
+        note: "规则、组件、文档分层"
+      }
     ],
     signature: ["dense but structured scanning", "topic-led navigation", "evidence modules", "high information honesty"],
     borrow: ["clear thesis before detail", "topic chips or side navigation", "labeled evidence blocks"],
@@ -430,17 +586,37 @@ export const visualFamilies = [
     ancestors: ["postmodern-memphis", "brutalism-neo-brutalism"],
     structureIds: ["catalog-explorer", "immersive-stage"],
     samples: [
-      { screenshot: "gumroad-live.png", alt: "Gumroad homepage", label: "Gumroad" },
-      { screenshot: "memphis-milano.png", alt: "Memphis Milano homepage", label: "Memphis Milano" }
+      {
+        screenshot: "bureau-borsche.png",
+        alt: "Bureau Borsche homepage",
+        label: "Bureau Borsche",
+        href: "https://bureauborsche.com/",
+        note: "反模板但仍可读的个性结构"
+      },
+      {
+        screenshot: "gumroad-live.png",
+        alt: "Gumroad homepage",
+        label: "Gumroad",
+        href: "https://gumroad.com/",
+        note: "更强烈的边界和态度"
+      },
+      {
+        screenshot: "arena-home-live.png",
+        alt: "Are.na homepage",
+        label: "Are.na",
+        href: "https://www.are.na/",
+        note: "自由拼贴与目录感混合"
+      }
     ],
     signature: ["anti-grid play", "bold borders or shapes", "strong accent color", "deliberate refusal of neutral polish"],
     borrow: ["attitude through structure and shape", "color as a punch, not as decoration everywhere", "selective disorder inside a still-readable page"],
     bestFor: ["creator brands", "experimental commerce", "identity-led products", "anti-template launches"],
     avoidWhen: ["the page needs institutional trust first", "content has to feel calm or archival", "complex tasks already create cognitive load"],
     references: [
+      { label: "Bureau Borsche", href: "https://bureauborsche.com/" },
       { label: "Gumroad", href: "https://gumroad.com/" },
-      { label: "Memphis Milano", href: "https://memphis.it/en/" },
-      { label: "Wix: Brutalist Websites", href: "https://www.wix.com/blog/brutalist-websites" }
+      { label: "Are.na", href: "https://www.are.na/" },
+      { label: "Memphis Milano", href: "https://memphis.it/en/" }
     ],
     prompt: "Use a playful postmodern anti-grid family: attitude-forward composition, bright accent punches, visible structure, and just enough disorder to feel alive without becoming messy."
   },
@@ -451,17 +627,37 @@ export const visualFamilies = [
     ancestors: ["cyberpunk-techno-futurism"],
     structureIds: ["immersive-stage", "dossier"],
     samples: [
-      { screenshot: "cyberpunk-net.png", alt: "Cyberpunk homepage", label: "Cyberpunk" },
-      { screenshot: "razer.png", alt: "Razer homepage", label: "Razer" }
+      {
+        screenshot: "nothing-tech-live.png",
+        alt: "Nothing homepage",
+        label: "Nothing",
+        href: "https://nothing.tech/",
+        note: "科技感但仍有品牌世界观"
+      },
+      {
+        screenshot: "playstation-ps5-live.png",
+        alt: "PlayStation 5 homepage",
+        label: "PlayStation 5",
+        href: "https://www.playstation.com/en-us/ps5/",
+        note: "黑底高对比和硬件叙事"
+      },
+      {
+        screenshot: "cyberpunk-net.png",
+        alt: "Cyberpunk homepage",
+        label: "Cyberpunk",
+        href: "https://www.cyberpunk.net/",
+        note: "世界观先行的未来科技舞台"
+      }
     ],
     signature: ["neon-on-dark contrast", "future-world mood", "glow as atmosphere", "dramatic hardware or scene framing"],
     borrow: ["dark-stage contrast", "controlled neon accents", "future-tech worldbuilding without losing hierarchy"],
     bestFor: ["gaming", "hardware launches", "immersive tech brands", "futurist campaign pages"],
     avoidWhen: ["quiet reading is the main task", "credibility depends on calm neutrality", "the content has to feel archival or scholarly"],
     references: [
+      { label: "Nothing", href: "https://nothing.tech/" },
+      { label: "PlayStation 5", href: "https://www.playstation.com/en-us/ps5/" },
       { label: "Cyberpunk", href: "https://www.cyberpunk.net/" },
-      { label: "Razer", href: "https://www.razer.com/" },
-      { label: "Britannica: Cyberpunk", href: "https://www.britannica.com/art/cyberpunk" }
+      { label: "Razer", href: "https://www.razer.com/" }
     ],
     prompt: "Use a neon techno-futurist family: dark base, controlled neon accents, high-energy worldbuilding, and hierarchy that still stays legible inside a dramatic future-tech atmosphere."
   }

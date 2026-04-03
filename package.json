@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "extract:intake": "node scripts/extract-feishu-design-intake.mjs",
-    "build": "node scripts/build-site.mjs"
+    "build": "node scripts/build-site.mjs",
+    "export:skills": "node scripts/export-design-skills-repo.mjs"
   }
 }

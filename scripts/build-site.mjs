@@ -21,6 +21,12 @@ import {
   structureMeta,
   useCaseMeta
 } from "../src/atlas-taxonomy.mjs";
+import {
+  designSkillsRepoHref,
+  extraStyleSources,
+  styleReferenceCatalog,
+  styleSkillSpecCatalog
+} from "../src/style-atlas-catalog.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -563,6 +569,18 @@ const styleMetaMap = {
     toneAxis: "quiet",
     orderAxis: "structured"
   },
+  "dark-studio-gallery": {
+    slug: "dark-studio-gallery",
+    nameZh: "暗色画廊",
+    cardUses: ["工作室作品集", "案例展示", "Selected Works"],
+    lookLike: ["黑底图像墙", "作品切片先行", "标题克制", "工作室语气明确"],
+    notFor: ["知识库", "高密度工具页", "生活方式杂志站"],
+    filterTags: ["minimal-black-white", "bold-personality"],
+    siteTypes: ["portfolio", "brand", "other"],
+    audiences: ["clients", "fans", "self"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
+  },
   "product-precision-interface": {
     slug: "product-tool",
     nameZh: "产品工具",
@@ -623,6 +641,18 @@ const styleMetaMap = {
     toneAxis: "bold",
     orderAxis: "distinctive"
   },
+  "brutalist-raw-interface": {
+    slug: "brutalist-raw",
+    nameZh: "粗野直给",
+    cardUses: ["创作者发布", "实验品牌", "宣言页"],
+    lookLike: ["硬边界", "高对比", "直给排版", "不讨好但可读"],
+    notFor: ["静奢品牌", "严肃知识库", "复杂后台工具"],
+    filterTags: ["bold-personality"],
+    siteTypes: ["portfolio", "brand", "launch", "other"],
+    audiences: ["fans", "general", "self"],
+    toneAxis: "bold",
+    orderAxis: "distinctive"
+  },
   "curated-reference-directory": {
     slug: "reference-directory",
     nameZh: "参考目录",
@@ -658,32 +688,74 @@ const styleMetaMap = {
     audiences: ["fans", "general", "clients"],
     toneAxis: "bold",
     orderAxis: "distinctive"
+  },
+  "luxury-fashion-editorial": {
+    slug: "luxury-fashion-editorial",
+    nameZh: "时尚奢刊",
+    cardUses: ["时尚品牌", "奢刊专题", "文化品牌"],
+    lookLike: ["大片裁切", "奢华留白", "时尚感 serif", "封面节奏"],
+    notFor: ["工具产品", "重筛选目录", "高频任务流"],
+    filterTags: ["magazine-publishing", "craft-natural"],
+    siteTypes: ["brand", "blog", "launch"],
+    audiences: ["fans", "clients", "general"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
+  },
+  "humanist-modern-brand": {
+    slug: "humanist-modern",
+    nameZh: "人文现代",
+    cardUses: ["生活方式品牌", "现代产品品牌", "内容品牌首页"],
+    lookLike: ["温和现代", "留白克制", "人味而不复古", "产品与内容并存"],
+    notFor: ["极端科技场景", "反模板实验页", "重型后台工具"],
+    filterTags: ["craft-natural", "minimal-black-white"],
+    siteTypes: ["brand", "portfolio", "blog", "other"],
+    audiences: ["clients", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
   }
 };
+
+const styleSkillSpecMap = styleSkillSpecCatalog;
 
 const styleOrder = [
   "swiss-typographic-grid",
   "monochrome-studio-systems",
+  "dark-studio-gallery",
+  "humanist-modern-brand",
   "neon-techno-futurist-interface",
   "magazine-editorial",
+  "luxury-fashion-editorial",
   "quiet-lifestyle-editorial",
   "playful-postmodern-anti-grid",
+  "brutalist-raw-interface",
   "product-precision-interface",
   "curated-reference-directory",
   "evidence-dense-knowledge-surface",
   "stage-driven-showcase"
 ];
 
+const styleSourceMap = new Map([
+  ...families.map((item) => [item.id, item]),
+  ...extraStyleSources.map((item) => [item.id, item])
+]);
+
 const styleFamilies = styleOrder
-  .map((id) => familyMap.get(id))
+  .map((id) => styleSourceMap.get(id))
   .filter(Boolean)
   .map((item) => {
     const meta = styleMetaMap[item.id] || {};
+    const liveReferences = (styleReferenceCatalog[item.id] || []).filter((entry) => isUsableScreenshot(entry.screenshot));
+    const leadReference = liveReferences[0] || null;
+    const primarySample = uniqueSamples(item.samples || [])[0] || null;
     return {
       ...item,
       slug: meta.slug || item.id,
       href: browseHref(meta.slug || item.id),
       nameZh: meta.nameZh || item.titleZh || item.title,
+      cover: leadReference?.screenshot || primarySample?.screenshot || item.cover || "",
+      coverLabel: leadReference?.label || primarySample?.label || item.coverLabel || meta.nameZh || item.titleZh || item.title,
+      coverAlt: leadReference?.alt || primarySample?.alt || item.coverAlt || primarySample?.label || item.titleEn || item.title || "",
+      demoHref: leadReference?.href || primarySample?.href || item.demoHref || item.references?.[0]?.href || "",
       cardUses: meta.cardUses || (item.bestFor || []).slice(0, 3),
       lookLike: meta.lookLike || (item.signature || []).slice(0, 4),
       notFor: meta.notFor || (item.avoidWhen || []).slice(0, 3),
@@ -691,7 +763,9 @@ const styleFamilies = styleOrder
       siteTypes: meta.siteTypes || ["other"],
       audiences: meta.audiences || ["general"],
       toneAxis: meta.toneAxis || "quiet",
-      orderAxis: meta.orderAxis || "structured"
+      orderAxis: meta.orderAxis || "structured",
+      liveReferences,
+      skillSpec: styleSkillSpecMap[item.id] || null
     };
   });
 
@@ -945,7 +1019,11 @@ function aboutHref() {
   return sitePath("about");
 }
 
-const githubHref = "https://github.com/EOMZON";
+const githubHref = designSkillsRepoHref;
+
+function styleSkillRepoHref(item) {
+  return `${githubHref}/tree/main/styles/${item.slug}`;
+}
 
 function linkAttrs(href, className = "") {
   const classAttr = className ? ` class="${className}"` : "";
@@ -1059,6 +1137,25 @@ function renderList(items = []) {
 
 function dedupeStrings(items = []) {
   return [...new Set(items.filter(Boolean))];
+}
+
+function plainPhraseText(item) {
+  const pill = normalizePill(item);
+  return pill.zh || pill.en || "";
+}
+
+function renderPlainPhraseList(items = [], limit = items.length || 0) {
+  return items
+    .slice(0, limit || items.length)
+    .map((item) => plainPhraseText(item))
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function normalizeReferenceKey(value = "") {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
 }
 
 function serializeJsonForHtml(value) {
@@ -1404,7 +1501,21 @@ const movementCompactBlurbMap = {
 };
 
 function movementCompactBlurb(item) {
-  return movementCompactBlurbMap[item.id] || item.principles?.[0] || item.origin || "";
+  return item.summary || item.whyItMatters || movementCompactBlurbMap[item.id] || item.principles?.[0] || item.origin || "";
+}
+
+function movementVisualCueLine(item) {
+  return (item.principles || []).slice(0, 3).join(" · ");
+}
+
+function movementWebUseLine(item, relatedFamilies = []) {
+  const bestForLine = renderPlainPhraseList(item.bestFor || [], 3);
+  if (bestForLine) return bestForLine;
+  return relatedFamilies
+    .slice(0, 3)
+    .map((entry) => entry.nameZh || entry.titleZh || entry.title)
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function renderTimelineFamilyTags(items = []) {
@@ -1416,6 +1527,16 @@ function renderTimelineFamilyTags(items = []) {
         (item) =>
           `<a ${linkAttrs(familyHref(item.id), "timeline-node-tag")}>${escapeHtml(`→ ${item.titleZh || item.title}`)}</a>`
       )
+      .join("")}
+  </div>`;
+}
+
+function renderTimelineSignalPills(items = []) {
+  if (!items.length) return "";
+  return `<div class="timeline-node-signals">
+    ${items
+      .slice(0, 4)
+      .map((item) => `<span class="timeline-node-signal">${escapeHtml(item)}</span>`)
       .join("")}
   </div>`;
 }
@@ -1452,13 +1573,21 @@ function renderTimelineNavigator(items = []) {
   </nav>`;
 }
 
-function renderTimelineStreamItem(item, index) {
+function renderTimelineStreamItem(item, index, options = {}) {
+  const { expanded = false } = options;
   const leadVisual = item.primaryVisual || fallbackVisual(item);
   const relatedFamilies = item.familyIds.map((id) => familyMap.get(id)).filter(Boolean);
   const years = movementYears(item);
-  const blurb = movementCompactBlurb(item);
+  const summary = movementCompactBlurb(item);
+  const visualCues = movementVisualCueLine(item);
+  const webUse = movementWebUseLine(item, relatedFamilies);
+  const detailSummary = item.summary || "";
+  const impact = item.whyItMatters || "";
+  const signals = item.principles || item.signatures || [];
 
-  return `<article class="timeline-node" id="${escapeHtml(movementAnchorId(item.id))}" style="--stagger:${escapeHtml(`${(index % 4) * 50}ms`)};">
+  return `<article class="timeline-node${expanded ? " timeline-node--expanded" : ""}" id="${escapeHtml(
+    movementAnchorId(item.id)
+  )}" style="--stagger:${escapeHtml(`${(index % 4) * 50}ms`)};">
     <div class="timeline-node-year">
       <span class="timeline-node-year-number">${escapeHtml(String(years.start))}</span>
       <span class="timeline-node-year-range">${escapeHtml(String(years.end))}</span>
@@ -1466,8 +1595,8 @@ function renderTimelineStreamItem(item, index) {
     <div class="timeline-node-axis" aria-hidden="true">
       <span class="timeline-node-dot"></span>
     </div>
-    <a ${linkAttrs(movementHref(item.id), "timeline-node-card")}>
-      <div class="timeline-node-media">
+    <div class="timeline-node-card card-surface">
+      <a ${linkAttrs(movementHref(item.id), "timeline-node-media")}>
         ${
           leadVisual?.screenshot
             ? `<div class="timeline-node-image-wrap">
@@ -1475,16 +1604,48 @@ function renderTimelineStreamItem(item, index) {
               </div>`
             : `<div class="timeline-node-placeholder"></div>`
         }
-      </div>
+      </a>
       <div class="timeline-node-copy">
-        <p class="timeline-node-titleline">
-          <span class="timeline-node-title-zh">${escapeHtml(item.titleZh)}</span>
-          <span class="timeline-node-title-en">${escapeHtml(item.titleEn || item.title)}</span>
-        </p>
-        <p class="timeline-node-blurb">${escapeHtml(blurb)}</p>
+        <div class="timeline-node-head">
+          <p class="timeline-node-titleline">
+            <span class="timeline-node-title-zh">${escapeHtml(item.titleZh)}</span>
+            <span class="timeline-node-title-en">${escapeHtml(item.titleEn || item.title)}</span>
+          </p>
+          <a ${linkAttrs(movementHref(item.id), "timeline-node-open")}>${escapeHtml(
+            bilingualText("查看详情", "Open")
+          )}</a>
+        </div>
+        <p class="timeline-node-summary">${escapeHtml(summary)}</p>
+        ${
+          visualCues
+            ? `<p class="timeline-node-line"><span class="timeline-node-label">${escapeHtml(
+                bilingualText("视觉特点", "Visual Traits")
+              )}</span>${escapeHtml(visualCues)}</p>`
+            : ""
+        }
+        ${
+          webUse
+            ? `<p class="timeline-node-line"><span class="timeline-node-label">${escapeHtml(
+                bilingualText("今天常见于", "Common Today")
+              )}</span>${escapeHtml(webUse)}</p>`
+            : ""
+        }
+        ${
+          expanded && detailSummary
+            ? `<p class="timeline-node-detail">${escapeHtml(detailSummary)}</p>`
+            : ""
+        }
+        ${
+          expanded && impact
+            ? `<p class="timeline-node-line timeline-node-line--stacked"><span class="timeline-node-label">${escapeHtml(
+                bilingualText("网页影响", "Web Influence")
+              )}</span>${escapeHtml(impact)}</p>`
+            : ""
+        }
+        ${expanded ? renderTimelineSignalPills(signals) : ""}
         ${renderTimelineFamilyTags(relatedFamilies)}
       </div>
-    </a>
+    </div>
   </article>`;
 }
 
@@ -1496,7 +1657,8 @@ function renderTimelineAtlasSection(options = {}) {
     kicker = bilingualText("历史流派", "Historical Timeline"),
     summary = "",
     sectionId = "timeline-atlas",
-    heroMode = false
+    heroMode = false,
+    expandedCards = false
   } = options;
 
   const ordered = [...movements].sort((a, b) => movementYears(a).start - movementYears(b).start);
@@ -1521,10 +1683,10 @@ function renderTimelineAtlasSection(options = {}) {
       </div>
     </div>
     ${renderTimelineNavigator(ordered)}
-    <div class="timeline-stream" data-timeline-stream aria-label="${escapeHtml(
+    <div class="timeline-stream${expandedCards ? " timeline-stream--expanded" : ""}" data-timeline-stream aria-label="${escapeHtml(
       bilingualText("历史流派", "Historical Timeline")
     )}">
-      ${ordered.map((item, index) => renderTimelineStreamItem(item, index)).join("")}
+      ${ordered.map((item, index) => renderTimelineStreamItem(item, index, { expanded: expandedCards })).join("")}
     </div>
   </section>`;
 }
@@ -1730,26 +1892,38 @@ function selectorResolveMovement(family) {
 function selectorReferenceEntries(family) {
   if (!family) return [];
 
-  const visuals = uniqueSamples(family.samples || []).slice(0, 3);
+  if (family.liveReferences?.length) {
+    return family.liveReferences.map((entry) => ({
+      label: entry.label,
+      href: entry.href,
+      screenshot: entry.screenshot,
+      alt: entry.alt || entry.label,
+      note: entry.note || ""
+    }));
+  }
+
+  const visuals = uniqueSamples(family.samples || []).slice(0, 4);
   const references = family.references || [];
   const normalizedReferences = references.map((reference) => ({
     ...reference,
-    normalizedLabel: String(reference.label || "").toLowerCase().replace(/[^a-z0-9]+/g, "")
+    normalizedLabel: normalizeReferenceKey(reference.label || "")
   }));
 
   return visuals.map((sample, index) => {
-    const sampleKey = String(sample.label || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    const sampleKey = normalizeReferenceKey(sample.label || "");
     const matchedReference =
+      normalizedReferences.find((reference) => sampleKey && reference.normalizedLabel === sampleKey) ||
       normalizedReferences.find((reference) => sampleKey && reference.normalizedLabel.includes(sampleKey)) ||
       normalizedReferences.find((reference) => sampleKey && sampleKey.includes(reference.normalizedLabel)) ||
       references[index] ||
       null;
 
     return {
-      label: matchedReference?.label || sample.label || displayTitle(family),
-      href: matchedReference?.href || familyHref(family.id),
+      label: sample.label || matchedReference?.label || displayTitle(family),
+      href: sample.href || matchedReference?.href || familyHref(family.id),
+      note: sample.note || matchedReference?.note || "",
       screenshot: sample.screenshot,
-      alt: sample.alt || matchedReference?.label || sample.label || displayTitle(family)
+      alt: sample.alt || sample.label || matchedReference?.label || displayTitle(family)
     };
   });
 }
@@ -2699,14 +2873,23 @@ function stylePrimaryReference(item) {
 }
 
 function stylePromptPacket(item) {
+  const spec = styleSkillSpecMap[item.id] || {
+    summary: "",
+    palette: [],
+    typography: [],
+    layout: [],
+    imagery: [],
+    motion: [],
+    avoid: []
+  };
   const structuresList = relatedStyleStructures(item)
     .map((entry) => displayTitle(entry))
     .join(" / ");
   const movementsList = relatedStyleMovements(item)
     .map((entry) => displayTitle(entry))
     .join(" / ");
-  const referencePacket = (item.references || [])
-    .slice(0, 3)
+  const referencePacket = selectorReferenceEntries(item)
+    .slice(0, 4)
     .map((entry) => `${entry.label}: ${entry.href}`)
     .join(" / ");
 
@@ -2717,7 +2900,21 @@ function stylePromptPacket(item) {
 推荐页面组织：${structuresList || bilingualText("待补充", "Pending")}
 历史来源：${movementsList || bilingualText("待补充", "Pending")}
 参考网站：${referencePacket || bilingualText("待补充", "Pending")}
+配色系统：${(spec.palette || []).join(" / ") || bilingualText("保持克制、统一、层级清楚", "Keep the palette restrained and legible")}
+排版系统：${(spec.typography || []).join(" / ") || bilingualText("建立清楚标题、正文、标签层级", "Build a clear title/body/meta hierarchy")}
+版式规则：${(spec.layout || []).join(" / ") || bilingualText("让布局服务内容和信息结构", "Let layout serve the content job")}
+图片处理：${(spec.imagery || []).join(" / ") || bilingualText("统一图片比例和展示规则", "Keep image ratios and treatment consistent")}
 风格要求：${item.prompt}`;
+}
+
+function styleSkillCueLine(item) {
+  const spec = item.skillSpec || styleSkillSpecMap[item.id] || {};
+  const cues = dedupeStrings([
+    ...(spec.layout || []).slice(0, 1),
+    ...(spec.typography || []).slice(0, 1),
+    ...(spec.palette || []).slice(0, 1)
+  ]).slice(0, 2);
+  return cues.join(" · ");
 }
 
 function styleSkillDownloadPath(item) {
@@ -2725,38 +2922,81 @@ function styleSkillDownloadPath(item) {
 }
 
 function renderStyleSkillMarkdown(item) {
+  const spec = styleSkillSpecMap[item.id] || {
+    useWhen: [],
+    palette: [],
+    typography: [],
+    layout: [],
+    imagery: [],
+    motion: [],
+    avoid: []
+  };
+  const references = selectorReferenceEntries(item);
+
   return `---
-name: style-${item.slug}
-description: ${item.nameZh} (${item.titleEn || item.title}) style pack for AI website building
+name: ${item.slug}
+description: "${item.nameZh} (${item.titleEn || item.title}) style skill for AI website building."
 ---
 
 # ${item.nameZh} (${item.titleEn || item.title})
 
-## 适合做
+## 适用场景 / Use When
+
+${(spec.useWhen || item.cardUses).join(" / ") || "适合需要明确风格锚点、参考站和可直接复用 prompt 的建站任务。"}
+
+## 适合做 / Best For
 
 - ${item.cardUses.join("\n- ")}
 
-## 不适合做
+## 不适合做 / Not For
 
 - ${item.notFor.join("\n- ")}
 
-## 视觉特征
+## 长这样 / Visual Traits
 
 - ${item.lookLike.join("\n- ")}
 
-## 推荐页面组织
+## 配色系统 / Color System
+
+- ${(spec.palette || []).join("\n- ") || "Keep the palette restrained and legible."}
+
+## 排版系统 / Typography
+
+- ${(spec.typography || []).join("\n- ") || "Build a clear title, body, and metadata hierarchy."}
+
+## 版式规则 / Layout Rules
+
+- ${(spec.layout || []).join("\n- ") || "Use a layout system that matches the content job."}
+
+## 图片处理 / Image Treatment
+
+- ${(spec.imagery || []).join("\n- ") || "Keep screenshots and images consistent in ratio and crop."}
+
+## 动效节奏 / Motion
+
+- ${(spec.motion || []).join("\n- ") || "Use restrained interaction feedback."}
+
+## 推荐结构 / Recommended Structures
 
 - ${relatedStyleStructures(item)
   .map((entry) => displayTitle(entry))
   .join("\n- ") || "Pending"}
 
-## 历史来源
+## 历史来源 / Historical Roots
 
 - ${relatedStyleMovements(item)
   .map((entry) => displayTitle(entry))
   .join("\n- ") || "Pending"}
 
-## Prompt
+## 参考网站 / Reference Sites
+
+- ${references.map((entry) => `${entry.label}: ${entry.href}`).join("\n- ") || "Pending"}
+
+## 注意避坑 / Avoid
+
+- ${(spec.avoid || item.notFor).join("\n- ") || "Pending"}
+
+## Prompt DNA
 
 \`\`\`text
 ${stylePromptPacket(item)}
@@ -2768,6 +3008,8 @@ function styleCardSearchText(item) {
   return [
     item.nameZh,
     item.titleEn || item.title,
+    item.coverLabel || "",
+    item.summaryZh || item.summary || "",
     ...(item.cardUses || []),
     ...(item.lookLike || []),
     ...(item.filterTags || [])
@@ -2777,6 +3019,7 @@ function styleCardSearchText(item) {
 }
 
 function renderBrowseStyleCard(item) {
+  const skillCue = styleSkillCueLine(item);
   return `<article class="style-card card-surface" data-style-card data-style-tags="${escapeHtml(
     item.filterTags.join(" ")
   )}" data-style-search="${escapeHtml(styleCardSearchText(item))}">
@@ -2785,7 +3028,9 @@ function renderBrowseStyleCard(item) {
     </a>
     <div class="style-card-body">
       <h3 class="style-card-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</h3>
+      <p class="style-card-reference">${escapeHtml(`主参考：${item.coverLabel || item.nameZh}`)}</p>
       <p class="style-card-fit">${escapeHtml(`适合做：${item.cardUses.slice(0, 3).join(" · ")}`)}</p>
+      ${skillCue ? `<p class="style-card-skill">${escapeHtml(`Skill 核心：${skillCue}`)}</p>` : ""}
     </div>
   </article>`;
 }
@@ -2882,6 +3127,8 @@ function renderStyleReferenceRail(item) {
     .filter((entry) => entry.screenshot && entry.screenshot !== item.cover)
     .slice(0, 4);
 
+  if (!references.length) return "";
+
   return `<section class="section">
     ${renderSectionHead(
       bilingualText("真实网站参考", "Real References"),
@@ -2898,7 +3145,41 @@ function renderStyleReferenceRail(item) {
             <div class="card-body">
               <p class="card-kicker">${escapeHtml(bilingualText("代表网站", "Reference"))}</p>
               <h3 class="card-title">${escapeHtml(entry.label)}</h3>
+              ${entry.note ? `<p class="card-summary">${escapeHtml(entry.note)}</p>` : ""}
               <a ${linkAttrs(entry.href, "text-link")}>${escapeHtml(bilingualText("打开网站", "Open Site"))}</a>
+            </div>
+          </article>`
+        )
+        .join("")}
+    </div>
+  </section>`;
+}
+
+function renderStyleSkillSpecSection(item) {
+  const spec = styleSkillSpecMap[item.id] || {};
+  const sections = [
+    { label: bilingualText("配色系统", "Color System"), items: spec.palette || [] },
+    { label: bilingualText("排版系统", "Typography"), items: spec.typography || [] },
+    { label: bilingualText("版式规则", "Layout Rules"), items: spec.layout || [] },
+    { label: bilingualText("图片处理", "Image Treatment"), items: spec.imagery || [] },
+    { label: bilingualText("交互节奏", "Motion"), items: spec.motion || [] }
+  ].filter((entry) => entry.items.length);
+
+  if (!sections.length) return "";
+
+  return `<section class="section">
+    ${renderSectionHead(
+      bilingualText("Skill 包含什么", "What The Skill Controls"),
+      bilingualText("截图、排版和规则来自同一套风格包", "The screenshots, layout, and rules come from the same skill packet"),
+      ""
+    )}
+    <div class="style-skill-grid">
+      ${sections
+        .map(
+          (entry) => `<article class="detail-card card-surface">
+            <div class="card-body">
+              <p class="card-kicker">${escapeHtml(entry.label)}</p>
+              ${renderList(entry.items)}
             </div>
           </article>`
         )
@@ -2956,11 +3237,15 @@ function renderBrowseStyleDetail(item) {
             <a ${linkAttrs(styleSkillDownloadPath(item), "ghost-button")} download>${escapeHtml(
               bilingualText("下载 .md Skill", "Download .md Skill")
             )}</a>
+            <a ${linkAttrs(styleSkillRepoHref(item), "ghost-button")}>${escapeHtml(
+              bilingualText("GitHub Skill", "GitHub Skill")
+            )}</a>
           </div>
         </div>
         <div class="style-detail-head">
           <div class="style-detail-head-main">
             <h1 class="detail-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title, "detail-inline-title")}</h1>
+            ${item.summaryZh || item.summary ? `<p class="detail-summary">${escapeHtml(item.summaryZh || item.summary)}</p>` : ""}
             <div class="pill-row">${renderStaticPills(item.cardUses.slice(0, 3))}</div>
           </div>
         </div>
@@ -2971,7 +3256,7 @@ function renderBrowseStyleDetail(item) {
           <div class="style-detail-stage-copy">
             <p class="card-kicker">${escapeHtml(bilingualText("主参考", "Primary Reference"))}</p>
             <h2 class="card-title">${escapeHtml(primaryReference?.label || item.nameZh)}</h2>
-            <p class="card-summary">${escapeHtml(item.summaryZh || item.summary || "")}</p>
+            <p class="card-summary">${escapeHtml(primaryReference?.note || item.summaryZh || item.summary || "")}</p>
             ${primaryReference?.href ? `<a ${linkAttrs(primaryReference.href, "text-link")}>${escapeHtml(bilingualText("打开参考网站", "Open Reference"))}</a>` : ""}
           </div>
         </article>
@@ -2990,6 +3275,7 @@ function renderBrowseStyleDetail(item) {
           )}</p>${renderList(item.notFor)}</div></article>
         </div>
       </section>`,
+      renderStyleSkillSpecSection(item),
       `<section class="section">
         ${renderSectionHead(
           bilingualText("AI Prompt", "AI Prompt"),
@@ -3005,6 +3291,9 @@ function renderBrowseStyleDetail(item) {
               )}</button>
               <a ${linkAttrs(styleSkillDownloadPath(item), "ghost-button")} download>${escapeHtml(
                 bilingualText("下载 .md Skill", "Download .md Skill")
+              )}</a>
+              <a ${linkAttrs(styleSkillRepoHref(item), "ghost-button")}>${escapeHtml(
+                bilingualText("GitHub Skill", "GitHub Skill")
               )}</a>
             </div>
           </div>
@@ -3084,12 +3373,33 @@ function buildAboutPage() {
           )}</p><p>${escapeHtml("最后再补背景，用来理解来源和避坑，而不是先决定风格。")}</p></div></article>
         </div>
       </section>`,
+      `<section class="section">
+        ${renderSectionHead(
+          bilingualText("公开 Skills 仓库", "Public Skills Repo"),
+          bilingualText("每个风格都有对应的可下载 Skill", "Each style has a downloadable skill"),
+          "公开仓库只放风格 skills，本网站负责浏览、选型和说明。"
+        )}
+        <article class="detail-card card-surface">
+          <div class="card-body">
+            <p class="card-summary">${escapeHtml(
+              "仓库里会按风格分文件夹维护 SKILL.md。你可以直接放进 Codex / Cursor / OpenClaw 的 skills 目录，也可以先在站内看图选方向，再去 GitHub 拿 skill。"
+            )}</p>
+            <div class="hero-actions">
+              <a ${linkAttrs(githubHref, "button")}>${escapeHtml("打开 GitHub 仓库 ↗")}</a>
+              <a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
+                bilingualText("回到风格浏览", "Back to Browse")
+              )}</a>
+            </div>
+          </div>
+        </article>
+      </section>`,
       renderTimelineAtlasSection({
         titleZh: "历史流派时间轴",
         titleEn: "Historical Timeline",
         kicker: bilingualText("历史来源", "Background Lineage"),
         summary: "这部分从首页挪到 About。先选到目标，再回来补历史脉络。",
-        sectionId: "about-history-timeline"
+        sectionId: "about-history-timeline",
+        expandedCards: true
       })
     ].join("")
   });
@@ -3113,7 +3423,7 @@ const selectorWizardAudienceOptions = [
 
 const selectorWizardVisualOptions = {
   tone: [
-    { id: "quiet", titleZh: "安静克制", titleEn: "Quiet", screenshot: "signal-a-studio.png", alt: "Quiet reference" },
+    { id: "quiet", titleZh: "安静克制", titleEn: "Quiet", screenshot: "gentlewoman-live.png", alt: "Quiet reference" },
     { id: "bold", titleZh: "强烈有力", titleEn: "Bold", screenshot: "cyberpunk-net.png", alt: "Bold reference" }
   ],
   order: [
@@ -3471,6 +3781,28 @@ function buildSelectorPage() {
   });
 }
 
+function buildStyleCatalogPayload() {
+  return styleFamilies.map((item) => ({
+    id: item.id,
+    slug: item.slug,
+    nameZh: item.nameZh,
+    titleEn: item.titleEn || item.title,
+    summaryZh: item.summaryZh || item.summary || "",
+    cardUses: item.cardUses,
+    lookLike: item.lookLike,
+    notFor: item.notFor,
+    filterTags: item.filterTags,
+    cover: item.cover,
+    coverAlt: item.coverAlt || item.nameZh,
+    coverLabel: item.coverLabel || item.nameZh,
+    demoHref: item.demoHref || "",
+    downloadPath: styleSkillDownloadPath(item),
+    githubSkillHref: styleSkillRepoHref(item),
+    references: selectorReferenceEntries(item),
+    skillSpec: item.skillSpec || null
+  }));
+}
+
 function build() {
   fs.rmSync(distRoot, { recursive: true, force: true });
   ensureDir(distRoot);
@@ -3496,6 +3828,8 @@ function build() {
   for (const family of styleFamilies) {
     writeFile(path.join(distRoot, "downloads", `${family.slug}.md`), renderStyleSkillMarkdown(family));
   }
+
+  writeFile(path.join(distRoot, "data", "style-catalog.json"), JSON.stringify(buildStyleCatalogPayload(), null, 2));
 
   assertNoDuplicateImagesPerPage();
 }

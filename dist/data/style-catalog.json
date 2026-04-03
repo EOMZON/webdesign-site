@@ -1,0 +1,1319 @@
+[
+  {
+    "id": "swiss-typographic-grid",
+    "slug": "swiss-grid",
+    "nameZh": "瑞士网格",
+    "titleEn": "Swiss Typographic Grid",
+    "summaryZh": "以网格、排印和对齐关系组织信息的系统型页面，适合会持续生长的档案、参考库和知识站。",
+    "cardUses": [
+      "档案站",
+      "工作室",
+      "参考库"
+    ],
+    "lookLike": [
+      "严格网格",
+      "大量留白",
+      "排印主导",
+      "黑白为主"
+    ],
+    "notFor": [
+      "娱乐发布",
+      "霓虹科技页",
+      "重情绪电商"
+    ],
+    "filterTags": [
+      "minimal-black-white"
+    ],
+    "cover": "signal-a-studio.png",
+    "coverAlt": "Signal-A Studio screenshot",
+    "coverLabel": "Signal-A Studio",
+    "demoHref": "https://signal-a.studio/",
+    "downloadPath": "/downloads/swiss-grid.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/swiss-grid",
+    "references": [
+      {
+        "label": "Signal-A Studio",
+        "href": "https://signal-a.studio/",
+        "screenshot": "signal-a-studio.png",
+        "alt": "Signal-A Studio screenshot",
+        "note": "黑白极简、系统化、留白干净，第一眼就能读出 Swiss 网格。"
+      },
+      {
+        "label": "Studio Feixen",
+        "href": "https://www.studiofeixen.ch/",
+        "screenshot": "studio-feixen.png",
+        "alt": "Studio Feixen screenshot",
+        "note": "更有实验性的 Swiss 网格版本。"
+      },
+      {
+        "label": "Pentagram",
+        "href": "https://www.pentagram.com/",
+        "screenshot": "pentagram.png",
+        "alt": "Pentagram screenshot",
+        "note": "项目与元数据组织很强，但首屏更像具体作品封面。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "档案站",
+        "设计工作室",
+        "参考库",
+        "设计系统入口"
+      ],
+      "palette": [
+        "背景接近纯白或纯黑",
+        "只用黑白灰作为主系统",
+        "强调层级而不是装饰色"
+      ],
+      "typography": [
+        "一个无衬线主字体",
+        "标题和元数据都要严格对齐",
+        "字号系统以层级和标签为主"
+      ],
+      "layout": [
+        "12 列或明确模数网格",
+        "所有卡片和段落都对齐到同一边界",
+        "元数据要像导航一样可读"
+      ],
+      "imagery": [
+        "图片视为网格中的内容块",
+        "避免漂浮卡片和圆角浏览器壳",
+        "截图统一裁切比例"
+      ],
+      "motion": [
+        "动效极少",
+        "更多依靠 hover 的边框和对齐反馈",
+        "不要做情绪化转场"
+      ],
+      "avoid": [
+        "装饰性渐变",
+        "软糯圆角组件",
+        "不规则瀑布流"
+      ]
+    }
+  },
+  {
+    "id": "monochrome-studio-systems",
+    "slug": "minimal-black-white",
+    "nameZh": "极简黑白",
+    "titleEn": "Monochrome Studio Systems",
+    "summaryZh": "以黑白排印、工作室语气和项目索引为核心的极简页面，克制但有明确作者性，特别适合设计工作室与识别作品集。",
+    "cardUses": [
+      "作品集",
+      "品牌站",
+      "工作室"
+    ],
+    "lookLike": [
+      "黑白对比",
+      "项目索引",
+      "留白控制",
+      "作者感强"
+    ],
+    "notFor": [
+      "电商首页",
+      "高频工具台",
+      "重彩活动页"
+    ],
+    "filterTags": [
+      "minimal-black-white"
+    ],
+    "cover": "fictivekin-home-live.png",
+    "coverAlt": "Fictive Kin screenshot",
+    "coverLabel": "Fictive Kin",
+    "demoHref": "https://fictivekin.com/",
+    "downloadPath": "/downloads/minimal-black-white.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/minimal-black-white",
+    "references": [
+      {
+        "label": "Fictive Kin",
+        "href": "https://fictivekin.com/",
+        "screenshot": "fictivekin-home-live.png",
+        "alt": "Fictive Kin screenshot",
+        "note": "黑白、克制、工作室语气明确，但比作品画廊更偏整体品牌首页。"
+      },
+      {
+        "label": "OK-RM",
+        "href": "https://www.ok-rm.co.uk/",
+        "screenshot": "ok-rm.png",
+        "alt": "OK-RM screenshot",
+        "note": "更偏文化工作室的极简黑白语气。"
+      },
+      {
+        "label": "Signal-A Studio",
+        "href": "https://signal-a.studio/",
+        "screenshot": "signal-a-studio.png",
+        "alt": "Signal-A Studio screenshot",
+        "note": "更系统化、更网格化的一侧。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "作品集",
+        "创意工作室",
+        "身份识别型品牌站"
+      ],
+      "palette": [
+        "主色只用黑白灰",
+        "允许一层非常弱的暖灰",
+        "不要用彩色功能色做导航"
+      ],
+      "typography": [
+        "黑白对比要靠字重和字号拉开",
+        "英文副标题保持小而克制",
+        "正文密度低于产品站"
+      ],
+      "layout": [
+        "项目索引是主角",
+        "首页像目录不是长解释",
+        "卡片留白比内容多"
+      ],
+      "imagery": [
+        "图片统一成作品切片",
+        "默认加轻微暗色蒙版",
+        "不要用浏览器截图解释功能"
+      ],
+      "motion": [
+        "滚动显露可以有",
+        "hover 只做轻微放大或边框变化",
+        "避免科技感发光"
+      ],
+      "avoid": [
+        "暖黄纸感底色",
+        "SaaS hero 套壳",
+        "五颜六色标签"
+      ]
+    }
+  },
+  {
+    "id": "dark-studio-gallery",
+    "slug": "dark-studio-gallery",
+    "nameZh": "暗色画廊",
+    "titleEn": "Dark Studio Gallery",
+    "summaryZh": "更偏黑底图像画廊的工作室页面，靠作品切片、克制标题和 Selected Work 节奏建立说服力，而不是靠长段落先解释自己。",
+    "cardUses": [
+      "工作室作品集",
+      "案例展示",
+      "Selected Works"
+    ],
+    "lookLike": [
+      "黑底图像墙",
+      "作品切片先行",
+      "标题克制",
+      "工作室语气明确"
+    ],
+    "notFor": [
+      "知识库",
+      "高密度工具页",
+      "生活方式杂志站"
+    ],
+    "filterTags": [
+      "minimal-black-white",
+      "bold-personality"
+    ],
+    "cover": "fictivekin-work.png",
+    "coverAlt": "Fictive Kin / Work screenshot",
+    "coverLabel": "Fictive Kin / Work",
+    "demoHref": "https://fictivekin.com/work",
+    "downloadPath": "/downloads/dark-studio-gallery.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/dark-studio-gallery",
+    "references": [
+      {
+        "label": "Fictive Kin / Work",
+        "href": "https://fictivekin.com/work",
+        "screenshot": "fictivekin-work.png",
+        "alt": "Fictive Kin / Work screenshot",
+        "note": "最像 Selected Works 黑底画廊的代表。"
+      },
+      {
+        "label": "Studio Feixen",
+        "href": "https://www.studiofeixen.ch/",
+        "screenshot": "studio-feixen.png",
+        "alt": "Studio Feixen screenshot",
+        "note": "更带设计图像墙和实验排版的一侧。"
+      },
+      {
+        "label": "OK-RM",
+        "href": "https://www.ok-rm.co.uk/",
+        "screenshot": "ok-rm.png",
+        "alt": "OK-RM screenshot",
+        "note": "更克制、更像黑白工作室声明页。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "工作室作品集",
+        "创意机构首页",
+        "Selected Works 页面"
+      ],
+      "palette": [
+        "纯黑或近黑底色",
+        "图像是主角",
+        "文字保持白灰克制"
+      ],
+      "typography": [
+        "标题退后一步",
+        "项目标题和 hover 文案短而准",
+        "元数据很少但要准确"
+      ],
+      "layout": [
+        "先作品网格再解释",
+        "selected 与 archive 分层明确",
+        "不要一上来用长段落证明自己"
+      ],
+      "imagery": [
+        "项目媒体统一 16:9 或 16:10",
+        "图片裁切稳定",
+        "黑色蒙版比普通作品集更轻"
+      ],
+      "motion": [
+        "hover reveal captions",
+        "轻微放大或亮度变化即可",
+        "滚动节奏安静连续"
+      ],
+      "avoid": [
+        "首屏长解释",
+        "彩色标签",
+        "像 SaaS case study 列表"
+      ]
+    }
+  },
+  {
+    "id": "humanist-modern-brand",
+    "slug": "humanist-modern",
+    "nameZh": "人文现代",
+    "titleEn": "Humanist Modern Brand",
+    "summaryZh": "更温和的人文现代页面，依然干净有结构，但比严格瑞士或工具产品页更有人味、更像现代生活方式品牌。",
+    "cardUses": [
+      "生活方式品牌",
+      "现代产品品牌",
+      "内容品牌首页"
+    ],
+    "lookLike": [
+      "温和现代",
+      "留白克制",
+      "人味而不复古",
+      "产品与内容并存"
+    ],
+    "notFor": [
+      "极端科技场景",
+      "反模板实验页",
+      "重型后台工具"
+    ],
+    "filterTags": [
+      "craft-natural",
+      "minimal-black-white"
+    ],
+    "cover": "monocle.png",
+    "coverAlt": "Monocle screenshot",
+    "coverLabel": "Monocle",
+    "demoHref": "https://monocle.com/",
+    "downloadPath": "/downloads/humanist-modern.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/humanist-modern",
+    "references": [
+      {
+        "label": "Monocle",
+        "href": "https://monocle.com/",
+        "screenshot": "monocle.png",
+        "alt": "Monocle screenshot",
+        "note": "更有人味的现代品牌目录。"
+      },
+      {
+        "label": "Apple MacBook Pro",
+        "href": "https://www.apple.com/macbook-pro/",
+        "screenshot": "apple-macbook.png",
+        "alt": "Apple MacBook Pro screenshot",
+        "note": "温和现代、产品与品牌平衡。"
+      },
+      {
+        "label": "Kinfolk",
+        "href": "https://kinfolk.com/",
+        "screenshot": "kinfolk-live.png",
+        "alt": "Kinfolk screenshot",
+        "note": "现代生活方式气质。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "现代生活方式品牌",
+        "温和产品品牌站",
+        "内容与品牌混合首页"
+      ],
+      "palette": [
+        "中性底色里带一点温度",
+        "不要发黄过头",
+        "整体仍要干净现代"
+      ],
+      "typography": [
+        "字要清楚但不生硬",
+        "标题比 Swiss 更温和",
+        "正文更可读、更生活化"
+      ],
+      "layout": [
+        "现代目录和品牌叙事并存",
+        "内容块之间呼吸感强",
+        "不要极端硬网格"
+      ],
+      "imagery": [
+        "产品图和生活方式图可以并存",
+        "图片要显得真实而不是超未来",
+        "裁切稳定"
+      ],
+      "motion": [
+        "很少的动效",
+        "更多靠内容切换节奏",
+        "不要大张旗鼓的舞台 reveal"
+      ],
+      "avoid": [
+        "冷冰冰工具站语气",
+        "极端后现代冲突",
+        "大面积霓虹科技感"
+      ]
+    }
+  },
+  {
+    "id": "neon-techno-futurist-interface",
+    "slug": "neon-tech",
+    "nameZh": "霓虹科技",
+    "titleEn": "Neon Techno-Futurist Interface",
+    "summaryZh": "黑底霓虹、世界观先行的未来科技页面，更接近游戏、硬件或沉浸式 tech launch。",
+    "cardUses": [
+      "游戏页",
+      "发布页",
+      "未来科技"
+    ],
+    "lookLike": [
+      "高反差",
+      "黑底霓虹",
+      "世界观先行",
+      "动势强"
+    ],
+    "notFor": [
+      "档案站",
+      "长文博客",
+      "安静品牌页"
+    ],
+    "filterTags": [
+      "technology-future",
+      "bold-personality"
+    ],
+    "cover": "playstation-ps5-live.png",
+    "coverAlt": "PlayStation 5 screenshot",
+    "coverLabel": "PlayStation 5",
+    "demoHref": "https://www.playstation.com/en-us/ps5/",
+    "downloadPath": "/downloads/neon-tech.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/neon-tech",
+    "references": [
+      {
+        "label": "PlayStation 5",
+        "href": "https://www.playstation.com/en-us/ps5/",
+        "screenshot": "playstation-ps5-live.png",
+        "alt": "PlayStation 5 screenshot",
+        "note": "更完整的科技发布与场景世界观。"
+      },
+      {
+        "label": "Cyberpunk",
+        "href": "https://www.cyberpunk.net/",
+        "screenshot": "cyberpunk-net.png",
+        "alt": "Cyberpunk screenshot",
+        "note": "黑底霓虹和世界观最直接。"
+      },
+      {
+        "label": "Razer",
+        "href": "https://www.razer.com/",
+        "screenshot": "razer.png",
+        "alt": "Razer screenshot",
+        "note": "硬件品牌常见的未来科技语法。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "游戏页",
+        "硬件发布",
+        "未来科技品牌页"
+      ],
+      "palette": [
+        "黑底为主",
+        "霓虹色只做重点光源",
+        "高反差但不能刺眼"
+      ],
+      "typography": [
+        "标题可以更大更硬朗",
+        "辅助信息要防止被光效吃掉",
+        "字距和大小要稳定"
+      ],
+      "layout": [
+        "首屏先定世界观",
+        "后续再落信息层级",
+        "用舞台式分段而不是普通卡片堆叠"
+      ],
+      "imagery": [
+        "允许大图和发光",
+        "截图和渲染图要统一色温",
+        "不要混入生活方式图片"
+      ],
+      "motion": [
+        "允许更强的 reveal",
+        "动效要像场景切换",
+        "但导航始终可见可读"
+      ],
+      "avoid": [
+        "暖纸感和米色底",
+        "学术知识站式排列",
+        "平庸 SaaS 渐变"
+      ]
+    }
+  },
+  {
+    "id": "magazine-editorial",
+    "slug": "magazine-editorial",
+    "nameZh": "杂志编辑",
+    "titleEn": "Magazine Editorial",
+    "summaryZh": "以封面感和主稿节奏为核心的杂志型页面，首屏像一期杂志的 lead spread，而不是通用 SaaS hero。",
+    "cardUses": [
+      "出版站",
+      "内容站",
+      "专题页"
+    ],
+    "lookLike": [
+      "封面式首屏",
+      "标题与图片张力",
+      "栏目层级",
+      "阅读节奏"
+    ],
+    "notFor": [
+      "复杂筛选工具",
+      "后台工作台",
+      "强操作产品"
+    ],
+    "filterTags": [
+      "magazine-publishing"
+    ],
+    "cover": "frieze.png",
+    "coverAlt": "Frieze screenshot",
+    "coverLabel": "Frieze",
+    "demoHref": "https://www.frieze.com/",
+    "downloadPath": "/downloads/magazine-editorial.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/magazine-editorial",
+    "references": [
+      {
+        "label": "Frieze",
+        "href": "https://www.frieze.com/",
+        "screenshot": "frieze.png",
+        "alt": "Frieze screenshot",
+        "note": "封面感和栏目节奏很典型。"
+      },
+      {
+        "label": "T Magazine",
+        "href": "https://www.nytimes.com/section/t-magazine",
+        "screenshot": "tmagazine.png",
+        "alt": "T Magazine screenshot",
+        "note": "图片和标题张力更强。"
+      },
+      {
+        "label": "The New Yorker",
+        "href": "https://www.newyorker.com/",
+        "screenshot": "newyorker.png",
+        "alt": "The New Yorker screenshot",
+        "note": "长期内容出版和阅读入口。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "出版站",
+        "内容站",
+        "专题站",
+        "品牌杂志"
+      ],
+      "palette": [
+        "配色服务封面和图片",
+        "可以白底也可以深底",
+        "比产品站更允许图片定调"
+      ],
+      "typography": [
+        "标题与副标题节奏要像杂志",
+        "允许 serif + sans 组合",
+        "栏目标签要清楚"
+      ],
+      "layout": [
+        "首屏像 cover 或 lead spread",
+        "正文不是一个大 feed",
+        "二级内容按编辑节奏排"
+      ],
+      "imagery": [
+        "图片是节奏器",
+        "尽量使用真实大图",
+        "不要用 UI 解释图代替封面图"
+      ],
+      "motion": [
+        "轻微 reveal 足够",
+        "不要让 hover 破坏阅读节奏",
+        "优先滚动节奏而非微交互"
+      ],
+      "avoid": [
+        "产品功能罗列",
+        "复杂筛选工具壳",
+        "所有模块都长得一样"
+      ]
+    }
+  },
+  {
+    "id": "luxury-fashion-editorial",
+    "slug": "luxury-fashion-editorial",
+    "nameZh": "时尚奢刊",
+    "titleEn": "Luxury Fashion Editorial",
+    "summaryZh": "更偏时尚与奢刊的编辑型页面，靠图像裁切、节奏和气质建立高级感，而不是靠复杂组件堆叠。",
+    "cardUses": [
+      "时尚品牌",
+      "奢刊专题",
+      "文化品牌"
+    ],
+    "lookLike": [
+      "大片裁切",
+      "奢华留白",
+      "时尚感 serif",
+      "封面节奏"
+    ],
+    "notFor": [
+      "工具产品",
+      "重筛选目录",
+      "高频任务流"
+    ],
+    "filterTags": [
+      "magazine-publishing",
+      "craft-natural"
+    ],
+    "cover": "tmagazine.png",
+    "coverAlt": "T Magazine screenshot",
+    "coverLabel": "T Magazine",
+    "demoHref": "https://www.nytimes.com/section/t-magazine",
+    "downloadPath": "/downloads/luxury-fashion-editorial.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/luxury-fashion-editorial",
+    "references": [
+      {
+        "label": "T Magazine",
+        "href": "https://www.nytimes.com/section/t-magazine",
+        "screenshot": "tmagazine.png",
+        "alt": "T Magazine screenshot",
+        "note": "更奢华、更大片、更时尚。"
+      },
+      {
+        "label": "The Gentlewoman",
+        "href": "https://thegentlewoman.co.uk/",
+        "screenshot": "gentlewoman.png",
+        "alt": "The Gentlewoman screenshot",
+        "note": "高级但克制的时尚内容站。"
+      },
+      {
+        "label": "Frieze",
+        "href": "https://www.frieze.com/",
+        "screenshot": "frieze.png",
+        "alt": "Frieze screenshot",
+        "note": "文化与时尚交界处的编辑页面。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "时尚品牌",
+        "奢刊专题",
+        "文化与高级消费品牌"
+      ],
+      "palette": [
+        "高对比黑白或低饱和奢华色",
+        "背景更干净",
+        "图片质感优先于功能色"
+      ],
+      "typography": [
+        "serif 与 sans 组合更明显",
+        "标题允许更大片感",
+        "正文要克制"
+      ],
+      "layout": [
+        "首屏像大片封面",
+        "分区像 editorial spread",
+        "内容密度低于普通内容站"
+      ],
+      "imagery": [
+        "大裁切、大留白、大片感照片",
+        "不要用产品 UI 截图",
+        "一页内图片风格保持一致"
+      ],
+      "motion": [
+        "更偏优雅 reveal",
+        "少而慢",
+        "不要科技感 hover"
+      ],
+      "avoid": [
+        "工具组件壳",
+        "过密卡片阵列",
+        "便宜促销感"
+      ]
+    }
+  },
+  {
+    "id": "quiet-lifestyle-editorial",
+    "slug": "craft-natural",
+    "nameZh": "工艺自然",
+    "titleEn": "Quiet Lifestyle Editorial",
+    "summaryZh": "更安静、更慢、更像收藏刊物或气质目录的生活方式页面，强调质感与留白而不是强操作感。",
+    "cardUses": [
+      "生活方式",
+      "品牌页",
+      "慢内容"
+    ],
+    "lookLike": [
+      "慢节奏",
+      "质感图片",
+      "留白很多",
+      "收藏感强"
+    ],
+    "notFor": [
+      "工具界面",
+      "高密度知识站",
+      "高频 CTA 落地页"
+    ],
+    "filterTags": [
+      "craft-natural",
+      "magazine-publishing"
+    ],
+    "cover": "kinfolk-live.png",
+    "coverAlt": "Kinfolk screenshot",
+    "coverLabel": "Kinfolk",
+    "demoHref": "https://kinfolk.com/",
+    "downloadPath": "/downloads/craft-natural.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/craft-natural",
+    "references": [
+      {
+        "label": "Kinfolk",
+        "href": "https://kinfolk.com/",
+        "screenshot": "kinfolk-live.png",
+        "alt": "Kinfolk screenshot",
+        "note": "纸本感和慢节奏生活方式最直接。"
+      },
+      {
+        "label": "The Gentlewoman",
+        "href": "https://thegentlewoman.co.uk/",
+        "screenshot": "gentlewoman.png",
+        "alt": "The Gentlewoman screenshot",
+        "note": "更偏静奢、时尚、杂志感。"
+      },
+      {
+        "label": "Monocle",
+        "href": "https://monocle.com/",
+        "screenshot": "monocle.png",
+        "alt": "Monocle screenshot",
+        "note": "更偏品牌和生活方式目录。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "生活方式品牌",
+        "慢内容站",
+        "时尚或文化品牌"
+      ],
+      "palette": [
+        "低对比黑白灰",
+        "允许一点温和米色但不是默认",
+        "整体要安静"
+      ],
+      "typography": [
+        "字比 Swiss 更松弛",
+        "可用更有气质的 serif",
+        "不要满屏元数据"
+      ],
+      "layout": [
+        "大图和留白优先",
+        "信息密度比杂志编辑更低",
+        "让浏览像翻刊物"
+      ],
+      "imagery": [
+        "图片要大且干净",
+        "默认加轻微暗色蒙版",
+        "避免功能型 UI 截图"
+      ],
+      "motion": [
+        "动作慢而少",
+        "更多依靠切换节奏",
+        "不要发光和强弹跳"
+      ],
+      "avoid": [
+        "工具导航条过重",
+        "高频 CTA",
+        "过度解释型模块"
+      ]
+    }
+  },
+  {
+    "id": "playful-postmodern-anti-grid",
+    "slug": "bold-personality",
+    "nameZh": "大胆个性",
+    "titleEn": "Playful Postmodern / Anti-Grid",
+    "summaryZh": "带着反模板态度的后现代页面，通过反网格、强形状和少量冲突打破同质化。",
+    "cardUses": [
+      "创作者",
+      "个人站",
+      "反模板发布"
+    ],
+    "lookLike": [
+      "反网格",
+      "形状强烈",
+      "识别度高",
+      "态度明显"
+    ],
+    "notFor": [
+      "严肃知识库",
+      "政府机构页",
+      "安静阅读站"
+    ],
+    "filterTags": [
+      "bold-personality"
+    ],
+    "cover": "bureau-borsche.png",
+    "coverAlt": "Bureau Borsche screenshot",
+    "coverLabel": "Bureau Borsche",
+    "demoHref": "https://bureauborsche.com/",
+    "downloadPath": "/downloads/bold-personality.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/bold-personality",
+    "references": [
+      {
+        "label": "Bureau Borsche",
+        "href": "https://bureauborsche.com/",
+        "screenshot": "bureau-borsche.png",
+        "alt": "Bureau Borsche screenshot",
+        "note": "形状、冲突和反模板最明确。"
+      },
+      {
+        "label": "Gumroad",
+        "href": "https://gumroad.com/",
+        "screenshot": "gumroad-live.png",
+        "alt": "Gumroad screenshot",
+        "note": "更接近新粗野和反精致产品页。"
+      },
+      {
+        "label": "Memphis Milano",
+        "href": "https://memphis.it/en/",
+        "screenshot": "memphis-milano.png",
+        "alt": "Memphis Milano screenshot",
+        "note": "后现代与孟菲斯的视觉源头更清楚。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "创作者主页",
+        "反模板发布",
+        "个性品牌页"
+      ],
+      "palette": [
+        "允许更强强调色",
+        "黑白仍是骨架",
+        "颜色只在 punch 点出现"
+      ],
+      "typography": [
+        "字可以更大更冲突",
+        "允许故意破格的边界",
+        "但要保留主阅读路径"
+      ],
+      "layout": [
+        "反网格但不反可读",
+        "局部冲突取代全局混乱",
+        "层级要清楚"
+      ],
+      "imagery": [
+        "允许不规则切片",
+        "图片和形状一起工作",
+        "不要全页都是拼贴噪音"
+      ],
+      "motion": [
+        "hover 可以更大胆",
+        "滚动 reveal 可以更有态度",
+        "不要把用户搞丢"
+      ],
+      "avoid": [
+        "纯情绪无层级",
+        "每个模块都想抢主角",
+        "对严肃内容用过猛"
+      ]
+    }
+  },
+  {
+    "id": "brutalist-raw-interface",
+    "slug": "brutalist-raw",
+    "nameZh": "粗野直给",
+    "titleEn": "Brutalist Raw Interface",
+    "summaryZh": "更硬、更直给、更像宣言或海报化网页的反精致方向，靠边框、对比和不讨好建立态度，而不是靠细腻润色。",
+    "cardUses": [
+      "创作者发布",
+      "实验品牌",
+      "宣言页"
+    ],
+    "lookLike": [
+      "硬边界",
+      "高对比",
+      "直给排版",
+      "不讨好但可读"
+    ],
+    "notFor": [
+      "静奢品牌",
+      "严肃知识库",
+      "复杂后台工具"
+    ],
+    "filterTags": [
+      "bold-personality"
+    ],
+    "cover": "gumroad-live.png",
+    "coverAlt": "Gumroad screenshot",
+    "coverLabel": "Gumroad",
+    "demoHref": "https://gumroad.com/",
+    "downloadPath": "/downloads/brutalist-raw.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/brutalist-raw",
+    "references": [
+      {
+        "label": "Gumroad",
+        "href": "https://gumroad.com/",
+        "screenshot": "gumroad-live.png",
+        "alt": "Gumroad screenshot",
+        "note": "边界硬、对比强、最接近 web brutalism 的大众例子。"
+      },
+      {
+        "label": "Bureau Borsche",
+        "href": "https://bureauborsche.com/",
+        "screenshot": "bureau-borsche.png",
+        "alt": "Bureau Borsche screenshot",
+        "note": "更偏文化和实验设计的粗野版本。"
+      },
+      {
+        "label": "Memphis Milano",
+        "href": "https://memphis.it/en/",
+        "screenshot": "memphis-milano.png",
+        "alt": "Memphis Milano screenshot",
+        "note": "更靠近后现代源头和反模板气质。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "创作者发布",
+        "实验品牌页",
+        "宣言式 landing page"
+      ],
+      "palette": [
+        "高对比黑白优先",
+        "允许一两个 punch 色",
+        "颜色是态度不是装饰"
+      ],
+      "typography": [
+        "标题更硬更直给",
+        "字距和边界有存在感",
+        "宁可少字也不要软糯说明"
+      ],
+      "layout": [
+        "边框和块面要明确",
+        "局部冲撞但整体仍可读",
+        "首屏能直接定下态度"
+      ],
+      "imagery": [
+        "图片和图形可以更硬切",
+        "允许更粗糙的展示感",
+        "不要混进温和生活方式图"
+      ],
+      "motion": [
+        "hover 可更强",
+        "切换要干脆",
+        "不要优雅慢动作"
+      ],
+      "avoid": [
+        "装得很精致",
+        "过多暖色纸感",
+        "为了态度牺牲基本可读性"
+      ]
+    }
+  },
+  {
+    "id": "product-precision-interface",
+    "slug": "product-tool",
+    "nameZh": "产品工具",
+    "titleEn": "Product Precision Interface",
+    "summaryZh": "强调状态、层级和界面清晰度的产品型页面，气质服从任务，精度高于氛围。",
+    "cardUses": [
+      "AI 工具",
+      "产品官网",
+      "平台页"
+    ],
+    "lookLike": [
+      "界面清晰",
+      "状态明确",
+      "截图解释功能",
+      "层级严谨"
+    ],
+    "notFor": [
+      "生活方式品牌",
+      "慢节奏内容站",
+      "纯情绪展示页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "technology-future"
+    ],
+    "cover": "linear.png",
+    "coverAlt": "Linear screenshot",
+    "coverLabel": "Linear",
+    "demoHref": "https://linear.app/",
+    "downloadPath": "/downloads/product-tool.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/product-tool",
+    "references": [
+      {
+        "label": "Linear",
+        "href": "https://linear.app/",
+        "screenshot": "linear.png",
+        "alt": "Linear screenshot",
+        "note": "产品叙事和 UI 截图高度一致。"
+      },
+      {
+        "label": "Stripe",
+        "href": "https://stripe.com/",
+        "screenshot": "stripe.png",
+        "alt": "Stripe screenshot",
+        "note": "典型的精密产品官网与信息层级。"
+      },
+      {
+        "label": "Atlassian Foundations",
+        "href": "https://atlassian.design/foundations/",
+        "screenshot": "atlassian-foundations.png",
+        "alt": "Atlassian Foundations screenshot",
+        "note": "系统化设计文档和产品规范表达。"
+      },
+      {
+        "label": "Carbon for AI",
+        "href": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+        "screenshot": "carbon-for-ai.png",
+        "alt": "Carbon for AI screenshot",
+        "note": "AI 产品型知识与规范页面。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "AI 工具",
+        "产品官网",
+        "平台入口",
+        "设计规范站"
+      ],
+      "palette": [
+        "浅底或深底都可以",
+        "颜色必须服务状态和层级",
+        "品牌色只在关键 CTA 出现"
+      ],
+      "typography": [
+        "无衬线为主",
+        "标题比编辑类更克制",
+        "数据和状态文案必须单独成层"
+      ],
+      "layout": [
+        "首屏先解释任务和收益",
+        "UI 截图要和文字一一对应",
+        "模块节奏像产品说明书"
+      ],
+      "imagery": [
+        "截图必须清楚解释功能",
+        "少用纯氛围图",
+        "卡片边界和容器系统一致"
+      ],
+      "motion": [
+        "交互反馈要清楚",
+        "避免华而不实的场景动画",
+        "演示动效只服务功能理解"
+      ],
+      "avoid": [
+        "大片时尚图主导页面",
+        "过多情绪化留白",
+        "不解释功能的抽象 hero"
+      ]
+    }
+  },
+  {
+    "id": "curated-reference-directory",
+    "slug": "reference-directory",
+    "nameZh": "参考目录",
+    "titleEn": "Curated Reference Directory",
+    "summaryZh": "以索引、缩略图和分类入口为核心的参考目录型页面，先让用户浏览，再让用户钻取。",
+    "cardUses": [
+      "灵感库",
+      "模板库",
+      "参考站"
+    ],
+    "lookLike": [
+      "缩略图密集",
+      "分类先行",
+      "浏览优先",
+      "索引清楚"
+    ],
+    "notFor": [
+      "单一品牌首页",
+      "强剧情叙事页",
+      "情绪化发布页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "magazine-publishing"
+    ],
+    "cover": "siteinspire-live.png",
+    "coverAlt": "SiteInspire screenshot",
+    "coverLabel": "SiteInspire",
+    "demoHref": "https://www.siteinspire.com/",
+    "downloadPath": "/downloads/reference-directory.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/reference-directory",
+    "references": [
+      {
+        "label": "SiteInspire",
+        "href": "https://www.siteinspire.com/",
+        "screenshot": "siteinspire-live.png",
+        "alt": "SiteInspire screenshot",
+        "note": "更像真正的 inspiration 浏览入口。"
+      },
+      {
+        "label": "Awwwards / Websites",
+        "href": "https://www.awwwards.com/websites/",
+        "screenshot": "awwwards-websites-live.png",
+        "alt": "Awwwards / Websites screenshot",
+        "note": "更偏 showcase 和筛选目录。"
+      },
+      {
+        "label": "Behance",
+        "href": "https://www.behance.net/",
+        "screenshot": "behance.png",
+        "alt": "Behance screenshot",
+        "note": "更大众和规模化的参考目录。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "灵感库",
+        "模板库",
+        "风格参考站",
+        "收藏目录"
+      ],
+      "palette": [
+        "主色保持中性",
+        "重点靠缩略图而非底色",
+        "筛选控件要稳定清楚"
+      ],
+      "typography": [
+        "卡片标题和分类标签清楚",
+        "正文字很少",
+        "浏览优先而非阅读优先"
+      ],
+      "layout": [
+        "首页就是入口和分类",
+        "先索引再详情",
+        "搜索、筛选、视图切换都要稳定"
+      ],
+      "imagery": [
+        "缩略图密度高但比例统一",
+        "避免同页重复图",
+        "每张图都要能代表一个方向"
+      ],
+      "motion": [
+        "切换视图和筛选优先",
+        "不要靠花哨动画来吸引",
+        "扫描效率高于情绪化过渡"
+      ],
+      "avoid": [
+        "英雄论式单一叙事",
+        "只有图片没有分类逻辑",
+        "首屏塞满理论解释"
+      ]
+    }
+  },
+  {
+    "id": "evidence-dense-knowledge-surface",
+    "slug": "knowledge-system",
+    "nameZh": "知识系统",
+    "titleEn": "Evidence-Dense Knowledge Surface",
+    "summaryZh": "论点、证据、导航和标签并存的知识型页面，密度高但必须保持可信和可扫描。",
+    "cardUses": [
+      "知识库",
+      "研究站",
+      "设计系统"
+    ],
+    "lookLike": [
+      "信息密度高",
+      "论点明确",
+      "证据模块",
+      "导航清楚"
+    ],
+    "notFor": [
+      "纯视觉品牌页",
+      "娱乐首屏",
+      "情绪化叙事"
+    ],
+    "filterTags": [
+      "minimal-black-white",
+      "product-tool"
+    ],
+    "cover": "ourworldindata-live.png",
+    "coverAlt": "Our World in Data screenshot",
+    "coverLabel": "Our World in Data",
+    "demoHref": "https://ourworldindata.org/",
+    "downloadPath": "/downloads/knowledge-system.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/knowledge-system",
+    "references": [
+      {
+        "label": "Our World in Data",
+        "href": "https://ourworldindata.org/",
+        "screenshot": "ourworldindata-live.png",
+        "alt": "Our World in Data screenshot",
+        "note": "数据、论点、导航并存。"
+      },
+      {
+        "label": "Carbon for AI",
+        "href": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+        "screenshot": "carbon-for-ai.png",
+        "alt": "Carbon for AI screenshot",
+        "note": "AI 产品知识页面的规范化表达。"
+      },
+      {
+        "label": "People + AI Guidebook",
+        "href": "https://pair.withgoogle.com/guidebook-v2/",
+        "screenshot": "pair-guidebook.png",
+        "alt": "People + AI Guidebook screenshot",
+        "note": "章节型知识组织很清楚。"
+      },
+      {
+        "label": "Atlassian Foundations",
+        "href": "https://atlassian.design/foundations/",
+        "screenshot": "atlassian-foundations.png",
+        "alt": "Atlassian Foundations screenshot",
+        "note": "结构化设计系统表达。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "研究站",
+        "知识库",
+        "设计系统",
+        "指南站"
+      ],
+      "palette": [
+        "中性配色",
+        "高对比文本优先",
+        "颜色用于主题或状态而不是情绪"
+      ],
+      "typography": [
+        "正文和标签系统要一起设计",
+        "大标题不必夸张",
+        "小标题和段落层级要稳定"
+      ],
+      "layout": [
+        "先结论再证据",
+        "边导航或标签导航清楚",
+        "密度高但有分区"
+      ],
+      "imagery": [
+        "图表和截图都是证据",
+        "不相关氛围图尽量少",
+        "同一页内图片尺寸规则明确"
+      ],
+      "motion": [
+        "几乎不靠动效",
+        "更靠滚动结构和锚点导航",
+        "保持稳定阅读"
+      ],
+      "avoid": [
+        "只剩 mood 没有论点",
+        "图片太抢戏",
+        "无序瀑布流"
+      ]
+    }
+  },
+  {
+    "id": "stage-driven-showcase",
+    "slug": "stage-showcase",
+    "nameZh": "舞台展示",
+    "titleEn": "Stage-Driven Showcase",
+    "summaryZh": "首屏像舞台或镜头，一张图或一个场景先建立世界，再把内容逐层展开。",
+    "cardUses": [
+      "品牌发布",
+      "作品首屏",
+      "Campaign"
+    ],
+    "lookLike": [
+      "主视觉独占",
+      "信息密度低",
+      "镜头感强",
+      "记忆点明确"
+    ],
+    "notFor": [
+      "复杂目录页",
+      "重筛选工具",
+      "长期增长档案"
+    ],
+    "filterTags": [
+      "bold-personality",
+      "technology-future"
+    ],
+    "cover": "a24.png",
+    "coverAlt": "A24 screenshot",
+    "coverLabel": "A24",
+    "demoHref": "https://a24films.com/",
+    "downloadPath": "/downloads/stage-showcase.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/stage-showcase",
+    "references": [
+      {
+        "label": "A24",
+        "href": "https://a24films.com/",
+        "screenshot": "a24.png",
+        "alt": "A24 screenshot",
+        "note": "首屏舞台感最明确。"
+      },
+      {
+        "label": "Apple MacBook Pro",
+        "href": "https://www.apple.com/macbook-pro/",
+        "screenshot": "apple-macbook.png",
+        "alt": "Apple MacBook Pro screenshot",
+        "note": "产品发布的镜头感版本。"
+      },
+      {
+        "label": "PlayStation 5",
+        "href": "https://www.playstation.com/en-us/ps5/",
+        "screenshot": "playstation-ps5-live.png",
+        "alt": "PlayStation 5 screenshot",
+        "note": "游戏/硬件的强视觉首屏。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "品牌发布",
+        "活动页",
+        "作品首屏",
+        "电影文化页"
+      ],
+      "palette": [
+        "让主视觉定调",
+        "界面色彩服从主视觉",
+        "用高对比建立记忆点"
+      ],
+      "typography": [
+        "标题像海报或镜头标题",
+        "正文少而准",
+        "说明信息延后出现"
+      ],
+      "layout": [
+        "首屏只有一个强主角",
+        "后面再解释",
+        "章节像场景切换"
+      ],
+      "imagery": [
+        "大图必须占主导",
+        "裁切要有电影感",
+        "避免缩略图库式首屏"
+      ],
+      "motion": [
+        "可以用更明显的 reveal",
+        "但不能遮蔽 CTA 和导航",
+        "过场不宜过长"
+      ],
+      "avoid": [
+        "复杂目录页",
+        "信息一次性全展开",
+        "工具后台式网格"
+      ]
+    }
+  }
+]
