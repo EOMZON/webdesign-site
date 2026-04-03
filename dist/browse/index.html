@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browse style families by screenshot, filter, and search." />
+    <meta name="theme-color" content="#111111" />
+    <title>浏览风格 / Browse · Design Zondev</title>
+    <link rel="canonical" href="https://design.zondev.top/browse" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/site.css" />
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/app.js"></script>
+  </head>
+  <body class="browse-page index-page">
+    <div class="site-shell">
+      <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="Design Zondev home">
+        <span class="brand-mark">Design</span>
+        <strong class="brand-name">Zondev</strong>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/browse">浏览 / Browse</a>
+        <a href="/selector">选型器 / Selector</a>
+        <a href="/about">关于 / About</a>
+        <a href="https://github.com/EOMZON">GitHub / GitHub</a>
+      </nav>
+      <span class="status-pill">atlas v1.0</span>
+    </div>
+  </header>
+      <main class="page"><section class="page-lead">
+    <div class="page-lead-copy">
+      <p class="eyebrow">浏览 / Browse</p>
+      <h1 class="hero-title">先看图，再选风格 / Start with images, then choose a style</h1>
+      <p class="hero-intro">从截图、场景和直觉标签进入，不需要先懂专业名词。</p>
+    </div>
+    <aside class="page-lead-aside card-surface">
+      <p>先按极简、科技、工艺、个性、出版、产品这些直觉标签筛一遍，再进入单个风格详情页拿 Prompt。</p>
+      <div class="hero-actions"><a  class="button" href="/selector">帮我选风格 / Help Me Choose</a><a  class="ghost-button" href="/about">查看项目说明 / About</a></div>
+    </aside>
+  </section><section class="section style-gallery-section" id="gallery" data-browse-root>
+    <div class="section-head">
+    <div class="section-head-main">
+      <p class="eyebrow">浏览风格 / Browse</p>
+      <h2 class="section-title">完整图库 / Complete Gallery</h2>
+    </div>
+    <div class="section-head-side">
+      <p class="section-summary">可筛选、可搜索、可切换视图。</p>
+      
+    </div>
+  </div>
+    <div class="browse-toolbar">
+    <div class="browse-filters" role="tablist" aria-label="风格筛选 / Style filters">
+      <button class="browse-filter is-active" type="button" data-browse-filter="all">全部</button><button class="browse-filter" type="button" data-browse-filter="minimal-black-white">极简 / 黑白</button><button class="browse-filter" type="button" data-browse-filter="technology-future">科技 / 未来</button><button class="browse-filter" type="button" data-browse-filter="craft-natural">工艺 / 自然</button><button class="browse-filter" type="button" data-browse-filter="bold-personality">大胆 / 个性</button><button class="browse-filter" type="button" data-browse-filter="magazine-publishing">杂志 / 出版</button><button class="browse-filter" type="button" data-browse-filter="product-tool">产品 / 工具</button>
+    </div>
+    <div class="browse-toolbar-side">
+      <label class="browse-search">
+              <span class="sr-only">搜索风格 / Search styles</span>
+              <input type="search" placeholder="搜索风格名、场景、关键词 / Search styles, scenes, keywords" data-browse-search />
+            </label>
+      <div class="browse-view-toggle">
+              <button class="browse-view-button is-active" type="button" data-browse-view="grid">卡片 / Grid</button>
+              <button class="browse-view-button" type="button" data-browse-view="list">列表 / List</button>
+            </div>
+      
+    </div>
+  </div>
+    <div class="style-card-grid" data-browse-grid>
+      <article class="style-card card-surface" data-style-card data-style-tags="minimal-black-white" data-style-search="瑞士网格 swiss typographic grid 档案站 工作室 参考库 严格网格 大量留白 排印主导 黑白为主 minimal-black-white">
+    <a  class="style-card-media" href="/browse/swiss-grid">
+      <div class="image-frame">
+    <img src="/screenshots/pentagram.png" alt="Pentagram homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">瑞士网格</span>
+    <span class="style-inline-title-en">(Swiss Typographic Grid)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：档案站 · 工作室 · 参考库</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="minimal-black-white" data-style-search="极简黑白 monochrome studio systems 作品集 品牌站 工作室 黑白对比 项目索引 留白控制 作者感强 minimal-black-white">
+    <a  class="style-card-media" href="/browse/minimal-black-white">
+      <div class="image-frame">
+    <img src="/screenshots/fictivekin-work.png" alt="Fictive Kin work page" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">极简黑白</span>
+    <span class="style-inline-title-en">(Monochrome Studio Systems)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：作品集 · 品牌站 · 工作室</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="technology-future bold-personality" data-style-search="霓虹科技 neon techno-futurist interface 游戏页 发布页 未来科技 高反差 黑底霓虹 世界观先行 动势强 technology-future bold-personality">
+    <a  class="style-card-media" href="/browse/neon-tech">
+      <div class="image-frame">
+    <img src="/screenshots/playstation-ps5-live.png" alt="PlayStation 5 homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">霓虹科技</span>
+    <span class="style-inline-title-en">(Neon Techno-Futurist Interface)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：游戏页 · 发布页 · 未来科技</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="magazine-publishing" data-style-search="杂志编辑 magazine editorial 出版站 内容站 专题页 封面式首屏 标题与图片张力 栏目层级 阅读节奏 magazine-publishing">
+    <a  class="style-card-media" href="/browse/magazine-editorial">
+      <div class="image-frame">
+    <img src="/screenshots/frieze.png" alt="Frieze homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">杂志编辑</span>
+    <span class="style-inline-title-en">(Magazine Editorial)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：出版站 · 内容站 · 专题页</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="craft-natural magazine-publishing" data-style-search="工艺自然 quiet lifestyle editorial 生活方式 品牌页 慢内容 慢节奏 质感图片 留白很多 收藏感强 craft-natural magazine-publishing">
+    <a  class="style-card-media" href="/browse/craft-natural">
+      <div class="image-frame">
+    <img src="/screenshots/gentlewoman.png" alt="The Gentlewoman homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">工艺自然</span>
+    <span class="style-inline-title-en">(Quiet Lifestyle Editorial)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：生活方式 · 品牌页 · 慢内容</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="bold-personality" data-style-search="大胆个性 playful postmodern / anti-grid 创作者 个人站 反模板发布 反网格 形状强烈 识别度高 态度明显 bold-personality">
+    <a  class="style-card-media" href="/browse/bold-personality">
+      <div class="image-frame">
+    <img src="/screenshots/bureau-borsche.png" alt="Bureau Borsche homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">大胆个性</span>
+    <span class="style-inline-title-en">(Playful Postmodern / Anti-Grid)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：创作者 · 个人站 · 反模板发布</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="product-tool technology-future" data-style-search="产品工具 product precision interface ai 工具 产品官网 平台页 界面清晰 状态明确 截图解释功能 层级严谨 product-tool technology-future">
+    <a  class="style-card-media" href="/browse/product-tool">
+      <div class="image-frame">
+    <img src="/screenshots/linear.png" alt="Linear homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">产品工具</span>
+    <span class="style-inline-title-en">(Product Precision Interface)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：AI 工具 · 产品官网 · 平台页</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="product-tool magazine-publishing" data-style-search="参考目录 curated reference directory 灵感库 模板库 参考站 缩略图密集 分类先行 浏览优先 索引清楚 product-tool magazine-publishing">
+    <a  class="style-card-media" href="/browse/reference-directory">
+      <div class="image-frame">
+    <img src="/screenshots/awwwards-websites-live.png" alt="Awwwards websites directory" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">参考目录</span>
+    <span class="style-inline-title-en">(Curated Reference Directory)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：灵感库 · 模板库 · 参考站</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="minimal-black-white product-tool" data-style-search="知识系统 evidence-dense knowledge surface 知识库 研究站 设计系统 信息密度高 论点明确 证据模块 导航清楚 minimal-black-white product-tool">
+    <a  class="style-card-media" href="/browse/knowledge-system">
+      <div class="image-frame">
+    <img src="/screenshots/ourworldindata-live.png" alt="Our World In Data homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">知识系统</span>
+    <span class="style-inline-title-en">(Evidence-Dense Knowledge Surface)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：知识库 · 研究站 · 设计系统</p>
+    </div>
+  </article><article class="style-card card-surface" data-style-card data-style-tags="bold-personality technology-future" data-style-search="舞台展示 stage-driven showcase 品牌发布 作品首屏 campaign 主视觉独占 信息密度低 镜头感强 记忆点明确 bold-personality technology-future">
+    <a  class="style-card-media" href="/browse/stage-showcase">
+      <div class="image-frame">
+    <img src="/screenshots/a24.png" alt="A24 homepage" loading="lazy" />
+  </div>
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title"><span class="style-inline-title">
+    <span class="style-inline-title-zh">舞台展示</span>
+    <span class="style-inline-title-en">(Stage-Driven Showcase)</span>
+  </span></h3>
+      <p class="style-card-fit">适合做：品牌发布 · 作品首屏 · Campaign</p>
+    </div>
+  </article>
+    </div>
+    <p class="browse-empty" data-browse-empty hidden>没有找到匹配的风格，换个筛选或关键词试试。 / No styles matched. Try another filter or search.</p>
+  </section></main>
+      <footer class="footer">
+        <div class="footer-inner">
+          <p>Design Atlas：看图选风格，拿 Prompt 建站。 / Design Atlas: choose by image, leave with a prompt.</p>
+          <p>Updated 2026-04-03 · design.zondev.top</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

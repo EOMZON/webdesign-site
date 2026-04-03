@@ -15,11 +15,19 @@ function bilingualText(zh, en) {
   return `${zh} / ${en}`;
 }
 
-function renderBilingualStack(zh, en, className = "") {
-  return `<span class="bilingual-stack${className ? ` ${className}` : ""}">
-    <span class="bilingual-stack-zh">${escapeHtml(zh || en || "")}</span>
-    ${en ? `<span class="bilingual-stack-en">${escapeHtml(en)}</span>` : ""}
+function renderInlineEnglishTitle(zh, en, className = "") {
+  return `<span class="style-inline-title${className ? ` ${className}` : ""}">
+    <span class="style-inline-title-zh">${escapeHtml(zh || en || "")}</span>
+    ${en ? `<span class="style-inline-title-en">(${escapeHtml(en)})</span>` : ""}
   </span>`;
+}
+
+function renderImageFrame(fileName, altText, className = "") {
+  const cls = className ? ` ${className}` : "";
+  if (!fileName) return `<div class="image-placeholder${cls}">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`;
+  return `<div class="image-frame${cls}">
+    <img src="/screenshots/${escapeHtml(fileName)}" alt="${escapeHtml(altText || fileName)}" loading="lazy" />
+  </div>`;
 }
 
 function renderList(items = []) {
@@ -27,51 +35,23 @@ function renderList(items = []) {
   return `<ul class="bullet-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
 
-function renderStaticPills(items = []) {
-  if (!items.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补充", "Pending"))}</p>`;
-  return `<div class="pill-row">
-    ${items
-      .map((item) => `<span class="pill is-static"><span class="pill-text">${escapeHtml(item)}</span></span>`)
-      .join("")}
-  </div>`;
-}
-
-function renderLinkedPills(items = []) {
-  if (!items.length) return `<p class="empty-note">${escapeHtml(bilingualText("待补充", "Pending"))}</p>`;
-  return `<div class="pill-row">
-    ${items
-      .map(
-        (item) =>
-          `<a class="pill" href="${escapeHtml(item.href)}">${escapeHtml(
-            bilingualText(item.titleZh, item.titleEn || item.title || "")
-          )}</a>`
-      )
-      .join("")}
-  </div>`;
-}
-
-function renderImageFrame(fileName, altText, className = "") {
-  const cls = className ? ` ${className}` : "";
-  if (!fileName) {
-    return `<div class="image-placeholder${cls}">${escapeHtml(bilingualText("图片待补充", "Image Pending"))}</div>`;
-  }
-
-  return `<div class="image-frame${cls}">
-    <img src="/screenshots/${escapeHtml(fileName)}" alt="${escapeHtml(altText || fileName)}" loading="lazy" />
-  </div>`;
-}
-
 async function copyPrompt(button) {
-  const code = button.closest("[data-copy-container], .prompt-card, .prompt-panel, .detail-card")?.querySelector("code");
-  if (!code) return;
+  const targetId = button.dataset.copyTarget || "";
+  const target = targetId
+    ? document.getElementById(targetId)
+    : button.closest("[data-copy-container], .detail-card, .prompt-card, .prompt-panel")?.querySelector("code, pre");
+  if (!target) return;
+
   try {
-    await navigator.clipboard.writeText(code.textContent || "");
+    await navigator.clipboard.writeText(target.textContent || "");
     const original = button.textContent;
     button.textContent = "已复制 / Copied";
     window.setTimeout(() => {
       button.textContent = original;
     }, 1200);
-  } catch {}
+  } catch {
+    // Clipboard may be unavailable in some contexts.
+  }
 }
 
 function setupCopyButtons() {
@@ -79,7 +59,7 @@ function setupCopyButtons() {
   document.body.dataset.copyButtonsReady = "true";
 
   document.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-copy-prompt]");
+    const button = event.target.closest("[data-copy-target], [data-copy-prompt]");
     if (!button) return;
     event.preventDefault();
     copyPrompt(button);
@@ -109,427 +89,217 @@ function setupTimelineReveal() {
   items.forEach((item) => observer.observe(item));
 }
 
-function normalizeKey(value = "") {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "");
-}
-
-function dedupeStrings(items = []) {
-  const seen = new Set();
-
-  return items.filter((item) => {
-    const normalized = String(item || "").trim();
-    if (!normalized || seen.has(normalized)) return false;
-    seen.add(normalized);
-    return true;
-  });
-}
-
-function selectorToneLabel(data, id = "auto") {
-  const option = data.toneOptions.find((entry) => entry.id === id) || data.toneOptions[0];
-  return bilingualText(option?.titleZh, option?.titleEn);
-}
-
-function selectorModeLabel(data, id = "auto") {
-  const option = data.modeOptions.find((entry) => entry.id === id) || data.modeOptions[0];
-  return bilingualText(option?.titleZh, option?.titleEn);
-}
-
-function selectorFamilyCandidates(data, useCase) {
-  return dedupeStrings([useCase?.primaryFamilyId, ...(useCase?.secondaryFamilyIds || [])])
-    .map((id) => data.familyMap.get(id))
+function splitTags(raw = "") {
+  return String(raw || "")
+    .split(/\s+/)
+    .map((item) => item.trim())
     .filter(Boolean);
 }
 
-function selectorStructureCandidates(data, useCase, family = null) {
-  const useCaseIds = useCase?.structureIds || [];
-  const familyIds = family?.structureIds || [];
-  const intersected = family ? useCaseIds.filter((id) => familyIds.includes(id)) : useCaseIds;
-  const fallbackIds = intersected.length ? intersected : familyIds.length ? familyIds : useCaseIds;
+function setupStyleBrowsers() {
+  const roots = document.querySelectorAll("[data-browse-root]");
+  if (!roots.length) return;
 
-  return dedupeStrings(fallbackIds)
-    .map((id) => data.structureMap.get(id))
-    .filter(Boolean);
-}
+  roots.forEach((root) => {
+    const cards = Array.from(root.querySelectorAll("[data-style-card], [data-browse-card]"));
+    const filterButtons = Array.from(root.querySelectorAll("[data-browse-filter]"));
+    const searchInput = root.querySelector("[data-browse-search]");
+    const viewButtons = Array.from(root.querySelectorAll("[data-browse-view]"));
+    const grid = root.querySelector("[data-browse-grid]");
+    const empty = root.querySelector("[data-browse-empty]");
 
-function selectorResolveFamily(data, { useCase, familyId = "", tone = "auto" }) {
-  const candidates = selectorFamilyCandidates(data, useCase);
-  if (!candidates.length) return null;
+    if (!cards.length) return;
 
-  const explicit = familyId ? candidates.find((entry) => entry.id === familyId) : null;
-  if (explicit) return explicit;
+    let activeFilter = filterButtons.find((button) => button.classList.contains("is-active"))?.dataset.browseFilter || "all";
+    let activeView = viewButtons.find((button) => button.classList.contains("is-active"))?.dataset.browseView || "grid";
 
-  if (tone && tone !== "auto") {
-    const toned = candidates.find((entry) => data.familyToneMap?.[entry.id] === tone);
-    if (toned) return toned;
-  }
+    const apply = () => {
+      const query = (searchInput?.value || "").trim().toLowerCase();
+      let visibleCount = 0;
 
-  return candidates[0];
-}
+      cards.forEach((card) => {
+        const tagSource = card.dataset.styleTags || card.dataset.filterTags || "";
+        const searchSource = card.dataset.styleSearch || card.dataset.search || "";
+        const tags = splitTags(tagSource);
+        const matchesFilter = activeFilter === "all" || tags.includes(activeFilter);
+        const matchesQuery = !query || String(searchSource).toLowerCase().includes(query);
+        const visible = matchesFilter && matchesQuery;
+        card.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
 
-function selectorResolveStructure(data, { useCase, family, structureId = "", mode = "auto" }) {
-  const candidates = selectorStructureCandidates(data, useCase, family);
-  if (!candidates.length) return null;
+      filterButtons.forEach((button) => {
+        const selected = button.dataset.browseFilter === activeFilter;
+        button.classList.toggle("is-active", selected);
+        button.setAttribute("aria-selected", selected ? "true" : "false");
+      });
 
-  const explicit = structureId ? candidates.find((entry) => entry.id === structureId) : null;
-  if (explicit) return explicit;
+      viewButtons.forEach((button) => {
+        const selected = button.dataset.browseView === activeView;
+        button.classList.toggle("is-active", selected);
+        button.setAttribute("aria-selected", selected ? "true" : "false");
+      });
 
-  if (mode && mode !== "auto") {
-    const matched = candidates.find((entry) => data.structureModeMap?.[entry.id] === mode);
-    if (matched) return matched;
-  }
+      if (grid) {
+        grid.dataset.view = activeView;
+        grid.classList.toggle("is-list", activeView === "list");
+      }
 
-  return candidates[0];
-}
-
-function selectorResolveMovement(data, family) {
-  if (!family) return null;
-  return family.movementIds?.map((id) => data.movementMap.get(id)).filter(Boolean)[0] || null;
-}
-
-function selectorReferenceEntries(family) {
-  if (!family) return [];
-
-  const visuals = (family.samples || []).slice(0, 3);
-  const references = family.references || [];
-
-  return visuals.map((sample, index) => {
-    const sampleKey = normalizeKey(sample.label);
-    const matched =
-      references.find((reference) => {
-        const refKey = normalizeKey(reference.label);
-        return sampleKey && (refKey.includes(sampleKey) || sampleKey.includes(refKey));
-      }) ||
-      references[index] ||
-      null;
-
-    return {
-      label: matched?.label || sample.label || family.titleEn || family.titleZh || family.id,
-      href: matched?.href || family.href,
-      screenshot: sample.screenshot,
-      alt: sample.alt || matched?.label || sample.label || family.titleEn || family.titleZh || family.id
+      if (empty) empty.hidden = visibleCount > 0;
     };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.browseFilter || "all";
+        apply();
+      });
+    });
+
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeView = button.dataset.browseView || "grid";
+        apply();
+      });
+    });
+
+    if (searchInput) searchInput.addEventListener("input", apply);
+    apply();
   });
 }
 
-function buildSelectorPrompt(data, packet) {
-  const referencePacket = packet.references.length
-    ? packet.references.map((item) => `${item.label}: ${item.href}`).join(" / ")
-    : bilingualText("待补充", "Pending");
-
-  return `内容类型 Content Type: ${bilingualText(packet.useCase.titleZh, packet.useCase.titleEn)}
-历史线索 Historical Movement: ${packet.movement ? bilingualText(packet.movement.titleZh, packet.movement.titleEn) : bilingualText("按家族自动匹配", "Auto from family")}
-网页家族 Visual Family: ${bilingualText(packet.family.titleZh, packet.family.titleEn)}
-信息结构 IA Layer: ${bilingualText(packet.structure.titleZh, packet.structure.titleEn)}
-参考网站 Reference Packet: ${referencePacket}
-内容形状 Content Shape: ${packet.useCase.contentShape}
-用户目标 User Goal: ${packet.useCase.userGoal}
-场景气质 Tone: ${selectorToneLabel(data, packet.state.tone)}
-交互倾向 Mode: ${selectorModeLabel(data, packet.state.mode)}
-可借 Borrow: ${packet.borrow.join(" / ")}
-避免 Avoid: ${packet.avoid.join(" / ")}
-风格提示 Family Prompt: ${packet.family.prompt || ""}`;
+function getOptionLabel(options = [], id = "", fallback = "") {
+  return options.find((item) => item.id === id)?.titleZh || fallback || id;
 }
 
-function resolveSelectorPacket(data, state) {
-  const tone = data.toneOptions.some((entry) => entry.id === state.tone) ? state.tone : "auto";
-  const mode = data.modeOptions.some((entry) => entry.id === state.mode) ? state.mode : "auto";
-  const useCase = data.useCaseMap.get(state.useCaseId) || data.useCases[0] || null;
-  const family = selectorResolveFamily(data, { useCase, familyId: state.familyId || "", tone });
-  const structure = selectorResolveStructure(data, {
-    useCase,
-    family,
-    structureId: state.structureId || "",
-    mode
+function syncSelectorWizardChoiceState(root) {
+  root.querySelectorAll(".wizard-choice-pill, .selector-visual-choice").forEach((label) => {
+    const input = label.querySelector("input[type='radio']");
+    label.classList.toggle("is-selected", Boolean(input?.checked));
   });
-  const movement = selectorResolveMovement(data, family);
-  const references = selectorReferenceEntries(family);
-  const borrow = dedupeStrings([...(family?.borrow || []), ...(structure?.signals || [])]).slice(0, 4);
-  const avoid = dedupeStrings([...(useCase?.avoid || []), ...(family?.avoidWhen || []), ...(structure?.watchouts || [])]).slice(
-    0,
-    4
-  );
-  const alternatives = selectorFamilyCandidates(data, useCase).filter((entry) => entry.id !== family?.id);
-  const structureAlternatives = selectorStructureCandidates(data, useCase, family).filter((entry) => entry.id !== structure?.id);
+}
 
-  const packet = {
-    state: {
-      useCaseId: useCase?.id || "",
-      familyId: state.familyId || "",
-      structureId: state.structureId || "",
-      tone,
-      mode
-    },
-    useCase,
-    family,
-    structure,
-    movement,
-    references,
-    borrow,
-    avoid,
-    alternatives,
-    structureAlternatives
+function scoreSelectorWizardStyle(style, state) {
+  let score = 0;
+  const reasons = [];
+
+  if ((style.siteTypes || []).includes(state.siteType)) {
+    score += 4;
+    reasons.push(`适合做${state.siteTypeLabel}`);
+  }
+
+  if ((style.audiences || []).includes(state.audience)) {
+    score += 2;
+    reasons.push(`更适合给${state.audienceLabel}看`);
+  }
+
+  if (style.toneAxis === state.tone) {
+    score += 2;
+    reasons.push(`第一眼更偏${state.tone === "quiet" ? "安静克制" : "强烈有力"}`);
+  }
+
+  if (style.orderAxis === state.order) {
+    score += 2;
+    reasons.push(`页面组织更偏${state.order === "structured" ? "整洁系统" : "个性独特"}`);
+  }
+
+  if (state.siteType === "other") score += 1;
+  return { score, reasons };
+}
+
+function resolveSelectorWizardPacket(data, state) {
+  const normalizedState = {
+    ...state,
+    siteTypeLabel: getOptionLabel(data.siteOptions, state.siteType, state.siteType),
+    audienceLabel: getOptionLabel(data.audienceOptions, state.audience, state.audience)
   };
 
-  packet.prompt = buildSelectorPrompt(data, packet);
-  return packet;
+  const ranked = (data.styles || [])
+    .map((style) => {
+      const scored = scoreSelectorWizardStyle(style, normalizedState);
+      return {
+        style,
+        score: scored.score,
+        reasons: scored.reasons.slice(0, 3)
+      };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  return {
+    state: normalizedState,
+    results: ranked
+  };
 }
 
-function renderSelectorChoiceCard({ kickerZh, kickerEn, item, href, summary, metaMarkup = "", emptyLabel = "" }) {
-  if (!item) {
-    return `<article class="detail-card relation-card selector-choice-card card-surface">
-      <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText(kickerZh, kickerEn))}</p>
-        <h3 class="card-title">${escapeHtml(emptyLabel || bilingualText("待补充", "Pending"))}</h3>
+function renderSelectorWizardResults(packet) {
+  return `<div class="selector-wizard-results" data-selector-wizard-results>
+    <div class="section-head">
+      <div class="section-head-main">
+        <p class="eyebrow">${escapeHtml(bilingualText("推荐结果", "Recommendations"))}</p>
+        <h2 class="section-title">${escapeHtml(bilingualText("推荐你先看这 2 到 3 个风格", "Start with these 2-3 styles"))}</h2>
       </div>
-    </article>`;
-  }
-
-  return `<article class="detail-card relation-card selector-choice-card card-surface">
-    <div class="card-body">
-      <p class="card-kicker">${escapeHtml(bilingualText(kickerZh, kickerEn))}</p>
-      <h3 class="card-title">${renderBilingualStack(item.titleZh, item.titleEn || item.title)}</h3>
-      <p class="card-summary">${escapeHtml(summary || item.summary || item.summaryZh || "")}</p>
-      ${metaMarkup}
-      <a class="text-link" href="${escapeHtml(href)}">${escapeHtml(bilingualText("查看详情", "Open Detail"))}</a>
     </div>
-  </article>`;
-}
+    <div class="selector-recommendation-grid">
+      ${packet.results
+        .map(({ style, reasons }) => {
+          const titleZh = style.titleZh || style.nameZh || style.id || "";
+          const titleEn = style.titleEn || style.title || "";
+          const cardUses = Array.isArray(style.cardUses) ? style.cardUses.slice(0, 3) : [];
+          const href = style.href || (style.slug ? `/browse/${style.slug}` : "/browse");
 
-function renderSelectorReferenceCard(item) {
-  return `<article class="selector-reference-card card-surface">
-    <a class="card-media selector-reference-media" href="${escapeHtml(item.href)}" target="_blank" rel="noreferrer noopener">
-      ${renderImageFrame(item.screenshot, item.alt || item.label)}
-      <div class="card-overlay">
-        <span class="card-overlay-label">${escapeHtml(bilingualText("真实参考", "Live Reference"))}</span>
-        <h3 class="card-overlay-title">${escapeHtml(item.label)}</h3>
-      </div>
-    </a>
-    <div class="card-body">
-      <a class="text-link" href="${escapeHtml(item.href)}" target="_blank" rel="noreferrer noopener">${escapeHtml(
-        bilingualText("打开网站", "Open Site")
-      )}</a>
-    </div>
-  </article>`;
-}
-
-function renderSelectorResults(data, packet) {
-  const alternativeFamilies = packet.alternatives.slice(0, 2);
-  const alternativeStructures = packet.structureAlternatives.slice(0, 2);
-
-  return `<div class="selector-results" data-selector-results>
-    <article class="selector-summary card-surface">
-      <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText("推荐建站方案", "Recommended Packet"))}</p>
-        <h2 class="section-title">${renderBilingualStack(packet.useCase.titleZh, packet.useCase.titleEn || packet.useCase.title)}</h2>
-        <p class="section-summary">${escapeHtml(packet.useCase.summary)}</p>
-        <div class="selector-summary-grid">
-          <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("你的内容大概长这样", "Content Shape"))}</h4>
-            <p>${escapeHtml(packet.useCase.contentShape)}</p>
-          </div>
-          <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("你想让用户先感受到", "User Outcome"))}</h4>
-            <p>${escapeHtml(packet.useCase.userGoal)}</p>
-          </div>
-          <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("第一眼气质", "First Impression"))}</h4>
-            <p>${escapeHtml(selectorToneLabel(data, packet.state.tone))}</p>
-          </div>
-          <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("交互方式", "Interaction Mode"))}</h4>
-            <p>${escapeHtml(selectorModeLabel(data, packet.state.mode))}</p>
-          </div>
-        </div>
-      </div>
-    </article>
-    <div class="selector-choice-grid">
-      ${renderSelectorChoiceCard({
-        kickerZh: "历史线索",
-        kickerEn: "Background Lineage",
-        item: packet.movement,
-        href: packet.movement?.href || "/movements",
-        summary: packet.movement?.whyItMatters || packet.movement?.summary || "",
-        metaMarkup: packet.movement
-          ? `<div class="meta-block">
-              <h4>${escapeHtml(bilingualText("时期", "Period"))}</h4>
-              <p>${escapeHtml(packet.movement.era || "")}</p>
-            </div>`
-          : "",
-        emptyLabel: bilingualText("按家族自动匹配", "Auto from family")
-      })}
-      ${renderSelectorChoiceCard({
-        kickerZh: "页面感觉",
-        kickerEn: "Visual Family",
-        item: packet.family,
-        href: packet.family?.href || "/families",
-        summary: packet.family?.summaryZh || packet.family?.summary || "",
-        metaMarkup: packet.family
-          ? `<div class="meta-block">
-              <h4>${escapeHtml(bilingualText("适合内容", "Best For"))}</h4>
-              ${renderStaticPills((packet.family.bestFor || []).slice(0, 3))}
-            </div>`
-          : ""
-      })}
-      ${renderSelectorChoiceCard({
-        kickerZh: "页面组织",
-        kickerEn: "Structure Pattern",
-        item: packet.structure,
-        href: packet.structure?.href || "/structures",
-        summary: packet.structure?.summary || "",
-        metaMarkup: packet.structure
-          ? `<div class="meta-block">
-              <h4>${escapeHtml(bilingualText("识别信号", "Signals"))}</h4>
-              ${renderStaticPills((packet.structure.signals || []).slice(0, 3))}
-            </div>`
-          : ""
-      })}
-    </div>
-    <div class="selector-meta-grid">
-      <article class="detail-card card-surface">
-        <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("直接借这几条", "Copy These Traits"))}</p>
-          ${renderList(packet.borrow)}
-        </div>
-      </article>
-      <article class="detail-card card-surface">
-        <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("别做成这样", "Avoid These Moves"))}</p>
-          ${renderList(packet.avoid)}
-        </div>
-      </article>
-      <article class="detail-card card-surface">
-        <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("如果结果不对，改这里", "If This Feels Wrong"))}</p>
-          <div class="selector-alternative-stack">
-            <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("换一种页面感觉", "Try Another Page Feeling"))}</h4>
-              ${
-                alternativeFamilies.length
-                  ? renderLinkedPills(alternativeFamilies)
-                  : `<p>${escapeHtml(bilingualText("当前已是最直接匹配", "Current match is already the primary fit"))}</p>`
-              }
+          return `<article class="selector-result-card card-surface">
+            <a class="selector-result-media" href="${escapeHtml(href)}">
+              ${renderImageFrame(style.screenshot || style.cover, style.alt || style.coverAlt || titleZh)}
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">${renderInlineEnglishTitle(titleZh, titleEn)}</h3>
+              <p class="card-summary">${escapeHtml(`适合做：${cardUses.join(" · ")}`)}</p>
+              ${renderList(reasons)}
+              <div class="hero-actions">
+                <a class="text-link" href="${escapeHtml(href)}">${escapeHtml(bilingualText("查看详情", "Open Detail"))}</a>
+              </div>
             </div>
-            <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("换一种页面组织", "Try Another Structure"))}</h4>
-              ${
-                alternativeStructures.length
-                  ? renderLinkedPills(alternativeStructures)
-                  : `<p>${escapeHtml(bilingualText("当前结构已是最直接匹配", "Current structure is already the primary fit"))}</p>`
-              }
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="detail-card card-surface">
-        <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("接下来这样做", "Next Steps"))}</p>
-          ${renderList([
-            "先打开 2 到 3 个真实参考站，确认图像大小、导航和留白是不是你要的感觉。",
-            "复制下面的 Prompt 包给 AI，先让它出首页草图，不要一开始就做全站。",
-            "如果结果太花、太冷或太像模板，再回来切换页面感觉或页面组织。"
-          ])}
-        </div>
-      </article>
+          </article>`;
+        })
+        .join("")}
     </div>
-    <section class="selector-reference-section">
-      <div class="section-head">
-        <div class="section-head-main">
-          <p class="eyebrow">${escapeHtml(bilingualText("先看这几个真实网站", "Open These Real Sites First"))}</p>
-          <h2 class="section-title">${escapeHtml(bilingualText("直接打开真实站点", "Open the closest real websites"))}</h2>
-        </div>
-      </div>
-      <div class="selector-reference-grid">
-        ${packet.references.map((item) => renderSelectorReferenceCard(item)).join("")}
-      </div>
-    </section>
-    <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
-      <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText("交给 AI 的 Prompt", "AI Prompt"))}</p>
-        <h3 class="card-title">${escapeHtml(bilingualText("把下面这段直接交给 AI", "Paste This Into Your AI Builder"))}</h3>
-        <code>${escapeHtml(packet.prompt)}</code>
-        <div class="hero-actions">
-          <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
-        </div>
-      </div>
-    </article>
   </div>`;
 }
 
-function readSelectorState(form, data) {
-  const state = {
-    useCaseId: form.elements.useCaseId?.value || data.initialState.useCaseId || "",
-    familyId: form.elements.familyId?.value || "",
-    structureId: form.elements.structureId?.value || "",
-    tone: form.elements.tone?.value || "auto",
-    mode: form.elements.mode?.value || "auto"
-  };
-
-  return state;
-}
-
-function fillSelect(select, options, { selected = "", allowAuto = false, autoLabel = bilingualText("自动匹配", "Auto") } = {}) {
-  if (!select) return;
-
-  const autoMarkup = allowAuto ? `<option value="">${escapeHtml(autoLabel)}</option>` : "";
-  select.innerHTML = `${autoMarkup}${options
-    .map((item) => {
-      const text = bilingualText(item.titleZh, item.titleEn || item.title || item.id || "");
-      return `<option value="${escapeHtml(item.id)}"${item.id === selected ? " selected" : ""}>${escapeHtml(text)}</option>`;
-    })
-    .join("")}`;
-}
-
-function syncSelectorControls(form, data, draftState) {
-  const useCase = data.useCaseMap.get(draftState.useCaseId) || data.useCases[0] || null;
-  if (!useCase) return draftState;
-
-  const familyOptions = selectorFamilyCandidates(data, useCase);
-  const familyValid = familyOptions.some((entry) => entry.id === draftState.familyId);
-  const normalizedFamilyId = familyValid ? draftState.familyId : "";
-  fillSelect(form.elements.familyId, familyOptions, { selected: normalizedFamilyId, allowAuto: true });
-
-  const family = selectorResolveFamily(data, {
-    useCase,
-    familyId: normalizedFamilyId,
-    tone: draftState.tone
-  });
-  const structureOptions = selectorStructureCandidates(data, useCase, family);
-  const structureValid = structureOptions.some((entry) => entry.id === draftState.structureId);
-  const normalizedStructureId = structureValid ? draftState.structureId : "";
-  fillSelect(form.elements.structureId, structureOptions, { selected: normalizedStructureId, allowAuto: true });
-
-  return {
-    ...draftState,
-    useCaseId: useCase.id,
-    familyId: normalizedFamilyId,
-    structureId: normalizedStructureId
-  };
-}
-
-function updateSelectorUrl(state) {
+function updateSelectorWizardUrl(state) {
   const url = new URL(window.location.href);
-  url.searchParams.set("useCase", state.useCaseId);
-
-  if (state.familyId) url.searchParams.set("family", state.familyId);
-  else url.searchParams.delete("family");
-
-  if (state.structureId) url.searchParams.set("structure", state.structureId);
-  else url.searchParams.delete("structure");
-
-  if (state.tone && state.tone !== "auto") url.searchParams.set("tone", state.tone);
-  else url.searchParams.delete("tone");
-
-  if (state.mode && state.mode !== "auto") url.searchParams.set("mode", state.mode);
-  else url.searchParams.delete("mode");
-
+  url.searchParams.set("siteType", state.siteType);
+  url.searchParams.set("audience", state.audience);
+  url.searchParams.set("tone", state.tone);
+  url.searchParams.set("order", state.order);
   window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
 }
 
-function setupSelector() {
-  const root = document.querySelector("[data-style-selector]");
-  const dataScript = document.getElementById("selector-data");
+function readWizardStateFromUrl(data) {
+  const params = new URLSearchParams(window.location.search);
+  const siteIds = new Set((data.siteOptions || []).map((item) => item.id));
+  const audienceIds = new Set((data.audienceOptions || []).map((item) => item.id));
+  const toneIds = new Set((data.visualOptions?.tone || []).map((item) => item.id));
+  const orderIds = new Set((data.visualOptions?.order || []).map((item) => item.id));
+
+  const fromUrl = {
+    siteType: params.get("siteType") || data.initialState?.siteType || "portfolio",
+    audience: params.get("audience") || data.initialState?.audience || "clients",
+    tone: params.get("tone") || data.initialState?.tone || "quiet",
+    order: params.get("order") || data.initialState?.order || "structured"
+  };
+
+  return {
+    siteType: siteIds.has(fromUrl.siteType) ? fromUrl.siteType : data.initialState?.siteType || "portfolio",
+    audience: audienceIds.has(fromUrl.audience) ? fromUrl.audience : data.initialState?.audience || "clients",
+    tone: toneIds.has(fromUrl.tone) ? fromUrl.tone : data.initialState?.tone || "quiet",
+    order: orderIds.has(fromUrl.order) ? fromUrl.order : data.initialState?.order || "structured"
+  };
+}
+
+function setupSelectorWizard() {
+  const root = document.querySelector("[data-selector-wizard]");
+  const dataScript = document.getElementById("selector-wizard-data");
   if (!root || !dataScript) return;
 
   let data;
@@ -539,53 +309,34 @@ function setupSelector() {
     return;
   }
 
-  data.useCaseMap = new Map((data.useCases || []).map((item) => [item.id, item]));
-  data.familyMap = new Map((data.families || []).map((item) => [item.id, item]));
-  data.structureMap = new Map((data.structures || []).map((item) => [item.id, item]));
-  data.movementMap = new Map((data.movements || []).map((item) => [item.id, item]));
+  if (!root.querySelector("[data-selector-wizard-results]")) return;
+  const state = readWizardStateFromUrl(data);
 
-  const form = root.querySelector("[data-selector-form]");
-  if (!form || !root.querySelector("[data-selector-results]")) return;
+  ["siteType", "audience", "tone", "order"].forEach((name) => {
+    const input = root.querySelector(`input[name="${name}"][value="${state[name]}"]`);
+    if (input) input.checked = true;
+  });
 
-  const params = new URLSearchParams(window.location.search);
-  const initialState = {
-    useCaseId: params.get("useCase") || data.initialState.useCaseId || "",
-    familyId: params.get("family") || "",
-    structureId: params.get("structure") || "",
-    tone: params.get("tone") || data.initialState.tone || "auto",
-    mode: params.get("mode") || data.initialState.mode || "auto"
+  const apply = () => {
+    const packet = resolveSelectorWizardPacket(data, state);
+    const current = root.querySelector("[data-selector-wizard-results]");
+    if (current) current.outerHTML = renderSelectorWizardResults(packet);
+    syncSelectorWizardChoiceState(root);
+    updateSelectorWizardUrl(state);
   };
 
-  fillSelect(form.elements.useCaseId, data.useCases || [], { selected: initialState.useCaseId });
-  fillSelect(form.elements.tone, data.toneOptions || [], { selected: initialState.tone });
-  fillSelect(form.elements.mode, data.modeOptions || [], { selected: initialState.mode });
+  root.querySelectorAll("input[type='radio']").forEach((input) => {
+    input.addEventListener("change", () => {
+      state[input.name] = input.value;
+      apply();
+    });
+  });
 
-  const render = () => {
-    const draftState = readSelectorState(form, data);
-    const normalizedState = syncSelectorControls(form, data, draftState);
-    form.elements.useCaseId.value = normalizedState.useCaseId;
-    form.elements.tone.value = normalizedState.tone;
-    form.elements.mode.value = normalizedState.mode;
-    form.elements.familyId.value = normalizedState.familyId;
-    form.elements.structureId.value = normalizedState.structureId;
-
-    const packet = resolveSelectorPacket(data, normalizedState);
-    const currentResults = root.querySelector("[data-selector-results]");
-    if (currentResults) {
-      currentResults.outerHTML = renderSelectorResults(data, packet);
-    }
-    updateSelectorUrl(normalizedState);
-  };
-
-  syncSelectorControls(form, data, initialState);
-  form.elements.useCaseId.value = initialState.useCaseId;
-  form.elements.tone.value = initialState.tone;
-  form.elements.mode.value = initialState.mode;
-  render();
-
-  form.addEventListener("change", render);
+  syncSelectorWizardChoiceState(root);
+  apply();
 }
 
 setupCopyButtons();
 setupTimelineReveal();
-setupSelector();
+setupStyleBrowsers();
+setupSelectorWizard();

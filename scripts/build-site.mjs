@@ -67,6 +67,123 @@ const families = visualFamilies.map((item) =>
   )
 );
 
+const familyBrowseMeta = {
+  "magazine-editorial": {
+    styleNameZh: "杂志编辑",
+    filterLabel: "杂志 / 出版",
+    looksLike: ["封面感首屏", "主标题和大图带节奏", "内容像一期杂志往下展开"],
+    fit: ["出版站", "内容站", "品牌特稿"],
+    notFor: ["后台工具", "复杂表单", "高频任务流"],
+    audience: ["fans", "self"],
+    axis: "distinctive",
+    featured: true
+  },
+  "quiet-lifestyle-editorial": {
+    styleNameZh: "工艺自然",
+    filterLabel: "工艺 / 自然",
+    looksLike: ["留白很多", "图片安静", "节奏慢", "品牌气质先成立"],
+    fit: ["生活方式品牌", "手工艺站", "慢节奏内容站"],
+    notFor: ["硬核工具页", "促销电商", "信息特别密的知识库"],
+    audience: ["clients", "fans", "self"],
+    axis: "distinctive",
+    featured: true
+  },
+  "swiss-typographic-grid": {
+    styleNameZh: "瑞士网格",
+    filterLabel: "极简 / 黑白",
+    looksLike: ["严格网格", "大量留白", "排印主导", "黑白为主"],
+    fit: ["档案站", "工作室", "参考库"],
+    notFor: ["娱乐发布", "强霓虹科技感", "重促销电商"],
+    audience: ["clients", "users", "self"],
+    axis: "system",
+    featured: true
+  },
+  "monochrome-studio-systems": {
+    styleNameZh: "极简黑白",
+    filterLabel: "极简 / 黑白",
+    looksLike: ["黑白排版", "项目索引清楚", "工作室语气强", "看起来很克制"],
+    fit: ["作品集", "品牌页", "创意机构"],
+    notFor: ["高饱和活动页", "复杂运营后台", "儿童向页面"],
+    audience: ["clients", "employers", "self"],
+    axis: "distinctive",
+    featured: true
+  },
+  "product-precision-interface": {
+    styleNameZh: "产品工具",
+    filterLabel: "产品 / 工具",
+    looksLike: ["界面精密", "截图解释功能", "信息层级清楚", "任务优先"],
+    fit: ["工具产品", "AI 产品", "平台首页"],
+    notFor: ["纯内容阅读", "慢节奏品牌站", "实验性艺术页"],
+    audience: ["users", "clients"],
+    axis: "system",
+    featured: true
+  },
+  "stage-driven-showcase": {
+    styleNameZh: "发布舞台",
+    filterLabel: "大胆 / 个性",
+    looksLike: ["一张图先定调", "首屏像舞台", "世界观先成立", "下面再解释"],
+    fit: ["发布页", "活动页", "作品展示"],
+    notFor: ["知识库", "重筛选目录", "复杂工具壳"],
+    audience: ["fans", "users"],
+    axis: "distinctive",
+    featured: false
+  },
+  "curated-reference-directory": {
+    styleNameZh: "参考图库",
+    filterLabel: "产品 / 工具",
+    looksLike: ["缩略图很多", "先浏览再下钻", "分类清楚", "筛选明显"],
+    fit: ["灵感库", "模板库", "参考站"],
+    notFor: ["单一品牌故事", "长文特稿", "只有一两个案例的站"],
+    audience: ["users", "self"],
+    axis: "system",
+    featured: false
+  },
+  "evidence-dense-knowledge-surface": {
+    styleNameZh: "知识档案",
+    filterLabel: "产品 / 工具",
+    looksLike: ["信息密但有秩序", "模块清楚", "证据和导航并存", "可信度高"],
+    fit: ["知识库", "研究站", "文档入口"],
+    notFor: ["纯情绪品牌页", "重图片轻文字页面", "短促销活动"],
+    audience: ["users", "clients", "self"],
+    axis: "system",
+    featured: false
+  },
+  "playful-postmodern-anti-grid": {
+    styleNameZh: "大胆个性",
+    filterLabel: "大胆 / 个性",
+    looksLike: ["反模板", "边界更硬", "形状更跳", "看起来有态度"],
+    fit: ["创作者主页", "个人品牌", "实验发布页"],
+    notFor: ["严肃知识站", "机构官网", "需要平静信任感的页面"],
+    audience: ["fans", "self"],
+    axis: "distinctive",
+    featured: true
+  },
+  "neon-techno-futurist-interface": {
+    styleNameZh: "霓虹科技",
+    filterLabel: "科技 / 未来",
+    looksLike: ["黑底高对比", "霓虹光感", "未来科技感", "能量很强"],
+    fit: ["游戏页", "硬件发布", "科技感 landing page"],
+    notFor: ["安静阅读", "生活方式品牌", "档案站"],
+    audience: ["fans", "users"],
+    axis: "distinctive",
+    featured: true
+  }
+};
+
+for (const family of families) {
+  const meta = familyBrowseMeta[family.id] || {};
+  family.styleNameZh = meta.styleNameZh || family.titleZh;
+  family.filterLabel = meta.filterLabel || "全部";
+  family.looksLike = meta.looksLike || [];
+  family.fit = meta.fit || [];
+  family.notFor = meta.notFor || [];
+  family.audience = meta.audience || [];
+  family.axis = meta.axis || "system";
+  family.featured = meta.featured ?? false;
+  family.demoHref = family.references?.[0]?.href || "";
+  family.downloadHref = sitePath("downloads", `${family.id}.md`);
+}
+
 const movementSeed = new Map();
 
 for (const item of historicalMovements) {
@@ -411,6 +528,176 @@ const patternMap = new Map(patterns.map((item) => [item.id, item]));
 const useCaseMap = new Map(useCases.map((item) => [item.id, item]));
 const structureMap = new Map(structures.map((item) => [item.id, item]));
 
+const browseFilterOptions = [
+  { id: "all", labelZh: "全部", labelEn: "All" },
+  { id: "minimal-black-white", labelZh: "极简 / 黑白", labelEn: "Minimal / B&W" },
+  { id: "technology-future", labelZh: "科技 / 未来", labelEn: "Tech / Future" },
+  { id: "craft-natural", labelZh: "工艺 / 自然", labelEn: "Craft / Natural" },
+  { id: "bold-personality", labelZh: "大胆 / 个性", labelEn: "Bold / Personality" },
+  { id: "magazine-publishing", labelZh: "杂志 / 出版", labelEn: "Magazine / Publishing" },
+  { id: "product-tool", labelZh: "产品 / 工具", labelEn: "Product / Tool" }
+];
+
+const styleMetaMap = {
+  "swiss-typographic-grid": {
+    slug: "swiss-grid",
+    nameZh: "瑞士网格",
+    cardUses: ["档案站", "工作室", "参考库"],
+    lookLike: ["严格网格", "大量留白", "排印主导", "黑白为主"],
+    notFor: ["娱乐发布", "霓虹科技页", "重情绪电商"],
+    filterTags: ["minimal-black-white"],
+    siteTypes: ["portfolio", "brand", "blog", "other"],
+    audiences: ["clients", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "monochrome-studio-systems": {
+    slug: "minimal-black-white",
+    nameZh: "极简黑白",
+    cardUses: ["作品集", "品牌站", "工作室"],
+    lookLike: ["黑白对比", "项目索引", "留白控制", "作者感强"],
+    notFor: ["电商首页", "高频工具台", "重彩活动页"],
+    filterTags: ["minimal-black-white"],
+    siteTypes: ["portfolio", "brand", "other"],
+    audiences: ["clients", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "product-precision-interface": {
+    slug: "product-tool",
+    nameZh: "产品工具",
+    cardUses: ["AI 工具", "产品官网", "平台页"],
+    lookLike: ["界面清晰", "状态明确", "截图解释功能", "层级严谨"],
+    notFor: ["生活方式品牌", "慢节奏内容站", "纯情绪展示页"],
+    filterTags: ["product-tool", "technology-future"],
+    siteTypes: ["tool", "brand", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "neon-techno-futurist-interface": {
+    slug: "neon-tech",
+    nameZh: "霓虹科技",
+    cardUses: ["游戏页", "发布页", "未来科技"],
+    lookLike: ["高反差", "黑底霓虹", "世界观先行", "动势强"],
+    notFor: ["档案站", "长文博客", "安静品牌页"],
+    filterTags: ["technology-future", "bold-personality"],
+    siteTypes: ["launch", "brand", "other"],
+    audiences: ["fans", "general"],
+    toneAxis: "bold",
+    orderAxis: "distinctive"
+  },
+  "magazine-editorial": {
+    slug: "magazine-editorial",
+    nameZh: "杂志编辑",
+    cardUses: ["出版站", "内容站", "专题页"],
+    lookLike: ["封面式首屏", "标题与图片张力", "栏目层级", "阅读节奏"],
+    notFor: ["复杂筛选工具", "后台工作台", "强操作产品"],
+    filterTags: ["magazine-publishing"],
+    siteTypes: ["blog", "brand", "other"],
+    audiences: ["fans", "general", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "quiet-lifestyle-editorial": {
+    slug: "craft-natural",
+    nameZh: "工艺自然",
+    cardUses: ["生活方式", "品牌页", "慢内容"],
+    lookLike: ["慢节奏", "质感图片", "留白很多", "收藏感强"],
+    notFor: ["工具界面", "高密度知识站", "高频 CTA 落地页"],
+    filterTags: ["craft-natural", "magazine-publishing"],
+    siteTypes: ["brand", "blog", "portfolio"],
+    audiences: ["fans", "general", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
+  },
+  "playful-postmodern-anti-grid": {
+    slug: "bold-personality",
+    nameZh: "大胆个性",
+    cardUses: ["创作者", "个人站", "反模板发布"],
+    lookLike: ["反网格", "形状强烈", "识别度高", "态度明显"],
+    notFor: ["严肃知识库", "政府机构页", "安静阅读站"],
+    filterTags: ["bold-personality"],
+    siteTypes: ["portfolio", "brand", "launch", "other"],
+    audiences: ["fans", "general", "self"],
+    toneAxis: "bold",
+    orderAxis: "distinctive"
+  },
+  "curated-reference-directory": {
+    slug: "reference-directory",
+    nameZh: "参考目录",
+    cardUses: ["灵感库", "模板库", "参考站"],
+    lookLike: ["缩略图密集", "分类先行", "浏览优先", "索引清楚"],
+    notFor: ["单一品牌首页", "强剧情叙事页", "情绪化发布页"],
+    filterTags: ["product-tool", "magazine-publishing"],
+    siteTypes: ["blog", "tool", "other"],
+    audiences: ["general", "self", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "evidence-dense-knowledge-surface": {
+    slug: "knowledge-system",
+    nameZh: "知识系统",
+    cardUses: ["知识库", "研究站", "设计系统"],
+    lookLike: ["信息密度高", "论点明确", "证据模块", "导航清楚"],
+    notFor: ["纯视觉品牌页", "娱乐首屏", "情绪化叙事"],
+    filterTags: ["minimal-black-white", "product-tool"],
+    siteTypes: ["blog", "tool", "other"],
+    audiences: ["general", "self", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "stage-driven-showcase": {
+    slug: "stage-showcase",
+    nameZh: "舞台展示",
+    cardUses: ["品牌发布", "作品首屏", "Campaign"],
+    lookLike: ["主视觉独占", "信息密度低", "镜头感强", "记忆点明确"],
+    notFor: ["复杂目录页", "重筛选工具", "长期增长档案"],
+    filterTags: ["bold-personality", "technology-future"],
+    siteTypes: ["launch", "brand", "portfolio"],
+    audiences: ["fans", "general", "clients"],
+    toneAxis: "bold",
+    orderAxis: "distinctive"
+  }
+};
+
+const styleOrder = [
+  "swiss-typographic-grid",
+  "monochrome-studio-systems",
+  "neon-techno-futurist-interface",
+  "magazine-editorial",
+  "quiet-lifestyle-editorial",
+  "playful-postmodern-anti-grid",
+  "product-precision-interface",
+  "curated-reference-directory",
+  "evidence-dense-knowledge-surface",
+  "stage-driven-showcase"
+];
+
+const styleFamilies = styleOrder
+  .map((id) => familyMap.get(id))
+  .filter(Boolean)
+  .map((item) => {
+    const meta = styleMetaMap[item.id] || {};
+    return {
+      ...item,
+      slug: meta.slug || item.id,
+      href: browseHref(meta.slug || item.id),
+      nameZh: meta.nameZh || item.titleZh || item.title,
+      cardUses: meta.cardUses || (item.bestFor || []).slice(0, 3),
+      lookLike: meta.lookLike || (item.signature || []).slice(0, 4),
+      notFor: meta.notFor || (item.avoidWhen || []).slice(0, 3),
+      filterTags: meta.filterTags || ["all"],
+      siteTypes: meta.siteTypes || ["other"],
+      audiences: meta.audiences || ["general"],
+      toneAxis: meta.toneAxis || "quiet",
+      orderAxis: meta.orderAxis || "structured"
+    };
+  });
+
+const styleFamilyMap = new Map(styleFamilies.map((item) => [item.id, item]));
+const styleFamilySlugMap = new Map(styleFamilies.map((item) => [item.slug, item]));
+
 const routeHref = {
   movements: "/movements",
   families: "/families",
@@ -626,7 +913,8 @@ function sitePath(...segments) {
 }
 
 function familyHref(id) {
-  return sitePath("families", id);
+  const style = styleFamilyMap.get(id);
+  return browseHref(style?.slug || id);
 }
 
 function movementHref(id) {
@@ -644,6 +932,20 @@ function structureHref(id) {
 function selectorHref() {
   return sitePath("selector");
 }
+
+function browseHref(slug) {
+  return sitePath("browse", slug);
+}
+
+function browseIndexHref() {
+  return sitePath("browse");
+}
+
+function aboutHref() {
+  return sitePath("about");
+}
+
+const githubHref = "https://github.com/EOMZON";
 
 function linkAttrs(href, className = "") {
   const classAttr = className ? ` class="${className}"` : "";
@@ -898,14 +1200,12 @@ function renderTopbar() {
         <strong class="brand-name">Zondev</strong>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="/">${escapeHtml(bilingualText("首页", "Home"))}</a>
-        <a href="${escapeHtml(selectorHref())}">${escapeHtml(bilingualText("选型器", "Style Selector"))}</a>
-        <a href="/use-cases">${escapeHtml(bilingualText("使用场景", "Use Cases"))}</a>
-        <a href="/families">${escapeHtml(bilingualText("网页家族", "Web Families"))}</a>
-        <a href="/structures">${escapeHtml(bilingualText("信息结构", "Structure Patterns"))}</a>
-        <a href="/movements">${escapeHtml(bilingualText("历史流派", "Historical Movements"))}</a>
+        <a href="${escapeHtml(browseIndexHref())}">${escapeHtml(bilingualText("浏览", "Browse"))}</a>
+        <a href="${escapeHtml(selectorHref())}">${escapeHtml(bilingualText("选型器", "Selector"))}</a>
+        <a href="${escapeHtml(aboutHref())}">${escapeHtml(bilingualText("关于", "About"))}</a>
+        <a href="${escapeHtml(githubHref)}">${escapeHtml(bilingualText("GitHub", "GitHub"))}</a>
       </nav>
-      <span class="status-pill">atlas v0.9</span>
+      <span class="status-pill">atlas v1.0</span>
     </div>
   </header>`;
 }
@@ -933,8 +1233,8 @@ function layout({ title, description, pathname = "/", body, pageClass = "" }) {
         <div class="footer-inner">
           <p>${escapeHtml(
             bilingualText(
-              "给用 AI 做站的人：历史线索、页面感觉、结构模式、建站场景与真实参考",
-              "For AI site builders: movements, page families, structure patterns, use cases, and live references"
+              "Design Atlas：看图选风格，拿 Prompt 建站。",
+              "Design Atlas: choose by image, leave with a prompt."
             )
           )}</p>
           <p>Updated ${escapeHtml(siteMeta.updatedAt)} · ${escapeHtml(siteMeta.origin.replace(/^https?:\/\//, ""))}</p>
@@ -1912,6 +2212,111 @@ function renderBackLink(href, label) {
   return `<a ${linkAttrs(href, "back-link")}>${escapeHtml(label)}</a>`;
 }
 
+function renderStyleName(item, className = "") {
+  return `<span class="style-name${className ? ` ${escapeHtml(className)}` : ""}">
+    <span class="style-name-zh">${escapeHtml(item.nameZh || item.titleZh || item.title || "")}</span>
+    <span class="style-name-en">(${escapeHtml(item.titleEn || item.title || "")})</span>
+  </span>`;
+}
+
+function renderBrowseCard(item) {
+  const searchTerms = [
+    item.nameZh,
+    item.titleEn,
+    ...(item.cardUses || []),
+    ...(item.lookLike || []),
+    ...(item.notFor || []),
+    ...(item.filterTags || [])
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return `<article class="browse-card card-surface" data-browse-card data-filter-tags="${escapeHtml(
+    ["all", ...(item.filterTags || [])].join(" ")
+  )}" data-search="${escapeHtml(searchTerms)}">
+    <a ${linkAttrs(item.href, "browse-card-media")}>
+      ${renderImageFrame(item.cover, item.coverAlt || item.nameZh || item.titleEn || item.title || "", "browse-card-image")}
+      <div class="card-overlay browse-card-overlay">
+        <span class="card-overlay-label">${escapeHtml(
+          browseFilterOptions.find((entry) => entry.id === item.filterTags?.[0])?.labelZh || "风格"
+        )}</span>
+      </div>
+    </a>
+    <div class="card-body">
+      <h3 class="browse-card-title">${renderStyleName(item)}</h3>
+      <p class="browse-card-fit">${escapeHtml(`适合做：${(item.cardUses || []).slice(0, 3).join(" · ")}`)}</p>
+    </div>
+  </article>`;
+}
+
+function renderBrowseGallery(items, options = {}) {
+  const {
+    title = bilingualText("浏览风格", "Browse Styles"),
+    kicker = bilingualText("风格图库", "Style Gallery"),
+    summary = "直接看图、切标签、搜关键词。先找到像的，再决定要不要点进详情页拿 Prompt。",
+    actionMarkup = "",
+    showSearch = false,
+    showViewToggle = false,
+    sectionId = "browse-gallery",
+    rootAttrs = "",
+    itemsLimit = 0
+  } = options;
+
+  const shownItems = itemsLimit ? items.slice(0, itemsLimit) : items;
+
+  return `<section class="section browse-section" id="${escapeHtml(sectionId)}" ${rootAttrs}>
+    ${renderSectionHead(kicker, title, summary, actionMarkup)}
+    <div class="browse-controls">
+      <div class="browse-filter-row" role="tablist" aria-label="${escapeHtml(bilingualText("筛选标签", "Browse Filters"))}">
+        ${browseFilterOptions
+          .map(
+            (item, index) =>
+              `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" data-browse-filter="${escapeHtml(
+                item.id
+              )}">${escapeHtml(item.labelZh)}</button>`
+          )
+          .join("")}
+      </div>
+      ${
+        showSearch || showViewToggle
+          ? `<div class="browse-toolbar">
+              ${
+                showSearch
+                  ? `<label class="browse-search">
+                      <span class="browse-search-label">${escapeHtml(bilingualText("搜索", "Search"))}</span>
+                      <input type="search" placeholder="${escapeHtml(
+                        bilingualText("搜索风格名、场景或关键词", "Search styles, scenes, or traits")
+                      )}" data-browse-search />
+                    </label>`
+                  : ""
+              }
+              ${
+                showViewToggle
+                  ? `<div class="browse-view-toggle" role="tablist" aria-label="${escapeHtml(
+                      bilingualText("视图", "View")
+                    )}">
+                      <button class="filter-chip is-active" type="button" data-browse-view="grid">${escapeHtml(
+                        bilingualText("网格", "Grid")
+                      )}</button>
+                      <button class="filter-chip" type="button" data-browse-view="list">${escapeHtml(
+                        bilingualText("列表", "List")
+                      )}</button>
+                    </div>`
+                  : ""
+              }
+            </div>`
+          : ""
+      }
+    </div>
+    <div class="browse-grid" data-browse-grid>
+      ${shownItems.map((item) => renderBrowseCard(item)).join("")}
+    </div>
+    <p class="browse-empty" data-browse-empty hidden>${escapeHtml(
+      bilingualText("没有匹配结果，换个标签或关键词试试。", "No matches yet. Try another filter or keyword.")
+    )}</p>
+  </section>`;
+}
+
 function renderFamilyDetail(item) {
   const relatedMovements = item.movementIds.map((id) => movementMap.get(id)).filter(Boolean);
   const relatedPatterns = item.patternIds.map((id) => patternMap.get(id)).filter(Boolean);
@@ -2373,6 +2778,604 @@ function renderUseCaseDetail(item) {
   });
 }
 
+function renderInlineEnglishTitle(zh, en, className = "") {
+  return `<span class="style-inline-title${className ? ` ${escapeHtml(className)}` : ""}">
+    <span class="style-inline-title-zh">${escapeHtml(zh || en || "")}</span>
+    ${en ? `<span class="style-inline-title-en">(${escapeHtml(en)})</span>` : ""}
+  </span>`;
+}
+
+function relatedStyleUseCases(item) {
+  return useCases.filter(
+    (entry) => entry.primaryFamilyId === item.id || (entry.secondaryFamilyIds || []).includes(item.id)
+  );
+}
+
+function relatedStyleStructures(item) {
+  return (item.structureIds || []).map((id) => structureMap.get(id)).filter(Boolean);
+}
+
+function relatedStyleMovements(item) {
+  return (item.movementIds || []).map((id) => movementMap.get(id)).filter(Boolean);
+}
+
+function stylePrimaryReference(item) {
+  return selectorReferenceEntries(item)[0] || item.references?.[0] || null;
+}
+
+function stylePromptPacket(item) {
+  const structuresList = relatedStyleStructures(item)
+    .map((entry) => displayTitle(entry))
+    .join(" / ");
+  const movementsList = relatedStyleMovements(item)
+    .map((entry) => displayTitle(entry))
+    .join(" / ");
+  const referencePacket = (item.references || [])
+    .slice(0, 3)
+    .map((entry) => `${entry.label}: ${entry.href}`)
+    .join(" / ");
+
+  return `请参考${item.nameZh}（${item.titleEn || item.title}）风格建站：
+视觉特征：${item.lookLike.join(" / ")}
+适合场景：${item.cardUses.join(" / ")}
+不适合：${item.notFor.join(" / ")}
+推荐页面组织：${structuresList || bilingualText("待补充", "Pending")}
+历史来源：${movementsList || bilingualText("待补充", "Pending")}
+参考网站：${referencePacket || bilingualText("待补充", "Pending")}
+风格要求：${item.prompt}`;
+}
+
+function styleSkillDownloadPath(item) {
+  return sitePath("downloads", `${item.slug}.md`);
+}
+
+function renderStyleSkillMarkdown(item) {
+  return `---
+name: style-${item.slug}
+description: ${item.nameZh} (${item.titleEn || item.title}) style pack for AI website building
+---
+
+# ${item.nameZh} (${item.titleEn || item.title})
+
+## 适合做
+
+- ${item.cardUses.join("\n- ")}
+
+## 不适合做
+
+- ${item.notFor.join("\n- ")}
+
+## 视觉特征
+
+- ${item.lookLike.join("\n- ")}
+
+## 推荐页面组织
+
+- ${relatedStyleStructures(item)
+  .map((entry) => displayTitle(entry))
+  .join("\n- ") || "Pending"}
+
+## 历史来源
+
+- ${relatedStyleMovements(item)
+  .map((entry) => displayTitle(entry))
+  .join("\n- ") || "Pending"}
+
+## Prompt
+
+\`\`\`text
+${stylePromptPacket(item)}
+\`\`\`
+`;
+}
+
+function styleCardSearchText(item) {
+  return [
+    item.nameZh,
+    item.titleEn || item.title,
+    ...(item.cardUses || []),
+    ...(item.lookLike || []),
+    ...(item.filterTags || [])
+  ]
+    .join(" ")
+    .toLowerCase();
+}
+
+function renderBrowseStyleCard(item) {
+  return `<article class="style-card card-surface" data-style-card data-style-tags="${escapeHtml(
+    item.filterTags.join(" ")
+  )}" data-style-search="${escapeHtml(styleCardSearchText(item))}">
+    <a ${linkAttrs(browseHref(item.slug), "style-card-media")}>
+      ${renderImageFrame(item.cover, item.coverAlt || item.nameZh)}
+    </a>
+    <div class="style-card-body">
+      <h3 class="style-card-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</h3>
+      <p class="style-card-fit">${escapeHtml(`适合做：${item.cardUses.slice(0, 3).join(" · ")}`)}</p>
+    </div>
+  </article>`;
+}
+
+function renderBrowseControls({ includeSearch = false, includeViewToggle = false, actionHref = "", actionLabel = "" } = {}) {
+  return `<div class="browse-toolbar">
+    <div class="browse-filters" role="tablist" aria-label="${escapeHtml(bilingualText("风格筛选", "Style filters"))}">
+      ${browseFilterOptions
+        .map(
+          (item, index) =>
+            `<button class="browse-filter${index === 0 ? " is-active" : ""}" type="button" data-browse-filter="${escapeHtml(
+              item.id
+            )}">${escapeHtml(item.labelZh)}</button>`
+        )
+        .join("")}
+    </div>
+    <div class="browse-toolbar-side">
+      ${
+        includeSearch
+          ? `<label class="browse-search">
+              <span class="sr-only">${escapeHtml(bilingualText("搜索风格", "Search styles"))}</span>
+              <input type="search" placeholder="${escapeHtml(
+                bilingualText("搜索风格名、场景、关键词", "Search styles, scenes, keywords")
+              )}" data-browse-search />
+            </label>`
+          : ""
+      }
+      ${
+        includeViewToggle
+          ? `<div class="browse-view-toggle">
+              <button class="browse-view-button is-active" type="button" data-browse-view="grid">${escapeHtml(
+                bilingualText("卡片", "Grid")
+              )}</button>
+              <button class="browse-view-button" type="button" data-browse-view="list">${escapeHtml(
+                bilingualText("列表", "List")
+              )}</button>
+            </div>`
+          : ""
+      }
+      ${actionHref ? `<a ${linkAttrs(actionHref, "text-link")}>${escapeHtml(actionLabel)}</a>` : ""}
+    </div>
+  </div>`;
+}
+
+function renderStyleGallerySection({
+  sectionId = "style-gallery",
+  title = bilingualText("浏览风格", "Browse Styles"),
+  summary = "",
+  includeSearch = false,
+  includeViewToggle = false,
+  actionHref = "",
+  actionLabel = "",
+  stylesList = styleFamilies
+} = {}) {
+  return `<section class="section style-gallery-section" id="${escapeHtml(sectionId)}" data-browse-root>
+    ${renderSectionHead(
+      bilingualText("浏览风格", "Browse"),
+      title,
+      summary,
+      actionHref ? `<a ${linkAttrs(actionHref, "text-link")}>${escapeHtml(actionLabel)}</a>` : ""
+    )}
+    ${renderBrowseControls({ includeSearch, includeViewToggle, actionHref: "", actionLabel: "" })}
+    <div class="style-card-grid" data-browse-grid>
+      ${stylesList.map((item) => renderBrowseStyleCard(item)).join("")}
+    </div>
+    <p class="browse-empty" data-browse-empty hidden>${escapeHtml(
+      bilingualText("没有找到匹配的风格，换个筛选或关键词试试。", "No styles matched. Try another filter or search.")
+    )}</p>
+  </section>`;
+}
+
+function renderLandingHero() {
+  return `<section class="landing-hero section" id="top">
+    <div class="landing-hero-inner">
+      <p class="landing-kicker">DESIGN ATLAS — AI 建站风格参考库</p>
+      <h1 class="landing-title">
+        <span>不知道网站要做成什么样？</span>
+        <span>从这里开始。</span>
+      </h1>
+      <div class="landing-copy">
+        <p>${escapeHtml(`${movements.length} 种历史风格 · ${styleFamilies.length} 种网页风格 · 每种风格配 AI Prompt`)}</p>
+        <p>${escapeHtml("看图选风格，拿 Prompt 建站，审美不够也能做出好看的页面。")}</p>
+      </div>
+      <div class="hero-actions landing-actions">
+        <a ${linkAttrs(browseIndexHref(), "button")}>${escapeHtml(bilingualText("浏览所有风格", "Browse All Styles"))}</a>
+        <a ${linkAttrs(selectorHref(), "ghost-button")}>${escapeHtml(bilingualText("帮我选风格", "Help Me Choose"))}</a>
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderStyleReferenceRail(item) {
+  const references = selectorReferenceEntries(item)
+    .filter((entry) => entry.screenshot && entry.screenshot !== item.cover)
+    .slice(0, 4);
+
+  return `<section class="section">
+    ${renderSectionHead(
+      bilingualText("真实网站参考", "Real References"),
+      bilingualText("先看这些真实网站", "Open these real sites first"),
+      ""
+    )}
+    <div class="reference-rail">
+      ${references
+        .map(
+          (entry) => `<article class="reference-rail-card card-surface">
+            <a ${linkAttrs(entry.href, "reference-rail-media")}>
+              ${renderImageFrame(entry.screenshot, entry.alt || entry.label)}
+            </a>
+            <div class="card-body">
+              <p class="card-kicker">${escapeHtml(bilingualText("代表网站", "Reference"))}</p>
+              <h3 class="card-title">${escapeHtml(entry.label)}</h3>
+              <a ${linkAttrs(entry.href, "text-link")}>${escapeHtml(bilingualText("打开网站", "Open Site"))}</a>
+            </div>
+          </article>`
+        )
+        .join("")}
+    </div>
+  </section>`;
+}
+
+function renderStyleHistoryFold(item) {
+  const origins = relatedStyleMovements(item);
+  if (!origins.length) return "";
+
+  return `<section class="section">
+    <details class="history-fold card-surface">
+      <summary>${escapeHtml(bilingualText("历史来源", "Historical Roots"))}</summary>
+      <div class="history-fold-body">
+        <p class="section-summary">${escapeHtml(
+          bilingualText("这部分放在最后看，用来补背景，而不是先决定风格。", "Use this section to add background after the direction is already clear.")
+        )}</p>
+        <div class="history-origin-list">
+          ${origins
+            .map(
+              (origin) => `<article class="history-origin-item">
+                <div class="history-origin-year">${escapeHtml(origin.era || "")}</div>
+                <div class="history-origin-copy">
+                  <h3>${renderInlineEnglishTitle(origin.titleZh, origin.titleEn || origin.title)}</h3>
+                  <p>${escapeHtml(origin.summary || origin.whyItMatters || "")}</p>
+                </div>
+              </article>`
+            )
+            .join("")}
+        </div>
+      </div>
+    </details>
+  </section>`;
+}
+
+function renderBrowseStyleDetail(item) {
+  const primaryReference = stylePrimaryReference(item);
+  const promptPacket = stylePromptPacket(item);
+
+  return layout({
+    title: `${item.nameZh} · ${siteMeta.title}`,
+    description: item.summaryZh || item.summary,
+    pathname: browseHref(item.slug),
+    pageClass: "detail-page browse-style-detail-page",
+    body: [
+      `<section class="style-detail-hero section">
+        <div class="style-detail-topline">
+          ${renderBackLink(browseIndexHref(), bilingualText("返回浏览", "Back to Browse"))}
+          <div class="style-detail-actions">
+            <button class="copy-button" type="button" data-copy-target="${escapeHtml(`style-prompt-${item.slug}`)}">${escapeHtml(
+              bilingualText("复制 Prompt", "Copy Prompt")
+            )}</button>
+            <a ${linkAttrs(styleSkillDownloadPath(item), "ghost-button")} download>${escapeHtml(
+              bilingualText("下载 .md Skill", "Download .md Skill")
+            )}</a>
+          </div>
+        </div>
+        <div class="style-detail-head">
+          <div class="style-detail-head-main">
+            <h1 class="detail-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title, "detail-inline-title")}</h1>
+            <div class="pill-row">${renderStaticPills(item.cardUses.slice(0, 3))}</div>
+          </div>
+        </div>
+        <article class="style-detail-stage card-surface">
+          <a ${linkAttrs(primaryReference?.href || "#", "style-detail-stage-media")}>
+            ${renderImageFrame(item.cover, item.coverAlt || item.nameZh)}
+          </a>
+          <div class="style-detail-stage-copy">
+            <p class="card-kicker">${escapeHtml(bilingualText("主参考", "Primary Reference"))}</p>
+            <h2 class="card-title">${escapeHtml(primaryReference?.label || item.nameZh)}</h2>
+            <p class="card-summary">${escapeHtml(item.summaryZh || item.summary || "")}</p>
+            ${primaryReference?.href ? `<a ${linkAttrs(primaryReference.href, "text-link")}>${escapeHtml(bilingualText("打开参考网站", "Open Reference"))}</a>` : ""}
+          </div>
+        </article>
+      </section>`,
+      renderStyleReferenceRail(item),
+      `<section class="section">
+        <div class="style-detail-core-grid">
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("长这样", "Looks Like")
+          )}</p>${renderList(item.lookLike)}</div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("适合做", "Good For")
+          )}</p>${renderList(item.cardUses)}</div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("不适合做", "Not For")
+          )}</p>${renderList(item.notFor)}</div></article>
+        </div>
+      </section>`,
+      `<section class="section">
+        ${renderSectionHead(
+          bilingualText("AI Prompt", "AI Prompt"),
+          bilingualText("复制后直接粘贴给 Cursor / Claude", "Paste directly into Cursor / Claude"),
+          ""
+        )}
+        <article class="detail-card card-surface" data-copy-container>
+          <div class="card-body">
+            <code id="${escapeHtml(`style-prompt-${item.slug}`)}">${escapeHtml(promptPacket)}</code>
+            <div class="hero-actions">
+              <button class="copy-button" type="button" data-copy-target="${escapeHtml(`style-prompt-${item.slug}`)}">${escapeHtml(
+                bilingualText("复制 Prompt", "Copy Prompt")
+              )}</button>
+              <a ${linkAttrs(styleSkillDownloadPath(item), "ghost-button")} download>${escapeHtml(
+                bilingualText("下载 .md Skill", "Download .md Skill")
+              )}</a>
+            </div>
+          </div>
+        </article>
+      </section>`,
+      renderStyleHistoryFold(item)
+    ].join("")
+  });
+}
+
+function buildBrowsePage() {
+  return layout({
+    title: `${bilingualText("浏览风格", "Browse")} · ${siteMeta.title}`,
+    description: "Browse style families by screenshot, filter, and search.",
+    pathname: browseIndexHref(),
+    pageClass: "browse-page index-page",
+    body: [
+      renderPageLead({
+        kicker: bilingualText("浏览", "Browse"),
+        title: bilingualText("先看图，再选风格", "Start with images, then choose a style"),
+        summary: "从截图、场景和直觉标签进入，不需要先懂专业名词。",
+        detail: "先按极简、科技、工艺、个性、出版、产品这些直觉标签筛一遍，再进入单个风格详情页拿 Prompt。",
+        actions: `<div class="hero-actions"><a ${linkAttrs(selectorHref(), "button")}>${escapeHtml(
+          bilingualText("帮我选风格", "Help Me Choose")
+        )}</a><a ${linkAttrs(aboutHref(), "ghost-button")}>${escapeHtml(
+          bilingualText("查看项目说明", "About")
+        )}</a></div>`
+      }),
+      renderStyleGallerySection({
+        sectionId: "gallery",
+        title: bilingualText("完整图库", "Complete Gallery"),
+        summary: "可筛选、可搜索、可切换视图。",
+        includeSearch: true,
+        includeViewToggle: true,
+        stylesList: styleFamilies
+      })
+    ].join("")
+  });
+}
+
+function buildAboutPage() {
+  return layout({
+    title: `${bilingualText("关于", "About")} · ${siteMeta.title}`,
+    description: "About Design Atlas and the historical timeline behind the styles.",
+    pathname: aboutHref(),
+    pageClass: "about-page index-page",
+    body: [
+      renderPageLead({
+        kicker: bilingualText("关于", "About"),
+        title: bilingualText("这不是设计史百科，而是建站选型工具", "Not a design-history encyclopedia, but a style selection tool"),
+        summary: "首页负责看图和进入；浏览页负责比较；详情页负责拿 Prompt；选型器负责帮完全没有方向的人缩小范围。",
+        detail: "你喜欢的时间轴和风格背景被放到这里和详情页底部，不再占首页主入口，但仍然完整保留。",
+        actions: `<div class="hero-actions"><a ${linkAttrs(githubHref, "button")}>${escapeHtml(
+          bilingualText("GitHub", "GitHub")
+        )}</a><a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
+          bilingualText("开始浏览", "Start Browsing")
+        )}</a></div>`
+      }),
+      `<section class="section">
+        ${renderSectionHead(
+          bilingualText("使用方式", "How It Works"),
+          bilingualText("看图选风格，拿 Prompt 建站", "Choose by image, then build with prompts"),
+          ""
+        )}
+        <div class="detail-section-grid">
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("01 浏览", "Browse")
+          )}</p><p>${escapeHtml("按直觉标签和截图找相近的页面感觉。")}</p></div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("02 详情", "Detail")
+          )}</p><p>${escapeHtml("确认它长什么样、适合做什么、不适合做什么，并拿走 Prompt。")}</p></div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("03 选型器", "Selector")
+          )}</p><p>${escapeHtml("如果完全没有方向，就用 3 步问答拿到 2 到 3 个推荐风格。")}</p></div></article>
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
+            bilingualText("04 历史来源", "History")
+          )}</p><p>${escapeHtml("最后再补背景，用来理解来源和避坑，而不是先决定风格。")}</p></div></article>
+        </div>
+      </section>`,
+      renderTimelineAtlasSection({
+        titleZh: "历史流派时间轴",
+        titleEn: "Historical Timeline",
+        kicker: bilingualText("历史来源", "Background Lineage"),
+        summary: "这部分从首页挪到 About。先选到目标，再回来补历史脉络。",
+        sectionId: "about-history-timeline"
+      })
+    ].join("")
+  });
+}
+
+const selectorWizardSiteOptions = [
+  { id: "portfolio", titleZh: "个人作品集", titleEn: "Portfolio" },
+  { id: "brand", titleZh: "品牌官网", titleEn: "Brand Site" },
+  { id: "blog", titleZh: "内容博客", titleEn: "Content Blog" },
+  { id: "tool", titleZh: "工具产品", titleEn: "Tool / Product" },
+  { id: "launch", titleZh: "发布页", titleEn: "Launch Page" },
+  { id: "other", titleZh: "其他", titleEn: "Other" }
+];
+
+const selectorWizardAudienceOptions = [
+  { id: "clients", titleZh: "潜在客户 / 雇主", titleEn: "Clients / Employers" },
+  { id: "fans", titleZh: "粉丝 / 订阅者", titleEn: "Fans / Subscribers" },
+  { id: "general", titleZh: "普通用户", titleEn: "General Users" },
+  { id: "self", titleZh: "自己", titleEn: "Myself" }
+];
+
+const selectorWizardVisualOptions = {
+  tone: [
+    { id: "quiet", titleZh: "安静克制", titleEn: "Quiet", screenshot: "signal-a-studio.png", alt: "Quiet reference" },
+    { id: "bold", titleZh: "强烈有力", titleEn: "Bold", screenshot: "cyberpunk-net.png", alt: "Bold reference" }
+  ],
+  order: [
+    {
+      id: "structured",
+      titleZh: "整洁系统",
+      titleEn: "Structured",
+      screenshot: "swiss-institute.png",
+      alt: "Structured reference"
+    },
+    { id: "distinctive", titleZh: "个性独特", titleEn: "Distinctive", screenshot: "bureau-borsche.png", alt: "Distinctive reference" }
+  ]
+};
+
+const selectorWizardDefaultState = {
+  siteType: "portfolio",
+  audience: "clients",
+  tone: "quiet",
+  order: "structured"
+};
+
+function selectorWizardPayload() {
+  return {
+    initialState: selectorWizardDefaultState,
+    siteOptions: selectorWizardSiteOptions,
+    audienceOptions: selectorWizardAudienceOptions,
+    visualOptions: selectorWizardVisualOptions,
+    styles: styleFamilies.map((item) => ({
+      id: item.id,
+      slug: item.slug,
+      href: browseHref(item.slug),
+      titleZh: item.nameZh,
+      titleEn: item.titleEn || item.title,
+      summary: item.summaryZh || item.summary,
+      screenshot: item.cover,
+      alt: item.coverAlt || item.nameZh,
+      cardUses: item.cardUses,
+      lookLike: item.lookLike,
+      notFor: item.notFor,
+      filterTags: item.filterTags,
+      siteTypes: item.siteTypes,
+      audiences: item.audiences,
+      toneAxis: item.toneAxis,
+      orderAxis: item.orderAxis
+    }))
+  };
+}
+
+function selectorWizardSiteLabel(id) {
+  return selectorWizardSiteOptions.find((item) => item.id === id)?.titleZh || id;
+}
+
+function selectorWizardAudienceLabel(id) {
+  return selectorWizardAudienceOptions.find((item) => item.id === id)?.titleZh || id;
+}
+
+function scoreSelectorStyle(style, state) {
+  let score = 0;
+  const reasons = [];
+
+  if (style.siteTypes.includes(state.siteType)) {
+    score += 4;
+    reasons.push(`适合做${selectorWizardSiteLabel(state.siteType)}`);
+  }
+
+  if (style.audiences.includes(state.audience)) {
+    score += 2;
+    reasons.push(`更适合给${selectorWizardAudienceLabel(state.audience)}看`);
+  }
+
+  if (style.toneAxis === state.tone) {
+    score += 2;
+    reasons.push(`第一眼更偏${state.tone === "quiet" ? "安静克制" : "强烈有力"}`);
+  }
+
+  if (style.orderAxis === state.order) {
+    score += 2;
+    reasons.push(`页面组织更偏${state.order === "structured" ? "整洁系统" : "个性独特"}`);
+  }
+
+  if (state.siteType === "other") score += 1;
+
+  return { score, reasons };
+}
+
+function resolveSelectorWizardRecommendations(state = selectorWizardDefaultState) {
+  const ranked = styleFamilies
+    .map((style) => {
+      const result = scoreSelectorStyle(style, state);
+      return {
+        style,
+        score: result.score,
+        reasons: result.reasons.slice(0, 3)
+      };
+    })
+    .sort((a, b) => b.score - a.score || styleOrder.indexOf(a.style.id) - styleOrder.indexOf(b.style.id));
+
+  return {
+    state,
+    results: ranked.slice(0, 3)
+  };
+}
+
+function renderSelectorWizardOption(name, item, selected) {
+  return `<label class="wizard-choice-pill${selected === item.id ? " is-selected" : ""}">
+    <input type="radio" name="${escapeHtml(name)}" value="${escapeHtml(item.id)}"${selected === item.id ? " checked" : ""} />
+    <span>${escapeHtml(item.titleZh)}</span>
+  </label>`;
+}
+
+function renderSelectorWizardVisualGroup(name, title, options, selected) {
+  return `<article class="selector-visual-group">
+    <p class="card-kicker">${escapeHtml(title)}</p>
+    <div class="selector-visual-grid">
+      ${options
+        .map(
+          (item) => `<label class="selector-visual-choice${selected === item.id ? " is-selected" : ""}">
+            <input type="radio" name="${escapeHtml(name)}" value="${escapeHtml(item.id)}"${selected === item.id ? " checked" : ""} />
+            ${renderImageFrame(item.screenshot, item.alt || item.titleZh)}
+            <span class="selector-visual-label">${renderInlineEnglishTitle(item.titleZh, item.titleEn)}</span>
+          </label>`
+        )
+        .join("")}
+    </div>
+  </article>`;
+}
+
+function renderSelectorWizardResults(packet) {
+  return `<div class="selector-wizard-results" data-selector-wizard-results>
+    <div class="section-head">
+      <div class="section-head-main">
+        <p class="eyebrow">${escapeHtml(bilingualText("推荐结果", "Recommendations"))}</p>
+        <h2 class="section-title">${escapeHtml(bilingualText("推荐你先看这 2 到 3 个风格", "Start with these 2-3 styles"))}</h2>
+      </div>
+    </div>
+    <div class="selector-recommendation-grid">
+      ${packet.results
+        .map(
+          ({ style, reasons }) => `<article class="selector-result-card card-surface">
+            <a ${linkAttrs(browseHref(style.slug), "selector-result-media")}>
+              ${renderImageFrame(style.cover, style.coverAlt || style.nameZh)}
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">${renderInlineEnglishTitle(style.nameZh, style.titleEn || style.title)}</h3>
+              <p class="card-summary">${escapeHtml(`适合做：${style.cardUses.slice(0, 3).join(" · ")}`)}</p>
+              ${renderList(reasons)}
+              <div class="hero-actions">
+                <a ${linkAttrs(browseHref(style.slug), "text-link")}>${escapeHtml(bilingualText("查看详情", "Open Detail"))}</a>
+              </div>
+            </div>
+          </article>`
+        )
+        .join("")}
+    </div>
+  </div>`;
+}
+
 function buildHomePage() {
   return layout({
     title: siteMeta.title,
@@ -2380,16 +3383,13 @@ function buildHomePage() {
     pathname: "/",
     pageClass: "home-page",
     body: [
-      renderHomeOverviewHero(),
-      renderBrowseModes(),
-      renderFamilyCoordinateSection(),
-      renderTimelineAtlasSection({
-        titleZh: "结果选完，再补历史来源",
-        titleEn: "Trace the lineage after you know the target",
-        kicker: bilingualText("历史来源", "Background Lineage"),
-        summary: "如果你已经知道自己想做档案站、作品集、品牌页或工具页，再往下看这些网站感觉分别来自哪条历史线。",
-        sectionId: "historical-timeline",
-        heroMode: false
+      renderLandingHero(),
+      renderStyleGallerySection({
+        sectionId: "home-gallery",
+        title: bilingualText("浏览风格", "Browse Styles"),
+        summary: "按直觉标签筛，先看截图，再决定要不要打开详情页拿 Prompt。",
+        actionHref: browseIndexHref(),
+        actionLabel: bilingualText(`查看全部 ${styleFamilies.length} 种风格`, `View all ${styleFamilies.length} styles`)
       })
     ].join("")
   });
@@ -2504,81 +3504,73 @@ function buildUseCasesPage() {
 }
 
 function buildSelectorPage() {
-  const packet = resolveSelectorPacket(selectorDefaultState);
-  const familyOptions = selectorFamilyCandidates(packet.useCase);
-  const structureOptions = selectorStructureCandidates(packet.useCase, packet.family);
-  const payload = serializeJsonForHtml(selectorPayload());
+  const packet = resolveSelectorWizardRecommendations(selectorWizardDefaultState);
+  const payload = serializeJsonForHtml(selectorWizardPayload());
 
   return layout({
     title: `${bilingualText("选型器", "Style Selector")} · ${siteMeta.title}`,
-    description: "A scenario-first selector that turns use cases into movement, family, structure, references, and prompt packets.",
+    description: "A 3-step selector that recommends the right styles for AI site builders.",
     pathname: selectorHref(),
     pageClass: "index-page selector-page",
     body: [
       renderPageLead({
         kicker: bilingualText("选型器", "Style Selector"),
         title: bilingualText("选你要做的网站，拿走建站方向", "Choose the site, get a build direction"),
-        summary: "给用 AI 做站但不擅长审美判断的人。先选网站类型，再拿到页面感觉、页面组织、真实参考和可直接复制的 prompt。",
-        detail: "你不需要先懂设计史，也不用先会说专业风格名词。只要说清楚你要做什么网站，这页就会把方向收敛到能直接开工的程度。",
-        actions: `<div class="hero-actions"><a ${linkAttrs("/use-cases", "ghost-button")}>${escapeHtml(
-          bilingualText("浏览全部场景", "Browse Use Cases")
-        )}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(
-          bilingualText("浏览网页家族", "Browse Families")
+        summary: "只回答 3 个问题：做什么网站、给谁看、想要什么感觉。系统会直接推荐 2 到 3 个可落地的风格。",
+        detail: "重点不是学名词，而是尽快缩小范围。结果会直接链接到风格详情页。",
+        actions: `<div class="hero-actions"><a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
+          bilingualText("先去浏览", "Browse First")
+        )}</a><a ${linkAttrs(aboutHref(), "button")}>${escapeHtml(
+          bilingualText("查看说明", "About")
         )}</a></div>`
       }),
-      `<section class="section selector-shell" id="selector">
-        <div class="selector-layout" data-style-selector>
-          <aside class="selector-panel card-surface">
-            <div class="selector-panel-copy">
-              <p class="eyebrow">${escapeHtml(bilingualText("开始选择", "Start Here"))}</p>
-              <h2 class="section-title">${escapeHtml(bilingualText("先从网站类型开始", "Start from the use case"))}</h2>
-              <p class="section-summary">${escapeHtml(
-                "先选网站类型；如果默认结果不对，再手动改页面感觉和页面组织。"
-              )}</p>
-            </div>
-            <form class="selector-form" data-selector-form>
-              ${renderSelectorField({
-                name: "useCaseId",
-                labelZh: "我要做什么网站",
-                labelEn: "Use Case",
-                options: useCases,
-                selected: packet.state.useCaseId
-              })}
-              ${renderSelectorField({
-                name: "familyId",
-                labelZh: "想让页面更像哪一类",
-                labelEn: "Make it feel more like",
-                options: familyOptions,
-                selected: packet.state.familyId,
-                allowAuto: true
-              })}
-              ${renderSelectorField({
-                name: "structureId",
-                labelZh: "想用哪种页面组织",
-                labelEn: "Organize it like",
-                options: structureOptions,
-                selected: packet.state.structureId,
-                allowAuto: true
-              })}
-              ${renderSelectorField({
-                name: "tone",
-                labelZh: "第一眼更偏什么气质",
-                labelEn: "First-impression tone",
-                options: selectorToneOptions,
-                selected: packet.state.tone
-              })}
-              ${renderSelectorField({
-                name: "mode",
-                labelZh: "更偏哪种交互方式",
-                labelEn: "Interaction style",
-                options: selectorModeOptions,
-                selected: packet.state.mode
-              })}
-            </form>
-          </aside>
-          ${renderSelectorResults(packet)}
+      `<section class="section selector-wizard-shell" id="selector">
+        <div class="selector-wizard-layout" data-selector-wizard>
+          <div class="selector-wizard-questions">
+            <article class="selector-step card-surface">
+              <div class="card-body">
+                <p class="card-kicker">${escapeHtml(bilingualText("步骤 1", "Step 1"))}</p>
+                <h2 class="section-title">${escapeHtml(bilingualText("你要做什么类型的网站？", "What kind of site are you making?"))}</h2>
+                <div class="wizard-pill-grid">
+                  ${selectorWizardSiteOptions
+                    .map((item) => renderSelectorWizardOption("siteType", item, packet.state.siteType))
+                    .join("")}
+                </div>
+              </div>
+            </article>
+            <article class="selector-step card-surface">
+              <div class="card-body">
+                <p class="card-kicker">${escapeHtml(bilingualText("步骤 2", "Step 2"))}</p>
+                <h2 class="section-title">${escapeHtml(bilingualText("给谁看？", "Who is it for?"))}</h2>
+                <div class="wizard-pill-grid">
+                  ${selectorWizardAudienceOptions
+                    .map((item) => renderSelectorWizardOption("audience", item, packet.state.audience))
+                    .join("")}
+                </div>
+              </div>
+            </article>
+            <article class="selector-step card-surface">
+              <div class="card-body">
+                <p class="card-kicker">${escapeHtml(bilingualText("步骤 3", "Step 3"))}</p>
+                <h2 class="section-title">${escapeHtml(bilingualText("你更喜欢哪种感觉？", "Which feeling fits better?"))}</h2>
+                ${renderSelectorWizardVisualGroup(
+                  "tone",
+                  bilingualText("组 A：安静克制 vs 强烈有力", "Group A: Quiet vs Bold"),
+                  selectorWizardVisualOptions.tone,
+                  packet.state.tone
+                )}
+                ${renderSelectorWizardVisualGroup(
+                  "order",
+                  bilingualText("组 B：整洁系统 vs 个性独特", "Group B: Structured vs Distinctive"),
+                  selectorWizardVisualOptions.order,
+                  packet.state.order
+                )}
+              </div>
+            </article>
+          </div>
+          ${renderSelectorWizardResults(packet)}
         </div>
-        <script id="selector-data" type="application/json">${payload}</script>
+        <script id="selector-wizard-data" type="application/json">${payload}</script>
       </section>`
     ].join("")
   });
@@ -2593,26 +3585,21 @@ function build() {
   copyDir(path.join(srcRoot, "screenshots"), path.join(distRoot, "screenshots"));
 
   writePage([], buildHomePage());
-  writePage(["families"], buildFamiliesPage());
+  writePage(["browse"], buildBrowsePage());
+  writePage(["about"], buildAboutPage());
   writePage(["movements"], buildMovementsPage());
-  writePage(["structures"], buildStructuresPage());
   writePage(["selector"], buildSelectorPage());
-  writePage(["use-cases"], buildUseCasesPage());
 
-  for (const family of families) {
-    writePage(["families", family.id], renderFamilyDetail(family));
+  for (const family of styleFamilies) {
+    writePage(["browse", family.slug], renderBrowseStyleDetail(family));
   }
 
   for (const movement of movements) {
     writePage(["movements", movement.id], renderMovementDetail(movement));
   }
 
-  for (const structure of structures) {
-    writePage(["structures", structure.id], renderStructureDetail(structure));
-  }
-
-  for (const useCase of useCases) {
-    writePage(["use-cases", useCase.id], renderUseCaseDetail(useCase));
+  for (const family of styleFamilies) {
+    writeFile(path.join(distRoot, "downloads", `${family.slug}.md`), renderStyleSkillMarkdown(family));
   }
 
   assertNoDuplicateImagesPerPage();
