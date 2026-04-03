@@ -34,20 +34,20 @@
       <main class="page"><section class="page-lead">
     <div class="page-lead-copy">
       <p class="eyebrow">选型器 / Style Selector</p>
-      <h1 class="hero-title">先说你要做什么网站 / Start with the site you need</h1>
-      <p class="hero-intro">这页是给用 AI 做站的人用的。先选网站类型，再微调页面感觉和组织方式，最后直接拿走参考站和 prompt。</p>
+      <h1 class="hero-title">选你要做的网站，拿走建站方向 / Choose the site, get a build direction</h1>
+      <p class="hero-intro">给用 AI 做站但不擅长审美判断的人。先选网站类型，再拿到页面感觉、页面组织、真实参考和可直接复制的 prompt。</p>
     </div>
     <aside class="page-lead-aside card-surface">
-      <p>它的工作很直接：把你要做的网站类型，转成更稳的页面方向、结构方式和可立即开工的 AI 输入。</p>
+      <p>你不需要先懂设计史，也不用先会说专业风格名词。只要说清楚你要做什么网站，这页就会把方向收敛到能直接开工的程度。</p>
       <div class="hero-actions"><a  class="ghost-button" href="/use-cases">浏览全部场景 / Browse Use Cases</a><a  class="button" href="/families">浏览网页家族 / Browse Families</a></div>
     </aside>
   </section><section class="section selector-shell" id="selector">
         <div class="selector-layout" data-style-selector>
           <aside class="selector-panel card-surface">
             <div class="selector-panel-copy">
-              <p class="eyebrow">输入条件 / Inputs</p>
+              <p class="eyebrow">开始选择 / Start Here</p>
               <h2 class="section-title">先从网站类型开始 / Start from the use case</h2>
-              <p class="section-summary">不需要先懂设计史。先选网站类型，系统会先缩小范围，再让你微调页面感觉和页面组织。</p>
+              <p class="section-summary">先选网站类型；如果默认结果不对，再手动改页面感觉和页面组织。</p>
             </div>
             <form class="selector-form" data-selector-form>
               <label class="selector-field">
@@ -58,28 +58,28 @@
     </select>
   </label>
               <label class="selector-field">
-    <span class="selector-label">页面感觉覆盖 / Family Override</span>
+    <span class="selector-label">想让页面更像哪一类 / Make it feel more like</span>
     <select class="selector-select" name="familyId" data-selector-field="familyId">
       <option value="">自动匹配 / Auto</option>
       <option value="curated-reference-directory">策展目录索引型 / Curated Reference Directory</option><option value="swiss-typographic-grid">瑞士排印网格型 / Swiss Typographic Grid</option>
     </select>
   </label>
               <label class="selector-field">
-    <span class="selector-label">页面组织覆盖 / Structure Override</span>
+    <span class="selector-label">想用哪种页面组织 / Organize it like</span>
     <select class="selector-select" name="structureId" data-selector-field="structureId">
       <option value="">自动匹配 / Auto</option>
       <option value="catalog-explorer">目录索引型 / Catalog Explorer</option>
     </select>
   </label>
               <label class="selector-field">
-    <span class="selector-label">气质偏好 / Tone</span>
+    <span class="selector-label">第一眼更偏什么气质 / First-impression tone</span>
     <select class="selector-select" name="tone" data-selector-field="tone">
       
       <option value="auto" selected>自动 / Auto</option><option value="quiet">安静克制 / Quiet</option><option value="balanced">平衡中性 / Balanced</option><option value="bold">强烈表达 / Bold</option>
     </select>
   </label>
               <label class="selector-field">
-    <span class="selector-label">交互偏好 / Mode</span>
+    <span class="selector-label">更偏哪种交互方式 / Interaction style</span>
     <select class="selector-select" name="mode" data-selector-field="mode">
       
       <option value="auto" selected>自动 / Auto</option><option value="browse">浏览索引 / Browse / Index</option><option value="story">主叙事 / Story / Feature</option><option value="tool">工具操作 / Tool / Workbench</option><option value="immersive">沉浸舞台 / Immersive / Stage</option>
@@ -98,19 +98,19 @@
         <p class="section-summary">适合风格库、灵感库、模板库和设计参考站。关键是先给图像入口，再给分类、再给详情页。</p>
         <div class="selector-summary-grid">
           <div class="meta-block">
-            <h4>内容形状 / Content Shape</h4>
+            <h4>你的内容大概长这样 / Content Shape</h4>
             <p>Many parallel references, screenshot-heavy browsing, repeatable cards.</p>
           </div>
           <div class="meta-block">
-            <h4>用户目标 / User Goal</h4>
+            <h4>你想让用户先感受到 / User Outcome</h4>
             <p>快速比较风格、看真实案例、生成后续 agent 可复用的 style packet。</p>
           </div>
           <div class="meta-block">
-            <h4>场景气质 / Tone</h4>
+            <h4>第一眼气质 / First Impression</h4>
             <p>自动 / Auto</p>
           </div>
           <div class="meta-block">
-            <h4>交互倾向 / Mode</h4>
+            <h4>交互方式 / Interaction Mode</h4>
             <p>自动 / Auto</p>
           </div>
         </div>
@@ -119,7 +119,7 @@
     <div class="selector-choice-grid">
       <article class="detail-card relation-card selector-choice-card card-surface">
     <div class="card-body">
-      <p class="card-kicker">风格来源 / Historical Movement</p>
+      <p class="card-kicker">历史线索 / Background Lineage</p>
       <h3 class="card-title"><span class="bilingual-stack">
     <span class="bilingual-stack-zh">瑞士风格</span>
     <span class="bilingual-stack-en">Swiss Style</span>
@@ -170,28 +170,28 @@
     <div class="selector-meta-grid">
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">借法 / Borrow</p>
+          <p class="card-kicker">直接借这几条 / Copy These Traits</p>
           <ul class="bullet-list"><li>visible browse and filter paths</li><li>directory framing</li><li>high sample density without losing scannability</li><li>taxonomy</li></ul>
         </div>
       </article>
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">避免 / Avoid</p>
+          <p class="card-kicker">别做成这样 / Avoid These Moves</p>
           <ul class="bullet-list"><li>首页塞满理论说明</li><li>只有截图没有分类</li><li>一上来就逼用户读长文</li><li>a strong single narrative matters most</li></ul>
         </div>
       </article>
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">备选路径 / Alternatives</p>
+          <p class="card-kicker">如果结果不对，改这里 / If This Feels Wrong</p>
           <div class="selector-alternative-stack">
             <div class="meta-block">
-              <h4>备选家族 / Family Alternatives</h4>
+              <h4>换一种页面感觉 / Try Another Page Feeling</h4>
               <div class="pill-row">
     <a  class="pill" href="/families/swiss-typographic-grid"><span class="pill-text">瑞士排印网格型 / Swiss Typographic Grid</span></a>
   </div>
             </div>
             <div class="meta-block">
-              <h4>备选结构 / Structure Alternatives</h4>
+              <h4>换一种页面组织 / Try Another Structure</h4>
               <p>当前结构已是最直接匹配 / Current structure is already the primary fit</p>
             </div>
           </div>
@@ -207,7 +207,7 @@
     <section class="selector-reference-section">
       <div class="section-head">
     <div class="section-head-main">
-      <p class="eyebrow">真实参考 / Live References</p>
+      <p class="eyebrow">先看这几个真实网站 / Open These Real Sites First</p>
       <h2 class="section-title">直接打开真实站点 / Open the closest real websites</h2>
     </div>
     <div class="section-head-side">
@@ -247,8 +247,8 @@
     </section>
     <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
       <div class="card-body">
-        <p class="card-kicker">Prompt 包 / Prompt Packet</p>
-        <h3 class="card-title">这就是可以直接交给 AI 的版本 / This is the AI-ready packet</h3>
+        <p class="card-kicker">交给 AI 的 Prompt / AI Prompt</p>
+        <h3 class="card-title">把下面这段直接交给 AI / Paste This Into Your AI Builder</h3>
         <code>内容类型 Content Type: 风格图谱与参考库 / Style Atlas / Reference Library
 历史线索 Historical Movement: 瑞士风格 / Swiss Style
 网页家族 Visual Family: 策展目录索引型 / Curated Reference Directory

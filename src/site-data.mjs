@@ -8,11 +8,11 @@ export const siteMeta = {
 
 export const hero = {
   eyebrow: "Style-To-Site Atlas",
-  title: "先按网站类型，再决定页面感觉",
+  title: "先选你要做的网站，再决定风格和结构",
   intro:
-    "这不是给设计史学生看的首页，而是给想用 AI 做站的人准备的风格入口。先确定你要做什么网站，再去看页面感觉、结构和历史来源。",
+    "这是给用 AI 做站的人用的风格选型工具，不是设计史百科首页。",
   support:
-    "先用 use case 缩小方向，再用 web family 和 structure 修正结果，最后拿走真实参考和 prompt。",
+    "先选网站类型，再拿走页面感觉、页面组织、真实参考和 prompt；历史来源放在后面补。",
   primaryCta: { label: "Start Selector", href: "/selector" },
   secondaryCta: { label: "Browse Families", href: "/families" },
   note: "Use-case first. Family and structure second. History after the direction is clear."
@@ -90,7 +90,7 @@ export const browseModes = [
     id: "use-cases",
     title: "Use Cases",
     count: "7",
-    summary: "如果你不知道自己喜欢什么，从这里开始：先按网站类型选，再看最合适的风格和结构。",
+    summary: "如果你不知道自己喜欢什么，从这里开始最快：先按网站类型选，再拿结果去喂给 AI。",
     href: "/use-cases",
     detail: "最适合第一次进入。先从任务出发，再继续进入选型器。"
   },
@@ -106,7 +106,7 @@ export const browseModes = [
     id: "movements",
     title: "Historical Movements",
     count: "6",
-    summary: "当你已经知道自己想做出某种感觉，再回来看它的历史来源和常见误用。",
+    summary: "当你已经选到一个方向，再回来看它的历史来源和常见误用。",
     href: "/movements",
     detail: "适合补背景，不适合当第一次入口。"
   }

@@ -326,19 +326,19 @@ function renderSelectorResults(data, packet) {
         <p class="section-summary">${escapeHtml(packet.useCase.summary)}</p>
         <div class="selector-summary-grid">
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("内容形状", "Content Shape"))}</h4>
+            <h4>${escapeHtml(bilingualText("你的内容大概长这样", "Content Shape"))}</h4>
             <p>${escapeHtml(packet.useCase.contentShape)}</p>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("用户目标", "User Goal"))}</h4>
+            <h4>${escapeHtml(bilingualText("你想让用户先感受到", "User Outcome"))}</h4>
             <p>${escapeHtml(packet.useCase.userGoal)}</p>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("场景气质", "Tone"))}</h4>
+            <h4>${escapeHtml(bilingualText("第一眼气质", "First Impression"))}</h4>
             <p>${escapeHtml(selectorToneLabel(data, packet.state.tone))}</p>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("交互倾向", "Mode"))}</h4>
+            <h4>${escapeHtml(bilingualText("交互方式", "Interaction Mode"))}</h4>
             <p>${escapeHtml(selectorModeLabel(data, packet.state.mode))}</p>
           </div>
         </div>
@@ -346,8 +346,8 @@ function renderSelectorResults(data, packet) {
     </article>
     <div class="selector-choice-grid">
       ${renderSelectorChoiceCard({
-        kickerZh: "风格来源",
-        kickerEn: "Historical Movement",
+        kickerZh: "历史线索",
+        kickerEn: "Background Lineage",
         item: packet.movement,
         href: packet.movement?.href || "/movements",
         summary: packet.movement?.whyItMatters || packet.movement?.summary || "",
@@ -389,22 +389,22 @@ function renderSelectorResults(data, packet) {
     <div class="selector-meta-grid">
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("借法", "Borrow"))}</p>
+          <p class="card-kicker">${escapeHtml(bilingualText("直接借这几条", "Copy These Traits"))}</p>
           ${renderList(packet.borrow)}
         </div>
       </article>
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("避免", "Avoid"))}</p>
+          <p class="card-kicker">${escapeHtml(bilingualText("别做成这样", "Avoid These Moves"))}</p>
           ${renderList(packet.avoid)}
         </div>
       </article>
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("备选路径", "Alternatives"))}</p>
+          <p class="card-kicker">${escapeHtml(bilingualText("如果结果不对，改这里", "If This Feels Wrong"))}</p>
           <div class="selector-alternative-stack">
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("备选家族", "Family Alternatives"))}</h4>
+              <h4>${escapeHtml(bilingualText("换一种页面感觉", "Try Another Page Feeling"))}</h4>
               ${
                 alternativeFamilies.length
                   ? renderLinkedPills(alternativeFamilies)
@@ -412,7 +412,7 @@ function renderSelectorResults(data, packet) {
               }
             </div>
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("备选结构", "Structure Alternatives"))}</h4>
+              <h4>${escapeHtml(bilingualText("换一种页面组织", "Try Another Structure"))}</h4>
               ${
                 alternativeStructures.length
                   ? renderLinkedPills(alternativeStructures)
@@ -436,7 +436,7 @@ function renderSelectorResults(data, packet) {
     <section class="selector-reference-section">
       <div class="section-head">
         <div class="section-head-main">
-          <p class="eyebrow">${escapeHtml(bilingualText("真实参考", "Live References"))}</p>
+          <p class="eyebrow">${escapeHtml(bilingualText("先看这几个真实网站", "Open These Real Sites First"))}</p>
           <h2 class="section-title">${escapeHtml(bilingualText("直接打开真实站点", "Open the closest real websites"))}</h2>
         </div>
       </div>
@@ -446,8 +446,8 @@ function renderSelectorResults(data, packet) {
     </section>
     <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
       <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText("Prompt 包", "Prompt Packet"))}</p>
-        <h3 class="card-title">${escapeHtml(bilingualText("这就是可以直接交给 AI 的版本", "This is the AI-ready packet"))}</h3>
+        <p class="card-kicker">${escapeHtml(bilingualText("交给 AI 的 Prompt", "AI Prompt"))}</p>
+        <h3 class="card-title">${escapeHtml(bilingualText("把下面这段直接交给 AI", "Paste This Into Your AI Builder"))}</h3>
         <code>${escapeHtml(packet.prompt)}</code>
         <div class="hero-actions">
           <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>

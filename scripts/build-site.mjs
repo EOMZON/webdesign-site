@@ -1052,16 +1052,16 @@ function renderHomeOverviewHero() {
         <p class="eyebrow">${escapeHtml(bilingualText("AI 建站风格选型", "Style-To-Site Atlas"))}</p>
         <h1 class="hero-title home-hero-title">
           <span class="home-hero-title-zh">
-            <span>先按网站类型</span>
-            <span>找到合适方向</span>
+            <span>先选你要做的网站</span>
+            <span>再决定风格和结构</span>
           </span>
-          <span class="home-hero-title-en">Start with the site you need, then choose the right direction</span>
+          <span class="home-hero-title-en">Choose the site first, then decide the style and structure</span>
         </h1>
-        <p class="hero-support">给用 AI 做站但不确定审美方向的人。先看你要做个人站、品牌页、工具页还是作品集，再拿走参考站、页面结构和 prompt。</p>
+        <p class="hero-support">给用 AI 做站、但不知道该做成什么样的人。先选网站类型，再拿到页面感觉、页面组织、真实参考和可直接给 AI 的 prompt。</p>
       </div>
       <div class="home-hero-deck">
         <p class="home-hero-stats">${escapeHtml(
-          `${movements.length}条历史线索 · ${families.length}种网站感觉 · ${useCases.length}类建站场景`
+          `${useCases.length}类建站场景 · ${families.length}种页面感觉 · ${movements.length}条历史来源`
         )}</p>
         <div class="hero-route-buttons">
           <a ${linkAttrs(selectorHref(), "hero-route-button hero-route-button--primary")}>${escapeHtml(
@@ -1599,19 +1599,19 @@ function renderSelectorResults(packet) {
         <p class="section-summary">${escapeHtml(packet.useCase.summary)}</p>
         <div class="selector-summary-grid">
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("内容形状", "Content Shape"))}</h4>
+            <h4>${escapeHtml(bilingualText("你的内容大概长这样", "Content Shape"))}</h4>
             <p>${escapeHtml(packet.useCase.contentShape)}</p>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("用户目标", "User Goal"))}</h4>
+            <h4>${escapeHtml(bilingualText("你想让用户先感受到", "User Outcome"))}</h4>
             <p>${escapeHtml(packet.useCase.userGoal)}</p>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("场景气质", "Tone"))}</h4>
+            <h4>${escapeHtml(bilingualText("第一眼气质", "First Impression"))}</h4>
             <p>${escapeHtml(selectorToneLabel(packet.state.tone))}</p>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("交互倾向", "Mode"))}</h4>
+            <h4>${escapeHtml(bilingualText("交互方式", "Interaction Mode"))}</h4>
             <p>${escapeHtml(selectorModeLabel(packet.state.mode))}</p>
           </div>
         </div>
@@ -1619,8 +1619,8 @@ function renderSelectorResults(packet) {
     </article>
     <div class="selector-choice-grid">
       ${renderSelectorChoiceCard({
-        kickerZh: "风格来源",
-        kickerEn: "Historical Movement",
+        kickerZh: "历史线索",
+        kickerEn: "Background Lineage",
         item: packet.movement,
         href: packet.movement ? movementHref(packet.movement.id) : movementHref("swiss-international-typography"),
         summary: packet.movement?.whyItMatters || packet.movement?.summary || "",
@@ -1662,26 +1662,26 @@ function renderSelectorResults(packet) {
     <div class="selector-meta-grid">
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("借法", "Borrow"))}</p>
+          <p class="card-kicker">${escapeHtml(bilingualText("直接借这几条", "Copy These Traits"))}</p>
           ${renderList(packet.borrow)}
         </div>
       </article>
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("避免", "Avoid"))}</p>
+          <p class="card-kicker">${escapeHtml(bilingualText("别做成这样", "Avoid These Moves"))}</p>
           ${renderList(packet.avoid)}
         </div>
       </article>
       <article class="detail-card card-surface">
         <div class="card-body">
-          <p class="card-kicker">${escapeHtml(bilingualText("备选路径", "Alternatives"))}</p>
+          <p class="card-kicker">${escapeHtml(bilingualText("如果结果不对，改这里", "If This Feels Wrong"))}</p>
           <div class="selector-alternative-stack">
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("备选家族", "Family Alternatives"))}</h4>
+              <h4>${escapeHtml(bilingualText("换一种页面感觉", "Try Another Page Feeling"))}</h4>
               ${alternativeFamilies.length ? renderLinkedPills(alternativeFamilies, familyMap, familyHref) : `<p>${escapeHtml(bilingualText("当前已是最直接匹配", "Current match is already the primary fit"))}</p>`}
             </div>
             <div class="meta-block">
-              <h4>${escapeHtml(bilingualText("备选结构", "Structure Alternatives"))}</h4>
+              <h4>${escapeHtml(bilingualText("换一种页面组织", "Try Another Structure"))}</h4>
               ${alternativeStructures.length ? renderLinkedPills(alternativeStructures, structureMap, structureHref) : `<p>${escapeHtml(bilingualText("当前结构已是最直接匹配", "Current structure is already the primary fit"))}</p>`}
             </div>
           </div>
@@ -1700,7 +1700,7 @@ function renderSelectorResults(packet) {
     </div>
     <section class="selector-reference-section">
       ${renderSectionHead(
-        bilingualText("真实参考", "Live References"),
+        bilingualText("先看这几个真实网站", "Open These Real Sites First"),
         bilingualText("直接打开真实站点", "Open the closest real websites"),
         ""
       )}
@@ -1710,8 +1710,8 @@ function renderSelectorResults(packet) {
     </section>
     <article class="selector-prompt-panel detail-card card-surface" data-copy-container>
       <div class="card-body">
-        <p class="card-kicker">${escapeHtml(bilingualText("Prompt 包", "Prompt Packet"))}</p>
-        <h3 class="card-title">${escapeHtml(bilingualText("这就是可以直接交给 AI 的版本", "This is the AI-ready packet"))}</h3>
+        <p class="card-kicker">${escapeHtml(bilingualText("交给 AI 的 Prompt", "AI Prompt"))}</p>
+        <h3 class="card-title">${escapeHtml(bilingualText("把下面这段直接交给 AI", "Paste This Into Your AI Builder"))}</h3>
         <code>${escapeHtml(packet.prompt)}</code>
         <div class="hero-actions">
           <button class="copy-button" type="button" data-copy-prompt>${escapeHtml(bilingualText("复制", "Copy"))}</button>
@@ -2062,7 +2062,7 @@ function renderMovementDetail(item) {
             </div>
           </div>
           <div class="meta-block">
-            <h4>${escapeHtml(bilingualText("放到网站里会是什么效果", "Why It Matters On The Web"))}</h4>
+            <h4>${escapeHtml(bilingualText("第一眼通常是什么感觉", "What It Usually Feels Like"))}</h4>
             <p>${escapeHtml(item.whyItMatters)}</p>
           </div>
         </div>
@@ -2080,14 +2080,14 @@ function renderMovementDetail(item) {
       `<section class="section">
         ${renderSectionHead(
           bilingualText("拿它做什么网站", "How It Translates Into Sites"),
-          bilingualText("先看适合场景，再看核心语法和风险", "Start with the site fit, then learn the language"),
+          bilingualText("先看适合做什么站，再看页面常见做法和最容易做坏什么", "Start with the site fit, then see the usual moves and common mistakes"),
           ""
         )}
         <div class="detail-section-grid">
           <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("适合", "Best For"))}</p>${renderStaticPills(
             item.bestFor || []
           )}</div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("原则", "Principles"))}</p>${renderList(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("页面里常见做法", "Common Page Moves"))}</p>${renderList(
             item.principles
           )}</div></article>
           <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("误用提醒", "Watchouts"))}</p>${renderList(
@@ -2323,18 +2323,18 @@ function renderUseCaseDetail(item) {
       </section>`,
       `<section class="section">
         ${renderSectionHead(
-          bilingualText("为什么适配", "Why This Fit Works"),
-          bilingualText("从任务反推视觉和结构", "Work backward from task to style and structure"),
+          bilingualText("先这样做", "Start Here"),
+          bilingualText("从任务反推页面感觉和页面组织", "Work backward from the job to page feeling and structure"),
           ""
         )}
         <div class="detail-section-grid">
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("内容形状", "Content Shape"))}</p><p>${escapeHtml(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("页面里会出现什么", "What Shows Up On The Page"))}</p><p>${escapeHtml(
             item.contentShape
           )}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("用户目标", "User Goal"))}</p><p>${escapeHtml(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("第一眼要让用户明白什么", "What Users Should Get First"))}</p><p>${escapeHtml(
             item.userGoal
           )}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("为什么", "Why"))}</p><p>${escapeHtml(
+          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("这样安排的原因", "Why This Arrangement Works"))}</p><p>${escapeHtml(
             item.note
           )}</p></div></article>
           <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(bilingualText("避免", "Avoid"))}</p>${renderList(
@@ -2384,10 +2384,10 @@ function buildHomePage() {
       renderBrowseModes(),
       renderFamilyCoordinateSection(),
       renderTimelineAtlasSection({
-        titleZh: "最后再补历史来源",
-        titleEn: "Open the historical lineage last",
-        kicker: bilingualText("历史流派", "Historical Timeline"),
-        summary: "已经先看过网站类型或页面感觉，再回来看这些风格从哪里来、为什么会演化成今天的网站语言。",
+        titleZh: "结果选完，再补历史来源",
+        titleEn: "Trace the lineage after you know the target",
+        kicker: bilingualText("历史来源", "Background Lineage"),
+        summary: "如果你已经知道自己想做档案站、作品集、品牌页或工具页，再往下看这些网站感觉分别来自哪条历史线。",
         sectionId: "historical-timeline",
         heroMode: false
       })
@@ -2430,16 +2430,16 @@ function buildMovementsPage() {
     body: [
       renderPageLead({
         kicker: bilingualText("历史流派", "Historical Movements"),
-        title: bilingualText("按设计谱系浏览", "Browse by Design Lineage"),
-        summary: "这里看的是语言来源，不是网页模板。更适合在你已经看中过某种页面感觉之后，再回来补它的出处。",
-        detail: "从 Arts and Crafts、Art Nouveau、Bauhaus、Swiss、Mid-Century Modern 到 Brutalism、Memphis、Cyberpunk，先识别祖先语言，再理解它为什么会在今天的网站里复活。",
+        title: bilingualText("从喜欢的网站感觉，往前找它从哪来", "Trace the lineage behind the site feeling"),
+        summary: "如果你看中过某种网站感觉，但不知道它为什么成立，就从这里往前找。",
+        detail: "看这类网站通常从哪来、适合落成什么站、下一步该看哪类网页。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
       renderTimelineAtlasSection({
         titleZh: "历史流派时间轴",
         titleEn: "Historical Timeline",
-        kicker: bilingualText("按年代浏览", "Browse by Period"),
-        summary: "",
+        kicker: bilingualText("历史线索", "Background Lineage"),
+        summary: "当你已经知道自己想做哪类网站，再回看这些页面感觉分别从哪条历史线长出来。",
         sectionId: "movement-timeline"
       })
     ].join("")
@@ -2517,9 +2517,9 @@ function buildSelectorPage() {
     body: [
       renderPageLead({
         kicker: bilingualText("选型器", "Style Selector"),
-        title: bilingualText("先说你要做什么网站", "Start with the site you need"),
-        summary: "这页是给用 AI 做站的人用的。先选网站类型，再微调页面感觉和组织方式，最后直接拿走参考站和 prompt。",
-        detail: "它的工作很直接：把你要做的网站类型，转成更稳的页面方向、结构方式和可立即开工的 AI 输入。",
+        title: bilingualText("选你要做的网站，拿走建站方向", "Choose the site, get a build direction"),
+        summary: "给用 AI 做站但不擅长审美判断的人。先选网站类型，再拿到页面感觉、页面组织、真实参考和可直接复制的 prompt。",
+        detail: "你不需要先懂设计史，也不用先会说专业风格名词。只要说清楚你要做什么网站，这页就会把方向收敛到能直接开工的程度。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/use-cases", "ghost-button")}>${escapeHtml(
           bilingualText("浏览全部场景", "Browse Use Cases")
         )}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(
@@ -2530,10 +2530,10 @@ function buildSelectorPage() {
         <div class="selector-layout" data-style-selector>
           <aside class="selector-panel card-surface">
             <div class="selector-panel-copy">
-              <p class="eyebrow">${escapeHtml(bilingualText("输入条件", "Inputs"))}</p>
+              <p class="eyebrow">${escapeHtml(bilingualText("开始选择", "Start Here"))}</p>
               <h2 class="section-title">${escapeHtml(bilingualText("先从网站类型开始", "Start from the use case"))}</h2>
               <p class="section-summary">${escapeHtml(
-                "不需要先懂设计史。先选网站类型，系统会先缩小范围，再让你微调页面感觉和页面组织。"
+                "先选网站类型；如果默认结果不对，再手动改页面感觉和页面组织。"
               )}</p>
             </div>
             <form class="selector-form" data-selector-form>
@@ -2546,31 +2546,31 @@ function buildSelectorPage() {
               })}
               ${renderSelectorField({
                 name: "familyId",
-                labelZh: "页面感觉覆盖",
-                labelEn: "Family Override",
+                labelZh: "想让页面更像哪一类",
+                labelEn: "Make it feel more like",
                 options: familyOptions,
                 selected: packet.state.familyId,
                 allowAuto: true
               })}
               ${renderSelectorField({
                 name: "structureId",
-                labelZh: "页面组织覆盖",
-                labelEn: "Structure Override",
+                labelZh: "想用哪种页面组织",
+                labelEn: "Organize it like",
                 options: structureOptions,
                 selected: packet.state.structureId,
                 allowAuto: true
               })}
               ${renderSelectorField({
                 name: "tone",
-                labelZh: "气质偏好",
-                labelEn: "Tone",
+                labelZh: "第一眼更偏什么气质",
+                labelEn: "First-impression tone",
                 options: selectorToneOptions,
                 selected: packet.state.tone
               })}
               ${renderSelectorField({
                 name: "mode",
-                labelZh: "交互偏好",
-                labelEn: "Mode",
+                labelZh: "更偏哪种交互方式",
+                labelEn: "Interaction style",
                 options: selectorModeOptions,
                 selected: packet.state.mode
               })}
