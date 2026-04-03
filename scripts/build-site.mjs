@@ -1010,9 +1010,9 @@ function renderRouteCards(options = {}) {
 function renderBrowseModes() {
   return `<section class="section" id="browse-modes">
     ${renderSectionHead(
-      bilingualText("浏览入口", "Entry Routes"),
-      bilingualText("先选入口，再进细节", "Pick an entry, then go deeper"),
-      "如果你只是想先把网站方向选对，就从最接近你的任务那条路进去。"
+      bilingualText("开始方式", "Entry Routes"),
+      bilingualText("先选进入方式，再往下看细节", "Choose your way in before reading the history"),
+      "第一次来这里，不要先读完整条时间线。先按网站类型、页面感觉或历史来源选一条最接近你的入口。"
     )}
     ${renderRouteCards()}
   </section>`;
@@ -1064,14 +1064,14 @@ function renderHomeOverviewHero() {
           `${movements.length}条历史线索 · ${families.length}种网站感觉 · ${useCases.length}类建站场景`
         )}</p>
         <div class="hero-route-buttons">
-          <a ${linkAttrs("/use-cases", "hero-route-button hero-route-button--primary")}>${escapeHtml(
-            bilingualText("先按网站类型开始", "Start With Use Cases")
+          <a ${linkAttrs(selectorHref(), "hero-route-button hero-route-button--primary")}>${escapeHtml(
+            bilingualText("直接开始选型", "Start the Selector")
+          )}</a>
+          <a ${linkAttrs("/use-cases", "hero-route-button")}>${escapeHtml(
+            bilingualText("先看网站类型", "Browse Use Cases")
           )}</a>
           <a ${linkAttrs("/families", "hero-route-button")}>${escapeHtml(
             bilingualText("再看页面感觉", "Browse Web Families")
-          )}</a>
-          <a ${linkAttrs("/movements", "hero-route-button")}>${escapeHtml(
-            bilingualText("最后补历史来源", "Open Movements")
           )}</a>
         </div>
       </div>
@@ -1232,9 +1232,9 @@ function renderTimelineAtlasSection(options = {}) {
 function renderFamilyCoordinateSection() {
   return `<section class="section" id="style-field">
     ${renderSectionHead(
-      bilingualText("风格坐标场", "Style Coordinate Field"),
-      bilingualText("先按页面感觉筛一轮", "Compare page tones first"),
-      "拿不准时，就先看它更偏系统还是舞台、更安静还是更有张力。"
+      bilingualText("页面感觉坐标场", "Style Coordinate Field"),
+      bilingualText("如果你已经知道想要什么页面感觉，从这里筛", "If you already know the page feel, start here"),
+      "横轴看页面更偏系统还是更偏舞台，纵轴看它更安静还是更有张力。先缩小感觉范围，再继续打开对应家族。"
     )}
     ${renderFieldAtlas()}
   </section>`;
@@ -2384,10 +2384,10 @@ function buildHomePage() {
       renderBrowseModes(),
       renderFamilyCoordinateSection(),
       renderTimelineAtlasSection({
-        titleZh: "按年代往下看",
-        titleEn: "Browse by era",
+        titleZh: "最后再补历史来源",
+        titleEn: "Open the historical lineage last",
         kicker: bilingualText("历史流派", "Historical Timeline"),
-        summary: "如果你想知道这些网站感觉从哪来，再往下看它们的历史来源和今天的常见落点。",
+        summary: "已经先看过网站类型或页面感觉，再回来看这些风格从哪里来、为什么会演化成今天的网站语言。",
         sectionId: "historical-timeline",
         heroMode: false
       })
@@ -2404,9 +2404,9 @@ function buildFamiliesPage() {
     body: [
       renderPageLead({
         kicker: bilingualText("网页家族", "Web Families"),
-        title: bilingualText("按网页家族浏览", "Browse by Web Family"),
-        summary: "这里看的是今天网站最常见的呈现家族，适合直接找站型参考。",
-        detail: "从 Editorial、Swiss、Monochrome Studio、Directory、Product、Stage 到 Anti-Grid，先看类型，再下钻细节。",
+        title: bilingualText("按页面感觉浏览", "Browse by Web Family"),
+        summary: "这里看的是今天网站最常见的页面感觉，适合直接找相近站型和真实参考。",
+        detail: "从 Editorial、Swiss、Monochrome Studio、Directory、Product、Stage 到 Anti-Grid，先看网页今天怎么长，再决定要不要回头补历史来源。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/movements", "button")}>${escapeHtml(bilingualText("查看历史流派", "Open Movements"))}</a></div>`
       }),
       renderFamilyGridSection({
@@ -2431,8 +2431,8 @@ function buildMovementsPage() {
       renderPageLead({
         kicker: bilingualText("历史流派", "Historical Movements"),
         title: bilingualText("按设计谱系浏览", "Browse by Design Lineage"),
-        summary: "这里看的是语言来源，不是网页模板。它帮助你把喜欢的味道接回更稳定的历史语境。",
-        detail: "从 Arts and Crafts、Art Nouveau、Bauhaus、Swiss、Mid-Century Modern 到 Brutalism、Memphis、Cyberpunk，先识别祖先语言。",
+        summary: "这里看的是语言来源，不是网页模板。更适合在你已经看中过某种页面感觉之后，再回来补它的出处。",
+        detail: "从 Arts and Crafts、Art Nouveau、Bauhaus、Swiss、Mid-Century Modern 到 Brutalism、Memphis、Cyberpunk，先识别祖先语言，再理解它为什么会在今天的网站里复活。",
         actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
       }),
       renderTimelineAtlasSection({
