@@ -1203,7 +1203,7 @@ function renderTopbar() {
         <a href="${escapeHtml(browseIndexHref())}">${escapeHtml(bilingualText("浏览", "Browse"))}</a>
         <a href="${escapeHtml(selectorHref())}">${escapeHtml(bilingualText("选型器", "Selector"))}</a>
         <a href="${escapeHtml(aboutHref())}">${escapeHtml(bilingualText("关于", "About"))}</a>
-        <a href="${escapeHtml(githubHref)}">${escapeHtml(bilingualText("GitHub", "GitHub"))}</a>
+        <a href="${escapeHtml(githubHref)}">${escapeHtml("GitHub ↗")}</a>
       </nav>
       <span class="status-pill">atlas v1.0</span>
     </div>
@@ -2212,111 +2212,6 @@ function renderBackLink(href, label) {
   return `<a ${linkAttrs(href, "back-link")}>${escapeHtml(label)}</a>`;
 }
 
-function renderStyleName(item, className = "") {
-  return `<span class="style-name${className ? ` ${escapeHtml(className)}` : ""}">
-    <span class="style-name-zh">${escapeHtml(item.nameZh || item.titleZh || item.title || "")}</span>
-    <span class="style-name-en">(${escapeHtml(item.titleEn || item.title || "")})</span>
-  </span>`;
-}
-
-function renderBrowseCard(item) {
-  const searchTerms = [
-    item.nameZh,
-    item.titleEn,
-    ...(item.cardUses || []),
-    ...(item.lookLike || []),
-    ...(item.notFor || []),
-    ...(item.filterTags || [])
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return `<article class="browse-card card-surface" data-browse-card data-filter-tags="${escapeHtml(
-    ["all", ...(item.filterTags || [])].join(" ")
-  )}" data-search="${escapeHtml(searchTerms)}">
-    <a ${linkAttrs(item.href, "browse-card-media")}>
-      ${renderImageFrame(item.cover, item.coverAlt || item.nameZh || item.titleEn || item.title || "", "browse-card-image")}
-      <div class="card-overlay browse-card-overlay">
-        <span class="card-overlay-label">${escapeHtml(
-          browseFilterOptions.find((entry) => entry.id === item.filterTags?.[0])?.labelZh || "风格"
-        )}</span>
-      </div>
-    </a>
-    <div class="card-body">
-      <h3 class="browse-card-title">${renderStyleName(item)}</h3>
-      <p class="browse-card-fit">${escapeHtml(`适合做：${(item.cardUses || []).slice(0, 3).join(" · ")}`)}</p>
-    </div>
-  </article>`;
-}
-
-function renderBrowseGallery(items, options = {}) {
-  const {
-    title = bilingualText("浏览风格", "Browse Styles"),
-    kicker = bilingualText("风格图库", "Style Gallery"),
-    summary = "直接看图、切标签、搜关键词。先找到像的，再决定要不要点进详情页拿 Prompt。",
-    actionMarkup = "",
-    showSearch = false,
-    showViewToggle = false,
-    sectionId = "browse-gallery",
-    rootAttrs = "",
-    itemsLimit = 0
-  } = options;
-
-  const shownItems = itemsLimit ? items.slice(0, itemsLimit) : items;
-
-  return `<section class="section browse-section" id="${escapeHtml(sectionId)}" ${rootAttrs}>
-    ${renderSectionHead(kicker, title, summary, actionMarkup)}
-    <div class="browse-controls">
-      <div class="browse-filter-row" role="tablist" aria-label="${escapeHtml(bilingualText("筛选标签", "Browse Filters"))}">
-        ${browseFilterOptions
-          .map(
-            (item, index) =>
-              `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" data-browse-filter="${escapeHtml(
-                item.id
-              )}">${escapeHtml(item.labelZh)}</button>`
-          )
-          .join("")}
-      </div>
-      ${
-        showSearch || showViewToggle
-          ? `<div class="browse-toolbar">
-              ${
-                showSearch
-                  ? `<label class="browse-search">
-                      <span class="browse-search-label">${escapeHtml(bilingualText("搜索", "Search"))}</span>
-                      <input type="search" placeholder="${escapeHtml(
-                        bilingualText("搜索风格名、场景或关键词", "Search styles, scenes, or traits")
-                      )}" data-browse-search />
-                    </label>`
-                  : ""
-              }
-              ${
-                showViewToggle
-                  ? `<div class="browse-view-toggle" role="tablist" aria-label="${escapeHtml(
-                      bilingualText("视图", "View")
-                    )}">
-                      <button class="filter-chip is-active" type="button" data-browse-view="grid">${escapeHtml(
-                        bilingualText("网格", "Grid")
-                      )}</button>
-                      <button class="filter-chip" type="button" data-browse-view="list">${escapeHtml(
-                        bilingualText("列表", "List")
-                      )}</button>
-                    </div>`
-                  : ""
-              }
-            </div>`
-          : ""
-      }
-    </div>
-    <div class="browse-grid" data-browse-grid>
-      ${shownItems.map((item) => renderBrowseCard(item)).join("")}
-    </div>
-    <p class="browse-empty" data-browse-empty hidden>${escapeHtml(
-      bilingualText("没有匹配结果，换个标签或关键词试试。", "No matches yet. Try another filter or keyword.")
-    )}</p>
-  </section>`;
-}
-
 function renderFamilyDetail(item) {
   const relatedMovements = item.movementIds.map((id) => movementMap.get(id)).filter(Boolean);
   const relatedPatterns = item.patternIds.map((id) => patternMap.get(id)).filter(Boolean);
@@ -3163,7 +3058,7 @@ function buildAboutPage() {
         summary: "首页负责看图和进入；浏览页负责比较；详情页负责拿 Prompt；选型器负责帮完全没有方向的人缩小范围。",
         detail: "你喜欢的时间轴和风格背景被放到这里和详情页底部，不再占首页主入口，但仍然完整保留。",
         actions: `<div class="hero-actions"><a ${linkAttrs(githubHref, "button")}>${escapeHtml(
-          bilingualText("GitHub", "GitHub")
+          "GitHub ↗"
         )}</a><a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
           bilingualText("开始浏览", "Start Browsing")
         )}</a></div>`
@@ -3433,7 +3328,7 @@ function buildMovementsPage() {
         title: bilingualText("从喜欢的网站感觉，往前找它从哪来", "Trace the lineage behind the site feeling"),
         summary: "如果你看中过某种网站感觉，但不知道它为什么成立，就从这里往前找。",
         detail: "看这类网站通常从哪来、适合落成什么站、下一步该看哪类网页。",
-        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs("/families", "button")}>${escapeHtml(bilingualText("查看网页家族", "Open Families"))}</a></div>`
+        actions: `<div class="hero-actions"><a ${linkAttrs("/", "ghost-button")}>${escapeHtml(bilingualText("返回首页", "Back Home"))}</a><a ${linkAttrs(browseIndexHref(), "button")}>${escapeHtml(bilingualText("查看浏览页", "Open Browse"))}</a></div>`
       }),
       renderTimelineAtlasSection({
         titleZh: "历史流派时间轴",

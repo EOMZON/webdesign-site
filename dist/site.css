@@ -2747,6 +2747,16 @@ code {
   font-size: 0.82rem;
 }
 
+.detail-title .style-inline-title-zh {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.detail-title .style-inline-title-en {
+  font-size: 0.28em;
+  letter-spacing: 0.04em;
+}
+
 .style-card-fit,
 .browse-empty {
   margin: 0;
