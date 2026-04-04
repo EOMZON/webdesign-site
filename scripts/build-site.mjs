@@ -22,6 +22,7 @@ import {
   useCaseMeta
 } from "../src/atlas-taxonomy.mjs";
 import {
+  atlasEcosystemCatalog,
   designSkillsRepoHref,
   extraStyleSources,
   styleReferenceCatalog,
@@ -3344,6 +3345,47 @@ function buildBrowsePage() {
   });
 }
 
+function renderAtlasEcosystemSection() {
+  return `<section class="section" id="atlas-ecosystem">
+    ${renderSectionHead(
+      bilingualText("类似站点与开源路径", "Comparable Sites and Open-Source Paths"),
+      bilingualText("外面已经有哪些成熟做法", "What already exists outside this atlas"),
+      "市面上没有一个完全等于你现在这个站的现成产品。更接近的是四类分散方案：灵感图库、系统索引、历史档案、开源底座。"
+    )}
+    ${atlasEcosystemCatalog
+      .map(
+        (group) => `<div class="resource-group">
+          <div class="section-head">
+            <div class="section-head-main">
+              <p class="eyebrow">${escapeHtml(bilingualText("外部参考", "External Reference"))}</p>
+              <h2 class="section-title">${renderBilingualStack(group.titleZh, group.titleEn)}</h2>
+            </div>
+            <p class="section-summary">${escapeHtml(group.summaryZh)}</p>
+          </div>
+          <div class="detail-section-grid resource-grid">
+            ${group.items
+              .map(
+                (item) => `<article class="detail-card card-surface">
+                  <div class="card-body">
+                    <p class="card-kicker">${escapeHtml(item.openSource ? bilingualText("开源路径", "Open Source") : bilingualText("类似站点", "Comparable Site"))}</p>
+                    <h3 class="card-title">${renderInlineEnglishTitle(item.titleZh, item.titleEn)}</h3>
+                    <p class="card-summary">${escapeHtml(item.noteZh)}</p>
+                    ${renderStaticPills([...(item.tags || []), item.openSource ? "开源可借" : "结构可借"])}
+                    <div class="hero-actions resource-card-links">
+                      <a ${linkAttrs(item.href, "text-link")}>${escapeHtml(item.openSource ? "打开项目" : "打开站点")}</a>
+                      ${item.repoHref ? `<a ${linkAttrs(item.repoHref, "text-link")}>${escapeHtml("GitHub ↗")}</a>` : ""}
+                    </div>
+                  </div>
+                </article>`
+              )
+              .join("")}
+          </div>
+        </div>`
+      )
+      .join("")}
+  </section>`;
+}
+
 function buildAboutPage() {
   return layout({
     title: `${bilingualText("关于", "About")} · ${siteMeta.title}`,
@@ -3403,6 +3445,7 @@ function buildAboutPage() {
           </div>
         </article>
       </section>`,
+      renderAtlasEcosystemSection(),
       renderTimelineAtlasSection({
         titleZh: "历史流派时间轴",
         titleEn: "Historical Timeline",
@@ -3813,6 +3856,16 @@ function buildStyleCatalogPayload() {
   }));
 }
 
+function buildAtlasEcosystemPayload() {
+  return atlasEcosystemCatalog.map((group) => ({
+    id: group.id,
+    titleZh: group.titleZh,
+    titleEn: group.titleEn,
+    summaryZh: group.summaryZh,
+    items: group.items
+  }));
+}
+
 function build() {
   fs.rmSync(distRoot, { recursive: true, force: true });
   ensureDir(distRoot);
@@ -3840,6 +3893,7 @@ function build() {
   }
 
   writeFile(path.join(distRoot, "data", "style-catalog.json"), JSON.stringify(buildStyleCatalogPayload(), null, 2));
+  writeFile(path.join(distRoot, "data", "atlas-ecosystem.json"), JSON.stringify(buildAtlasEcosystemPayload(), null, 2));
 
   assertNoDuplicateImagesPerPage();
 }

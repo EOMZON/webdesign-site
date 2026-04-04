@@ -1,0 +1,193 @@
+[
+  {
+    "id": "live-galleries",
+    "titleZh": "灵感图库",
+    "titleEn": "Curated Galleries",
+    "summaryZh": "这一类最接近你的浏览页目标：先看截图，再按标签、类型或场景筛。多数不是开源，但很适合借它们的分类方法和首屏组织。",
+    "items": [
+      {
+        "titleZh": "Minimal Gallery",
+        "titleEn": "Minimal Gallery",
+        "href": "https://minimal.gallery/",
+        "noteZh": "截图优先，并把网站、模板、工具放在同一套浏览入口里。",
+        "tags": [
+          "人工策展",
+          "截图聚合",
+          "模板延展"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "A1 Gallery",
+        "titleEn": "A1 Gallery",
+        "href": "https://www.a1.gallery/",
+        "noteZh": "风格、类型、行业、技术标签拆得很细，更像现代化的 inspiration atlas。",
+        "tags": [
+          "标签体系",
+          "高更新",
+          "类型筛选"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "Land-book",
+        "titleEn": "Land-book",
+        "href": "https://land-book.com/",
+        "noteZh": "适合参考 gallery + 收藏板 + section 检索 这一层产品结构。",
+        "tags": [
+          "灵感板",
+          "section 检索",
+          "付费深度"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "One Page Love",
+        "titleEn": "One Page Love",
+        "href": "https://onepagelove.com/",
+        "noteZh": "单页网站、区块模块、模板市场三层做得很成熟。",
+        "tags": [
+          "单页网站",
+          "区块参考",
+          "模板转化"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "Siiimple",
+        "titleEn": "Siiimple",
+        "href": "https://siiimple.com/",
+        "noteZh": "极简方向特别清楚，适合参考“少而准”的视觉筛法。",
+        "tags": [
+          "极简",
+          "画廊",
+          "人工筛选"
+        ],
+        "openSource": false
+      }
+    ]
+  },
+  {
+    "id": "system-indexes",
+    "titleZh": "系统与组件索引",
+    "titleEn": "System Indexes",
+    "summaryZh": "这一类不是风格图库，而是把设计系统、组件、规范和实现方式做成检索入口。适合你补“怎么做出来”这一层。",
+    "items": [
+      {
+        "titleZh": "Component Gallery",
+        "titleEn": "Component Gallery",
+        "href": "https://component.gallery/",
+        "noteZh": "把组件、设计系统、代码示例和开源状态放在同一条检索链里。",
+        "tags": [
+          "组件索引",
+          "设计系统",
+          "代码示例"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "Design Systems Repo",
+        "titleEn": "Design Systems Repo",
+        "href": "https://designsystemsrepo.com/",
+        "noteZh": "不只看系统本身，还把文章、工具、书和 talks 组织成一套资源库。",
+        "tags": [
+          "设计系统",
+          "资源库",
+          "文章工具"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "Open UI",
+        "titleEn": "Open UI",
+        "href": "https://open-ui.org/",
+        "noteZh": "更偏底层组件语义、部件、状态和行为研究，适合做交互层参考。",
+        "tags": [
+          "组件研究",
+          "交互语义",
+          "规范化"
+        ],
+        "openSource": true
+      }
+    ]
+  },
+  {
+    "id": "historical-archives",
+    "titleZh": "历史档案",
+    "titleEn": "Historical Archives",
+    "summaryZh": "这一类更接近你现在 About 页时间轴的外部参照。重点不是模板，而是历史演化、年代感和视觉源流。",
+    "items": [
+      {
+        "titleZh": "Web Design Museum",
+        "titleEn": "Web Design Museum",
+        "href": "https://www.webdesignmuseum.org/",
+        "noteZh": "把旧网站、Flash、App、软件和展览都纳入同一套历史档案里。",
+        "tags": [
+          "历史档案",
+          "年代索引",
+          "展览结构"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "Style Stage",
+        "titleEn": "Style Stage",
+        "href": "https://stylestage.dev/",
+        "repoHref": "https://github.com/5t3ph/stylestage",
+        "noteZh": "虽然不是历史博物馆，但它很好地证明了“同一内容，不同视觉语法”可以如何被系统化展示。",
+        "tags": [
+          "同内容异风格",
+          "社区提交",
+          "CSS 展示"
+        ],
+        "openSource": true
+      }
+    ]
+  },
+  {
+    "id": "open-source-foundations",
+    "titleZh": "开源底座",
+    "titleEn": "Open-Source Foundations",
+    "summaryZh": "真正完全开源、还能直接拿来做你这类站点底座的方案，更多长在 design system 或 digital collection 领域，而不是灵感图库本身。",
+    "items": [
+      {
+        "titleZh": "Figma SDS",
+        "titleEn": "Figma SDS",
+        "href": "https://github.com/figma/sds",
+        "repoHref": "https://github.com/figma/sds",
+        "noteZh": "更像开源设计系统底板，适合借 token、component、code connect 这层组织方式。",
+        "tags": [
+          "设计系统",
+          "React",
+          "Tokens"
+        ],
+        "openSource": true
+      },
+      {
+        "titleZh": "Omeka S",
+        "titleEn": "Omeka S",
+        "href": "https://omeka.org/s/",
+        "repoHref": "https://github.com/omeka/omeka-s",
+        "noteZh": "如果把你的站做得更像策展档案馆，Omeka 的 collection / exhibit 结构很值得借。",
+        "tags": [
+          "数字馆藏",
+          "展览站",
+          "多站点"
+        ],
+        "openSource": true
+      },
+      {
+        "titleZh": "CollectionBuilder",
+        "titleEn": "CollectionBuilder",
+        "href": "https://collectionbuilder.github.io/cb-docs/",
+        "noteZh": "更适合把截图、元数据、时间轴、地图、主题页做成静态数字收藏网站。",
+        "tags": [
+          "静态站",
+          "元数据",
+          "时间轴"
+        ],
+        "openSource": true
+      }
+    ]
+  }
+]
