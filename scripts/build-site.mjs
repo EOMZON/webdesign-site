@@ -358,13 +358,24 @@ const primaryVisualMap = {
     "Fictive Kin / Work",
     "Fictive Kin work page"
   ),
+  "creative-media-editorial": visualAsset(
+    "itsnicethat-live.png",
+    "It's Nice That",
+    "It's Nice That homepage"
+  ),
   "product-precision-interface": visualAsset("linear.png", "Linear", "Linear homepage"),
   "stage-driven-showcase": visualAsset("a24.png", "A24", "A24 homepage"),
+  "template-market-library": visualAsset(
+    "notion-templates-live.png",
+    "Notion Templates",
+    "Notion templates page"
+  ),
   "curated-reference-directory": visualAsset(
     "awwwards-websites-live.png",
     "Awwwards / Websites",
     "Awwwards websites directory"
   ),
+  "networked-visual-board": visualAsset("arena-home-live.png", "Are.na", "Are.na homepage"),
   "evidence-dense-knowledge-surface": visualAsset(
     "ourworldindata-live.png",
     "Our World In Data",
@@ -594,6 +605,18 @@ const styleMetaMap = {
     toneAxis: "quiet",
     orderAxis: "structured"
   },
+  "creative-media-editorial": {
+    slug: "creative-media",
+    nameZh: "创意媒体",
+    cardUses: ["创意媒体", "设计博客", "文化资讯"],
+    lookLike: ["栏目感强", "图文并行", "更新频繁", "封面与列表共存"],
+    notFor: ["重操作工具页", "强销售落地页", "只有少量内容的站"],
+    filterTags: ["magazine-publishing"],
+    siteTypes: ["blog", "brand", "other"],
+    audiences: ["fans", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
   "neon-techno-futurist-interface": {
     slug: "neon-tech",
     nameZh: "霓虹科技",
@@ -654,6 +677,18 @@ const styleMetaMap = {
     toneAxis: "bold",
     orderAxis: "distinctive"
   },
+  "template-market-library": {
+    slug: "template-market",
+    nameZh: "模板市场",
+    cardUses: ["模板库", "Prompt 库", "Starter Kit"],
+    lookLike: ["分类清楚", "卡片可转化", "列表密度高", "浏览与购买并存"],
+    notFor: ["纯品牌故事页", "长文特稿", "沉浸式发布页"],
+    filterTags: ["product-tool"],
+    siteTypes: ["tool", "other", "brand"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
   "curated-reference-directory": {
     slug: "reference-directory",
     nameZh: "参考目录",
@@ -665,6 +700,18 @@ const styleMetaMap = {
     audiences: ["general", "self", "clients"],
     toneAxis: "quiet",
     orderAxis: "structured"
+  },
+  "networked-visual-board": {
+    slug: "visual-board",
+    nameZh: "灵感看板",
+    cardUses: ["灵感库", "研究地图", "案例收集"],
+    lookLike: ["关系感强", "卡片可延展", "标签驱动", "收藏与下钻并存"],
+    notFor: ["单一品牌首页", "高转化落地页", "严格流程工具"],
+    filterTags: ["product-tool", "bold-personality"],
+    siteTypes: ["tool", "blog", "other"],
+    audiences: ["self", "general", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
   },
   "evidence-dense-knowledge-surface": {
     slug: "knowledge-system",
@@ -723,6 +770,7 @@ const styleOrder = [
   "monochrome-studio-systems",
   "dark-studio-gallery",
   "humanist-modern-brand",
+  "creative-media-editorial",
   "neon-techno-futurist-interface",
   "magazine-editorial",
   "luxury-fashion-editorial",
@@ -730,7 +778,9 @@ const styleOrder = [
   "playful-postmodern-anti-grid",
   "brutalist-raw-interface",
   "product-precision-interface",
+  "template-market-library",
   "curated-reference-directory",
+  "networked-visual-board",
   "evidence-dense-knowledge-surface",
   "stage-driven-showcase"
 ];
@@ -1706,8 +1756,8 @@ function renderFamilyCoordinateSection() {
   return `<section class="section" id="style-field">
     ${renderSectionHead(
       bilingualText("页面感觉坐标场", "Style Coordinate Field"),
-      bilingualText("如果你已经知道想要什么页面感觉，从这里筛", "If you already know the page feel, start here"),
-      "横轴看页面更偏系统还是更偏舞台，纵轴看它更安静还是更有张力。先缩小感觉范围，再继续打开对应家族。"
+      bilingualText("先用页面感觉缩小范围", "Start by narrowing the page feel"),
+      "左边更系统，右边更有表现力；上面更强烈，下面更安静。先在这里找到气质区间，再继续打开对应风格。"
     )}
     ${renderFieldAtlas()}
   </section>`;
@@ -3041,7 +3091,7 @@ function renderBrowseStyleCard(item) {
       <h3 class="style-card-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</h3>
       <p class="style-card-reference">${escapeHtml(`主参考：${item.coverLabel || item.nameZh}`)}</p>
       <p class="style-card-fit">${escapeHtml(`适合做：${item.cardUses.slice(0, 3).join(" · ")}`)}</p>
-      ${skillCue ? `<p class="style-card-skill">${escapeHtml(`Skill 核心：${skillCue}`)}</p>` : ""}
+      ${skillCue ? `<p class="style-card-skill">${escapeHtml(`对应 Skill：${skillCue}`)}</p>` : ""}
     </div>
   </article>`;
 }
@@ -3114,20 +3164,85 @@ function renderStyleGallerySection({
 }
 
 function renderLandingHero() {
+  const preferredIds = [
+    "swiss-typographic-grid",
+    "monochrome-studio-systems",
+    "creative-media-editorial",
+    "quiet-lifestyle-editorial",
+    "neon-techno-futurist-interface",
+    "template-market-library",
+    "networked-visual-board",
+    "dark-studio-gallery"
+  ];
+  const heroStyles = preferredIds.map((id) => styleFamilyMap.get(id)).filter(Boolean);
+  const heroVisualMap = {
+    "swiss-typographic-grid": visualAsset("pentagram.png", "Pentagram", "Pentagram homepage"),
+    "monochrome-studio-systems": visualAsset("ok-rm.png", "OK-RM", "OK-RM homepage"),
+    "creative-media-editorial": visualAsset("newyorker.png", "The New Yorker", "The New Yorker homepage"),
+    "quiet-lifestyle-editorial": visualAsset("gentlewoman.png", "The Gentlewoman", "The Gentlewoman homepage"),
+    "neon-techno-futurist-interface": visualAsset("cyberpunk-net.png", "Cyberpunk", "Cyberpunk homepage"),
+    "template-market-library": visualAsset(
+      "awwwards-websites-live.png",
+      "Awwwards / Websites",
+      "Awwwards websites directory"
+    ),
+    "networked-visual-board": visualAsset("behance.png", "Behance", "Behance homepage"),
+    "dark-studio-gallery": visualAsset("studio-feixen.png", "Studio Feixen", "Studio Feixen homepage")
+  };
+  const heroCards = heroStyles.map((item) => ({
+    item,
+    visual: heroVisualMap[item.id] || fallbackVisual(item)
+  }));
+
   return `<section class="landing-hero section" id="top">
     <div class="landing-hero-inner">
-      <p class="landing-kicker">DESIGN ATLAS — AI 建站风格参考库</p>
-      <h1 class="landing-title">
-        <span>不知道网站要做成什么样？</span>
-        <span>从这里开始。</span>
-      </h1>
-      <div class="landing-copy">
-        <p>${escapeHtml(`${movements.length} 种历史风格 · ${styleFamilies.length} 种网页风格 · 每种风格配 AI Prompt`)}</p>
-        <p>${escapeHtml("看图选风格，拿 Prompt 建站，审美不够也能做出好看的页面。")}</p>
+      <div class="landing-hero-copy">
+        <p class="landing-kicker">DESIGN ATLAS — AI 建站风格参考库</p>
+        <h1 class="landing-title">
+          <span>不知道网站要做成什么样？</span>
+          <span>先看图，再开始。</span>
+        </h1>
+        <p class="landing-flow-lead">${escapeHtml("选风格 → 拿 Prompt → 直接建站")}</p>
+        <div class="landing-flow-strip" aria-label="${escapeHtml(bilingualText("使用流程", "Workflow"))}">
+          <span class="landing-flow-step">01 选风格</span>
+          <span class="landing-flow-step">02 拿 Prompt</span>
+          <span class="landing-flow-step">03 给 AI 建站</span>
+        </div>
+        <div class="landing-copy">
+          <p>${escapeHtml(`${movements.length} 种历史流派 · ${styleFamilies.length} 种网页风格 · 每种风格配 AI Prompt`)}</p>
+          <p>${escapeHtml("先看真实页面长什么样，再决定适合你的方向；不需要先懂设计史，也不用先会写风格提示词。")}</p>
+        </div>
+        <div class="hero-actions landing-actions">
+          <a ${linkAttrs(selectorHref(), "button")}>${escapeHtml("开始选型 →")}</a>
+        </div>
+        <p class="landing-inline-links">
+          <a ${linkAttrs(browseIndexHref())}>${escapeHtml(bilingualText("直接浏览风格", "Browse styles"))}</a>
+          <span>·</span>
+          <a ${linkAttrs(aboutHref())}>${escapeHtml(bilingualText("查看项目说明", "About"))}</a>
+          <span>·</span>
+          <a ${linkAttrs("/movements")}>${escapeHtml(bilingualText("看完整流派时间轴", "Open timeline"))}</a>
+        </p>
       </div>
-      <div class="hero-actions landing-actions">
-        <a ${linkAttrs(browseIndexHref(), "button")}>${escapeHtml(bilingualText("浏览所有风格", "Browse All Styles"))}</a>
-        <a ${linkAttrs(selectorHref(), "ghost-button")}>${escapeHtml(bilingualText("帮我选风格", "Help Me Choose"))}</a>
+      <div class="landing-preview-shell card-surface">
+        <div class="landing-preview-head">
+          <p class="eyebrow">${escapeHtml(bilingualText("风格预览", "Style Preview"))}</p>
+          <p class="landing-preview-note">${escapeHtml("先扫一眼这些方向，再往下筛。")}</p>
+        </div>
+        <div class="landing-preview-rail">
+          ${heroCards
+            .map(
+              ({ item, visual }) => `<a ${linkAttrs(browseHref(item.slug), "landing-preview-card")}>
+                <span class="landing-preview-media">
+                  ${renderImageFrame(visual?.screenshot || item.cover, visual?.alt || item.coverAlt || item.nameZh)}
+                </span>
+                <span class="landing-preview-copy">
+                  <span class="landing-preview-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</span>
+                  <span class="landing-preview-meta">${escapeHtml(`适合做：${item.cardUses.slice(0, 2).join(" · ")}`)}</span>
+                </span>
+              </a>`
+            )
+            .join("")}
+        </div>
       </div>
     </div>
   </section>`;
@@ -3346,114 +3461,224 @@ function buildBrowsePage() {
 }
 
 function renderAtlasEcosystemSection() {
-  return `<section class="section" id="atlas-ecosystem">
+  return `<section class="section about-ecosystem" id="atlas-ecosystem">
     ${renderSectionHead(
       bilingualText("类似站点与开源路径", "Comparable Sites and Open-Source Paths"),
       bilingualText("外面已经有哪些成熟做法", "What already exists outside this atlas"),
-      "市面上没有一个完全等于你现在这个站的现成产品。更接近的是四类分散方案：灵感图库、系统索引、历史档案、开源底座。"
+      "这一页不再把它们做成一堵同尺寸卡片墙，而是按“能借什么”来分组列出。"
     )}
-    ${atlasEcosystemCatalog
-      .map(
-        (group) => `<div class="resource-group">
-          <div class="section-head">
-            <div class="section-head-main">
-              <p class="eyebrow">${escapeHtml(bilingualText("外部参考", "External Reference"))}</p>
-              <h2 class="section-title">${renderBilingualStack(group.titleZh, group.titleEn)}</h2>
+    <div class="about-ecosystem-grid">
+      ${atlasEcosystemCatalog
+        .map(
+          (group) => `<article class="about-ecosystem-group card-surface">
+            <div class="about-ecosystem-group-head">
+              <p class="card-kicker">${escapeHtml(bilingualText("外部参考", "External Reference"))}</p>
+              <h3 class="card-title">${renderInlineEnglishTitle(group.titleZh, group.titleEn)}</h3>
+              <p class="card-summary">${escapeHtml(group.summaryZh)}</p>
             </div>
-            <p class="section-summary">${escapeHtml(group.summaryZh)}</p>
-          </div>
-          <div class="detail-section-grid resource-grid">
-            ${group.items
-              .map(
-                (item) => `<article class="detail-card card-surface">
-                  <div class="card-body">
-                    <p class="card-kicker">${escapeHtml(item.openSource ? bilingualText("开源路径", "Open Source") : bilingualText("类似站点", "Comparable Site"))}</p>
-                    <h3 class="card-title">${renderInlineEnglishTitle(item.titleZh, item.titleEn)}</h3>
-                    <p class="card-summary">${escapeHtml(item.noteZh)}</p>
-                    ${renderStaticPills([...(item.tags || []), item.openSource ? "开源可借" : "结构可借"])}
-                    <div class="hero-actions resource-card-links">
-                      <a ${linkAttrs(item.href, "text-link")}>${escapeHtml(item.openSource ? "打开项目" : "打开站点")}</a>
-                      ${item.repoHref ? `<a ${linkAttrs(item.repoHref, "text-link")}>${escapeHtml("GitHub ↗")}</a>` : ""}
+            <ul class="about-ecosystem-list">
+              ${group.items
+                .map(
+                  (item) => `<li class="about-ecosystem-item">
+                    <div class="about-ecosystem-item-head">
+                      <a ${linkAttrs(item.href, "about-ecosystem-link")}>${escapeHtml(item.titleZh)}</a>
+                      ${item.repoHref ? `<a ${linkAttrs(item.repoHref, "about-ecosystem-repo")}>${escapeHtml("GitHub ↗")}</a>` : ""}
                     </div>
-                  </div>
-                </article>`
-              )
-              .join("")}
-          </div>
-        </div>`
-      )
-      .join("")}
+                    <p class="about-ecosystem-note">${escapeHtml(item.noteZh)}</p>
+                    <p class="about-ecosystem-tags">${escapeHtml(
+                      [...(item.tags || []), item.openSource ? "开源可借" : "结构可借"].join(" · ")
+                    )}</p>
+                  </li>`
+                )
+                .join("")}
+            </ul>
+          </article>`
+        )
+        .join("")}
+    </div>
+  </section>`;
+}
+
+function renderAboutHero() {
+  const cards = [
+    {
+      titleZh: "浏览",
+      titleEn: "Browse",
+      summary: "先看图，按直觉标签筛方向。",
+      href: browseIndexHref(),
+      screenshot: "awwwards-websites-live.png",
+      alt: "Browse preview"
+    },
+    {
+      titleZh: "选型器",
+      titleEn: "Selector",
+      summary: "如果完全没方向，用 3 步问答缩小范围。",
+      href: selectorHref(),
+      screenshot: "signal-a-studio.png",
+      alt: "Selector preview"
+    },
+    {
+      titleZh: "拿 Prompt",
+      titleEn: "Prompt / Skill",
+      summary: "确认适合做什么，再复制 Prompt 或下载 Skill。",
+      href: githubHref,
+      screenshot: "atlassian-foundations.png",
+      alt: "Prompt preview"
+    }
+  ];
+
+  return `<section class="section about-hero" id="top">
+    <div class="about-hero-main">
+      <div class="about-hero-copy">
+        <p class="landing-kicker">${escapeHtml(bilingualText("关于", "About"))}</p>
+        <h1 class="landing-title about-hero-title">
+          <span>这不是设计史百科。</span>
+          <span>它是你的建站选型工具。</span>
+        </h1>
+        <div class="landing-copy about-hero-copy-text">
+          <p>${escapeHtml("这个站解决的不是“设计风格叫什么”，而是“我现在要做一个网站，先选哪种方向，接下来怎么交给 AI 做出来”。")}</p>
+          <p>${escapeHtml("首页负责看图和缩小范围，浏览页负责比较，详情页负责拿 Prompt，GitHub 仓库负责公开保存这些 skills。")}</p>
+        </div>
+        <div class="hero-actions landing-actions">
+          <a ${linkAttrs(browseIndexHref(), "button")}>${escapeHtml(bilingualText("开始浏览", "Start Browsing"))}</a>
+        </div>
+      </div>
+      <div class="about-preview-grid">
+        ${cards
+          .map(
+            (item) => `<a ${linkAttrs(item.href, "about-preview-card card-surface")}>
+              <span class="about-preview-media">
+                ${renderImageFrame(item.screenshot, item.alt)}
+              </span>
+              <span class="about-preview-body">
+                <span class="card-kicker">${renderInlineEnglishTitle(item.titleZh, item.titleEn)}</span>
+                <span class="about-preview-summary">${escapeHtml(item.summary)}</span>
+              </span>
+            </a>`
+          )
+          .join("")}
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderAboutWorkflowSection() {
+  const steps = [
+    {
+      number: "01",
+      title: "先看图挑方向",
+      summary: "先按极简、科技、工艺、个性、出版、工具这些直觉标签筛一遍。",
+      screenshot: "siteinspire-live.png",
+      alt: "Browse by gallery"
+    },
+    {
+      number: "02",
+      title: "打开单个风格详情",
+      summary: "确认它长什么样、适合做什么、不适合做什么。",
+      screenshot: "fictivekin-work.png",
+      alt: "Style detail preview"
+    },
+    {
+      number: "03",
+      title: "复制 Prompt 或下载 Skill",
+      summary: "把风格规则带走，直接喂给 Codex / Cursor / Claude。",
+      screenshot: "pair-guidebook.png",
+      alt: "Prompt and skill preview"
+    },
+    {
+      number: "04",
+      title: "再回来补历史来源",
+      summary: "历史流派留到最后看，用来理解源头和避坑，不抢首页入口。",
+      screenshot: "frieze.png",
+      alt: "History preview"
+    }
+  ];
+
+  return `<section class="section" id="how-it-works">
+    ${renderSectionHead(
+      bilingualText("使用方式", "How It Works"),
+      bilingualText("看图选风格，拿 Prompt 建站", "Choose by image, then build with prompts"),
+      "这四步才是这个站真正的服务链。"
+    )}
+    <div class="about-steps-grid">
+      ${steps
+        .map(
+          (item) => `<article class="about-step-card card-surface">
+            <div class="about-step-media">
+              ${renderImageFrame(item.screenshot, item.alt)}
+            </div>
+            <div class="about-step-body">
+              <p class="about-step-number">${escapeHtml(item.number)}</p>
+              <h3 class="card-title">${escapeHtml(item.title)}</h3>
+              <p class="card-summary">${escapeHtml(item.summary)}</p>
+            </div>
+          </article>`
+        )
+        .join("")}
+    </div>
   </section>`;
 }
 
 function buildAboutPage() {
   return layout({
     title: `${bilingualText("关于", "About")} · ${siteMeta.title}`,
-    description: "About Design Atlas and the historical timeline behind the styles.",
+    description: "About Design Atlas as a style-selection service for AI website building.",
     pathname: aboutHref(),
     pageClass: "about-page index-page",
     body: [
-      renderPageLead({
-        kicker: bilingualText("关于", "About"),
-        title: bilingualText("这不是设计史百科，而是建站选型工具", "Not a design-history encyclopedia, but a style selection tool"),
-        summary: "首页负责看图和进入；浏览页负责比较；详情页负责拿 Prompt；选型器负责帮完全没有方向的人缩小范围。",
-        detail: "你喜欢的时间轴和风格背景被放到这里和详情页底部，不再占首页主入口，但仍然完整保留。",
-        actions: `<div class="hero-actions"><a ${linkAttrs(githubHref, "button")}>${escapeHtml(
-          "GitHub ↗"
-        )}</a><a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
-          bilingualText("开始浏览", "Start Browsing")
-        )}</a></div>`
-      }),
-      `<section class="section">
-        ${renderSectionHead(
-          bilingualText("使用方式", "How It Works"),
-          bilingualText("看图选风格，拿 Prompt 建站", "Choose by image, then build with prompts"),
-          ""
-        )}
-        <div class="detail-section-grid">
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
-            bilingualText("01 浏览", "Browse")
-          )}</p><p>${escapeHtml("按直觉标签和截图找相近的页面感觉。")}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
-            bilingualText("02 详情", "Detail")
-          )}</p><p>${escapeHtml("确认它长什么样、适合做什么、不适合做什么，并拿走 Prompt。")}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
-            bilingualText("03 选型器", "Selector")
-          )}</p><p>${escapeHtml("如果完全没有方向，就用 3 步问答拿到 2 到 3 个推荐风格。")}</p></div></article>
-          <article class="detail-card card-surface"><div class="card-body"><p class="card-kicker">${escapeHtml(
-            bilingualText("04 历史来源", "History")
-          )}</p><p>${escapeHtml("最后再补背景，用来理解来源和避坑，而不是先决定风格。")}</p></div></article>
-        </div>
-      </section>`,
+      renderAboutHero(),
+      renderAboutWorkflowSection(),
       `<section class="section">
         ${renderSectionHead(
           bilingualText("公开 Skills 仓库", "Public Skills Repo"),
           bilingualText("每个风格都有对应的可下载 Skill", "Each style has a downloadable skill"),
-          "公开仓库只放风格 skills，本网站负责浏览、选型和说明。"
+          "网站负责浏览、选型和说明；公开仓库负责把每个风格的 Skill 单独保存、同步和开放下载。"
+        )}
+        <div class="about-repo-grid">
+          <article class="detail-card card-surface">
+            <div class="card-body">
+              <p class="card-summary">${escapeHtml(
+                "仓库按风格分文件夹维护 SKILL.md。你可以先在站内看图选方向，再去 GitHub 拿对应 skill；也可以直接把 skill 放进 Codex / Cursor / OpenClaw 的 skills 目录复用。"
+              )}</p>
+              <div class="hero-actions">
+                <a ${linkAttrs(githubHref, "button")}>${escapeHtml("打开 GitHub 仓库 ↗")}</a>
+                <a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
+                  bilingualText("回到风格浏览", "Back to Browse")
+                )}</a>
+              </div>
+            </div>
+          </article>
+          <article class="detail-card card-surface">
+            <div class="card-body">
+              <p class="card-kicker">${escapeHtml(bilingualText("仓库内容", "Repo Contents"))}</p>
+              ${renderList([
+                "每个风格一个独立 slug 与 SKILL.md",
+                "和站内详情页一一对应",
+                "通过 npm run build && npm run export:skills 同步",
+                "适合直接给 AI 当风格约束包"
+              ])}
+            </div>
+          </article>
+        </div>
+      </section>`,
+      renderAtlasEcosystemSection(),
+      `<section class="section">
+        ${renderSectionHead(
+          bilingualText("历史流派", "Historical Timeline"),
+          bilingualText("时间轴还在，但不占首页入口", "The timeline still exists, but no longer owns the homepage"),
+          "当你已经选到一个方向，再回来补历史演化、视觉特征和网页里的延续关系。"
         )}
         <article class="detail-card card-surface">
           <div class="card-body">
             <p class="card-summary">${escapeHtml(
-              "仓库里会按风格分文件夹维护 SKILL.md。你可以直接放进 Codex / Cursor / OpenClaw 的 skills 目录，也可以先在站内看图选方向，再去 GitHub 拿 skill。"
+              "完整的历史流派页会给你更大的年份展示、更完整的视觉特征和对应网页影响，不再挤在 About 里和服务说明抢注意力。"
             )}</p>
             <div class="hero-actions">
-              <a ${linkAttrs(githubHref, "button")}>${escapeHtml("打开 GitHub 仓库 ↗")}</a>
-              <a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
-                bilingualText("回到风格浏览", "Back to Browse")
-              )}</a>
+              <a ${linkAttrs("/movements", "button")}>${escapeHtml(bilingualText("查看完整流派时间轴", "Open Full Timeline"))}</a>
             </div>
           </div>
         </article>
-      </section>`,
-      renderAtlasEcosystemSection(),
-      renderTimelineAtlasSection({
-        titleZh: "历史流派时间轴",
-        titleEn: "Historical Timeline",
-        kicker: bilingualText("历史来源", "Background Lineage"),
-        summary: "这部分从首页挪到 About。先选到目标，再回来补历史脉络。",
-        sectionId: "about-history-timeline",
-        expandedCards: true
-      })
+      </section>`
     ].join("")
   });
 }
@@ -3642,10 +3867,11 @@ function buildHomePage() {
     pageClass: "home-page",
     body: [
       renderLandingHero(),
+      renderFamilyCoordinateSection(),
       renderStyleGallerySection({
         sectionId: "home-gallery",
         title: bilingualText("浏览风格", "Browse Styles"),
-        summary: "按直觉标签筛，先看截图，再决定要不要打开详情页拿 Prompt。",
+        summary: "按直觉标签筛，先看截图，再决定要不要打开详情页拿 Prompt。现在这层已经补进了更多风格方向、参考网站和对应 Skill。",
         actionHref: browseIndexHref(),
         actionLabel: bilingualText(`查看全部 ${styleFamilies.length} 种风格`, `View all ${styleFamilies.length} styles`)
       })

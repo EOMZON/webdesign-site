@@ -2665,10 +2665,17 @@ code {
 }
 
 .landing-hero-inner {
-  width: min(72rem, 100%);
+  width: min(86rem, 100%);
   display: grid;
-  gap: 18px;
+  grid-template-columns: minmax(0, 0.94fr) minmax(320px, 1.06fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
   padding: clamp(28px, 6vh, 72px) 0;
+}
+
+.landing-hero-copy {
+  display: grid;
+  gap: 16px;
 }
 
 .landing-kicker {
@@ -2693,10 +2700,44 @@ code {
   display: block;
 }
 
+.landing-flow-lead {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.landing-flow-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.landing-flow-step,
+.landing-inline-links {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.landing-flow-step {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .landing-copy {
   display: grid;
   gap: 8px;
-  max-width: 34rem;
+  max-width: 38rem;
 }
 
 .landing-copy p {
@@ -2707,6 +2748,281 @@ code {
 
 .landing-actions {
   padding-top: 6px;
+}
+
+.landing-inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+}
+
+.landing-inline-links a:hover,
+.about-ecosystem-link:hover,
+.about-ecosystem-repo:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.landing-preview-shell {
+  overflow: hidden;
+  padding: 18px;
+}
+
+.landing-preview-head {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.landing-preview-head .eyebrow,
+.landing-preview-note {
+  margin: 0;
+}
+
+.landing-preview-note,
+.about-preview-summary,
+.about-ecosystem-note,
+.about-ecosystem-tags {
+  color: var(--ink-soft);
+}
+
+.landing-preview-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 300px);
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.landing-preview-card,
+.about-preview-card {
+  display: grid;
+  color: inherit;
+}
+
+.landing-preview-card {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.landing-preview-media,
+.about-preview-media {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-bottom: 1px solid var(--line);
+}
+
+.landing-preview-media .image-frame,
+.landing-preview-media img,
+.about-preview-media .image-frame,
+.about-preview-media img,
+.about-step-media .image-frame,
+.about-step-media img {
+  height: 100%;
+}
+
+.landing-preview-media,
+.about-preview-media,
+.about-step-media {
+  position: relative;
+  background: var(--panel-muted);
+}
+
+.landing-preview-media::after,
+.about-preview-media::after,
+.about-step-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  pointer-events: none;
+}
+
+.landing-preview-copy,
+.about-preview-body,
+.about-step-body {
+  display: grid;
+  gap: 8px;
+}
+
+.landing-preview-copy {
+  padding: 14px 16px;
+}
+
+.landing-preview-title {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.18;
+}
+
+.landing-preview-meta {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.about-hero {
+  border-top: 0;
+  padding-top: 18px;
+}
+
+.about-hero-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.about-hero-copy {
+  display: grid;
+  gap: 16px;
+  max-width: 56rem;
+}
+
+.about-hero-title {
+  max-width: 11ch;
+}
+
+.about-preview-grid,
+.about-repo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.about-preview-grid {
+  grid-template-columns: 1fr;
+}
+
+.about-preview-card {
+  overflow: hidden;
+}
+
+.about-preview-body {
+  padding: 14px 16px 16px;
+}
+
+.about-preview-summary {
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.about-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.about-step-card {
+  overflow: hidden;
+}
+
+.about-step-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-step-body {
+  padding: 18px;
+}
+
+.about-step-number {
+  margin: 0;
+  color: #555555;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 0.84;
+  letter-spacing: -0.06em;
+  text-transform: none;
+}
+
+.about-step-card .card-title {
+  font-size: 1.4rem;
+  line-height: 1.06;
+}
+
+.about-ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.about-ecosystem-group {
+  padding: 18px 18px 20px;
+}
+
+.about-ecosystem-group-head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.about-ecosystem-group-head .card-kicker,
+.about-ecosystem-group-head .card-title,
+.about-ecosystem-group-head .card-summary,
+.about-ecosystem-item-head,
+.about-ecosystem-note,
+.about-ecosystem-tags {
+  margin: 0;
+}
+
+.about-ecosystem-list {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.about-ecosystem-item {
+  display: grid;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.about-ecosystem-item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.about-ecosystem-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.about-ecosystem-link,
+.about-ecosystem-repo {
+  color: var(--ink);
+}
+
+.about-ecosystem-link {
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.about-ecosystem-repo {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.about-ecosystem-note,
+.about-ecosystem-tags {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.about-ecosystem-tags {
+  font-size: 0.82rem;
 }
 
 .browse-toolbar {
@@ -3084,6 +3400,11 @@ code {
 }
 
 @media (max-width: 1080px) {
+  .landing-hero-inner,
+  .about-preview-grid,
+  .about-repo-grid,
+  .about-ecosystem-grid,
+  .about-steps-grid,
   .selector-wizard-layout,
   .style-detail-stage,
   .style-detail-core-grid,
@@ -3096,6 +3417,10 @@ code {
   .selector-wizard-questions {
     position: static;
   }
+
+  .about-hero-title {
+    max-width: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -3103,8 +3428,26 @@ code {
     min-height: auto;
   }
 
+  .landing-hero-inner {
+    gap: 20px;
+  }
+
   .landing-title {
     font-size: clamp(2.9rem, 13vw, 4.8rem);
+  }
+
+  .landing-flow-strip,
+  .landing-inline-links {
+    gap: 8px;
+  }
+
+  .landing-preview-shell,
+  .about-ecosystem-group {
+    padding: 14px;
+  }
+
+  .landing-preview-rail {
+    grid-auto-columns: minmax(220px, 84vw);
   }
 
   .browse-toolbar,
@@ -3125,6 +3468,16 @@ code {
   .history-origin-item {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .about-step-body,
+  .about-preview-body {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .about-step-card .card-title {
+    font-size: 1.2rem;
   }
 
   .style-detail-stage-media {

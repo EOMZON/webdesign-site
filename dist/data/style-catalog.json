@@ -371,6 +371,99 @@
     }
   },
   {
+    "id": "creative-media-editorial",
+    "slug": "creative-media",
+    "nameZh": "创意媒体",
+    "titleEn": "Creative Media Editorial",
+    "summaryZh": "介于杂志封面和内容 feed 之间的创意媒体首页，既要有图像张力，也要有持续更新时的浏览效率。",
+    "cardUses": [
+      "创意媒体",
+      "设计博客",
+      "文化资讯"
+    ],
+    "lookLike": [
+      "栏目感强",
+      "图文并行",
+      "更新频繁",
+      "封面与列表共存"
+    ],
+    "notFor": [
+      "重操作工具页",
+      "强销售落地页",
+      "只有少量内容的站"
+    ],
+    "filterTags": [
+      "magazine-publishing"
+    ],
+    "cover": "itsnicethat-live.png",
+    "coverAlt": "It's Nice That screenshot",
+    "coverLabel": "It's Nice That",
+    "demoHref": "https://www.itsnicethat.com/",
+    "downloadPath": "/downloads/creative-media.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/creative-media",
+    "references": [
+      {
+        "label": "It's Nice That",
+        "href": "https://www.itsnicethat.com/",
+        "screenshot": "itsnicethat-live.png",
+        "alt": "It's Nice That screenshot",
+        "note": "更像持续更新的创意媒体首页，而不是一期静态封面。"
+      },
+      {
+        "label": "Frieze",
+        "href": "https://www.frieze.com/",
+        "screenshot": "frieze.png",
+        "alt": "Frieze screenshot",
+        "note": "内容与图片之间的编辑节奏很成熟。"
+      },
+      {
+        "label": "The New Yorker",
+        "href": "https://www.newyorker.com/",
+        "screenshot": "newyorker.png",
+        "alt": "The New Yorker screenshot",
+        "note": "长期栏目、更新和出版感之间的平衡。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "创意媒体首页",
+        "设计博客",
+        "文化资讯站",
+        "更新频繁的内容品牌"
+      ],
+      "palette": [
+        "以黑白灰为骨架",
+        "图片自己定调",
+        "不要把功能色做成主角"
+      ],
+      "typography": [
+        "标题、栏目、时间和作者信息都要清楚",
+        "serif 与 sans 可以并用",
+        "保持读稿节奏而不是纯海报感"
+      ],
+      "layout": [
+        "先有 lead story 再有次级栏目",
+        "支持高频更新但不失去封面感",
+        "首页是编辑入口不是长文全文"
+      ],
+      "imagery": [
+        "图片必须有张力",
+        "缩略图和 lead 图要区分层级",
+        "不要全部裁成同一种无差别卡片"
+      ],
+      "motion": [
+        "轻微 reveal 即可",
+        "更依赖版面节奏而不是交互动效",
+        "不要让 hover 打断浏览"
+      ],
+      "avoid": [
+        "单纯做成 feed",
+        "所有内容都同级",
+        "只有封面气质没有更新入口"
+      ]
+    }
+  },
+  {
     "id": "neon-techno-futurist-interface",
     "slug": "neon-tech",
     "nameZh": "霓虹科技",
@@ -1028,6 +1121,99 @@
     }
   },
   {
+    "id": "template-market-library",
+    "slug": "template-market",
+    "nameZh": "模板市场",
+    "titleEn": "Template Market Library",
+    "summaryZh": "更偏模板库、starter kit 和资源市场的浏览形态，既有高密度索引，也有明确的转化入口，但不该退化成普通 SaaS 落地页。",
+    "cardUses": [
+      "模板库",
+      "Prompt 库",
+      "Starter Kit"
+    ],
+    "lookLike": [
+      "分类清楚",
+      "卡片可转化",
+      "列表密度高",
+      "浏览与购买并存"
+    ],
+    "notFor": [
+      "纯品牌故事页",
+      "长文特稿",
+      "沉浸式发布页"
+    ],
+    "filterTags": [
+      "product-tool"
+    ],
+    "cover": "notion-templates-live.png",
+    "coverAlt": "Notion Templates screenshot",
+    "coverLabel": "Notion Templates",
+    "demoHref": "https://www.notion.com/templates",
+    "downloadPath": "/downloads/template-market.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/template-market",
+    "references": [
+      {
+        "label": "Notion Templates",
+        "href": "https://www.notion.com/templates",
+        "screenshot": "notion-templates-live.png",
+        "alt": "Notion Templates screenshot",
+        "note": "分类、卡片和转化入口同时成立。"
+      },
+      {
+        "label": "Awwwards / Websites",
+        "href": "https://www.awwwards.com/websites/",
+        "screenshot": "awwwards-websites-live.png",
+        "alt": "Awwwards / Websites screenshot",
+        "note": "高密度缩略图浏览和筛选方式值得借。"
+      },
+      {
+        "label": "SiteInspire",
+        "href": "https://www.siteinspire.com/",
+        "screenshot": "siteinspire-live.png",
+        "alt": "SiteInspire screenshot",
+        "note": "更偏灵感目录，但 browse rhythm 很适合模板库。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "模板库",
+        "Prompt 库",
+        "Starter Kit",
+        "资源市场"
+      ],
+      "palette": [
+        "保持中性骨架",
+        "重点用在分类和 CTA",
+        "不要让背景色抢走卡片信息"
+      ],
+      "typography": [
+        "标题短而准",
+        "分类标签清楚",
+        "价格、下载、用途这些元数据要很好扫"
+      ],
+      "layout": [
+        "首页就是筛选和比较入口",
+        "转化动作要近",
+        "列表和详情必须分层清楚"
+      ],
+      "imagery": [
+        "缩略图比例统一",
+        "一眼能看出模板类型",
+        "避免重复图导致目录失真"
+      ],
+      "motion": [
+        "筛选和视图切换反馈要稳",
+        "避免花哨转场",
+        "浏览效率高于戏剧性"
+      ],
+      "avoid": [
+        "把模板库做成纯品牌故事",
+        "只有 CTA 没有比较信息",
+        "卡片和标签体系混乱"
+      ]
+    }
+  },
+  {
     "id": "curated-reference-directory",
     "slug": "reference-directory",
     "nameZh": "参考目录",
@@ -1118,6 +1304,100 @@
         "英雄论式单一叙事",
         "只有图片没有分类逻辑",
         "首屏塞满理论解释"
+      ]
+    }
+  },
+  {
+    "id": "networked-visual-board",
+    "slug": "visual-board",
+    "nameZh": "灵感看板",
+    "titleEn": "Networked Visual Board",
+    "summaryZh": "更像灵感看板、研究地图和视觉数据库的浏览系统，卡片、标签与关联路径和首图一样重要。",
+    "cardUses": [
+      "灵感库",
+      "研究地图",
+      "案例收集"
+    ],
+    "lookLike": [
+      "关系感强",
+      "卡片可延展",
+      "标签驱动",
+      "收藏与下钻并存"
+    ],
+    "notFor": [
+      "单一品牌首页",
+      "高转化落地页",
+      "严格流程工具"
+    ],
+    "filterTags": [
+      "product-tool",
+      "bold-personality"
+    ],
+    "cover": "arena-home-live.png",
+    "coverAlt": "Are.na screenshot",
+    "coverLabel": "Are.na",
+    "demoHref": "https://www.are.na/",
+    "downloadPath": "/downloads/visual-board.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/visual-board",
+    "references": [
+      {
+        "label": "Are.na",
+        "href": "https://www.are.na/",
+        "screenshot": "arena-home-live.png",
+        "alt": "Are.na screenshot",
+        "note": "最像开放式灵感看板和关系网的代表。"
+      },
+      {
+        "label": "Behance",
+        "href": "https://www.behance.net/",
+        "screenshot": "behance.png",
+        "alt": "Behance screenshot",
+        "note": "更大规模的案例和收藏型视觉索引。"
+      },
+      {
+        "label": "SiteInspire",
+        "href": "https://www.siteinspire.com/",
+        "screenshot": "siteinspire-live.png",
+        "alt": "SiteInspire screenshot",
+        "note": "如果要把看板做得更可筛选，可以借它的目录感。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "灵感库",
+        "研究地图",
+        "案例收集站",
+        "设计参考网络"
+      ],
+      "palette": [
+        "中性底色更稳",
+        "颜色用于分组或状态",
+        "不要靠大量装饰色制造‘灵感感’"
+      ],
+      "typography": [
+        "卡片标题和标签必须易扫",
+        "元数据密度允许更高",
+        "短描述比长段落更有效"
+      ],
+      "layout": [
+        "支持收藏、关联、回访",
+        "卡片、标签、关系同时存在",
+        "从一张图可以走到一串相关内容"
+      ],
+      "imagery": [
+        "缩略图既要能代表内容，也要能在群组里协同工作",
+        "不要同页大量重复",
+        "允许局部更像看板而不是统一宣传图"
+      ],
+      "motion": [
+        "hover 只做轻量反馈",
+        "重点是路径切换和关联探索",
+        "不要把看板做成舞台演出"
+      ],
+      "avoid": [
+        "单一 hero 叙事",
+        "没有标签和关联关系",
+        "全站都像随机瀑布流"
       ]
     }
   },

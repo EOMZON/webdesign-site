@@ -106,6 +106,80 @@ export const extraStyleSources = [
     ],
     prompt:
       "Use a brutalist raw interface family: hard borders, assertive contrast, visible structure, little polish, and enough attitude to break away from safe template aesthetics without losing readability."
+  },
+  {
+    id: "creative-media-editorial",
+    title: "Creative Media Editorial",
+    titleZh: "创意媒体",
+    titleEn: "Creative Media Editorial",
+    summary:
+      "Editorial media homepages that sit between a magazine cover and a live content feed, balancing strong imagery with frequent updates and scanning speed.",
+    summaryZh: "介于杂志封面和内容 feed 之间的创意媒体首页，既要有图像张力，也要有持续更新时的浏览效率。",
+    ancestors: ["new-typography", "swiss-international-typography", "art-deco-streamlined-luxury"],
+    movementIds: ["new-typography", "swiss-international-typography", "art-deco-streamlined-luxury"],
+    structureIds: ["archive-stack", "dossier"],
+    samples: [
+      { screenshot: "itsnicethat-live.png", alt: "It's Nice That homepage", label: "It's Nice That" },
+      { screenshot: "frieze.png", alt: "Frieze homepage", label: "Frieze" },
+      { screenshot: "newyorker.png", alt: "The New Yorker homepage", label: "The New Yorker" }
+    ],
+    references: [
+      { label: "It's Nice That", href: "https://www.itsnicethat.com/" },
+      { label: "Frieze", href: "https://www.frieze.com/" },
+      { label: "The New Yorker", href: "https://www.newyorker.com/" }
+    ],
+    prompt:
+      "Use a creative media editorial family: a strong lead image or story block, visible section rhythm, live publishing cadence, and enough structure to support frequent updates without losing voice."
+  },
+  {
+    id: "template-market-library",
+    title: "Template Market Library",
+    titleZh: "模板市场",
+    titleEn: "Template Market Library",
+    summary:
+      "Conversion-aware template and starter-kit libraries that mix screenshot-first browsing, taxonomy, and obvious actions without collapsing into generic SaaS landing pages.",
+    summaryZh: "更偏模板库、starter kit 和资源市场的浏览形态，既有高密度索引，也有明确的转化入口，但不该退化成普通 SaaS 落地页。",
+    ancestors: ["bauhaus-functional-modernism", "swiss-international-typography"],
+    movementIds: ["bauhaus-functional-modernism", "swiss-international-typography"],
+    structureIds: ["catalog-explorer", "workbench"],
+    samples: [
+      { screenshot: "notion-templates-live.png", alt: "Notion templates page", label: "Notion Templates" },
+      { screenshot: "awwwards-websites-live.png", alt: "Awwwards websites directory", label: "Awwwards" },
+      { screenshot: "siteinspire-live.png", alt: "SiteInspire homepage", label: "SiteInspire" }
+    ],
+    references: [
+      { label: "Notion Templates", href: "https://www.notion.com/templates" },
+      { label: "One Page Love", href: "https://onepagelove.com/" },
+      { label: "Minimal Gallery", href: "https://minimal.gallery/" },
+      { label: "Land-book", href: "https://land-book.com/" }
+    ],
+    prompt:
+      "Use a template market library family: screenshot-led cards, obvious category filters, clear conversion actions, and a browse-to-detail rhythm that helps users compare, decide, and take the asset quickly."
+  },
+  {
+    id: "networked-visual-board",
+    title: "Networked Visual Board",
+    titleZh: "灵感看板",
+    titleEn: "Networked Visual Board",
+    summary:
+      "Reference boards and inspiration systems that feel like a living visual database, where cards, tags, and relationships matter as much as the first screenshot.",
+    summaryZh: "更像灵感看板、研究地图和视觉数据库的浏览系统，卡片、标签与关联路径和首图一样重要。",
+    ancestors: ["dada", "postmodern-memphis", "swiss-international-typography"],
+    movementIds: ["dada", "postmodern-memphis", "swiss-international-typography"],
+    structureIds: ["network-graph", "catalog-explorer"],
+    samples: [
+      { screenshot: "arena-home-live.png", alt: "Are.na homepage", label: "Are.na" },
+      { screenshot: "behance.png", alt: "Behance homepage", label: "Behance" },
+      { screenshot: "siteinspire-live.png", alt: "SiteInspire homepage", label: "SiteInspire" }
+    ],
+    references: [
+      { label: "Are.na", href: "https://www.are.na/" },
+      { label: "Behance", href: "https://www.behance.net/" },
+      { label: "Fonts In Use", href: "https://fontsinuse.com/" },
+      { label: "Godly", href: "https://godly.website/" }
+    ],
+    prompt:
+      "Use a networked visual board family: a living card field, tag-driven paths, cross-links between references, and a layout that supports collecting, comparing, and revisiting rather than just presenting one hero story."
   }
 ];
 
@@ -186,6 +260,21 @@ export const styleReferenceCatalog = {
     liveReference("gumroad-live.png", "Gumroad", "https://gumroad.com/", "边界硬、对比强、最接近 web brutalism 的大众例子。"),
     liveReference("bureau-borsche.png", "Bureau Borsche", "https://bureauborsche.com/", "更偏文化和实验设计的粗野版本。"),
     liveReference("memphis-milano.png", "Memphis Milano", "https://memphis.it/en/", "更靠近后现代源头和反模板气质。")
+  ],
+  "creative-media-editorial": [
+    liveReference("itsnicethat-live.png", "It's Nice That", "https://www.itsnicethat.com/", "更像持续更新的创意媒体首页，而不是一期静态封面。"),
+    liveReference("frieze.png", "Frieze", "https://www.frieze.com/", "内容与图片之间的编辑节奏很成熟。"),
+    liveReference("newyorker.png", "The New Yorker", "https://www.newyorker.com/", "长期栏目、更新和出版感之间的平衡。")
+  ],
+  "template-market-library": [
+    liveReference("notion-templates-live.png", "Notion Templates", "https://www.notion.com/templates", "分类、卡片和转化入口同时成立。"),
+    liveReference("awwwards-websites-live.png", "Awwwards / Websites", "https://www.awwwards.com/websites/", "高密度缩略图浏览和筛选方式值得借。"),
+    liveReference("siteinspire-live.png", "SiteInspire", "https://www.siteinspire.com/", "更偏灵感目录，但 browse rhythm 很适合模板库。")
+  ],
+  "networked-visual-board": [
+    liveReference("arena-home-live.png", "Are.na", "https://www.are.na/", "最像开放式灵感看板和关系网的代表。"),
+    liveReference("behance.png", "Behance", "https://www.behance.net/", "更大规模的案例和收藏型视觉索引。"),
+    liveReference("siteinspire-live.png", "SiteInspire", "https://www.siteinspire.com/", "如果要把看板做得更可筛选，可以借它的目录感。")
   ]
 };
 
@@ -315,6 +404,33 @@ export const styleSkillSpecCatalog = {
     imagery: ["图片和图形可以更硬切", "允许更粗糙的展示感", "不要混进温和生活方式图"],
     motion: ["hover 可更强", "切换要干脆", "不要优雅慢动作"],
     avoid: ["装得很精致", "过多暖色纸感", "为了态度牺牲基本可读性"]
+  },
+  "creative-media-editorial": {
+    useWhen: ["创意媒体首页", "设计博客", "文化资讯站", "更新频繁的内容品牌"],
+    palette: ["以黑白灰为骨架", "图片自己定调", "不要把功能色做成主角"],
+    typography: ["标题、栏目、时间和作者信息都要清楚", "serif 与 sans 可以并用", "保持读稿节奏而不是纯海报感"],
+    layout: ["先有 lead story 再有次级栏目", "支持高频更新但不失去封面感", "首页是编辑入口不是长文全文"],
+    imagery: ["图片必须有张力", "缩略图和 lead 图要区分层级", "不要全部裁成同一种无差别卡片"],
+    motion: ["轻微 reveal 即可", "更依赖版面节奏而不是交互动效", "不要让 hover 打断浏览"],
+    avoid: ["单纯做成 feed", "所有内容都同级", "只有封面气质没有更新入口"]
+  },
+  "template-market-library": {
+    useWhen: ["模板库", "Prompt 库", "Starter Kit", "资源市场"],
+    palette: ["保持中性骨架", "重点用在分类和 CTA", "不要让背景色抢走卡片信息"],
+    typography: ["标题短而准", "分类标签清楚", "价格、下载、用途这些元数据要很好扫"],
+    layout: ["首页就是筛选和比较入口", "转化动作要近", "列表和详情必须分层清楚"],
+    imagery: ["缩略图比例统一", "一眼能看出模板类型", "避免重复图导致目录失真"],
+    motion: ["筛选和视图切换反馈要稳", "避免花哨转场", "浏览效率高于戏剧性"],
+    avoid: ["把模板库做成纯品牌故事", "只有 CTA 没有比较信息", "卡片和标签体系混乱"]
+  },
+  "networked-visual-board": {
+    useWhen: ["灵感库", "研究地图", "案例收集站", "设计参考网络"],
+    palette: ["中性底色更稳", "颜色用于分组或状态", "不要靠大量装饰色制造‘灵感感’"],
+    typography: ["卡片标题和标签必须易扫", "元数据密度允许更高", "短描述比长段落更有效"],
+    layout: ["支持收藏、关联、回访", "卡片、标签、关系同时存在", "从一张图可以走到一串相关内容"],
+    imagery: ["缩略图既要能代表内容，也要能在群组里协同工作", "不要同页大量重复", "允许局部更像看板而不是统一宣传图"],
+    motion: ["hover 只做轻量反馈", "重点是路径切换和关联探索", "不要把看板做成舞台演出"],
+    avoid: ["单一 hero 叙事", "没有标签和关联关系", "全站都像随机瀑布流"]
   }
 };
 
@@ -323,46 +439,46 @@ export const atlasEcosystemCatalog = [
     id: "live-galleries",
     titleZh: "灵感图库",
     titleEn: "Curated Galleries",
-    summaryZh: "这一类最接近你的浏览页目标：先看截图，再按标签、类型或场景筛。多数不是开源，但很适合借它们的分类方法和首屏组织。",
+    summaryZh: "这一类最接近你的浏览页目标：先看截图，再按标签、类型或场景筛。多数不是开源，但非常适合借首页组织、分类方法和浏览节奏。",
     items: [
       {
-        titleZh: "Minimal Gallery",
-        titleEn: "Minimal Gallery",
-        href: "https://minimal.gallery/",
-        noteZh: "截图优先，并把网站、模板、工具放在同一套浏览入口里。",
-        tags: ["人工策展", "截图聚合", "模板延展"],
+        titleZh: "Awwwards",
+        titleEn: "Awwwards",
+        href: "https://www.awwwards.com/",
+        noteZh: "首页把最新、获奖、合集和分类入口并列摆出来，适合借它的强入口组织。",
+        tags: ["首屏组织", "高密度展示", "分类入口"],
         openSource: false
       },
       {
-        titleZh: "A1 Gallery",
-        titleEn: "A1 Gallery",
-        href: "https://www.a1.gallery/",
-        noteZh: "风格、类型、行业、技术标签拆得很细，更像现代化的 inspiration atlas。",
-        tags: ["标签体系", "高更新", "类型筛选"],
+        titleZh: "Godly",
+        titleEn: "Godly",
+        href: "https://godly.website/",
+        noteZh: "非常克制、图像优先，适合借它低噪声的 image-first 浏览方式。",
+        tags: ["黑白克制", "截图优先", "低噪声"],
         openSource: false
       },
       {
         titleZh: "Land-book",
         titleEn: "Land-book",
         href: "https://land-book.com/",
-        noteZh: "适合参考 gallery + 收藏板 + section 检索 这一层产品结构。",
-        tags: ["灵感板", "section 检索", "付费深度"],
+        noteZh: "筛选维度很丰富，尤其适合借行业、风格、版式与 section 的交叉筛法。",
+        tags: ["多维筛选", "section 检索", "案例库"],
         openSource: false
       },
       {
-        titleZh: "One Page Love",
-        titleEn: "One Page Love",
-        href: "https://onepagelove.com/",
-        noteZh: "单页网站、区块模块、模板市场三层做得很成熟。",
-        tags: ["单页网站", "区块参考", "模板转化"],
+        titleZh: "Mobbin",
+        titleEn: "Mobbin",
+        href: "https://mobbin.com/",
+        noteZh: "最适合借给选型器和下钻流程：从 Screens 到 Flows 的层级非常清楚。",
+        tags: ["选择器", "流程浏览", "组件与截图"],
         openSource: false
       },
       {
-        titleZh: "Siiimple",
-        titleEn: "Siiimple",
-        href: "https://siiimple.com/",
-        noteZh: "极简方向特别清楚，适合参考“少而准”的视觉筛法。",
-        tags: ["极简", "画廊", "人工筛选"],
+        titleZh: "Minimal Gallery",
+        titleEn: "Minimal Gallery",
+        href: "https://minimal.gallery/",
+        noteZh: "截图优先，并把网站、模板、工具放在同一套浏览入口里。",
+        tags: ["人工策展", "截图聚合", "模板延展"],
         openSource: false
       }
     ]
@@ -371,22 +487,31 @@ export const atlasEcosystemCatalog = [
     id: "system-indexes",
     titleZh: "系统与组件索引",
     titleEn: "System Indexes",
-    summaryZh: "这一类不是风格图库，而是把设计系统、组件、规范和实现方式做成检索入口。适合你补“怎么做出来”这一层。",
+    summaryZh: "这一类不是风格图库，而是把设计系统、组件、规范和实现方式做成检索入口。适合你补“这种风格怎么做出来”这一层。",
     items: [
       {
         titleZh: "Component Gallery",
         titleEn: "Component Gallery",
         href: "https://component.gallery/",
-        noteZh: "把组件、设计系统、代码示例和开源状态放在同一条检索链里。",
+        repoHref: "https://github.com/inbn/component-gallery",
+        noteZh: "组件、系统、代码示例和开源状态在同一条检索链里，特别适合补 style -> system -> example 的链路。",
         tags: ["组件索引", "设计系统", "代码示例"],
-        openSource: false
+        openSource: true
       },
       {
         titleZh: "Design Systems Repo",
         titleEn: "Design Systems Repo",
         href: "https://designsystemsrepo.com/",
-        noteZh: "不只看系统本身，还把文章、工具、书和 talks 组织成一套资源库。",
+        noteZh: "不只收系统本身，还把文章、工具、书和 talks 做成一套资源库。",
         tags: ["设计系统", "资源库", "文章工具"],
+        openSource: false
+      },
+      {
+        titleZh: "Fonts In Use",
+        titleEn: "Fonts In Use",
+        href: "https://fontsinuse.com/",
+        noteZh: "如果你后面想把风格 atlas 做得更像可检索档案，Fonts In Use 的元数据密度很值得借。",
+        tags: ["排印档案", "元数据", "高级搜索"],
         openSource: false
       },
       {
@@ -403,24 +528,47 @@ export const atlasEcosystemCatalog = [
     id: "historical-archives",
     titleZh: "历史档案",
     titleEn: "Historical Archives",
-    summaryZh: "这一类更接近你现在 About 页时间轴的外部参照。重点不是模板，而是历史演化、年代感和视觉源流。",
+    summaryZh: "这一类更接近你时间轴与历史流派的外部参照。重点不是模板，而是历史演化、年代感和视觉源流。",
     items: [
+      {
+        titleZh: "The Design Binders",
+        titleEn: "The Design Binders",
+        href: "https://www.designbinders.com/en",
+        noteZh: "最接近“设计流派时间轴”的外部参照，年代和风格切得很清楚。",
+        tags: ["设计流派", "年代轴", "风格概览"],
+        openSource: false
+      },
+      {
+        titleZh: "Letterform Archive",
+        titleEn: "Letterform Archive",
+        href: "https://letterformarchive.org/",
+        noteZh: "更像设计研究馆藏，适合借 archive、essay、collection 混合的组织方式。",
+        tags: ["设计档案", "研究型内容", "馆藏结构"],
+        openSource: false
+      },
+      {
+        titleZh: "Cooper Hewitt Collection",
+        titleEn: "Cooper Hewitt Collection",
+        href: "https://collection.cooperhewitt.org/",
+        noteZh: "馆藏检索、分类和开发者入口都很完整，适合借 serious archive 的信息架构。",
+        tags: ["馆藏检索", "主题索引", "开发者接口"],
+        openSource: false
+      },
+      {
+        titleZh: "V&A Collections",
+        titleEn: "V&A Collections",
+        href: "https://www.vam.ac.uk/collections",
+        noteZh: "大型博物馆藏品浏览与筛选的成熟案例，适合借浏览层的深度分组。",
+        tags: ["博物馆档案", "深度筛选", "主题浏览"],
+        openSource: false
+      },
       {
         titleZh: "Web Design Museum",
         titleEn: "Web Design Museum",
         href: "https://www.webdesignmuseum.org/",
-        noteZh: "把旧网站、Flash、App、软件和展览都纳入同一套历史档案里。",
-        tags: ["历史档案", "年代索引", "展览结构"],
+        noteZh: "把旧网站、Flash、App、软件和展览都纳入同一套历史档案里，更偏 web 历史视角。",
+        tags: ["网页历史", "年代索引", "展览结构"],
         openSource: false
-      },
-      {
-        titleZh: "Style Stage",
-        titleEn: "Style Stage",
-        href: "https://stylestage.dev/",
-        repoHref: "https://github.com/5t3ph/stylestage",
-        noteZh: "虽然不是历史博物馆，但它很好地证明了“同一内容，不同视觉语法”可以如何被系统化展示。",
-        tags: ["同内容异风格", "社区提交", "CSS 展示"],
-        openSource: true
       }
     ]
   },
@@ -428,15 +576,51 @@ export const atlasEcosystemCatalog = [
     id: "open-source-foundations",
     titleZh: "开源底座",
     titleEn: "Open-Source Foundations",
-    summaryZh: "真正完全开源、还能直接拿来做你这类站点底座的方案，更多长在 design system 或 digital collection 领域，而不是灵感图库本身。",
+    summaryZh: "真正完全开源、还能直接拿来做这类站点底座的方案，多长在 design system、docs 或 digital collection 领域，而不是灵感图库本身。",
     items: [
       {
-        titleZh: "Figma SDS",
-        titleEn: "Figma SDS",
-        href: "https://github.com/figma/sds",
-        repoHref: "https://github.com/figma/sds",
-        noteZh: "更像开源设计系统底板，适合借 token、component、code connect 这层组织方式。",
-        tags: ["设计系统", "React", "Tokens"],
+        titleZh: "Open Source Design",
+        titleEn: "Open Source Design",
+        href: "https://opensourcedesign.net/",
+        repoHref: "https://github.com/opensourcedesign/opensourcedesign.github.io",
+        noteZh: "社区、资源、文章和贡献路径组织得很成熟，适合借社区型资源站的架构。",
+        tags: ["社区资源", "开源", "内容与参与"],
+        openSource: true
+      },
+      {
+        titleZh: "shadcn/ui",
+        titleEn: "shadcn/ui",
+        href: "https://ui.shadcn.com/",
+        repoHref: "https://github.com/shadcn-ui/ui",
+        noteZh: "最值得借的是 example-led docs 和 copy-to-use 的交付方式，不是它的默认视觉。",
+        tags: ["可复制交付", "Example-led", "组件文档"],
+        openSource: true
+      },
+      {
+        titleZh: "USWDS",
+        titleEn: "USWDS",
+        href: "https://designsystem.digital.gov/",
+        repoHref: "https://github.com/uswds/uswds",
+        noteZh: "从 foundations 到 components 到真实站点的层级很完整，适合借 docs 架构。",
+        tags: ["设计系统", "文档层级", "开源"],
+        openSource: true
+      },
+      {
+        titleZh: "Primer",
+        titleEn: "Primer",
+        href: "https://primer.style/",
+        repoHref: "https://github.com/primer/react",
+        noteZh: "把 Product UI、Brand UI、Accessibility 拆开，很适合借‘视觉 vs 系统’分层方式。",
+        tags: ["Brand UI", "Product UI", "Accessibility"],
+        openSource: true
+      },
+      {
+        titleZh: "PatternFly",
+        titleEn: "PatternFly",
+        href: "https://www.patternfly.org/",
+        repoHref: "https://github.com/patternfly/patternfly-react",
+        noteZh: "非常完整的开源系统型站点，适合借 roadmap、docs、community 的分层。",
+        tags: ["系统型站点", "社区", "版本与路线图"],
         openSource: true
       },
       {
@@ -444,7 +628,7 @@ export const atlasEcosystemCatalog = [
         titleEn: "Omeka S",
         href: "https://omeka.org/s/",
         repoHref: "https://github.com/omeka/omeka-s",
-        noteZh: "如果把你的站做得更像策展档案馆，Omeka 的 collection / exhibit 结构很值得借。",
+        noteZh: "如果把你的站做得更像策展档案馆，collection / exhibit 结构非常值得借。",
         tags: ["数字馆藏", "展览站", "多站点"],
         openSource: true
       },
@@ -452,7 +636,7 @@ export const atlasEcosystemCatalog = [
         titleZh: "CollectionBuilder",
         titleEn: "CollectionBuilder",
         href: "https://collectionbuilder.github.io/cb-docs/",
-        noteZh: "更适合把截图、元数据、时间轴、地图、主题页做成静态数字收藏网站。",
+        noteZh: "适合把截图、元数据、时间轴、地图、主题页做成静态数字收藏网站。",
         tags: ["静态站", "元数据", "时间轴"],
         openSource: true
       }
