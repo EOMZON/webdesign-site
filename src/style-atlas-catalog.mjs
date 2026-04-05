@@ -764,6 +764,38 @@ export const atlasEcosystemCatalog = [
     ]
   },
   {
+    id: "official-trend-reports",
+    titleZh: "官方趋势来源",
+    titleEn: "Official Trend Reports",
+    summaryZh: "这一组不是风格库，而是近一年主流建站平台自己总结的方向。适合补“现在网页普遍往哪走”，再回到站内匹配更稳定的风格家族。",
+    items: [
+      {
+        titleZh: "Figma Web Design Trends",
+        titleEn: "Figma Web Design Trends",
+        href: "https://www.figma.com/resource-library/web-design-trends/",
+        noteZh: "把 AI 辅助、沉浸式 3D、实验导航、暗色模式、可访问性与可持续这些高频方向放在同一张趋势图里，适合做总览入口。",
+        tags: ["AI 辅助", "3D / 沉浸", "暗色 / 主题", "可访问性"],
+        openSource: false
+      },
+      {
+        titleZh: "Framer Web Design Trends",
+        titleEn: "Framer Web Design Trends",
+        href: "https://www.framer.com/blog/web-design-trends/",
+        noteZh: "更偏落地网页效果：滚动驱动、微交互、空间感和更强表达性的首屏语言，适合补“这些趋势实际会长什么样”。",
+        tags: ["滚动动效", "交互节奏", "空间感", "强排版"],
+        openSource: false
+      },
+      {
+        titleZh: "Squarespace 2025 Web Design Trends",
+        titleEn: "Squarespace 2025 Web Design Trends",
+        href: "https://pros.squarespace.com/blog/2025-web-design-trends",
+        noteZh: "补上更品牌、更生活方式的一面：表达型字体、有机形态、手绘/拼贴和发光视觉，能帮助区分“趋势信号”和“稳定家族”。",
+        tags: ["表达型排版", "有机形态", "手绘 / 拼贴", "发光 / 渐变"],
+        openSource: false
+      }
+    ]
+  },
+  {
     id: "template-marketplaces",
     titleZh: "模板市场",
     titleEn: "Template Marketplaces",
