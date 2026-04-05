@@ -324,6 +324,294 @@ export const extraStyleSources = [
     ],
     prompt:
       "Use an editorial commerce catalog family: issue-like pacing, content and product side by side, quiet shop actions, printed-catalog rhythm, and a brand world that sells through curation rather than loud conversion chrome."
+  },
+  {
+    id: "design-system-foundation",
+    title: "Design System Foundation",
+    titleZh: "设计系统基座",
+    titleEn: "Design System Foundation",
+    summary:
+      "Foundations-first documentation websites where tokens, typography, spacing, accessibility, and component rules are the primary product rather than secondary support material.",
+    summaryZh: "更像 foundations、tokens、guidelines 和 component rules 首页的系统文档家族，主角不是营销 hero，而是规则、部件和设计治理本身。",
+    ancestors: ["bauhaus-functional-modernism", "swiss-international-typography", "new-typography"],
+    movementIds: ["bauhaus-functional-modernism", "swiss-international-typography", "new-typography"],
+    structureIds: ["workbench", "archive-stack"],
+    samples: [
+      { screenshot: "atlassian-foundations.png", alt: "Atlassian Foundations page", label: "Atlassian Foundations" },
+      { screenshot: "carbon-for-ai.png", alt: "Carbon for AI page", label: "Carbon for AI" },
+      { screenshot: "pair-guidebook.png", alt: "People + AI Guidebook page", label: "People + AI Guidebook" }
+    ],
+    references: [
+      { label: "Atlassian Foundations", href: "https://atlassian.design/foundations/" },
+      { label: "Carbon for AI", href: "https://carbondesignsystem.com/guidelines/carbon-for-ai/" },
+      { label: "Primer", href: "https://primer.style/" }
+    ],
+    prompt:
+      "Use a design system foundation family: foundations-first navigation, tokens and principles at the top level, restrained product-neutral visuals, strong left-rail or sectional hierarchy, and a page rhythm built around reusable rules rather than campaign storytelling."
+  },
+  {
+    id: "journal-frontpage",
+    title: "Journal Frontpage",
+    titleZh: "评论期刊首页",
+    titleEn: "Journal Frontpage",
+    summary:
+      "Recurring publication homepages that feel like a living front page, with masthead authority, multiple sections, and a balance between headlines, illustration, and ongoing cadence.",
+    summaryZh: "更像长期更新的评论刊物、文化周刊和新闻评论首页，有稳定刊头、栏目层级和持续更新节奏，不完全等同于特稿式 editorial 首页。",
+    ancestors: ["new-typography", "swiss-international-typography", "art-deco-streamlined-luxury"],
+    movementIds: ["new-typography", "swiss-international-typography", "art-deco-streamlined-luxury"],
+    structureIds: ["archive-stack", "dossier"],
+    samples: [
+      { screenshot: "newyorker.png", alt: "The New Yorker homepage", label: "The New Yorker" },
+      { screenshot: "frieze.png", alt: "Frieze homepage", label: "Frieze" },
+      { screenshot: "tmagazine.png", alt: "T Magazine homepage", label: "T Magazine" }
+    ],
+    references: [
+      { label: "The New Yorker", href: "https://www.newyorker.com/" },
+      { label: "Frieze", href: "https://www.frieze.com/" },
+      { label: "T Magazine", href: "https://www.nytimes.com/section/t-magazine" }
+    ],
+    prompt:
+      "Use a journal frontpage family: authoritative masthead, repeatable sections, clear headline hierarchy, a steady editorial cadence, and a homepage that feels like an always-on publication rather than a one-off feature story."
+  },
+  {
+    id: "creative-portfolio-network",
+    title: "Creative Portfolio Network",
+    titleZh: "作品社区网络",
+    titleEn: "Creative Portfolio Network",
+    summary:
+      "Public creative networks where portfolio tiles, profiles, saves, and discovery matter together, sitting between a gallery, a social layer, and a searchable project archive.",
+    summaryZh: "更像 Behance 这类公开作品网络与 creator platform 的家族，作品卡、作者主页、社交证明和发现机制要同时成立。",
+    ancestors: ["dada", "swiss-international-typography", "postmodern-memphis"],
+    movementIds: ["dada", "swiss-international-typography", "postmodern-memphis"],
+    structureIds: ["network-graph", "catalog-explorer"],
+    samples: [
+      { screenshot: "behance.png", alt: "Behance homepage", label: "Behance" },
+      { screenshot: "arena-home-live.png", alt: "Are.na homepage", label: "Are.na" },
+      { screenshot: "siteinspire-live.png", alt: "SiteInspire homepage", label: "SiteInspire" }
+    ],
+    references: [
+      { label: "Behance", href: "https://www.behance.net/" },
+      { label: "Are.na", href: "https://www.are.na/" },
+      { label: "Mobbin", href: "https://mobbin.com/" }
+    ],
+    prompt:
+      "Use a creative portfolio network family: dense project-grid discovery, creator identity visible at every level, social proof or save behavior near the work, and a browse pattern that supports both inspiration scanning and profile-level drill-down."
+  },
+  {
+    id: "identity-case-archive",
+    title: "Identity Case Archive",
+    titleZh: "品牌案例档案",
+    titleEn: "Identity Case Archive",
+    summary:
+      "Case-led identity studio websites where brands, packaging, type, campaigns, and sectors are organized like a precise archive rather than a generic portfolio wall.",
+    summaryZh: "更像 identity studio、品牌机构和设计咨询公司的案例档案页，重点是把品牌、包装、字体和行业案例组织成一套严谨可读的 archive。",
+    ancestors: ["swiss-international-typography", "bauhaus-functional-modernism", "minimalism"],
+    movementIds: ["swiss-international-typography", "bauhaus-functional-modernism", "minimalism"],
+    structureIds: ["catalog-explorer", "dossier"],
+    samples: [
+      { screenshot: "pentagram.png", alt: "Pentagram homepage", label: "Pentagram" },
+      { screenshot: "signal-a-studio.png", alt: "Signal-A Studio homepage", label: "Signal-A Studio" },
+      { screenshot: "fictivekin-home-live.png", alt: "Fictive Kin homepage", label: "Fictive Kin" }
+    ],
+    references: [
+      { label: "Pentagram", href: "https://www.pentagram.com/" },
+      { label: "Signal-A Studio", href: "https://signal-a.studio/" },
+      { label: "Fictive Kin", href: "https://fictivekin.com/" }
+    ],
+    prompt:
+      "Use an identity case archive family: case-led landing, precise sector or discipline filtering, restrained brand-neutral layout, metadata that reads like an archive, and enough authority to feel like a top-tier consultancy rather than a generic studio folio."
+  },
+  {
+    id: "showcase-discovery-index",
+    title: "Showcase Discovery Index",
+    titleZh: "甄选展示索引",
+    titleEn: "Showcase Discovery Index",
+    summary:
+      "Taste-led showcase homepages that combine featured picks, category chips, and a dense discovery wall, closer to a curated awards front page than a personal reference library.",
+    summaryZh: "更像 SiteInspire、Awwwards 这类甄选展示首页的家族：先给 featured picks，再给 popular categories 和发现墙，策展口味比内部资料管理更强。",
+    ancestors: ["new-typography", "swiss-international-typography", "art-deco-streamlined-luxury"],
+    movementIds: ["new-typography", "swiss-international-typography", "art-deco-streamlined-luxury"],
+    structureIds: ["catalog-explorer", "archive-stack"],
+    samples: [
+      { screenshot: "awwwards-websites-live.png", alt: "Awwwards websites page", label: "Awwwards / Websites" },
+      { screenshot: "siteinspire.png", alt: "SiteInspire homepage", label: "SiteInspire" },
+      { screenshot: "siteinspire-live.png", alt: "SiteInspire listings", label: "SiteInspire / Listings" }
+    ],
+    references: [
+      { label: "Awwwards / Websites", href: "https://www.awwwards.com/websites/" },
+      { label: "SiteInspire", href: "https://www.siteinspire.com/" },
+      { label: "Minimal Gallery", href: "https://minimal.gallery/" }
+    ],
+    prompt:
+      "Use a showcase discovery index family: editorially curated featured slots, visible popular categories, dense but premium browsing, and a front page that signals taste first, then helps users discover more through filters and showcases."
+  },
+  {
+    id: "hospitality-scene-editorial",
+    title: "Hospitality Scene Editorial",
+    titleZh: "酒店场景叙事",
+    titleEn: "Hospitality Scene Editorial",
+    summary:
+      "Atmosphere-led hospitality websites where the homepage feels like entering a place, balancing location, programming, food, stays, and city scene rather than reading a generic brand pitch.",
+    summaryZh: "更像酒店、餐饮和城市文化场景页的家族，首页像进入一个地方，而不是看一份普通品牌介绍。",
+    ancestors: ["art-deco-streamlined-luxury", "mid-century-modern", "arts-and-crafts"],
+    movementIds: ["art-deco-streamlined-luxury", "mid-century-modern", "arts-and-crafts"],
+    structureIds: ["immersive-stage", "catalog-explorer"],
+    samples: [
+      { screenshot: "ace-hotel.png", alt: "Ace Hotel homepage", label: "Ace Hotel" },
+      { screenshot: "monocle.png", alt: "Monocle homepage", label: "Monocle" },
+      { screenshot: "kinfolk-live.png", alt: "Kinfolk homepage", label: "Kinfolk" }
+    ],
+    references: [
+      { label: "Ace Hotel", href: "https://acehotel.com/" },
+      { label: "Monocle", href: "https://monocle.com/" },
+      { label: "Kinfolk", href: "https://kinfolk.com/" }
+    ],
+    prompt:
+      "Use a hospitality scene editorial family: location-led hero, scene-driven photography, cultural programming, guide-like modules, and a pace that feels like entering a place rather than browsing a generic brand brochure."
+  },
+  {
+    id: "photo-journal-archive",
+    title: "Photo Journal Archive",
+    titleZh: "摄影期刊档案",
+    titleEn: "Photo Journal Archive",
+    summary:
+      "Image-led journal and photography publication websites where covers, essays, issues, and archive depth matter more than fast scanning utility.",
+    summaryZh: "更像摄影期刊、艺术图录和图像档案首页，封面、essay、issue 与 archive 深度比普通媒体列表更重要。",
+    ancestors: ["new-typography", "art-deco-streamlined-luxury", "swiss-international-typography"],
+    movementIds: ["new-typography", "art-deco-streamlined-luxury", "swiss-international-typography"],
+    structureIds: ["dossier", "archive-stack"],
+    samples: [
+      { screenshot: "aperture.png", alt: "Aperture homepage", label: "Aperture" },
+      { screenshot: "frieze.png", alt: "Frieze homepage", label: "Frieze" },
+      { screenshot: "tmagazine.png", alt: "T Magazine homepage", label: "T Magazine" }
+    ],
+    references: [
+      { label: "Aperture", href: "https://aperture.org/" },
+      { label: "Frieze", href: "https://www.frieze.com/" },
+      { label: "T Magazine", href: "https://www.nytimes.com/section/t-magazine" }
+    ],
+    prompt:
+      "Use a photo journal archive family: cover-led imagery, issue rhythm, essay-first hierarchy, restrained navigation, and an archive structure that supports both deep image browsing and editorial reading."
+  },
+  {
+    id: "bento-product-launch",
+    title: "Bento Product Launch",
+    titleZh: "Bento 产品发布",
+    titleEn: "Bento Product Launch",
+    summary:
+      "Modular AI and startup product launches that combine a strong hero with bento-style feature blocks, fast scan paths, and a dense but controlled product story.",
+    summaryZh: "更像当代 AI 和 startup 产品落地页的 Bento 拼块版本，用模块化卡片和快节奏扫描帮助用户迅速抓住能力边界。",
+    ancestors: ["bauhaus-functional-modernism", "swiss-international-typography", "minimalism"],
+    movementIds: ["bauhaus-functional-modernism", "swiss-international-typography", "minimalism"],
+    structureIds: ["workbench", "catalog-explorer"],
+    samples: [
+      { screenshot: "bolt-new.png", alt: "Bolt homepage", label: "Bolt" },
+      { screenshot: "vercel.png", alt: "Vercel homepage", label: "Vercel" },
+      { screenshot: "linear.png", alt: "Linear homepage", label: "Linear" }
+    ],
+    references: [
+      { label: "Bolt", href: "https://bolt.new/" },
+      { label: "Vercel", href: "https://vercel.com/" },
+      { label: "Linear", href: "https://linear.app/" }
+    ],
+    prompt:
+      "Use a bento product launch family: one strong product statement up top, modular feature blocks underneath, dense but controlled scan paths, a near-black or bright-neutral palette, and cards that explain real capability instead of generic marketing filler."
+  },
+  {
+    id: "modern-commerce-minimal",
+    title: "Modern Commerce Minimal",
+    titleZh: "现代零售极简",
+    titleEn: "Modern Commerce Minimal",
+    summary:
+      "Quiet DTC and fashion commerce websites where merchandising, category entry, and brand voice stay calm and premium without losing conversion clarity.",
+    summaryZh: "更像 Everlane、COS 这类现代零售首页，产品图、分类入口和品牌语气都很安静，但转化路径依旧清楚。",
+    ancestors: ["minimalism", "swiss-international-typography", "mid-century-modern"],
+    movementIds: ["minimalism", "swiss-international-typography", "mid-century-modern"],
+    structureIds: ["catalog-explorer", "dossier"],
+    samples: [
+      { screenshot: "everlane.png", alt: "Everlane homepage", label: "Everlane" },
+      { screenshot: "gentlewoman-live.png", alt: "The Gentlewoman homepage", label: "The Gentlewoman" },
+      { screenshot: "monocle.png", alt: "Monocle homepage", label: "Monocle" }
+    ],
+    references: [
+      { label: "Everlane", href: "https://www.everlane.com/" },
+      { label: "The Gentlewoman", href: "https://thegentlewoman.co.uk/" },
+      { label: "Monocle", href: "https://monocle.com/" }
+    ],
+    prompt:
+      "Use a modern commerce minimal family: calm merchandising, category-first browsing, quiet product photography, restrained copy, and a retail rhythm that feels premium without slipping into loud promotional noise."
+  },
+  {
+    id: "civic-service-clarity",
+    title: "Civic Service Clarity",
+    titleZh: "公共服务清晰系统",
+    titleEn: "Civic Service Clarity",
+    summary:
+      "Public-service and service-design websites where task paths, plain language, and trust are more important than brand expression, with every page optimized for clarity under pressure.",
+    summaryZh: "更像 GOV.UK 这类公共服务入口的高可读网页语言，重点是任务路径、文案清晰和可信，而不是品牌表达。",
+    ancestors: ["new-typography", "swiss-international-typography", "bauhaus-functional-modernism"],
+    movementIds: ["new-typography", "swiss-international-typography", "bauhaus-functional-modernism"],
+    structureIds: ["workbench", "archive-stack"],
+    samples: [
+      { screenshot: "govuk.png", alt: "GOV.UK homepage", label: "GOV.UK" },
+      { screenshot: "atlassian-foundations.png", alt: "Atlassian Foundations page", label: "Atlassian Foundations" },
+      { screenshot: "pair-guidebook.png", alt: "People + AI Guidebook page", label: "People + AI Guidebook" }
+    ],
+    references: [
+      { label: "GOV.UK", href: "https://www.gov.uk/" },
+      { label: "USWDS", href: "https://designsystem.digital.gov/" },
+      { label: "Service Manual", href: "https://www.gov.uk/service-manual" }
+    ],
+    prompt:
+      "Use a civic service clarity family: plain-language hierarchy, strong task-entry paths, explicit sectioning, calm trust-first color use, and layouts optimized for completion and comprehension rather than expressive branding."
+  },
+  {
+    id: "architecture-space-minimal",
+    title: "Architecture Space Minimal",
+    titleZh: "建筑空间极简",
+    titleEn: "Architecture Space Minimal",
+    summary:
+      "Architecture and spatial-practice websites where whitespace, project imagery, and project taxonomy create authority, with space and material carrying more of the tone than interface chrome.",
+    summaryZh: "更像建筑事务所、空间设计与文化空间站点，靠留白、空间图像和项目秩序建立判断，不靠重组件。",
+    ancestors: ["minimalism", "swiss-international-typography", "mid-century-modern"],
+    movementIds: ["minimalism", "swiss-international-typography", "mid-century-modern"],
+    structureIds: ["catalog-explorer", "archive-stack"],
+    samples: [
+      { screenshot: "snohetta.png", alt: "Snohetta homepage", label: "Snohetta" },
+      { screenshot: "swiss-institute.png", alt: "Swiss Institute homepage", label: "Swiss Institute" },
+      { screenshot: "ok-rm.png", alt: "OK-RM homepage", label: "OK-RM" }
+    ],
+    references: [
+      { label: "Snøhetta", href: "https://snohetta.com/" },
+      { label: "Swiss Institute", href: "https://www.swissinstitute.net/" },
+      { label: "OK-RM", href: "https://www.ok-rm.co.uk/" }
+    ],
+    prompt:
+      "Use an architecture space minimal family: whitespace-first composition, project imagery that carries material and scale, restrained project metadata, and a calm spatial rhythm that feels more like a practice archive than a generic agency site."
+  },
+  {
+    id: "expert-course-marketplace",
+    title: "Expert Course Marketplace",
+    titleZh: "专家课程平台",
+    titleEn: "Expert Course Marketplace",
+    summary:
+      "Creator education and cohort-course platforms where catalog discovery, instructor credibility, syllabus depth, and enrollment cues must all coexist in one clean system.",
+    summaryZh: "更像 cohort course、专家课程和 creator education 平台首页，课程卡、导师信誉、课程大纲和报名路径要同时成立。",
+    ancestors: ["bauhaus-functional-modernism", "swiss-international-typography", "minimalism"],
+    movementIds: ["bauhaus-functional-modernism", "swiss-international-typography", "minimalism"],
+    structureIds: ["catalog-explorer", "workbench"],
+    samples: [
+      { screenshot: "maven.png", alt: "Maven homepage", label: "Maven" },
+      { screenshot: "notion-templates-live.png", alt: "Notion Templates page", label: "Notion Templates" },
+      { screenshot: "pair-guidebook.png", alt: "People + AI Guidebook page", label: "People + AI Guidebook" }
+    ],
+    references: [
+      { label: "Maven", href: "https://maven.com/" },
+      { label: "MasterClass", href: "https://www.masterclass.com/" },
+      { label: "Domestika", href: "https://www.domestika.org/" }
+    ],
+    prompt:
+      "Use an expert course marketplace family: trust-led hero, category and cohort browsing, instructor proof near every course card, syllabus snippets, and a browse-to-enroll flow that feels structured but not corporate."
   }
 ];
 
@@ -449,6 +737,66 @@ export const styleReferenceCatalog = {
     liveReference("gentlewoman-live.png", "The Gentlewoman", "https://thegentlewoman.co.uk/", "内容、刊物感和品牌零售之间的距离拿捏得很好。"),
     liveReference("monocle.png", "Monocle", "https://monocle.com/", "品牌、目录和精选物件混合得更完整。"),
     liveReference("kinfolk-live.png", "Kinfolk", "https://kinfolk.com/", "如果你要更安静、更偏生活方式一侧，可以借它的节奏。")
+  ],
+  "design-system-foundation": [
+    liveReference("atlassian-foundations.png", "Atlassian Foundations", "https://atlassian.design/foundations/", "更像 foundations 首屏和规则入口的系统文档写法。"),
+    liveReference("carbon-for-ai.png", "Carbon for AI", "https://carbondesignsystem.com/guidelines/carbon-for-ai/", "AI 指南、规则和产品知识可以并存。"),
+    liveReference("pair-guidebook.png", "People + AI Guidebook", "https://pair.withgoogle.com/guidebook-v2/", "如果你想让系统文档更有人读感，可以借它的章节组织。")
+  ],
+  "journal-frontpage": [
+    liveReference("newyorker.png", "The New Yorker", "https://www.newyorker.com/", "最像长期更新的评论刊物 front page。"),
+    liveReference("frieze.png", "Frieze", "https://www.frieze.com/", "文化栏目、封面和更新节奏都很成熟。"),
+    liveReference("tmagazine.png", "T Magazine", "https://www.nytimes.com/section/t-magazine", "如果想让 journal 更时尚、更大片，可以借它。")
+  ],
+  "creative-portfolio-network": [
+    liveReference("behance.png", "Behance", "https://www.behance.net/", "作品、作者、社交证明和发现机制同时成立。"),
+    liveReference("arena-home-live.png", "Are.na", "https://www.are.na/", "更松弛、更研究型的网络化版本。"),
+    liveReference("siteinspire-live.png", "SiteInspire", "https://www.siteinspire.com/", "如果要更强调甄选浏览，可以借它的前台展示感。")
+  ],
+  "identity-case-archive": [
+    liveReference("pentagram.png", "Pentagram", "https://www.pentagram.com/", "品牌案例档案和机构权威感最直接。"),
+    liveReference("signal-a-studio.png", "Signal-A Studio", "https://signal-a.studio/", "更偏精密、排印导向的一侧。"),
+    liveReference("fictivekin-home-live.png", "Fictive Kin", "https://fictivekin.com/", "如果想让 case archive 更像 contemporary studio 首页，可以借它。")
+  ],
+  "showcase-discovery-index": [
+    liveReference("awwwards-websites-live.png", "Awwwards / Websites", "https://www.awwwards.com/websites/", "更偏 featured showcase 和奖项发现首页。"),
+    liveReference("siteinspire.png", "SiteInspire", "https://www.siteinspire.com/", "popular categories 和 curated front page 的组织尤其值得借。"),
+    liveReference("siteinspire-live.png", "SiteInspire / Listings", "https://www.siteinspire.com/", "如果你要更像案例索引页，可以借它的 listing 一侧。")
+  ],
+  "hospitality-scene-editorial": [
+    liveReference("ace-hotel.png", "Ace Hotel", "https://acehotel.com/", "最像场景先行、地点和 program 同时成立的 hospitality 首页。"),
+    liveReference("monocle.png", "Monocle", "https://monocle.com/", "如果你想让酒店与城市内容混合得更像一本 guide，可以借它。"),
+    liveReference("kinfolk-live.png", "Kinfolk", "https://kinfolk.com/", "更安静、更生活方式一侧的场景叙事。")
+  ],
+  "photo-journal-archive": [
+    liveReference("aperture.png", "Aperture", "https://aperture.org/", "最像摄影期刊、封面和 issue archive 同时成立的入口。"),
+    liveReference("frieze.png", "Frieze", "https://www.frieze.com/", "如果你想让图像期刊更像文化出版物，可以借它。"),
+    liveReference("tmagazine.png", "T Magazine", "https://www.nytimes.com/section/t-magazine", "更时尚、更大片的图像出版版本。")
+  ],
+  "bento-product-launch": [
+    liveReference("bolt-new.png", "Bolt", "https://bolt.new/", "更接近当代 AI 产品落地页的 bento 卡片表达。"),
+    liveReference("vercel.png", "Vercel", "https://vercel.com/", "如果你想要更克制、更平台化的 bento 结构，可以借它。"),
+    liveReference("linear.png", "Linear", "https://linear.app/", "更精密、更少噪音的一侧。")
+  ],
+  "modern-commerce-minimal": [
+    liveReference("everlane.png", "Everlane", "https://www.everlane.com/", "最像现代零售极简：首页安静，但购物路径很清楚。"),
+    liveReference("gentlewoman-live.png", "The Gentlewoman", "https://thegentlewoman.co.uk/", "如果你想让零售更像刊物，可以借它。"),
+    liveReference("monocle.png", "Monocle", "https://monocle.com/", "更偏品牌世界与目录混合的一侧。")
+  ],
+  "civic-service-clarity": [
+    liveReference("govuk.png", "GOV.UK", "https://www.gov.uk/", "最像服务设计与 plain-language hierarchy 的成熟范本。"),
+    liveReference("atlassian-foundations.png", "Atlassian Foundations", "https://atlassian.design/foundations/", "如果你想借清晰层级和说明写法，可以参考这一侧。"),
+    liveReference("pair-guidebook.png", "People + AI Guidebook", "https://pair.withgoogle.com/guidebook-v2/", "更偏指南式、解释型的清晰系统。")
+  ],
+  "architecture-space-minimal": [
+    liveReference("snohetta.png", "Snohetta", "https://snohetta.com/", "空间图像、留白和 practice authority 最直接。"),
+    liveReference("swiss-institute.png", "Swiss Institute", "https://www.swissinstitute.net/", "如果你想让建筑/空间站更偏文化机构，可以借它。"),
+    liveReference("ok-rm.png", "OK-RM", "https://www.ok-rm.co.uk/", "更偏创意 practice 的克制版本。")
+  ],
+  "expert-course-marketplace": [
+    liveReference("maven.png", "Maven", "https://maven.com/", "最像 cohort course、专家平台和目录浏览并存的首页。"),
+    liveReference("notion-templates-live.png", "Notion Templates", "https://www.notion.com/templates", "如果你想让课程平台更像高效 marketplace，可以借它。"),
+    liveReference("pair-guidebook.png", "People + AI Guidebook", "https://pair.withgoogle.com/guidebook-v2/", "更偏知识深度和章节组织的一侧。")
   ]
 };
 
@@ -659,6 +1007,114 @@ export const styleSkillSpecCatalog = {
     imagery: ["商品图和 editorial 图要共存", "缩略图像 printed catalog 一样整齐", "避免统一成普通电商卡片"],
     motion: ["hover 轻量即可", "重点是浏览节奏和目录感", "不要让商店操作打断品牌阅读"],
     avoid: ["做成大促首页", "只有气质没有购买路径", "商品和内容完全分裂成两个站"]
+  },
+  "design-system-foundation": {
+    useWhen: ["设计系统首页", "组件规范", "tokens 与 guidelines", "产品基础库"],
+    palette: ["中性浅底或深底都可以", "颜色要服务规则和部件区分", "不要用品牌营销色压过系统信息"],
+    typography: ["层级像文档系统而不是品牌广告", "术语、部件名和说明文字都要很好扫", "标题克制但清楚"],
+    layout: ["foundation、component、pattern 要是一级入口", "侧栏或分组导航必须稳定", "规则页面要支持长期生长"],
+    imagery: ["图例、tokens、组件截图和示意图都可以作为视觉证据", "少用情绪化 hero 图", "例子要比装饰重要"],
+    motion: ["几乎不需要戏剧化动效", "状态反馈要清楚", "交互应该像工具文档而不是 campaign"],
+    avoid: ["把系统站做成 landing page", "只有原则没有部件入口", "强氛围图抢走规则信息"]
+  },
+  "journal-frontpage": {
+    useWhen: ["评论刊物", "文化周刊", "新闻评论首页", "长期更新媒体"],
+    palette: ["黑白灰为骨架更稳", "封面色来自插图和栏目", "不要让功能色把 masthead 做得太轻"],
+    typography: ["刊头权威感很重要", "headline、deck、section 都要分清", "文本密度可以高但必须可扫"],
+    layout: ["首页像持续更新的 front page", "headline 与多栏目并存", "不能只有一个 feature 卡片撑全页"],
+    imagery: ["插图、封面图和栏目缩略都要有层级", "图片不是唯一主角", "避免全站都变成视觉大片"],
+    motion: ["轻量滚动和 hover 足够", "不要用动画打断阅读", "节奏应服务更新感和栏目感"],
+    avoid: ["做成一次性专题页", "只有大图没有栏目结构", "刊头和内容层级太弱"]
+  },
+  "creative-portfolio-network": {
+    useWhen: ["作品社区", "创作者平台", "公开案例库", "作品发现网络"],
+    palette: ["中性底色更利于高密度浏览", "颜色用于标签和状态", "不要靠整站大底色制造氛围"],
+    typography: ["项目名、作者名、收藏或互动信息都要清楚", "卡片文字短而准", "社交元数据不能太重"],
+    layout: ["项目网格、个人主页和发现机制要同时成立", "首页既能扫作品也能进 profile", "不要只做成随机瀑布流"],
+    imagery: ["作品图是核心，但需要作者或分类辅助信息", "卡片比例可以多样但要受控", "不要让图片把导航路径淹没"],
+    motion: ["hover 主要服务发现和保存", "不要过度动画化", "浏览效率高于情绪表演"],
+    avoid: ["做成纯研究看板", "只有社交没有作品质量", "没有 profile 层只剩图片墙"]
+  },
+  "identity-case-archive": {
+    useWhen: ["品牌机构", "设计咨询", "identity studio", "案例档案"],
+    palette: ["黑白灰或极少量辅助色最稳", "视觉权重应让位给案例和元数据", "不要做成潮流色块集合"],
+    typography: ["案例标题、行业、年份、服务范围要清楚", "更像档案标签而不是销售 slogan", "英文字体要有机构感"],
+    layout: ["首页和案例索引要有档案感", "支持按行业或服务查看", "不能只有漂亮封面没有结构"],
+    imagery: ["项目封面与案例裁切要一致", "图片要服务 case archive 的秩序", "避免每个项目都像独立 campaign microsite"],
+    motion: ["轻量 hover 与筛选反馈足够", "不需要情绪化场景切换", "档案式稳定感优先"],
+    avoid: ["做成普通作品墙", "案例与机构信息完全脱节", "华丽过度导致权威感下降"]
+  },
+  "showcase-discovery-index": {
+    useWhen: ["甄选案例站", "奖项展示", "灵感发现首页", "curated showcase"],
+    palette: ["中性骨架更衬托案例", "重点在标签和精选位", "不要把背景做得比作品更抢戏"],
+    typography: ["分类 chips、精选标题和站点名要很好扫", "更像 taste-led curation 而不是内部数据库", "文案应短促明确"],
+    layout: ["先有 featured 或 curated picks 再有案例墙", "popular categories 要足够醒目", "让用户快速从首页进入多条发现路径"],
+    imagery: ["缩略图密度高但必须有主次", "精选位和普通 listing 不能完全一样", "避免首页只有均匀卡片失去入口层次"],
+    motion: ["切换分类和浏览节奏更重要", "不要用复杂转场抢注意力", "首页应该让人很快想继续点"],
+    avoid: ["做成纯内部参考库", "只有分类没有精选入口", "所有卡片视觉层级完全一致"]
+  },
+  "hospitality-scene-editorial": {
+    useWhen: ["酒店品牌", "餐饮与空间品牌", "城市 guide 型首页", "场景叙事页"],
+    palette: ["黑白灰做骨架", "色调从场景摄影里来", "不要用功能色抢走地点气氛"],
+    typography: ["标题像地点或节目单而不是广告口号", "正文短而有温度", "栏目标签要像 guide 导航"],
+    layout: ["首屏先让人进入场景", "住宿、餐饮、program 和 city guide 可以并列出现", "不要把首页做成普通 brochure 长页"],
+    imagery: ["大图必须有地点感和时间感", "摄影比组件更重要", "局部缩略图要像 guide 入口而不是普通商品卡"],
+    motion: ["节奏要慢而明确", "轻量 reveal 就够", "不要用科技感 hover 打破氛围"],
+    avoid: ["纯功能型产品壳", "只有品牌宣言没有 program 入口", "过度促销感"]
+  },
+  "photo-journal-archive": {
+    useWhen: ["摄影期刊", "图像出版", "艺术档案", "作品图录首页"],
+    palette: ["中性黑白灰最稳", "让封面和图像自己定调", "不要用彩色界面色压过图片本身"],
+    typography: ["标题像 issue 名和 essay 标题", "正文更接近出版系统", "元数据要支持 archive 浏览"],
+    layout: ["封面位和 issue archive 要共存", "支持 essay、专题与馆藏式回访", "不要把它做成普通博客 feed"],
+    imagery: ["封面图和图像序列是主角", "单张图片尺度可以更大", "每张图都应该像出版物的一页而不是内容插图"],
+    motion: ["保持静态阅读感", "轻量滚动节奏即可", "不要用花哨动画干扰看图"],
+    avoid: ["只剩栏目卡片没有图像深度", "UI 组件感太重", "首页像普通资讯站"]
+  },
+  "bento-product-launch": {
+    useWhen: ["AI 产品发布", "startup 官网", "工具型 landing page", "模块化产品说明"],
+    palette: ["深浅都可以", "重点靠卡片层级和少量强调色", "不要做成廉价渐变大全"],
+    typography: ["标题要直接说明能力", "模块标题短而准", "数据点和功能标签要单独成层"],
+    layout: ["hero 之后立刻进入 bento 卡片", "支持快速扫读", "产品说明像一套模块而不是长篇 feature list"],
+    imagery: ["UI 截图、代码片段和演示块都能进卡片", "每张图都要解释能力", "不要混入无关生活方式摄影"],
+    motion: ["卡片 hover 和入场反馈可以更明显", "但要短促", "避免过长场景式转场"],
+    avoid: ["模块太多导致信息噪音", "只有漂亮卡片没有产品逻辑", "把 bento 当成纯装饰"]
+  },
+  "modern-commerce-minimal": {
+    useWhen: ["服饰零售", "DTC 品牌", "品类目录页", "设计品牌商店"],
+    palette: ["中性底色和低噪声摄影优先", "颜色从商品图里来", "不要让折扣色成为视觉主角"],
+    typography: ["标题像品牌语气而不是促销 banner", "分类与价格要好扫", "正文和 CTA 保持安静"],
+    layout: ["让品类入口、精选单品和品牌语气并存", "首页像安静的门店陈列", "购物路径必须清楚但不喧闹"],
+    imagery: ["商品图要干净且比例稳定", "模特图和静物图都应显得克制", "避免所有卡片都像促销橱窗"],
+    motion: ["轻量 hover 足够", "转场要像翻目录而不是广告轮播", "保持低噪声"],
+    avoid: ["大促气氛", "复杂产品功能页语法", "过多徽章和活动条打断气质"]
+  },
+  "civic-service-clarity": {
+    useWhen: ["公共服务入口", "流程办理站", "服务设计文档", "高可读知识入口"],
+    palette: ["颜色服务任务和状态", "高对比文本优先", "不要用品牌表达压过清晰度"],
+    typography: ["plain language 比个性更重要", "步骤、按钮、说明和错误提示都要很好读", "标题像任务入口而不是广告语"],
+    layout: ["先任务，再解释，再扩展", "服务入口必须明显", "页面要能支持压力下的快速完成"],
+    imagery: ["几乎不依赖氛围图", "示意图、流程图和图标都应辅助完成任务", "截图应服务说明而非定调"],
+    motion: ["动效极少", "反馈必须清楚", "稳定性和可访问性优先"],
+    avoid: ["华丽 hero", "情绪化排版压过完成路径", "把公共服务站做成品牌大片"]
+  },
+  "architecture-space-minimal": {
+    useWhen: ["建筑事务所", "空间品牌", "展览与场馆站", "practice archive"],
+    palette: ["黑白灰或接近白底更稳", "色彩从材料和空间图里来", "不要让装饰色压过空间感"],
+    typography: ["标题和项目名要像 practice archive", "说明短而准", "元数据更像项目标签而不是营销文案"],
+    layout: ["让空间图像占主导", "项目索引与简介并列", "首页像 practice 橱窗而不是功能说明页"],
+    imagery: ["建筑和空间图需要更大留白", "裁切要保留尺度感", "缩略图不应被过度统一成普通卡片"],
+    motion: ["保持平静和克制", "轻量 reveal 即可", "不要用炫技动效破坏空间感"],
+    avoid: ["组件感太强", "图片过小导致空间判断失真", "强销售型 hero"]
+  },
+  "expert-course-marketplace": {
+    useWhen: ["课程平台", "cohort course", "creator education", "专家型知识市场"],
+    palette: ["中性背景更利于高密度浏览", "颜色用于分类和状态", "不要靠大面积品牌色制造可信感"],
+    typography: ["课程名、导师名和关键信息都要清楚", "说明像目录而不是品牌宣言", "报名和开课信息必须很快扫到"],
+    layout: ["课程卡、导师信誉和 syllabus 入口要并存", "首页既能浏览也能快速判断适不适合报名", "不要做成普通 blog 首页"],
+    imagery: ["卡片图和导师头像可以并用", "重点是信息结构不是大氛围图", "课程截图或提纲应比装饰图更重要"],
+    motion: ["筛选和浏览反馈优先", "尽量少做戏剧化动效", "稳定浏览比视觉噱头更重要"],
+    avoid: ["只有课程封面没有可信信息", "把教育平台做成泛 SaaS 官网", "报名路径隐藏太深"]
   }
 };
 
@@ -668,14 +1124,14 @@ export const currentWebSignalsCatalog = [
     titleZh: "编辑出版",
     titleEn: "Editorial Publishing",
     summaryZh: "封面式首屏、图文主导、栏目节奏明确，适合内容品牌、文化媒体和专题型首页。",
-    styleIds: ["magazine-editorial", "creative-media-editorial", "luxury-fashion-editorial"]
+    styleIds: ["magazine-editorial", "creative-media-editorial", "luxury-fashion-editorial", "journal-frontpage"]
   },
   {
     id: "black-white-grid",
     titleZh: "黑白网格",
     titleEn: "Black-and-White Grid",
     summaryZh: "排印主导、克制留白、项目索引清楚，是工作室、档案站和参考库最稳定的一条当代方向。",
-    styleIds: ["swiss-typographic-grid", "monochrome-studio-systems", "dark-studio-gallery"]
+    styleIds: ["swiss-typographic-grid", "monochrome-studio-systems", "dark-studio-gallery", "identity-case-archive"]
   },
   {
     id: "institutional-programs",
@@ -696,7 +1152,7 @@ export const currentWebSignalsCatalog = [
     titleZh: "模板与发现市场",
     titleEn: "Template Discovery",
     summaryZh: "截图优先、分类清楚、拿走路径短，既是一种站型，也是一整套分发生态。",
-    styleIds: ["template-market-library", "curated-reference-directory", "networked-visual-board"]
+    styleIds: ["template-market-library", "curated-reference-directory", "networked-visual-board", "showcase-discovery-index"]
   },
   {
     id: "industrial-hardware",
@@ -711,6 +1167,62 @@ export const currentWebSignalsCatalog = [
     titleEn: "Editorial Commerce",
     summaryZh: "内容、刊物、会员和精选物件混在同一品牌世界里，靠目录感和策展感而不是促销噪音完成转化。",
     styleIds: ["editorial-commerce-catalog", "quiet-lifestyle-editorial", "humanist-modern-brand"]
+  },
+  {
+    id: "system-docs",
+    titleZh: "系统文档",
+    titleEn: "System Docs",
+    summaryZh: "设计系统、组件规范、tokens 和 guideline 入口正在变成一类很稳定的网页语言，不再只是产品文档的附属页面。",
+    styleIds: ["design-system-foundation", "evidence-dense-knowledge-surface", "product-precision-interface"]
+  },
+  {
+    id: "creative-networks",
+    titleZh: "创作网络",
+    titleEn: "Creative Networks",
+    summaryZh: "作品发现、作者身份、收藏和社交证明组合在一起，是创意社区与公开 portfolio platform 的稳定形态。",
+    styleIds: ["creative-portfolio-network", "networked-visual-board", "curated-reference-directory"]
+  },
+  {
+    id: "service-clarity",
+    titleZh: "服务清晰",
+    titleEn: "Service Clarity",
+    summaryZh: "plain language、任务入口和规则文档的组合越来越稳定，尤其适合公共服务、流程站和高可信知识入口。",
+    styleIds: ["civic-service-clarity", "design-system-foundation", "evidence-dense-knowledge-surface"]
+  },
+  {
+    id: "modular-ai-launches",
+    titleZh: "模块化 AI 发布",
+    titleEn: "Modular AI Launches",
+    summaryZh: "hero + bento 卡片 + 产品演示已经成为近一两年 AI 产品和 startup 首页里非常常见的一条方向。",
+    styleIds: ["bento-product-launch", "developer-infrastructure-aura", "product-precision-interface"]
+  },
+  {
+    id: "space-and-practice",
+    titleZh: "空间与事务所",
+    titleEn: "Space And Practice",
+    summaryZh: "建筑、空间、文化 practice 与 identity archive 之间正在共享一套更安静、更留白的 project-led 语言。",
+    styleIds: ["architecture-space-minimal", "identity-case-archive", "dark-studio-gallery"]
+  },
+  {
+    id: "retail-and-scene",
+    titleZh: "零售与场景品牌",
+    titleEn: "Retail And Scene Brands",
+    summaryZh: "零售、酒店、生活方式和文化品牌越来越依赖场景摄影、安静目录和低噪声转化来建立高级感。",
+    styleIds: ["modern-commerce-minimal", "hospitality-scene-editorial", "editorial-commerce-catalog", "quiet-lifestyle-editorial"]
+  },
+  {
+    id: "image-led-publications",
+    titleZh: "图像出版",
+    titleEn: "Image-Led Publications",
+    summaryZh: "摄影期刊、奢刊和文化出版更依赖封面、图像比例和 issue 节奏，而不是普通资讯站的栏目密度。",
+    styleIds: ["photo-journal-archive", "luxury-fashion-editorial", "magazine-editorial", "journal-frontpage"]
+  },
+  {
+    id: "expert-learning",
+    titleZh: "专家知识市场",
+    titleEn: "Expert Learning",
+    summaryZh: "课程平台、creator education 和 cohort course 正在形成一类介于 marketplace、媒体和知识产品之间的稳定网页语言。",
+    styleIds: ["expert-course-marketplace", "template-market-library", "report-storytelling-narrative"]
   }
 ];
 
@@ -754,11 +1266,27 @@ export const atlasEcosystemCatalog = [
         openSource: false
       },
       {
+        titleZh: "SiteInspire",
+        titleEn: "SiteInspire",
+        href: "https://www.siteinspire.com/",
+        noteZh: "popular categories、styles、types 和 subjects 并列呈现，很适合借它的前台发现入口与分类语言。",
+        tags: ["popular categories", "curated front page", "风格标签"],
+        openSource: false
+      },
+      {
         titleZh: "Minimal Gallery",
         titleEn: "Minimal Gallery",
         href: "https://minimal.gallery/",
         noteZh: "截图优先，并把网站、模板、工具放在同一套浏览入口里。",
         tags: ["人工策展", "截图聚合", "模板延展"],
+        openSource: false
+      },
+      {
+        titleZh: "A1 Gallery",
+        titleEn: "A1 Gallery",
+        href: "https://a1.gallery/",
+        noteZh: "把 styles 和 types 都做成明确分类页，适合借它补“风格名”和“站点类型”之间的桥梁。",
+        tags: ["styles", "types", "分类桥梁"],
         openSource: false
       }
     ]

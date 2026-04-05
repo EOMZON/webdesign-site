@@ -167,6 +167,63 @@ function setupStyleBrowsers() {
   });
 }
 
+function renderStyleFieldPreview(point) {
+  const titleZh = point.dataset.fieldPointTitleZh || "";
+  const titleEn = point.dataset.fieldPointTitleEn || "";
+  const summary = point.dataset.fieldPointSummary || "";
+  const cover = point.dataset.fieldPointCover || "";
+  const alt = point.dataset.fieldPointAlt || titleZh;
+  const fit = point.dataset.fieldPointFit || "";
+  const href = point.dataset.fieldPointHref || "/browse";
+
+  return `<a class="field-preview-media" href="${escapeHtml(href)}" data-field-preview-link>
+    ${renderImageFrame(cover, alt)}
+  </a>
+  <div class="field-preview-body">
+    <p class="card-kicker">${escapeHtml(bilingualText("当前风格", "Current Style"))}</p>
+    <h3 class="card-title" data-field-preview-title>${renderInlineEnglishTitle(titleZh, titleEn)}</h3>
+    <p class="card-summary" data-field-preview-summary>${escapeHtml(summary)}</p>
+    <p class="field-preview-fit" data-field-preview-fit>${escapeHtml(`适合做：${fit}`)}</p>
+    <a class="text-link" href="${escapeHtml(href)}" data-field-preview-cta>${escapeHtml(
+      bilingualText("查看这个风格", "Open this style")
+    )}</a>
+  </div>`;
+}
+
+function setupStyleField() {
+  const roots = document.querySelectorAll("[data-style-field-root]");
+  if (!roots.length) return;
+
+  roots.forEach((root) => {
+    const preview = root.querySelector("[data-field-preview]");
+    const points = Array.from(root.querySelectorAll("[data-field-point]"));
+    if (!preview || !points.length) return;
+
+    const setActivePoint = (point) => {
+      if (!point) return;
+      points.forEach((item) => item.classList.toggle("is-active", item === point));
+      preview.innerHTML = renderStyleFieldPreview(point);
+    };
+
+    const defaultPoint = points.find((point) => point.dataset.fieldDefault === "true") || points[0];
+    setActivePoint(defaultPoint);
+
+    const resetToDefault = () => setActivePoint(defaultPoint);
+
+    points.forEach((point) => {
+      point.addEventListener("mouseenter", () => setActivePoint(point));
+      point.addEventListener("focus", () => setActivePoint(point));
+    });
+
+    root.addEventListener("mouseleave", resetToDefault);
+    root.addEventListener("focusout", () => {
+      window.requestAnimationFrame(() => {
+        if (!root.contains(document.activeElement)) resetToDefault();
+      });
+    });
+  });
+}
+
 function getOptionLabel(options = [], id = "", fallback = "") {
   return options.find((item) => item.id === id)?.titleZh || fallback || id;
 }
@@ -339,4 +396,5 @@ function setupSelectorWizard() {
 setupCopyButtons();
 setupTimelineReveal();
 setupStyleBrowsers();
+setupStyleField();
 setupSelectorWizard();

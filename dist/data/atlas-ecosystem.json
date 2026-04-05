@@ -54,6 +54,18 @@
         "openSource": false
       },
       {
+        "titleZh": "SiteInspire",
+        "titleEn": "SiteInspire",
+        "href": "https://www.siteinspire.com/",
+        "noteZh": "popular categories、styles、types 和 subjects 并列呈现，很适合借它的前台发现入口与分类语言。",
+        "tags": [
+          "popular categories",
+          "curated front page",
+          "风格标签"
+        ],
+        "openSource": false
+      },
+      {
         "titleZh": "Minimal Gallery",
         "titleEn": "Minimal Gallery",
         "href": "https://minimal.gallery/",
@@ -62,6 +74,18 @@
           "人工策展",
           "截图聚合",
           "模板延展"
+        ],
+        "openSource": false
+      },
+      {
+        "titleZh": "A1 Gallery",
+        "titleEn": "A1 Gallery",
+        "href": "https://a1.gallery/",
+        "noteZh": "把 styles 和 types 都做成明确分类页，适合借它补“风格名”和“站点类型”之间的桥梁。",
+        "tags": [
+          "styles",
+          "types",
+          "分类桥梁"
         ],
         "openSource": false
       }

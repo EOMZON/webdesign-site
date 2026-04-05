@@ -93,6 +93,100 @@
     }
   },
   {
+    "id": "identity-case-archive",
+    "slug": "identity-case-archive",
+    "nameZh": "品牌案例档案",
+    "titleEn": "Identity Case Archive",
+    "summaryZh": "更像 identity studio、品牌机构和设计咨询公司的案例档案页，重点是把品牌、包装、字体和行业案例组织成一套严谨可读的 archive。",
+    "cardUses": [
+      "品牌机构",
+      "设计咨询",
+      "案例档案"
+    ],
+    "lookLike": [
+      "案例先行",
+      "元数据清楚",
+      "机构感强",
+      "档案秩序明显"
+    ],
+    "notFor": [
+      "纯情绪发布页",
+      "随机作品墙",
+      "高频工具台"
+    ],
+    "filterTags": [
+      "minimal-black-white",
+      "magazine-publishing"
+    ],
+    "cover": "pentagram.png",
+    "coverAlt": "Pentagram screenshot",
+    "coverLabel": "Pentagram",
+    "demoHref": "https://www.pentagram.com/",
+    "downloadPath": "/downloads/identity-case-archive.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/identity-case-archive",
+    "references": [
+      {
+        "label": "Pentagram",
+        "href": "https://www.pentagram.com/",
+        "screenshot": "pentagram.png",
+        "alt": "Pentagram screenshot",
+        "note": "品牌案例档案和机构权威感最直接。"
+      },
+      {
+        "label": "Signal-A Studio",
+        "href": "https://signal-a.studio/",
+        "screenshot": "signal-a-studio.png",
+        "alt": "Signal-A Studio screenshot",
+        "note": "更偏精密、排印导向的一侧。"
+      },
+      {
+        "label": "Fictive Kin",
+        "href": "https://fictivekin.com/",
+        "screenshot": "fictivekin-home-live.png",
+        "alt": "Fictive Kin screenshot",
+        "note": "如果想让 case archive 更像 contemporary studio 首页，可以借它。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "品牌机构",
+        "设计咨询",
+        "identity studio",
+        "案例档案"
+      ],
+      "palette": [
+        "黑白灰或极少量辅助色最稳",
+        "视觉权重应让位给案例和元数据",
+        "不要做成潮流色块集合"
+      ],
+      "typography": [
+        "案例标题、行业、年份、服务范围要清楚",
+        "更像档案标签而不是销售 slogan",
+        "英文字体要有机构感"
+      ],
+      "layout": [
+        "首页和案例索引要有档案感",
+        "支持按行业或服务查看",
+        "不能只有漂亮封面没有结构"
+      ],
+      "imagery": [
+        "项目封面与案例裁切要一致",
+        "图片要服务 case archive 的秩序",
+        "避免每个项目都像独立 campaign microsite"
+      ],
+      "motion": [
+        "轻量 hover 与筛选反馈足够",
+        "不需要情绪化场景切换",
+        "档案式稳定感优先"
+      ],
+      "avoid": [
+        "做成普通作品墙",
+        "案例与机构信息完全脱节",
+        "华丽过度导致权威感下降"
+      ]
+    }
+  },
+  {
     "id": "institutional-program-grid",
     "slug": "institutional-grid",
     "nameZh": "机构项目网格",
@@ -183,6 +277,100 @@
         "把机构页做成奢华品牌大片",
         "只剩网格没有 program 入口",
         "CTA 太弱导致申请或购票路径难找"
+      ]
+    }
+  },
+  {
+    "id": "civic-service-clarity",
+    "slug": "civic-service",
+    "nameZh": "公共服务清晰系统",
+    "titleEn": "Civic Service Clarity",
+    "summaryZh": "更像 GOV.UK 这类公共服务入口的高可读网页语言，重点是任务路径、文案清晰和可信，而不是品牌表达。",
+    "cardUses": [
+      "公共服务站",
+      "流程办理页",
+      "服务设计文档"
+    ],
+    "lookLike": [
+      "plain language",
+      "任务入口强",
+      "层级稳定",
+      "高可读"
+    ],
+    "notFor": [
+      "奢华品牌首页",
+      "实验海报页",
+      "纯情绪发布页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "minimal-black-white"
+    ],
+    "cover": "govuk.png",
+    "coverAlt": "GOV.UK screenshot",
+    "coverLabel": "GOV.UK",
+    "demoHref": "https://www.gov.uk/",
+    "downloadPath": "/downloads/civic-service.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/civic-service",
+    "references": [
+      {
+        "label": "GOV.UK",
+        "href": "https://www.gov.uk/",
+        "screenshot": "govuk.png",
+        "alt": "GOV.UK screenshot",
+        "note": "最像服务设计与 plain-language hierarchy 的成熟范本。"
+      },
+      {
+        "label": "Atlassian Foundations",
+        "href": "https://atlassian.design/foundations/",
+        "screenshot": "atlassian-foundations.png",
+        "alt": "Atlassian Foundations screenshot",
+        "note": "如果你想借清晰层级和说明写法，可以参考这一侧。"
+      },
+      {
+        "label": "People + AI Guidebook",
+        "href": "https://pair.withgoogle.com/guidebook-v2/",
+        "screenshot": "pair-guidebook.png",
+        "alt": "People + AI Guidebook screenshot",
+        "note": "更偏指南式、解释型的清晰系统。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "公共服务入口",
+        "流程办理站",
+        "服务设计文档",
+        "高可读知识入口"
+      ],
+      "palette": [
+        "颜色服务任务和状态",
+        "高对比文本优先",
+        "不要用品牌表达压过清晰度"
+      ],
+      "typography": [
+        "plain language 比个性更重要",
+        "步骤、按钮、说明和错误提示都要很好读",
+        "标题像任务入口而不是广告语"
+      ],
+      "layout": [
+        "先任务，再解释，再扩展",
+        "服务入口必须明显",
+        "页面要能支持压力下的快速完成"
+      ],
+      "imagery": [
+        "几乎不依赖氛围图",
+        "示意图、流程图和图标都应辅助完成任务",
+        "截图应服务说明而非定调"
+      ],
+      "motion": [
+        "动效极少",
+        "反馈必须清楚",
+        "稳定性和可访问性优先"
+      ],
+      "avoid": [
+        "华丽 hero",
+        "情绪化排版压过完成路径",
+        "把公共服务站做成品牌大片"
       ]
     }
   },
@@ -372,6 +560,100 @@
     }
   },
   {
+    "id": "architecture-space-minimal",
+    "slug": "architecture-space",
+    "nameZh": "建筑空间极简",
+    "titleEn": "Architecture Space Minimal",
+    "summaryZh": "更像建筑事务所、空间设计与文化空间站点，靠留白、空间图像和项目秩序建立判断，不靠重组件。",
+    "cardUses": [
+      "建筑事务所",
+      "空间品牌",
+      "practice archive"
+    ],
+    "lookLike": [
+      "空间图像主导",
+      "留白很多",
+      "项目秩序清楚",
+      "practice 感强"
+    ],
+    "notFor": [
+      "高频功能工具",
+      "大促电商",
+      "霓虹科技发布页"
+    ],
+    "filterTags": [
+      "minimal-black-white",
+      "craft-natural"
+    ],
+    "cover": "snohetta.png",
+    "coverAlt": "Snohetta screenshot",
+    "coverLabel": "Snohetta",
+    "demoHref": "https://snohetta.com/",
+    "downloadPath": "/downloads/architecture-space.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/architecture-space",
+    "references": [
+      {
+        "label": "Snohetta",
+        "href": "https://snohetta.com/",
+        "screenshot": "snohetta.png",
+        "alt": "Snohetta screenshot",
+        "note": "空间图像、留白和 practice authority 最直接。"
+      },
+      {
+        "label": "Swiss Institute",
+        "href": "https://www.swissinstitute.net/",
+        "screenshot": "swiss-institute.png",
+        "alt": "Swiss Institute screenshot",
+        "note": "如果你想让建筑/空间站更偏文化机构，可以借它。"
+      },
+      {
+        "label": "OK-RM",
+        "href": "https://www.ok-rm.co.uk/",
+        "screenshot": "ok-rm.png",
+        "alt": "OK-RM screenshot",
+        "note": "更偏创意 practice 的克制版本。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "建筑事务所",
+        "空间品牌",
+        "展览与场馆站",
+        "practice archive"
+      ],
+      "palette": [
+        "黑白灰或接近白底更稳",
+        "色彩从材料和空间图里来",
+        "不要让装饰色压过空间感"
+      ],
+      "typography": [
+        "标题和项目名要像 practice archive",
+        "说明短而准",
+        "元数据更像项目标签而不是营销文案"
+      ],
+      "layout": [
+        "让空间图像占主导",
+        "项目索引与简介并列",
+        "首页像 practice 橱窗而不是功能说明页"
+      ],
+      "imagery": [
+        "建筑和空间图需要更大留白",
+        "裁切要保留尺度感",
+        "缩略图不应被过度统一成普通卡片"
+      ],
+      "motion": [
+        "保持平静和克制",
+        "轻量 reveal 即可",
+        "不要用炫技动效破坏空间感"
+      ],
+      "avoid": [
+        "组件感太强",
+        "图片过小导致空间判断失真",
+        "强销售型 hero"
+      ]
+    }
+  },
+  {
     "id": "humanist-modern-brand",
     "slug": "humanist-modern",
     "nameZh": "人文现代",
@@ -461,6 +743,288 @@
         "冷冰冰工具站语气",
         "极端后现代冲突",
         "大面积霓虹科技感"
+      ]
+    }
+  },
+  {
+    "id": "hospitality-scene-editorial",
+    "slug": "hospitality-scene",
+    "nameZh": "酒店场景叙事",
+    "titleEn": "Hospitality Scene Editorial",
+    "summaryZh": "更像酒店、餐饮和城市文化场景页的家族，首页像进入一个地方，而不是看一份普通品牌介绍。",
+    "cardUses": [
+      "酒店品牌",
+      "餐饮空间",
+      "城市场景页"
+    ],
+    "lookLike": [
+      "地点气氛强",
+      "program 并列",
+      "摄影先行",
+      "像进入一个地方"
+    ],
+    "notFor": [
+      "工具后台",
+      "高密度知识站",
+      "模板市场首页"
+    ],
+    "filterTags": [
+      "craft-natural",
+      "magazine-publishing"
+    ],
+    "cover": "ace-hotel.png",
+    "coverAlt": "Ace Hotel screenshot",
+    "coverLabel": "Ace Hotel",
+    "demoHref": "https://acehotel.com/",
+    "downloadPath": "/downloads/hospitality-scene.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/hospitality-scene",
+    "references": [
+      {
+        "label": "Ace Hotel",
+        "href": "https://acehotel.com/",
+        "screenshot": "ace-hotel.png",
+        "alt": "Ace Hotel screenshot",
+        "note": "最像场景先行、地点和 program 同时成立的 hospitality 首页。"
+      },
+      {
+        "label": "Monocle",
+        "href": "https://monocle.com/",
+        "screenshot": "monocle.png",
+        "alt": "Monocle screenshot",
+        "note": "如果你想让酒店与城市内容混合得更像一本 guide，可以借它。"
+      },
+      {
+        "label": "Kinfolk",
+        "href": "https://kinfolk.com/",
+        "screenshot": "kinfolk-live.png",
+        "alt": "Kinfolk screenshot",
+        "note": "更安静、更生活方式一侧的场景叙事。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "酒店品牌",
+        "餐饮与空间品牌",
+        "城市 guide 型首页",
+        "场景叙事页"
+      ],
+      "palette": [
+        "黑白灰做骨架",
+        "色调从场景摄影里来",
+        "不要用功能色抢走地点气氛"
+      ],
+      "typography": [
+        "标题像地点或节目单而不是广告口号",
+        "正文短而有温度",
+        "栏目标签要像 guide 导航"
+      ],
+      "layout": [
+        "首屏先让人进入场景",
+        "住宿、餐饮、program 和 city guide 可以并列出现",
+        "不要把首页做成普通 brochure 长页"
+      ],
+      "imagery": [
+        "大图必须有地点感和时间感",
+        "摄影比组件更重要",
+        "局部缩略图要像 guide 入口而不是普通商品卡"
+      ],
+      "motion": [
+        "节奏要慢而明确",
+        "轻量 reveal 就够",
+        "不要用科技感 hover 打破氛围"
+      ],
+      "avoid": [
+        "纯功能型产品壳",
+        "只有品牌宣言没有 program 入口",
+        "过度促销感"
+      ]
+    }
+  },
+  {
+    "id": "modern-commerce-minimal",
+    "slug": "modern-commerce-minimal",
+    "nameZh": "现代零售极简",
+    "titleEn": "Modern Commerce Minimal",
+    "summaryZh": "更像 Everlane、COS 这类现代零售首页，产品图、分类入口和品牌语气都很安静，但转化路径依旧清楚。",
+    "cardUses": [
+      "服饰零售",
+      "DTC 品牌",
+      "品类目录页"
+    ],
+    "lookLike": [
+      "低噪声商品图",
+      "分类入口清楚",
+      "品牌语气安静",
+      "购物路径克制"
+    ],
+    "notFor": [
+      "复杂后台工具",
+      "研究档案站",
+      "强世界观游戏页"
+    ],
+    "filterTags": [
+      "craft-natural",
+      "product-tool"
+    ],
+    "cover": "everlane.png",
+    "coverAlt": "Everlane screenshot",
+    "coverLabel": "Everlane",
+    "demoHref": "https://www.everlane.com/",
+    "downloadPath": "/downloads/modern-commerce-minimal.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/modern-commerce-minimal",
+    "references": [
+      {
+        "label": "Everlane",
+        "href": "https://www.everlane.com/",
+        "screenshot": "everlane.png",
+        "alt": "Everlane screenshot",
+        "note": "最像现代零售极简：首页安静，但购物路径很清楚。"
+      },
+      {
+        "label": "The Gentlewoman",
+        "href": "https://thegentlewoman.co.uk/",
+        "screenshot": "gentlewoman-live.png",
+        "alt": "The Gentlewoman screenshot",
+        "note": "如果你想让零售更像刊物，可以借它。"
+      },
+      {
+        "label": "Monocle",
+        "href": "https://monocle.com/",
+        "screenshot": "monocle.png",
+        "alt": "Monocle screenshot",
+        "note": "更偏品牌世界与目录混合的一侧。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "服饰零售",
+        "DTC 品牌",
+        "品类目录页",
+        "设计品牌商店"
+      ],
+      "palette": [
+        "中性底色和低噪声摄影优先",
+        "颜色从商品图里来",
+        "不要让折扣色成为视觉主角"
+      ],
+      "typography": [
+        "标题像品牌语气而不是促销 banner",
+        "分类与价格要好扫",
+        "正文和 CTA 保持安静"
+      ],
+      "layout": [
+        "让品类入口、精选单品和品牌语气并存",
+        "首页像安静的门店陈列",
+        "购物路径必须清楚但不喧闹"
+      ],
+      "imagery": [
+        "商品图要干净且比例稳定",
+        "模特图和静物图都应显得克制",
+        "避免所有卡片都像促销橱窗"
+      ],
+      "motion": [
+        "轻量 hover 足够",
+        "转场要像翻目录而不是广告轮播",
+        "保持低噪声"
+      ],
+      "avoid": [
+        "大促气氛",
+        "复杂产品功能页语法",
+        "过多徽章和活动条打断气质"
+      ]
+    }
+  },
+  {
+    "id": "photo-journal-archive",
+    "slug": "photo-journal-archive",
+    "nameZh": "摄影期刊档案",
+    "titleEn": "Photo Journal Archive",
+    "summaryZh": "更像摄影期刊、艺术图录和图像档案首页，封面、essay、issue 与 archive 深度比普通媒体列表更重要。",
+    "cardUses": [
+      "摄影出版",
+      "图像档案",
+      "艺术期刊"
+    ],
+    "lookLike": [
+      "封面先行",
+      "issue 节奏",
+      "图像尺度大",
+      "archive 深度强"
+    ],
+    "notFor": [
+      "高频工具站",
+      "纯流程服务页",
+      "普通资讯 feed"
+    ],
+    "filterTags": [
+      "magazine-publishing",
+      "minimal-black-white"
+    ],
+    "cover": "aperture.png",
+    "coverAlt": "Aperture screenshot",
+    "coverLabel": "Aperture",
+    "demoHref": "https://aperture.org/",
+    "downloadPath": "/downloads/photo-journal-archive.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/photo-journal-archive",
+    "references": [
+      {
+        "label": "Aperture",
+        "href": "https://aperture.org/",
+        "screenshot": "aperture.png",
+        "alt": "Aperture screenshot",
+        "note": "最像摄影期刊、封面和 issue archive 同时成立的入口。"
+      },
+      {
+        "label": "Frieze",
+        "href": "https://www.frieze.com/",
+        "screenshot": "frieze.png",
+        "alt": "Frieze screenshot",
+        "note": "如果你想让图像期刊更像文化出版物，可以借它。"
+      },
+      {
+        "label": "T Magazine",
+        "href": "https://www.nytimes.com/section/t-magazine",
+        "screenshot": "tmagazine.png",
+        "alt": "T Magazine screenshot",
+        "note": "更时尚、更大片的图像出版版本。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "摄影期刊",
+        "图像出版",
+        "艺术档案",
+        "作品图录首页"
+      ],
+      "palette": [
+        "中性黑白灰最稳",
+        "让封面和图像自己定调",
+        "不要用彩色界面色压过图片本身"
+      ],
+      "typography": [
+        "标题像 issue 名和 essay 标题",
+        "正文更接近出版系统",
+        "元数据要支持 archive 浏览"
+      ],
+      "layout": [
+        "封面位和 issue archive 要共存",
+        "支持 essay、专题与馆藏式回访",
+        "不要把它做成普通博客 feed"
+      ],
+      "imagery": [
+        "封面图和图像序列是主角",
+        "单张图片尺度可以更大",
+        "每张图都应该像出版物的一页而不是内容插图"
+      ],
+      "motion": [
+        "保持静态阅读感",
+        "轻量滚动节奏即可",
+        "不要用花哨动画干扰看图"
+      ],
+      "avoid": [
+        "只剩栏目卡片没有图像深度",
+        "UI 组件感太重",
+        "首页像普通资讯站"
       ]
     }
   },
@@ -559,6 +1123,194 @@
     }
   },
   {
+    "id": "design-system-foundation",
+    "slug": "design-system-foundation",
+    "nameZh": "设计系统基座",
+    "titleEn": "Design System Foundation",
+    "summaryZh": "更像 foundations、tokens、guidelines 和 component rules 首页的系统文档家族，主角不是营销 hero，而是规则、部件和设计治理本身。",
+    "cardUses": [
+      "设计系统",
+      "组件规范",
+      "基础库"
+    ],
+    "lookLike": [
+      "foundation 导航",
+      "规则先行",
+      "侧栏稳定",
+      "部件层级清楚"
+    ],
+    "notFor": [
+      "情绪品牌页",
+      "慢内容首页",
+      "沉浸发布页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "minimal-black-white"
+    ],
+    "cover": "atlassian-foundations.png",
+    "coverAlt": "Atlassian Foundations screenshot",
+    "coverLabel": "Atlassian Foundations",
+    "demoHref": "https://atlassian.design/foundations/",
+    "downloadPath": "/downloads/design-system-foundation.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/design-system-foundation",
+    "references": [
+      {
+        "label": "Atlassian Foundations",
+        "href": "https://atlassian.design/foundations/",
+        "screenshot": "atlassian-foundations.png",
+        "alt": "Atlassian Foundations screenshot",
+        "note": "更像 foundations 首屏和规则入口的系统文档写法。"
+      },
+      {
+        "label": "Carbon for AI",
+        "href": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+        "screenshot": "carbon-for-ai.png",
+        "alt": "Carbon for AI screenshot",
+        "note": "AI 指南、规则和产品知识可以并存。"
+      },
+      {
+        "label": "People + AI Guidebook",
+        "href": "https://pair.withgoogle.com/guidebook-v2/",
+        "screenshot": "pair-guidebook.png",
+        "alt": "People + AI Guidebook screenshot",
+        "note": "如果你想让系统文档更有人读感，可以借它的章节组织。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "设计系统首页",
+        "组件规范",
+        "tokens 与 guidelines",
+        "产品基础库"
+      ],
+      "palette": [
+        "中性浅底或深底都可以",
+        "颜色要服务规则和部件区分",
+        "不要用品牌营销色压过系统信息"
+      ],
+      "typography": [
+        "层级像文档系统而不是品牌广告",
+        "术语、部件名和说明文字都要很好扫",
+        "标题克制但清楚"
+      ],
+      "layout": [
+        "foundation、component、pattern 要是一级入口",
+        "侧栏或分组导航必须稳定",
+        "规则页面要支持长期生长"
+      ],
+      "imagery": [
+        "图例、tokens、组件截图和示意图都可以作为视觉证据",
+        "少用情绪化 hero 图",
+        "例子要比装饰重要"
+      ],
+      "motion": [
+        "几乎不需要戏剧化动效",
+        "状态反馈要清楚",
+        "交互应该像工具文档而不是 campaign"
+      ],
+      "avoid": [
+        "把系统站做成 landing page",
+        "只有原则没有部件入口",
+        "强氛围图抢走规则信息"
+      ]
+    }
+  },
+  {
+    "id": "expert-course-marketplace",
+    "slug": "expert-course-marketplace",
+    "nameZh": "专家课程平台",
+    "titleEn": "Expert Course Marketplace",
+    "summaryZh": "更像 cohort course、专家课程和 creator education 平台首页，课程卡、导师信誉、课程大纲和报名路径要同时成立。",
+    "cardUses": [
+      "课程平台",
+      "creator education",
+      "cohort course"
+    ],
+    "lookLike": [
+      "课程卡清楚",
+      "导师信誉强",
+      "报名路径短",
+      "目录与内容并存"
+    ],
+    "notFor": [
+      "纯品牌大片",
+      "空间作品集",
+      "政府服务页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "magazine-publishing"
+    ],
+    "cover": "maven.png",
+    "coverAlt": "Maven screenshot",
+    "coverLabel": "Maven",
+    "demoHref": "https://maven.com/",
+    "downloadPath": "/downloads/expert-course-marketplace.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/expert-course-marketplace",
+    "references": [
+      {
+        "label": "Maven",
+        "href": "https://maven.com/",
+        "screenshot": "maven.png",
+        "alt": "Maven screenshot",
+        "note": "最像 cohort course、专家平台和目录浏览并存的首页。"
+      },
+      {
+        "label": "Notion Templates",
+        "href": "https://www.notion.com/templates",
+        "screenshot": "notion-templates-live.png",
+        "alt": "Notion Templates screenshot",
+        "note": "如果你想让课程平台更像高效 marketplace，可以借它。"
+      },
+      {
+        "label": "People + AI Guidebook",
+        "href": "https://pair.withgoogle.com/guidebook-v2/",
+        "screenshot": "pair-guidebook.png",
+        "alt": "People + AI Guidebook screenshot",
+        "note": "更偏知识深度和章节组织的一侧。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "课程平台",
+        "cohort course",
+        "creator education",
+        "专家型知识市场"
+      ],
+      "palette": [
+        "中性背景更利于高密度浏览",
+        "颜色用于分类和状态",
+        "不要靠大面积品牌色制造可信感"
+      ],
+      "typography": [
+        "课程名、导师名和关键信息都要清楚",
+        "说明像目录而不是品牌宣言",
+        "报名和开课信息必须很快扫到"
+      ],
+      "layout": [
+        "课程卡、导师信誉和 syllabus 入口要并存",
+        "首页既能浏览也能快速判断适不适合报名",
+        "不要做成普通 blog 首页"
+      ],
+      "imagery": [
+        "卡片图和导师头像可以并用",
+        "重点是信息结构不是大氛围图",
+        "课程截图或提纲应比装饰图更重要"
+      ],
+      "motion": [
+        "筛选和浏览反馈优先",
+        "尽量少做戏剧化动效",
+        "稳定浏览比视觉噱头更重要"
+      ],
+      "avoid": [
+        "只有课程封面没有可信信息",
+        "把教育平台做成泛 SaaS 官网",
+        "报名路径隐藏太深"
+      ]
+    }
+  },
+  {
     "id": "developer-infrastructure-aura",
     "slug": "developer-platform",
     "nameZh": "开发者平台",
@@ -649,6 +1401,100 @@
         "做成通用 SaaS landing",
         "过多生活方式摄影",
         "只有 UI 截图没有平台层叙事"
+      ]
+    }
+  },
+  {
+    "id": "bento-product-launch",
+    "slug": "bento-product-launch",
+    "nameZh": "Bento 产品发布",
+    "titleEn": "Bento Product Launch",
+    "summaryZh": "更像当代 AI 和 startup 产品落地页的 Bento 拼块版本，用模块化卡片和快节奏扫描帮助用户迅速抓住能力边界。",
+    "cardUses": [
+      "AI 产品",
+      "startup 官网",
+      "模块化 landing page"
+    ],
+    "lookLike": [
+      "hero 后接拼块",
+      "快节奏扫读",
+      "产品卡片密",
+      "说明模块化"
+    ],
+    "notFor": [
+      "安静生活方式站",
+      "机构 program 首页",
+      "纯图像期刊"
+    ],
+    "filterTags": [
+      "product-tool",
+      "technology-future"
+    ],
+    "cover": "bolt-new.png",
+    "coverAlt": "Bolt screenshot",
+    "coverLabel": "Bolt",
+    "demoHref": "https://bolt.new/",
+    "downloadPath": "/downloads/bento-product-launch.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/bento-product-launch",
+    "references": [
+      {
+        "label": "Bolt",
+        "href": "https://bolt.new/",
+        "screenshot": "bolt-new.png",
+        "alt": "Bolt screenshot",
+        "note": "更接近当代 AI 产品落地页的 bento 卡片表达。"
+      },
+      {
+        "label": "Vercel",
+        "href": "https://vercel.com/",
+        "screenshot": "vercel.png",
+        "alt": "Vercel screenshot",
+        "note": "如果你想要更克制、更平台化的 bento 结构，可以借它。"
+      },
+      {
+        "label": "Linear",
+        "href": "https://linear.app/",
+        "screenshot": "linear.png",
+        "alt": "Linear screenshot",
+        "note": "更精密、更少噪音的一侧。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "AI 产品发布",
+        "startup 官网",
+        "工具型 landing page",
+        "模块化产品说明"
+      ],
+      "palette": [
+        "深浅都可以",
+        "重点靠卡片层级和少量强调色",
+        "不要做成廉价渐变大全"
+      ],
+      "typography": [
+        "标题要直接说明能力",
+        "模块标题短而准",
+        "数据点和功能标签要单独成层"
+      ],
+      "layout": [
+        "hero 之后立刻进入 bento 卡片",
+        "支持快速扫读",
+        "产品说明像一套模块而不是长篇 feature list"
+      ],
+      "imagery": [
+        "UI 截图、代码片段和演示块都能进卡片",
+        "每张图都要解释能力",
+        "不要混入无关生活方式摄影"
+      ],
+      "motion": [
+        "卡片 hover 和入场反馈可以更明显",
+        "但要短促",
+        "避免过长场景式转场"
+      ],
+      "avoid": [
+        "模块太多导致信息噪音",
+        "只有漂亮卡片没有产品逻辑",
+        "把 bento 当成纯装饰"
       ]
     }
   },
@@ -836,6 +1682,99 @@
         "单纯做成 feed",
         "所有内容都同级",
         "只有封面气质没有更新入口"
+      ]
+    }
+  },
+  {
+    "id": "journal-frontpage",
+    "slug": "journal-frontpage",
+    "nameZh": "评论期刊首页",
+    "titleEn": "Journal Frontpage",
+    "summaryZh": "更像长期更新的评论刊物、文化周刊和新闻评论首页，有稳定刊头、栏目层级和持续更新节奏，不完全等同于特稿式 editorial 首页。",
+    "cardUses": [
+      "评论媒体",
+      "文化周刊",
+      "长期刊物"
+    ],
+    "lookLike": [
+      "刊头权威",
+      "栏目很多",
+      "headline 清楚",
+      "更新节奏稳定"
+    ],
+    "notFor": [
+      "一次性专题页",
+      "重工具产品",
+      "强销售首页"
+    ],
+    "filterTags": [
+      "magazine-publishing"
+    ],
+    "cover": "newyorker.png",
+    "coverAlt": "The New Yorker screenshot",
+    "coverLabel": "The New Yorker",
+    "demoHref": "https://www.newyorker.com/",
+    "downloadPath": "/downloads/journal-frontpage.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/journal-frontpage",
+    "references": [
+      {
+        "label": "The New Yorker",
+        "href": "https://www.newyorker.com/",
+        "screenshot": "newyorker.png",
+        "alt": "The New Yorker screenshot",
+        "note": "最像长期更新的评论刊物 front page。"
+      },
+      {
+        "label": "Frieze",
+        "href": "https://www.frieze.com/",
+        "screenshot": "frieze.png",
+        "alt": "Frieze screenshot",
+        "note": "文化栏目、封面和更新节奏都很成熟。"
+      },
+      {
+        "label": "T Magazine",
+        "href": "https://www.nytimes.com/section/t-magazine",
+        "screenshot": "tmagazine.png",
+        "alt": "T Magazine screenshot",
+        "note": "如果想让 journal 更时尚、更大片，可以借它。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "评论刊物",
+        "文化周刊",
+        "新闻评论首页",
+        "长期更新媒体"
+      ],
+      "palette": [
+        "黑白灰为骨架更稳",
+        "封面色来自插图和栏目",
+        "不要让功能色把 masthead 做得太轻"
+      ],
+      "typography": [
+        "刊头权威感很重要",
+        "headline、deck、section 都要分清",
+        "文本密度可以高但必须可扫"
+      ],
+      "layout": [
+        "首页像持续更新的 front page",
+        "headline 与多栏目并存",
+        "不能只有一个 feature 卡片撑全页"
+      ],
+      "imagery": [
+        "插图、封面图和栏目缩略都要有层级",
+        "图片不是唯一主角",
+        "避免全站都变成视觉大片"
+      ],
+      "motion": [
+        "轻量滚动和 hover 足够",
+        "不要用动画打断阅读",
+        "节奏应服务更新感和栏目感"
+      ],
+      "avoid": [
+        "做成一次性专题页",
+        "只有大图没有栏目结构",
+        "刊头和内容层级太弱"
       ]
     }
   },
@@ -1778,6 +2717,100 @@
     }
   },
   {
+    "id": "showcase-discovery-index",
+    "slug": "showcase-index",
+    "nameZh": "甄选展示索引",
+    "titleEn": "Showcase Discovery Index",
+    "summaryZh": "更像 SiteInspire、Awwwards 这类甄选展示首页的家族：先给 featured picks，再给 popular categories 和发现墙，策展口味比内部资料管理更强。",
+    "cardUses": [
+      "甄选案例站",
+      "奖项展示",
+      "灵感发现"
+    ],
+    "lookLike": [
+      "featured 入口",
+      "分类 chips",
+      "案例墙密集",
+      "策展口味强"
+    ],
+    "notFor": [
+      "内部知识库",
+      "单一品牌首页",
+      "重操作工作台"
+    ],
+    "filterTags": [
+      "product-tool",
+      "magazine-publishing"
+    ],
+    "cover": "awwwards-websites-live.png",
+    "coverAlt": "Awwwards / Websites screenshot",
+    "coverLabel": "Awwwards / Websites",
+    "demoHref": "https://www.awwwards.com/websites/",
+    "downloadPath": "/downloads/showcase-index.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/showcase-index",
+    "references": [
+      {
+        "label": "Awwwards / Websites",
+        "href": "https://www.awwwards.com/websites/",
+        "screenshot": "awwwards-websites-live.png",
+        "alt": "Awwwards / Websites screenshot",
+        "note": "更偏 featured showcase 和奖项发现首页。"
+      },
+      {
+        "label": "SiteInspire",
+        "href": "https://www.siteinspire.com/",
+        "screenshot": "siteinspire.png",
+        "alt": "SiteInspire screenshot",
+        "note": "popular categories 和 curated front page 的组织尤其值得借。"
+      },
+      {
+        "label": "SiteInspire / Listings",
+        "href": "https://www.siteinspire.com/",
+        "screenshot": "siteinspire-live.png",
+        "alt": "SiteInspire / Listings screenshot",
+        "note": "如果你要更像案例索引页，可以借它的 listing 一侧。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "甄选案例站",
+        "奖项展示",
+        "灵感发现首页",
+        "curated showcase"
+      ],
+      "palette": [
+        "中性骨架更衬托案例",
+        "重点在标签和精选位",
+        "不要把背景做得比作品更抢戏"
+      ],
+      "typography": [
+        "分类 chips、精选标题和站点名要很好扫",
+        "更像 taste-led curation 而不是内部数据库",
+        "文案应短促明确"
+      ],
+      "layout": [
+        "先有 featured 或 curated picks 再有案例墙",
+        "popular categories 要足够醒目",
+        "让用户快速从首页进入多条发现路径"
+      ],
+      "imagery": [
+        "缩略图密度高但必须有主次",
+        "精选位和普通 listing 不能完全一样",
+        "避免首页只有均匀卡片失去入口层次"
+      ],
+      "motion": [
+        "切换分类和浏览节奏更重要",
+        "不要用复杂转场抢注意力",
+        "首页应该让人很快想继续点"
+      ],
+      "avoid": [
+        "做成纯内部参考库",
+        "只有分类没有精选入口",
+        "所有卡片视觉层级完全一致"
+      ]
+    }
+  },
+  {
     "id": "curated-reference-directory",
     "slug": "reference-directory",
     "nameZh": "参考目录",
@@ -1868,6 +2901,100 @@
         "英雄论式单一叙事",
         "只有图片没有分类逻辑",
         "首屏塞满理论解释"
+      ]
+    }
+  },
+  {
+    "id": "creative-portfolio-network",
+    "slug": "creative-network",
+    "nameZh": "作品社区网络",
+    "titleEn": "Creative Portfolio Network",
+    "summaryZh": "更像 Behance 这类公开作品网络与 creator platform 的家族，作品卡、作者主页、社交证明和发现机制要同时成立。",
+    "cardUses": [
+      "创意社区",
+      "作品平台",
+      "公开案例库"
+    ],
+    "lookLike": [
+      "作者与作品并列",
+      "公开发现机制",
+      "社交证明",
+      "平台感更强"
+    ],
+    "notFor": [
+      "纯研究地图",
+      "机构档案站",
+      "安静长文首页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "bold-personality"
+    ],
+    "cover": "behance.png",
+    "coverAlt": "Behance screenshot",
+    "coverLabel": "Behance",
+    "demoHref": "https://www.behance.net/",
+    "downloadPath": "/downloads/creative-network.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/creative-network",
+    "references": [
+      {
+        "label": "Behance",
+        "href": "https://www.behance.net/",
+        "screenshot": "behance.png",
+        "alt": "Behance screenshot",
+        "note": "作品、作者、社交证明和发现机制同时成立。"
+      },
+      {
+        "label": "Are.na",
+        "href": "https://www.are.na/",
+        "screenshot": "arena-home-live.png",
+        "alt": "Are.na screenshot",
+        "note": "更松弛、更研究型的网络化版本。"
+      },
+      {
+        "label": "SiteInspire",
+        "href": "https://www.siteinspire.com/",
+        "screenshot": "siteinspire-live.png",
+        "alt": "SiteInspire screenshot",
+        "note": "如果要更强调甄选浏览，可以借它的前台展示感。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "作品社区",
+        "创作者平台",
+        "公开案例库",
+        "作品发现网络"
+      ],
+      "palette": [
+        "中性底色更利于高密度浏览",
+        "颜色用于标签和状态",
+        "不要靠整站大底色制造氛围"
+      ],
+      "typography": [
+        "项目名、作者名、收藏或互动信息都要清楚",
+        "卡片文字短而准",
+        "社交元数据不能太重"
+      ],
+      "layout": [
+        "项目网格、个人主页和发现机制要同时成立",
+        "首页既能扫作品也能进 profile",
+        "不要只做成随机瀑布流"
+      ],
+      "imagery": [
+        "作品图是核心，但需要作者或分类辅助信息",
+        "卡片比例可以多样但要受控",
+        "不要让图片把导航路径淹没"
+      ],
+      "motion": [
+        "hover 主要服务发现和保存",
+        "不要过度动画化",
+        "浏览效率高于情绪表演"
+      ],
+      "avoid": [
+        "做成纯研究看板",
+        "只有社交没有作品质量",
+        "没有 profile 层只剩图片墙"
       ]
     }
   },

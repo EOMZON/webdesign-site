@@ -1465,6 +1465,11 @@ code {
   padding: 40px 44px;
 }
 
+.field-atlas-shell {
+  display: grid;
+  gap: 18px;
+}
+
 .field-axis {
   position: absolute;
   background: var(--line);
@@ -1522,6 +1527,7 @@ code {
   position: absolute;
   transform: translate(-50%, -50%);
   color: inherit;
+  z-index: 1;
 }
 
 .field-point-dot {
@@ -1531,26 +1537,70 @@ code {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--panel-strong);
+  transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
 }
 
-.field-point:hover .field-point-dot {
+.field-point:hover .field-point-dot,
+.field-point.is-active .field-point-dot,
+.field-point:focus-visible .field-point-dot {
   background: var(--ink);
+  border-color: var(--ink);
+  transform: scale(1.2);
 }
 
 .field-point-label {
   position: absolute;
   top: 16px;
   left: 10px;
-  min-width: 120px;
+  min-width: 84px;
+  opacity: 0.72;
+  transition: opacity 160ms ease, transform 160ms ease;
+  transform: translateY(0);
+  pointer-events: none;
+}
+
+.field-point:hover .field-point-label,
+.field-point.is-active .field-point-label,
+.field-point:focus-visible .field-point-label {
+  opacity: 1;
+  transform: translateY(-2px);
 }
 
 .field-label-stack .bilingual-stack-zh {
-  font-size: 0.92rem;
-  line-height: 1.04;
+  font-size: 0.72rem;
+  line-height: 1.05;
 }
 
 .field-label-stack .bilingual-stack-en {
-  font-size: 0.64rem;
+  display: none;
+}
+
+.field-preview-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.92fr) minmax(0, 1.08fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.field-preview-media {
+  display: block;
+}
+
+.field-preview-media .image-frame img,
+.field-preview-media .image-placeholder {
+  min-height: 188px;
+}
+
+.field-preview-body {
+  display: grid;
+  gap: 10px;
+}
+
+.field-preview-fit {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
 }
 
 .home-hero {
@@ -2406,6 +2456,10 @@ code {
     min-width: 100%;
     min-height: 420px;
   }
+
+  .field-preview-panel {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
@@ -2491,6 +2545,11 @@ code {
 
   .field-atlas--compact .field-point-label {
     min-width: 88px;
+  }
+
+  .field-preview-media .image-frame img,
+  .field-preview-media .image-placeholder {
+    min-height: 220px;
   }
 }
 

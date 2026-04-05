@@ -463,6 +463,9 @@ function itemVisualCandidates(item) {
   return dedupeVisuals([
     item.primaryVisual,
     item.cover ? visualAsset(item.cover, baseLabel, baseAlt) : null,
+    ...((item.liveReferences || []).map((entry) =>
+      visualAsset(entry.screenshot, entry.label || baseLabel, entry.alt || entry.label || baseAlt)
+    ) || []),
     ...(item.samples || []).map((sample) =>
       visualAsset(sample.screenshot, sample.label || baseLabel, sample.alt || sample.label || baseAlt)
     )
@@ -499,6 +502,55 @@ function resolveContextualCardVisuals(items, usedScreenshots = new Set(), avoidS
     const visual = pickContextualVisual(item, usedScreenshots, { avoidScreenshots });
     visualMap.set(item.id, visual);
     if (visual?.screenshot) usedScreenshots.add(visual.screenshot);
+  }
+
+  return visualMap;
+}
+
+function assignUniqueVisuals(items, reservedScreenshots = new Set()) {
+  const entries = items.map((item) => ({
+    item,
+    candidates: itemVisualCandidates(item).filter((visual) => visual?.screenshot && !reservedScreenshots.has(visual.screenshot))
+  }));
+  const assignedByScreenshot = new Map();
+  const assignedByItem = new Map();
+  const orderedEntries = [...entries].sort(
+    (left, right) =>
+      left.candidates.length - right.candidates.length ||
+      String(left.item.nameZh || left.item.titleZh || left.item.title || "").localeCompare(
+        String(right.item.nameZh || right.item.titleZh || right.item.title || ""),
+        "zh-CN"
+      )
+  );
+
+  function visit(entry, seen = new Set()) {
+    for (const visual of entry.candidates) {
+      const screenshot = visual?.screenshot;
+      if (!screenshot || seen.has(screenshot)) continue;
+      seen.add(screenshot);
+      const owner = assignedByScreenshot.get(screenshot);
+      if (!owner || visit(owner, seen)) {
+        assignedByScreenshot.set(screenshot, entry);
+        assignedByItem.set(entry.item.id, visual);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  orderedEntries.forEach((entry) => visit(entry, new Set()));
+
+  const usedScreenshots = new Set(reservedScreenshots);
+  assignedByItem.forEach((visual) => {
+    if (visual?.screenshot) usedScreenshots.add(visual.screenshot);
+  });
+
+  const visualMap = new Map();
+  for (const item of items) {
+    const assigned = assignedByItem.get(item.id);
+    const fallback = assigned || pickContextualVisual(item, usedScreenshots, { avoidScreenshots: reservedScreenshots });
+    visualMap.set(item.id, fallback);
+    if (fallback?.screenshot) usedScreenshots.add(fallback.screenshot);
   }
 
   return visualMap;
@@ -612,6 +664,18 @@ const styleMetaMap = {
     toneAxis: "quiet",
     orderAxis: "distinctive"
   },
+  "identity-case-archive": {
+    slug: "identity-case-archive",
+    nameZh: "品牌案例档案",
+    cardUses: ["品牌机构", "设计咨询", "案例档案"],
+    lookLike: ["案例先行", "元数据清楚", "机构感强", "档案秩序明显"],
+    notFor: ["纯情绪发布页", "随机作品墙", "高频工具台"],
+    filterTags: ["minimal-black-white", "magazine-publishing"],
+    siteTypes: ["portfolio", "brand", "other"],
+    audiences: ["clients", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
   "institutional-program-grid": {
     slug: "institutional-grid",
     nameZh: "机构项目网格",
@@ -620,6 +684,18 @@ const styleMetaMap = {
     notFor: ["强销售首页", "纯工具后台", "单一 hero 发布页"],
     filterTags: ["minimal-black-white", "magazine-publishing"],
     siteTypes: ["brand", "blog", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "design-system-foundation": {
+    slug: "design-system-foundation",
+    nameZh: "设计系统基座",
+    cardUses: ["设计系统", "组件规范", "基础库"],
+    lookLike: ["foundation 导航", "规则先行", "侧栏稳定", "部件层级清楚"],
+    notFor: ["情绪品牌页", "慢内容首页", "沉浸发布页"],
+    filterTags: ["product-tool", "minimal-black-white"],
+    siteTypes: ["tool", "other", "brand"],
     audiences: ["general", "clients", "self"],
     toneAxis: "quiet",
     orderAxis: "structured"
@@ -681,6 +757,18 @@ const styleMetaMap = {
     filterTags: ["magazine-publishing"],
     siteTypes: ["blog", "brand", "other"],
     audiences: ["fans", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "journal-frontpage": {
+    slug: "journal-frontpage",
+    nameZh: "评论期刊首页",
+    cardUses: ["评论媒体", "文化周刊", "长期刊物"],
+    lookLike: ["刊头权威", "栏目很多", "headline 清楚", "更新节奏稳定"],
+    notFor: ["一次性专题页", "重工具产品", "强销售首页"],
+    filterTags: ["magazine-publishing"],
+    siteTypes: ["blog", "brand", "other"],
+    audiences: ["general", "fans", "clients"],
     toneAxis: "quiet",
     orderAxis: "structured"
   },
@@ -780,6 +868,18 @@ const styleMetaMap = {
     toneAxis: "quiet",
     orderAxis: "structured"
   },
+  "showcase-discovery-index": {
+    slug: "showcase-index",
+    nameZh: "甄选展示索引",
+    cardUses: ["甄选案例站", "奖项展示", "灵感发现"],
+    lookLike: ["featured 入口", "分类 chips", "案例墙密集", "策展口味强"],
+    notFor: ["内部知识库", "单一品牌首页", "重操作工作台"],
+    filterTags: ["product-tool", "magazine-publishing"],
+    siteTypes: ["blog", "tool", "other"],
+    audiences: ["general", "self", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
   "curated-reference-directory": {
     slug: "reference-directory",
     nameZh: "参考目录",
@@ -791,6 +891,18 @@ const styleMetaMap = {
     audiences: ["general", "self", "clients"],
     toneAxis: "quiet",
     orderAxis: "structured"
+  },
+  "creative-portfolio-network": {
+    slug: "creative-network",
+    nameZh: "作品社区网络",
+    cardUses: ["创意社区", "作品平台", "公开案例库"],
+    lookLike: ["作者与作品并列", "公开发现机制", "社交证明", "平台感更强"],
+    notFor: ["纯研究地图", "机构档案站", "安静长文首页"],
+    filterTags: ["product-tool", "bold-personality"],
+    siteTypes: ["tool", "portfolio", "other"],
+    audiences: ["general", "fans", "self"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
   },
   "networked-visual-board": {
     slug: "visual-board",
@@ -851,6 +963,90 @@ const styleMetaMap = {
     audiences: ["clients", "general", "self"],
     toneAxis: "quiet",
     orderAxis: "structured"
+  },
+  "hospitality-scene-editorial": {
+    slug: "hospitality-scene",
+    nameZh: "酒店场景叙事",
+    cardUses: ["酒店品牌", "餐饮空间", "城市场景页"],
+    lookLike: ["地点气氛强", "program 并列", "摄影先行", "像进入一个地方"],
+    notFor: ["工具后台", "高密度知识站", "模板市场首页"],
+    filterTags: ["craft-natural", "magazine-publishing"],
+    siteTypes: ["brand", "blog", "other"],
+    audiences: ["fans", "general", "clients"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
+  },
+  "photo-journal-archive": {
+    slug: "photo-journal-archive",
+    nameZh: "摄影期刊档案",
+    cardUses: ["摄影出版", "图像档案", "艺术期刊"],
+    lookLike: ["封面先行", "issue 节奏", "图像尺度大", "archive 深度强"],
+    notFor: ["高频工具站", "纯流程服务页", "普通资讯 feed"],
+    filterTags: ["magazine-publishing", "minimal-black-white"],
+    siteTypes: ["blog", "portfolio", "other"],
+    audiences: ["fans", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "architecture-space-minimal": {
+    slug: "architecture-space",
+    nameZh: "建筑空间极简",
+    cardUses: ["建筑事务所", "空间品牌", "practice archive"],
+    lookLike: ["空间图像主导", "留白很多", "项目秩序清楚", "practice 感强"],
+    notFor: ["高频功能工具", "大促电商", "霓虹科技发布页"],
+    filterTags: ["minimal-black-white", "craft-natural"],
+    siteTypes: ["portfolio", "brand", "other"],
+    audiences: ["clients", "general", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "modern-commerce-minimal": {
+    slug: "modern-commerce-minimal",
+    nameZh: "现代零售极简",
+    cardUses: ["服饰零售", "DTC 品牌", "品类目录页"],
+    lookLike: ["低噪声商品图", "分类入口清楚", "品牌语气安静", "购物路径克制"],
+    notFor: ["复杂后台工具", "研究档案站", "强世界观游戏页"],
+    filterTags: ["craft-natural", "product-tool"],
+    siteTypes: ["brand", "other"],
+    audiences: ["general", "clients", "fans"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "civic-service-clarity": {
+    slug: "civic-service",
+    nameZh: "公共服务清晰系统",
+    cardUses: ["公共服务站", "流程办理页", "服务设计文档"],
+    lookLike: ["plain language", "任务入口强", "层级稳定", "高可读"],
+    notFor: ["奢华品牌首页", "实验海报页", "纯情绪发布页"],
+    filterTags: ["product-tool", "minimal-black-white"],
+    siteTypes: ["tool", "blog", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "expert-course-marketplace": {
+    slug: "expert-course-marketplace",
+    nameZh: "专家课程平台",
+    cardUses: ["课程平台", "creator education", "cohort course"],
+    lookLike: ["课程卡清楚", "导师信誉强", "报名路径短", "目录与内容并存"],
+    notFor: ["纯品牌大片", "空间作品集", "政府服务页"],
+    filterTags: ["product-tool", "magazine-publishing"],
+    siteTypes: ["tool", "blog", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "bento-product-launch": {
+    slug: "bento-product-launch",
+    nameZh: "Bento 产品发布",
+    cardUses: ["AI 产品", "startup 官网", "模块化 landing page"],
+    lookLike: ["hero 后接拼块", "快节奏扫读", "产品卡片密", "说明模块化"],
+    notFor: ["安静生活方式站", "机构 program 首页", "纯图像期刊"],
+    filterTags: ["product-tool", "technology-future"],
+    siteTypes: ["tool", "launch", "brand", "other"],
+    audiences: ["general", "clients", "fans"],
+    toneAxis: "bold",
+    orderAxis: "structured"
   }
 };
 
@@ -858,14 +1054,24 @@ const styleSkillSpecMap = styleSkillSpecCatalog;
 
 const styleOrder = [
   "swiss-typographic-grid",
+  "identity-case-archive",
   "institutional-program-grid",
+  "civic-service-clarity",
   "monochrome-studio-systems",
   "dark-studio-gallery",
+  "architecture-space-minimal",
   "humanist-modern-brand",
+  "hospitality-scene-editorial",
+  "modern-commerce-minimal",
+  "photo-journal-archive",
   "report-storytelling-narrative",
+  "design-system-foundation",
+  "expert-course-marketplace",
   "developer-infrastructure-aura",
+  "bento-product-launch",
   "industrial-hardware-minimal",
   "creative-media-editorial",
+  "journal-frontpage",
   "neon-techno-futurist-interface",
   "magazine-editorial",
   "luxury-fashion-editorial",
@@ -876,7 +1082,9 @@ const styleOrder = [
   "brutalist-raw-interface",
   "product-precision-interface",
   "template-market-library",
+  "showcase-discovery-index",
   "curated-reference-directory",
+  "creative-portfolio-network",
   "networked-visual-board",
   "evidence-dense-knowledge-surface",
   "stage-driven-showcase"
@@ -946,18 +1154,162 @@ const movementYearMap = {
   "cyberpunk-techno-futurism": { start: 1982, end: 2025 }
 };
 
-const familyFieldMap = {
+const manualFamilyFieldMap = {
   "swiss-typographic-grid": { x: 22, y: 70, shortZh: "瑞士网格", shortEn: "Swiss Grid" },
+  "civic-service-clarity": { x: 16, y: 56, shortZh: "公共服务", shortEn: "Civic" },
   "evidence-dense-knowledge-surface": { x: 20, y: 48, shortZh: "证据知识", shortEn: "Evidence Dense" },
   "product-precision-interface": { x: 30, y: 44, shortZh: "精密产品", shortEn: "Product Precision" },
+  "bento-product-launch": { x: 40, y: 34, shortZh: "Bento发布", shortEn: "Bento" },
   "curated-reference-directory": { x: 42, y: 62, shortZh: "策展目录", shortEn: "Curated Directory" },
   "monochrome-studio-systems": { x: 44, y: 50, shortZh: "黑白工作室", shortEn: "Monochrome Studio" },
+  "architecture-space-minimal": { x: 54, y: 74, shortZh: "建筑空间", shortEn: "Architecture" },
+  "photo-journal-archive": { x: 58, y: 48, shortZh: "摄影期刊", shortEn: "Photo Journal" },
+  "modern-commerce-minimal": { x: 62, y: 58, shortZh: "零售极简", shortEn: "Commerce" },
   "quiet-lifestyle-editorial": { x: 50, y: 28, shortZh: "静奢生活", shortEn: "Quiet Lifestyle" },
+  "hospitality-scene-editorial": { x: 68, y: 24, shortZh: "酒店场景", shortEn: "Hospitality" },
   "magazine-editorial": { x: 56, y: 42, shortZh: "杂志特稿", shortEn: "Magazine Editorial" },
+  "expert-course-marketplace": { x: 34, y: 56, shortZh: "专家课程", shortEn: "Courses" },
   "stage-driven-showcase": { x: 76, y: 24, shortZh: "舞台展示", shortEn: "Stage Showcase" },
   "playful-postmodern-anti-grid": { x: 84, y: 56, shortZh: "后现代反网格", shortEn: "Anti-Grid" },
   "neon-techno-futurist-interface": { x: 90, y: 18, shortZh: "霓虹未来", shortEn: "Techno-Futurist" }
 };
+
+const fieldQuadrantBaseMap = {
+  "structured:quiet": { x: 34, y: 68 },
+  "structured:bold": { x: 32, y: 34 },
+  "distinctive:quiet": { x: 66, y: 68 },
+  "distinctive:bold": { x: 70, y: 34 }
+};
+
+const fieldQuadrantOffsetsMap = {
+  "structured:quiet": [
+    { x: -12, y: 10 },
+    { x: -6, y: -2 },
+    { x: 2, y: 12 },
+    { x: 8, y: -8 },
+    { x: 12, y: 4 },
+    { x: -14, y: -12 },
+    { x: 10, y: 14 },
+    { x: -2, y: -16 }
+  ],
+  "structured:bold": [
+    { x: -10, y: -10 },
+    { x: -2, y: 10 },
+    { x: 8, y: -2 },
+    { x: 12, y: 12 },
+    { x: -14, y: 4 },
+    { x: 4, y: -14 },
+    { x: 16, y: -10 },
+    { x: -6, y: 16 }
+  ],
+  "distinctive:quiet": [
+    { x: -8, y: 12 },
+    { x: 2, y: -4 },
+    { x: 10, y: 10 },
+    { x: 14, y: -8 },
+    { x: -14, y: 0 },
+    { x: 6, y: 16 },
+    { x: -4, y: -14 },
+    { x: 18, y: 2 }
+  ],
+  "distinctive:bold": [
+    { x: -6, y: -12 },
+    { x: 6, y: 8 },
+    { x: 14, y: -2 },
+    { x: -12, y: 10 },
+    { x: 12, y: 14 },
+    { x: -4, y: -16 },
+    { x: 18, y: -10 },
+    { x: -16, y: 2 }
+  ]
+};
+
+const fieldTagBiasMap = {
+  "minimal-black-white": { x: -10, y: 8 },
+  "product-tool": { x: -8, y: -2 },
+  "technology-future": { x: 12, y: -10 },
+  "craft-natural": { x: 4, y: 12 },
+  "magazine-publishing": { x: 2, y: 2 },
+  "bold-personality": { x: 14, y: -2 }
+};
+
+function clampFieldCoordinate(value) {
+  return Math.min(92, Math.max(8, value));
+}
+
+function styleFieldShortZh(item) {
+  const label = item.nameZh || item.titleZh || item.title || "";
+  return label.length > 7 ? `${label.slice(0, 7)}` : label;
+}
+
+function styleFieldShortEn(item) {
+  const raw = item.titleEn || item.title || "";
+  return raw
+    .replace(
+      /\b(Editorial|Interface|Catalog|Foundation|Network|Archive|Directory|Platform|Frontpage|Minimal|Narrative)\b/gi,
+      ""
+    )
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function fieldPointTooClose(candidate, usedPoints = []) {
+  return usedPoints.some((point) => Math.abs(point.x - candidate.x) < 7 && Math.abs(point.y - candidate.y) < 7);
+}
+
+function buildStyleFieldMap(items = [], manualMap = {}) {
+  const usedPoints = Object.values(manualMap).map((point) => ({ x: point.x, y: point.y }));
+  const quadrantCounts = new Map();
+  const map = { ...manualMap };
+
+  for (const item of items) {
+    if (map[item.id]) continue;
+
+    const orderBucket = item.orderAxis === "distinctive" ? "distinctive" : "structured";
+    const toneBucket = item.toneAxis === "bold" ? "bold" : "quiet";
+    const key = `${orderBucket}:${toneBucket}`;
+    const base = fieldQuadrantBaseMap[key] || { x: 50, y: 50 };
+    const offsets = fieldQuadrantOffsetsMap[key] || [{ x: 0, y: 0 }];
+    const count = quadrantCounts.get(key) || 0;
+    quadrantCounts.set(key, count + 1);
+
+    let biasX = 0;
+    let biasY = 0;
+    for (const tag of item.filterTags || []) {
+      const bias = fieldTagBiasMap[tag];
+      if (!bias) continue;
+      biasX += bias.x;
+      biasY += bias.y;
+    }
+
+    let selected = null;
+    for (let attempt = 0; attempt < offsets.length * 2; attempt += 1) {
+      const offset = offsets[(count + attempt) % offsets.length];
+      const extraSpread = Math.floor((count + attempt) / offsets.length) * 4;
+      const candidate = {
+        x: clampFieldCoordinate(base.x + biasX * 0.5 + offset.x + (attempt % 2 === 0 ? extraSpread : -extraSpread)),
+        y: clampFieldCoordinate(base.y + biasY * 0.5 + offset.y + (attempt % 2 === 0 ? -extraSpread : extraSpread))
+      };
+
+      if (!fieldPointTooClose(candidate, usedPoints)) {
+        selected = candidate;
+        break;
+      }
+    }
+
+    const point = {
+      ...(selected || { x: clampFieldCoordinate(base.x + biasX * 0.5), y: clampFieldCoordinate(base.y + biasY * 0.5) }),
+      shortZh: styleFieldShortZh(item),
+      shortEn: styleFieldShortEn(item)
+    };
+    usedPoints.push(point);
+    map[item.id] = point;
+  }
+
+  return map;
+}
+
+const familyFieldMap = buildStyleFieldMap(styleFamilies, manualFamilyFieldMap);
 
 const structureLeadFamilyMap = {
   dossier: "magazine-editorial",
@@ -1396,6 +1748,10 @@ function visualCandidates(item) {
 
   pushCandidate(item.cover, item.coverAlt || displayTitle(item), item.coverLabel || displayTitle(item));
 
+  for (const reference of item.liveReferences || []) {
+    pushCandidate(reference.screenshot, reference.alt, reference.label);
+  }
+
   for (const sample of uniqueSamples(item.samples || [])) {
     pushCandidate(sample.screenshot, sample.alt, sample.label);
   }
@@ -1403,8 +1759,18 @@ function visualCandidates(item) {
   return candidates;
 }
 
-function pickUniqueVisual(item, usedScreenshots = null) {
-  const candidates = visualCandidates(item);
+function pickPreferredOrUniqueVisual(item, preferredVisual = null, usedScreenshots = null) {
+  const candidates = [];
+  const seen = new Set();
+  const pushCandidate = (entry) => {
+    if (!entry?.screenshot || seen.has(entry.screenshot)) return;
+    seen.add(entry.screenshot);
+    candidates.push(entry);
+  };
+
+  pushCandidate(preferredVisual);
+  for (const entry of visualCandidates(item)) pushCandidate(entry);
+
   if (!candidates.length) {
     return {
       screenshot: "",
@@ -1422,6 +1788,16 @@ function pickUniqueVisual(item, usedScreenshots = null) {
   }
 
   return selected;
+}
+
+function pickUniqueVisual(item, usedScreenshots = null) {
+  return pickPreferredOrUniqueVisual(item, null, usedScreenshots);
+}
+
+function buildVisualMap(items = [], { usedScreenshots = null, preferredMap = {} } = {}) {
+  return new Map(
+    items.map((item) => [item.id, pickPreferredOrUniqueVisual(item, preferredMap[item.id] || null, usedScreenshots)])
+  );
 }
 
 function renderSectionHead(kicker, title, summary = "", actionMarkup = "") {
@@ -1563,30 +1939,63 @@ function renderBrowseModes() {
   </section>`;
 }
 
+function renderFieldPreviewPanel(item, visual = null) {
+  if (!item) return "";
+  const previewVisual = visual || pickUniqueVisual(item);
+  return `<article class="field-preview-panel card-surface" data-field-preview aria-live="polite">
+    <a ${linkAttrs(browseHref(item.slug), "field-preview-media")} data-field-preview-link>
+      ${renderImageFrame(previewVisual.screenshot, previewVisual.alt || item.coverAlt || item.nameZh)}
+    </a>
+    <div class="field-preview-body">
+      <p class="card-kicker">${escapeHtml(bilingualText("当前风格", "Current Style"))}</p>
+      <h3 class="card-title" data-field-preview-title>${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</h3>
+      <p class="card-summary" data-field-preview-summary>${escapeHtml(item.summaryZh || item.summary || "")}</p>
+      <p class="field-preview-fit" data-field-preview-fit>${escapeHtml(`适合做：${item.cardUses.slice(0, 3).join(" · ")}`)}</p>
+      <a ${linkAttrs(browseHref(item.slug), "text-link")} data-field-preview-cta>${escapeHtml(
+        bilingualText("查看这个风格", "Open this style")
+      )}</a>
+    </div>
+  </article>`;
+}
+
 function renderFieldAtlas(options = {}) {
-  const { compact = false } = options;
-  const plottedFamilies = families
+  const { compact = false, previewVisual = null, defaultStyleId = "" } = options;
+  const plottedFamilies = styleFamilies
     .map((item) => ({ ...item, coords: familyFieldMap[item.id] }))
     .filter((item) => item.coords);
+  const defaultItem = plottedFamilies.find((item) => item.id === defaultStyleId) || plottedFamilies[0] || null;
 
-  return `<div class="atlas-scroller${compact ? " atlas-scroller--compact" : ""}">
-    <div class="field-atlas card-surface${compact ? " field-atlas--compact" : ""}">
-      <div class="field-axis field-axis--x"></div>
-      <div class="field-axis field-axis--y"></div>
-      <div class="field-axis-label field-axis-label--left">${escapeHtml(bilingualText("系统与档案", "System + Archive"))}</div>
-      <div class="field-axis-label field-axis-label--right">${escapeHtml(bilingualText("舞台与表现", "Stage + Expression"))}</div>
-      <div class="field-axis-label field-axis-label--top">${escapeHtml(bilingualText("强烈张力", "Intense"))}</div>
-      <div class="field-axis-label field-axis-label--bottom">${escapeHtml(bilingualText("安静克制", "Quiet"))}</div>
-      ${plottedFamilies
-        .map((item) => {
-          const { x, y, shortZh, shortEn } = item.coords;
-          return `<a ${linkAttrs(familyHref(item.id), "field-point")} style="left:${x}%; top:${y}%;">
-            <span class="field-point-dot"></span>
-            <span class="field-point-label">${renderBilingualStack(shortZh || item.titleZh, shortEn || item.titleEn || item.title, "field-label-stack")}</span>
-          </a>`;
-        })
-        .join("")}
+  return `<div class="field-atlas-shell${compact ? " field-atlas-shell--compact" : ""}" data-style-field-root>
+    <div class="atlas-scroller${compact ? " atlas-scroller--compact" : ""}">
+      <div class="field-atlas card-surface${compact ? " field-atlas--compact" : ""}" data-style-field>
+        <div class="field-axis field-axis--x"></div>
+        <div class="field-axis field-axis--y"></div>
+        <div class="field-axis-label field-axis-label--left">${escapeHtml(bilingualText("系统与档案", "System + Archive"))}</div>
+        <div class="field-axis-label field-axis-label--right">${escapeHtml(bilingualText("舞台与表现", "Stage + Expression"))}</div>
+        <div class="field-axis-label field-axis-label--top">${escapeHtml(bilingualText("强烈张力", "Intense"))}</div>
+        <div class="field-axis-label field-axis-label--bottom">${escapeHtml(bilingualText("安静克制", "Quiet"))}</div>
+        ${plottedFamilies
+          .map((item, index) => {
+            const { x, y, shortZh, shortEn } = item.coords;
+            return `<a ${linkAttrs(browseHref(item.slug), "field-point")} data-field-point data-field-point-title-zh="${escapeHtml(
+              item.nameZh
+            )}" data-field-point-title-en="${escapeHtml(item.titleEn || item.title || "")}" data-field-point-summary="${escapeHtml(
+              item.summaryZh || item.summary || ""
+            )}" data-field-point-cover="${escapeHtml(item.cover || "")}" data-field-point-alt="${escapeHtml(
+              item.coverAlt || item.nameZh
+            )}" data-field-point-fit="${escapeHtml(item.cardUses.slice(0, 3).join(" · "))}" data-field-point-href="${escapeHtml(
+              browseHref(item.slug)
+            )}" aria-label="${escapeHtml(`${item.nameZh}${item.titleEn ? ` (${item.titleEn})` : ""}，适合做：${item.cardUses
+              .slice(0, 3)
+              .join(" · ")}`)}" ${item.id === defaultItem?.id ? 'data-field-default="true"' : ""} style="left:${x}%; top:${y}%;">
+              <span class="field-point-dot"></span>
+              <span class="field-point-label">${renderBilingualStack(shortZh || item.titleZh, shortEn || item.titleEn || item.title, "field-label-stack")}</span>
+            </a>`;
+          })
+          .join("")}
+      </div>
     </div>
+    ${renderFieldPreviewPanel(defaultItem, previewVisual)}
   </div>`;
 }
 
@@ -1849,14 +2258,14 @@ function renderTimelineAtlasSection(options = {}) {
   </section>`;
 }
 
-function renderFamilyCoordinateSection() {
+function renderFamilyCoordinateSection(options = {}) {
   return `<section class="section" id="style-field">
     ${renderSectionHead(
       bilingualText("页面感觉坐标场", "Style Coordinate Field"),
       bilingualText("先用页面感觉缩小范围", "Start by narrowing the page feel"),
-      "左边更系统，右边更有表现力；上面更强烈，下面更安静。先在这里找到气质区间，再继续打开对应风格。"
+      "先大致看这张图谱。桌面端把鼠标停在任一点上，下面会立刻换成对应风格的预览图、名字和适用场景。"
     )}
-    ${renderFieldAtlas()}
+    ${renderFieldAtlas(options)}
   </section>`;
 }
 
@@ -3176,17 +3585,18 @@ function styleCardSearchText(item) {
     .toLowerCase();
 }
 
-function renderBrowseStyleCard(item) {
+function renderBrowseStyleCard(item, options = {}) {
+  const visual = options.visual || pickUniqueVisual(item);
   const skillCue = styleSkillCueLine(item);
   return `<article class="style-card card-surface" data-style-card data-style-tags="${escapeHtml(
     item.filterTags.join(" ")
   )}" data-style-search="${escapeHtml(styleCardSearchText(item))}">
     <a ${linkAttrs(browseHref(item.slug), "style-card-media")}>
-      ${renderImageFrame(item.cover, item.coverAlt || item.nameZh)}
+      ${renderImageFrame(visual.screenshot, visual.alt || item.coverAlt || item.nameZh)}
     </a>
     <div class="style-card-body">
       <h3 class="style-card-title">${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</h3>
-      <p class="style-card-reference">${escapeHtml(`主参考：${item.coverLabel || item.nameZh}`)}</p>
+      <p class="style-card-reference">${escapeHtml(`主参考：${visual.label || item.coverLabel || item.nameZh}`)}</p>
       <p class="style-card-fit">${escapeHtml(`适合做：${item.cardUses.slice(0, 3).join(" · ")}`)}</p>
       ${skillCue ? `<p class="style-card-skill">${escapeHtml(`对应 Skill：${skillCue}`)}</p>` : ""}
     </div>
@@ -3241,8 +3651,19 @@ function renderStyleGallerySection({
   includeViewToggle = false,
   actionHref = "",
   actionLabel = "",
-  stylesList = styleFamilies
+  stylesList = styleFamilies,
+  visualMap = null,
+  preferredMap = {},
+  usedScreenshots = null
 } = {}) {
+  const resolvedVisuals = new Map();
+  for (const item of stylesList) {
+    resolvedVisuals.set(
+      item.id,
+      pickPreferredOrUniqueVisual(item, preferredMap[item.id] || visualMap?.get(item.id) || null, usedScreenshots)
+    );
+  }
+
   return `<section class="section style-gallery-section" id="${escapeHtml(sectionId)}" data-browse-root>
     ${renderSectionHead(
       bilingualText("浏览风格", "Browse"),
@@ -3252,7 +3673,7 @@ function renderStyleGallerySection({
     )}
     ${renderBrowseControls({ includeSearch, includeViewToggle, actionHref: "", actionLabel: "" })}
     <div class="style-card-grid" data-browse-grid>
-      ${stylesList.map((item) => renderBrowseStyleCard(item)).join("")}
+      ${stylesList.map((item) => renderBrowseStyleCard(item, { visual: resolvedVisuals.get(item.id) || null })).join("")}
     </div>
     <p class="browse-empty" data-browse-empty hidden>${escapeHtml(
       bilingualText("没有找到匹配的风格，换个筛选或关键词试试。", "No styles matched. Try another filter or search.")
@@ -3260,33 +3681,34 @@ function renderStyleGallerySection({
   </section>`;
 }
 
-function renderLandingHero() {
-  const preferredIds = [
-    "swiss-typographic-grid",
-    "monochrome-studio-systems",
-    "creative-media-editorial",
-    "quiet-lifestyle-editorial",
-    "neon-techno-futurist-interface",
-    "template-market-library",
-    "networked-visual-board"
-  ];
+function renderLandingHero(options = {}) {
+  const { visualMap = null, heroStyleIds = [] } = options;
+  const preferredIds = heroStyleIds.length
+    ? heroStyleIds
+    : [
+        "swiss-typographic-grid",
+        "architecture-space-minimal",
+        "bento-product-launch",
+        "creative-media-editorial",
+        "hospitality-scene-editorial",
+        "neon-techno-futurist-interface",
+        "showcase-discovery-index",
+        "networked-visual-board"
+      ];
   const heroStyles = preferredIds.map((id) => styleFamilyMap.get(id)).filter(Boolean);
   const heroVisualMap = {
     "swiss-typographic-grid": visualAsset("pentagram.png", "Pentagram", "Pentagram homepage"),
-    "monochrome-studio-systems": visualAsset("ok-rm.png", "OK-RM", "OK-RM homepage"),
+    "architecture-space-minimal": visualAsset("snohetta.png", "Snohetta", "Snohetta homepage"),
+    "bento-product-launch": visualAsset("bolt-new.png", "Bolt", "Bolt homepage"),
     "creative-media-editorial": visualAsset("newyorker.png", "The New Yorker", "The New Yorker homepage"),
-    "quiet-lifestyle-editorial": visualAsset("gentlewoman.png", "The Gentlewoman", "The Gentlewoman homepage"),
+    "hospitality-scene-editorial": visualAsset("ace-hotel.png", "Ace Hotel", "Ace Hotel homepage"),
     "neon-techno-futurist-interface": visualAsset("cyberpunk-net.png", "Cyberpunk", "Cyberpunk homepage"),
-    "template-market-library": visualAsset(
-      "awwwards-websites-live.png",
-      "Awwwards / Websites",
-      "Awwwards websites directory"
-    ),
+    "showcase-discovery-index": visualAsset("siteinspire.png", "SiteInspire", "SiteInspire categories"),
     "networked-visual-board": visualAsset("behance.png", "Behance", "Behance homepage")
   };
   const heroCards = heroStyles.map((item) => ({
     item,
-    visual: heroVisualMap[item.id] || fallbackVisual(item)
+    visual: visualMap?.get(item.id) || heroVisualMap[item.id] || fallbackVisual(item)
   }));
 
   return `<section class="landing-hero section" id="top">
@@ -3985,20 +4407,75 @@ function renderSelectorWizardResults(packet) {
 }
 
 function buildHomePage() {
+  const usedHomeScreenshots = new Set();
+  const homeHeroStyleIds = [
+    "swiss-typographic-grid",
+    "architecture-space-minimal",
+    "bento-product-launch",
+    "creative-media-editorial",
+    "hospitality-scene-editorial",
+    "neon-techno-futurist-interface",
+    "showcase-discovery-index",
+    "networked-visual-board"
+  ];
+  const homeHeroVisualMap = assignUniqueVisuals(
+    homeHeroStyleIds.map((id) => styleFamilyMap.get(id)).filter(Boolean),
+    usedHomeScreenshots
+  );
+  homeHeroVisualMap.forEach((visual) => {
+    if (visual?.screenshot) usedHomeScreenshots.add(visual.screenshot);
+  });
+  const defaultFieldStyle =
+    styleFamilyMap.get("architecture-space-minimal") ||
+    styleFamilies.find((item) => familyFieldMap[item.id]) ||
+    styleFamilies[0] ||
+    null;
+  const homeFieldPreviewVisual = defaultFieldStyle
+    ? pickUniqueVisual(defaultFieldStyle, usedHomeScreenshots)
+    : null;
+  const homeGalleryStyles = [
+    "swiss-typographic-grid",
+    "monochrome-studio-systems",
+    "dark-studio-gallery",
+    "humanist-modern-brand",
+    "civic-service-clarity",
+    "architecture-space-minimal",
+    "hospitality-scene-editorial",
+    "modern-commerce-minimal",
+    "photo-journal-archive",
+    "report-storytelling-narrative",
+    "design-system-foundation",
+    "developer-infrastructure-aura",
+    "bento-product-launch",
+    "creative-media-editorial",
+    "journal-frontpage",
+    "luxury-fashion-editorial",
+    "brutalist-raw-interface",
+    "template-market-library",
+    "showcase-discovery-index",
+    "networked-visual-board"
+  ]
+    .map((id) => styleFamilyMap.get(id))
+    .filter(Boolean);
   return layout({
     title: siteMeta.title,
     description: siteMeta.description,
     pathname: "/",
     pageClass: "home-page",
     body: [
-      renderLandingHero(),
-      renderFamilyCoordinateSection(),
+      renderLandingHero({ visualMap: homeHeroVisualMap, heroStyleIds: homeHeroStyleIds }),
+      renderFamilyCoordinateSection({
+        defaultStyleId: defaultFieldStyle?.id || "",
+        previewVisual: homeFieldPreviewVisual
+      }),
       renderStyleGallerySection({
         sectionId: "home-gallery",
-        title: bilingualText("浏览风格", "Browse Styles"),
-        summary: "按直觉标签筛，先看截图，再决定要不要打开详情页拿 Prompt。现在这层已经补进了更多风格方向、参考网站和对应 Skill。",
+        title: bilingualText("首页精选风格", "Featured Styles"),
+        summary: "首页先看一组代表性风格，完整数量、搜索和筛选都放到 Browse 页面。当前 atlas 已经扩到更完整的网页风格谱系，不再停留在最初那 23 个方向。",
         actionHref: browseIndexHref(),
-        actionLabel: bilingualText(`查看全部 ${styleFamilies.length} 种风格`, `View all ${styleFamilies.length} styles`)
+        actionLabel: bilingualText(`查看全部 ${styleFamilies.length} 种风格`, `View all ${styleFamilies.length} styles`),
+        stylesList: homeGalleryStyles,
+        visualMap: assignUniqueVisuals(homeGalleryStyles, usedHomeScreenshots)
       })
     ].join("")
   });

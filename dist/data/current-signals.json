@@ -7,7 +7,8 @@
     "styleIds": [
       "magazine-editorial",
       "creative-media-editorial",
-      "luxury-fashion-editorial"
+      "luxury-fashion-editorial",
+      "journal-frontpage"
     ]
   },
   {
@@ -18,7 +19,8 @@
     "styleIds": [
       "swiss-typographic-grid",
       "monochrome-studio-systems",
-      "dark-studio-gallery"
+      "dark-studio-gallery",
+      "identity-case-archive"
     ]
   },
   {
@@ -49,7 +51,8 @@
     "styleIds": [
       "template-market-library",
       "curated-reference-directory",
-      "networked-visual-board"
+      "networked-visual-board",
+      "showcase-discovery-index"
     ]
   },
   {
@@ -72,6 +75,96 @@
       "editorial-commerce-catalog",
       "quiet-lifestyle-editorial",
       "humanist-modern-brand"
+    ]
+  },
+  {
+    "id": "system-docs",
+    "titleZh": "系统文档",
+    "titleEn": "System Docs",
+    "summaryZh": "设计系统、组件规范、tokens 和 guideline 入口正在变成一类很稳定的网页语言，不再只是产品文档的附属页面。",
+    "styleIds": [
+      "design-system-foundation",
+      "evidence-dense-knowledge-surface",
+      "product-precision-interface"
+    ]
+  },
+  {
+    "id": "creative-networks",
+    "titleZh": "创作网络",
+    "titleEn": "Creative Networks",
+    "summaryZh": "作品发现、作者身份、收藏和社交证明组合在一起，是创意社区与公开 portfolio platform 的稳定形态。",
+    "styleIds": [
+      "creative-portfolio-network",
+      "networked-visual-board",
+      "curated-reference-directory"
+    ]
+  },
+  {
+    "id": "service-clarity",
+    "titleZh": "服务清晰",
+    "titleEn": "Service Clarity",
+    "summaryZh": "plain language、任务入口和规则文档的组合越来越稳定，尤其适合公共服务、流程站和高可信知识入口。",
+    "styleIds": [
+      "civic-service-clarity",
+      "design-system-foundation",
+      "evidence-dense-knowledge-surface"
+    ]
+  },
+  {
+    "id": "modular-ai-launches",
+    "titleZh": "模块化 AI 发布",
+    "titleEn": "Modular AI Launches",
+    "summaryZh": "hero + bento 卡片 + 产品演示已经成为近一两年 AI 产品和 startup 首页里非常常见的一条方向。",
+    "styleIds": [
+      "bento-product-launch",
+      "developer-infrastructure-aura",
+      "product-precision-interface"
+    ]
+  },
+  {
+    "id": "space-and-practice",
+    "titleZh": "空间与事务所",
+    "titleEn": "Space And Practice",
+    "summaryZh": "建筑、空间、文化 practice 与 identity archive 之间正在共享一套更安静、更留白的 project-led 语言。",
+    "styleIds": [
+      "architecture-space-minimal",
+      "identity-case-archive",
+      "dark-studio-gallery"
+    ]
+  },
+  {
+    "id": "retail-and-scene",
+    "titleZh": "零售与场景品牌",
+    "titleEn": "Retail And Scene Brands",
+    "summaryZh": "零售、酒店、生活方式和文化品牌越来越依赖场景摄影、安静目录和低噪声转化来建立高级感。",
+    "styleIds": [
+      "modern-commerce-minimal",
+      "hospitality-scene-editorial",
+      "editorial-commerce-catalog",
+      "quiet-lifestyle-editorial"
+    ]
+  },
+  {
+    "id": "image-led-publications",
+    "titleZh": "图像出版",
+    "titleEn": "Image-Led Publications",
+    "summaryZh": "摄影期刊、奢刊和文化出版更依赖封面、图像比例和 issue 节奏，而不是普通资讯站的栏目密度。",
+    "styleIds": [
+      "photo-journal-archive",
+      "luxury-fashion-editorial",
+      "magazine-editorial",
+      "journal-frontpage"
+    ]
+  },
+  {
+    "id": "expert-learning",
+    "titleZh": "专家知识市场",
+    "titleEn": "Expert Learning",
+    "summaryZh": "课程平台、creator education 和 cohort course 正在形成一类介于 marketplace、媒体和知识产品之间的稳定网页语言。",
+    "styleIds": [
+      "expert-course-marketplace",
+      "template-market-library",
+      "report-storytelling-narrative"
     ]
   }
 ]
