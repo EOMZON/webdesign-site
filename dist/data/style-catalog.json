@@ -93,6 +93,100 @@
     }
   },
   {
+    "id": "institutional-program-grid",
+    "slug": "institutional-grid",
+    "nameZh": "机构项目网格",
+    "titleEn": "Institutional Program Grid",
+    "summaryZh": "更像文化机构、研究机构、学校项目站或节展主页的网格型页面，要同时承载 program、活动、申请入口和档案，而不是退化成普通工作室首页。",
+    "cardUses": [
+      "美术馆站",
+      "机构项目",
+      "节展计划"
+    ],
+    "lookLike": [
+      "清冷网格",
+      "program 并列",
+      "栏目克制",
+      "机构感明确"
+    ],
+    "notFor": [
+      "强销售首页",
+      "纯工具后台",
+      "单一 hero 发布页"
+    ],
+    "filterTags": [
+      "minimal-black-white",
+      "magazine-publishing"
+    ],
+    "cover": "swiss-institute.png",
+    "coverAlt": "Swiss Institute screenshot",
+    "coverLabel": "Swiss Institute",
+    "demoHref": "https://www.swissinstitute.net/",
+    "downloadPath": "/downloads/institutional-grid.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/institutional-grid",
+    "references": [
+      {
+        "label": "Swiss Institute",
+        "href": "https://www.swissinstitute.net/",
+        "screenshot": "swiss-institute.png",
+        "alt": "Swiss Institute screenshot",
+        "note": "文化机构首页、项目和日程入口并存，是机构项目网格的典型。"
+      },
+      {
+        "label": "Frieze",
+        "href": "https://www.frieze.com/",
+        "screenshot": "frieze.png",
+        "alt": "Frieze screenshot",
+        "note": "更偏媒体与机构之间的 program 组织方式。"
+      },
+      {
+        "label": "Pentagram",
+        "href": "https://www.pentagram.com/",
+        "screenshot": "pentagram.png",
+        "alt": "Pentagram screenshot",
+        "note": "如果你想让机构项目页更像系统化 identity，可以借它的秩序感。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "美术馆站点",
+        "研究机构",
+        "学院项目页",
+        "节展与驻留项目"
+      ],
+      "palette": [
+        "黑白灰或近白底更稳",
+        "颜色只服务栏目和状态",
+        "不要用营销型品牌色抢 program 信息"
+      ],
+      "typography": [
+        "标题和栏目层级必须同时成立",
+        "日期、地点、项目类型这些元数据要很好扫",
+        "更接近机构排印而不是品牌 slogan"
+      ],
+      "layout": [
+        "首页同时容纳机构介绍、program、日程和申请入口",
+        "列表与 feature 要并存",
+        "网格必须帮助导航而不是只做形式"
+      ],
+      "imagery": [
+        "图片更像项目资料或展讯封面",
+        "缩略图比例要稳定",
+        "避免充满情绪的单一 hero 大图独占整页"
+      ],
+      "motion": [
+        "只做轻量 reveal 和 hover",
+        "不要让节目单式浏览被动画打断",
+        "优先保持浏览稳定"
+      ],
+      "avoid": [
+        "把机构页做成奢华品牌大片",
+        "只剩网格没有 program 入口",
+        "CTA 太弱导致申请或购票路径难找"
+      ]
+    }
+  },
+  {
     "id": "monochrome-studio-systems",
     "slug": "minimal-black-white",
     "nameZh": "极简黑白",
@@ -367,6 +461,288 @@
         "冷冰冰工具站语气",
         "极端后现代冲突",
         "大面积霓虹科技感"
+      ]
+    }
+  },
+  {
+    "id": "report-storytelling-narrative",
+    "slug": "report-storytelling",
+    "nameZh": "报告叙事",
+    "titleEn": "Report Storytelling Narrative",
+    "summaryZh": "更像研究专题、年度报告、影响力报告和结论驱动长文的页面家族，用章节、图表、证据模块和滚动节奏把故事讲清楚。",
+    "cardUses": [
+      "年度报告",
+      "研究专题",
+      "影响力报告"
+    ],
+    "lookLike": [
+      "结论先行",
+      "图表与章节并进",
+      "滚动叙事",
+      "证据模块化"
+    ],
+    "notFor": [
+      "模板市场",
+      "轻量个人站",
+      "沉浸发布页"
+    ],
+    "filterTags": [
+      "minimal-black-white",
+      "product-tool"
+    ],
+    "cover": "pair-guidebook.png",
+    "coverAlt": "People + AI Guidebook screenshot",
+    "coverLabel": "People + AI Guidebook",
+    "demoHref": "https://pair.withgoogle.com/guidebook-v2/",
+    "downloadPath": "/downloads/report-storytelling.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/report-storytelling",
+    "references": [
+      {
+        "label": "People + AI Guidebook",
+        "href": "https://pair.withgoogle.com/guidebook-v2/",
+        "screenshot": "pair-guidebook.png",
+        "alt": "People + AI Guidebook screenshot",
+        "note": "章节节奏、插图和长文导读都很成熟。"
+      },
+      {
+        "label": "Our World in Data",
+        "href": "https://ourworldindata.org/",
+        "screenshot": "ourworldindata-live.png",
+        "alt": "Our World in Data screenshot",
+        "note": "结论、证据和数据浏览并存，是报告叙事的可靠参考。"
+      },
+      {
+        "label": "Carbon for AI",
+        "href": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+        "screenshot": "carbon-for-ai.png",
+        "alt": "Carbon for AI screenshot",
+        "note": "适合补更系统、更产品化的报告表达。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "年度报告",
+        "研究专题",
+        "政策指南",
+        "影响力报告"
+      ],
+      "palette": [
+        "中性底色优先",
+        "颜色用于章节和数据强调",
+        "不要用情绪色覆盖证据本身"
+      ],
+      "typography": [
+        "标题像章节而不是广告口号",
+        "正文、注释和图表说明必须同时清楚",
+        "数据标签要单独设计层级"
+      ],
+      "layout": [
+        "先结论再证据",
+        "章节滚动要有叙事推进",
+        "图表、引文和案例要作为证据块穿插出现"
+      ],
+      "imagery": [
+        "图表和截图都要承担说明责任",
+        "少用无关氛围图",
+        "每张图都要服务论点或转场"
+      ],
+      "motion": [
+        "动效可以帮助章节进入",
+        "但不能抢走阅读注意力",
+        "滚动节奏比 hover 更重要"
+      ],
+      "avoid": [
+        "做成普通知识库首页",
+        "只有数据堆叠没有叙事",
+        "把报告页做成产品落地页"
+      ]
+    }
+  },
+  {
+    "id": "developer-infrastructure-aura",
+    "slug": "developer-platform",
+    "nameZh": "开发者平台",
+    "titleEn": "Developer Infrastructure Aura",
+    "summaryZh": "更像云平台、开发者工具、API 平台和 AI 基础设施官网的当代网页语言，关键不是普通 SaaS 营销，而是可信感、性能叙事、文档邻接和生态证明。",
+    "cardUses": [
+      "云平台",
+      "开发者工具",
+      "API 平台"
+    ],
+    "lookLike": [
+      "近黑平台感",
+      "性能可信",
+      "文档邻接",
+      "代码感克制"
+    ],
+    "notFor": [
+      "生活方式品牌",
+      "慢内容站",
+      "工艺自然首页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "technology-future"
+    ],
+    "cover": "vercel.png",
+    "coverAlt": "Vercel screenshot",
+    "coverLabel": "Vercel",
+    "demoHref": "https://vercel.com/",
+    "downloadPath": "/downloads/developer-platform.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/developer-platform",
+    "references": [
+      {
+        "label": "Vercel",
+        "href": "https://vercel.com/",
+        "screenshot": "vercel.png",
+        "alt": "Vercel screenshot",
+        "note": "近黑平台感、性能可信感和生态证明都很完整。"
+      },
+      {
+        "label": "Stripe",
+        "href": "https://stripe.com/",
+        "screenshot": "stripe.png",
+        "alt": "Stripe screenshot",
+        "note": "平台与产品说明之间的平衡非常成熟。"
+      },
+      {
+        "label": "Linear",
+        "href": "https://linear.app/",
+        "screenshot": "linear.png",
+        "alt": "Linear screenshot",
+        "note": "更克制、更产品化的开发者平台表达。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "云平台",
+        "开发者工具",
+        "API 平台",
+        "AI 基础设施官网"
+      ],
+      "palette": [
+        "近黑或冷白都可以",
+        "重点用少量高对比色建立可信感",
+        "不要用廉价渐变把平台感做薄"
+      ],
+      "typography": [
+        "无衬线为主",
+        "代码、性能、生态这类词要清楚分层",
+        "标题应克制但有技术信誉"
+      ],
+      "layout": [
+        "首屏先讲平台能力和可信度",
+        "文档、生态、产品模块要邻接出现",
+        "案例和 benchmark 要像证据而不是装饰"
+      ],
+      "imagery": [
+        "产品界面、代码片段和生态标识都可做视觉证据",
+        "少用纯情绪 hero 图",
+        "截图必须清楚解释平台能力"
+      ],
+      "motion": [
+        "动效要服务状态和性能感",
+        "避免娱乐化过场",
+        "更像稳定系统而不是活动页"
+      ],
+      "avoid": [
+        "做成通用 SaaS landing",
+        "过多生活方式摄影",
+        "只有 UI 截图没有平台层叙事"
+      ]
+    }
+  },
+  {
+    "id": "industrial-hardware-minimal",
+    "slug": "industrial-hardware",
+    "nameZh": "工业硬件极简",
+    "titleEn": "Industrial Hardware Minimal",
+    "summaryZh": "更偏消费电子、设备单品和工业设计品牌的极简家族，让物体、材质和控制得很克制的说明成为主角，而不是霓虹未来感或长篇叙事。",
+    "cardUses": [
+      "硬件发布",
+      "设备单品",
+      "科技品牌"
+    ],
+    "lookLike": [
+      "物体主导",
+      "材质克制",
+      "说明很少但准",
+      "工业留白"
+    ],
+    "notFor": [
+      "知识库",
+      "模板目录",
+      "文化资讯站"
+    ],
+    "filterTags": [
+      "technology-future",
+      "minimal-black-white"
+    ],
+    "cover": "apple-macbook.png",
+    "coverAlt": "Apple MacBook Pro screenshot",
+    "coverLabel": "Apple MacBook Pro",
+    "demoHref": "https://www.apple.com/macbook-pro/",
+    "downloadPath": "/downloads/industrial-hardware.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/industrial-hardware",
+    "references": [
+      {
+        "label": "Apple MacBook Pro",
+        "href": "https://www.apple.com/macbook-pro/",
+        "screenshot": "apple-macbook.png",
+        "alt": "Apple MacBook Pro screenshot",
+        "note": "物体主导、说明精准，是硬件极简的强参考。"
+      },
+      {
+        "label": "Xbox Series X",
+        "href": "https://www.xbox.com/en-US/consoles/xbox-series-x",
+        "screenshot": "xbox-series-x-live.png",
+        "alt": "Xbox Series X screenshot",
+        "note": "硬件体块、材质和世界观可以同时成立。"
+      },
+      {
+        "label": "PlayStation 5",
+        "href": "https://www.playstation.com/en-us/ps5/",
+        "screenshot": "playstation-ps5-live.png",
+        "alt": "PlayStation 5 screenshot",
+        "note": "更偏娱乐硬件的一侧，但仍能借它的物件舞台感。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "硬件发布",
+        "工业设计品牌",
+        "设备单品页",
+        "科技品牌旗舰页"
+      ],
+      "palette": [
+        "中性黑白灰优先",
+        "颜色从产品材质里来",
+        "不要无端加入霓虹特效"
+      ],
+      "typography": [
+        "说明文字少而准",
+        "规格信息要像工业标签一样清楚",
+        "标题不需要过度情绪化"
+      ],
+      "layout": [
+        "让物体本身占主导",
+        "在大图和规格之间保持节奏",
+        "信息区块像产品说明书而不是内容 feed"
+      ],
+      "imagery": [
+        "物体摄影或渲染必须足够干净",
+        "裁切要强调体块和材质",
+        "不要混入无关生活方式图像"
+      ],
+      "motion": [
+        "轻微镜头感和 reveal 足够",
+        "不要做赛博朋克式发光漂移",
+        "以稳定和精度为主"
+      ],
+      "avoid": [
+        "只剩未来感没有产品",
+        "把硬件站做成知识库",
+        "说明过多导致物体失去主角位置"
       ]
     }
   },
@@ -832,6 +1208,194 @@
         "工具导航条过重",
         "高频 CTA",
         "过度解释型模块"
+      ]
+    }
+  },
+  {
+    "id": "editorial-commerce-catalog",
+    "slug": "editorial-commerce",
+    "nameZh": "编辑商店",
+    "titleEn": "Editorial Commerce Catalog",
+    "summaryZh": "更像内容品牌、设计商店、刊物目录和精选物件零售混合在一起的家族，内容和商品并列出现，但整体仍保持刊物感和品牌调性。",
+    "cardUses": [
+      "设计商店",
+      "刊物目录",
+      "内容品牌零售"
+    ],
+    "lookLike": [
+      "内容与商品并列",
+      "期刊感缩略图",
+      "目录像 issue",
+      "转化不吵"
+    ],
+    "notFor": [
+      "纯 SaaS 工具",
+      "严肃研究档案",
+      "霓虹发布页"
+    ],
+    "filterTags": [
+      "craft-natural",
+      "magazine-publishing"
+    ],
+    "cover": "gentlewoman-live.png",
+    "coverAlt": "The Gentlewoman screenshot",
+    "coverLabel": "The Gentlewoman",
+    "demoHref": "https://thegentlewoman.co.uk/",
+    "downloadPath": "/downloads/editorial-commerce.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/editorial-commerce",
+    "references": [
+      {
+        "label": "The Gentlewoman",
+        "href": "https://thegentlewoman.co.uk/",
+        "screenshot": "gentlewoman-live.png",
+        "alt": "The Gentlewoman screenshot",
+        "note": "内容、刊物感和品牌零售之间的距离拿捏得很好。"
+      },
+      {
+        "label": "Monocle",
+        "href": "https://monocle.com/",
+        "screenshot": "monocle.png",
+        "alt": "Monocle screenshot",
+        "note": "品牌、目录和精选物件混合得更完整。"
+      },
+      {
+        "label": "Kinfolk",
+        "href": "https://kinfolk.com/",
+        "screenshot": "kinfolk-live.png",
+        "alt": "Kinfolk screenshot",
+        "note": "如果你要更安静、更偏生活方式一侧，可以借它的节奏。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "设计商店",
+        "刊物目录",
+        "内容品牌零售",
+        "家居与文化精选店"
+      ],
+      "palette": [
+        "中性底色更稳",
+        "颜色从物件和刊物封面里来",
+        "不要做强促销电商橱窗"
+      ],
+      "typography": [
+        "标题像刊物目录而不是促销 banner",
+        "商品信息和编辑栏目都要清楚",
+        "serif 与 sans 可以混搭但要克制"
+      ],
+      "layout": [
+        "内容、商品和精选合集要能并列出现",
+        "首页像一期 issue 或一册目录",
+        "转化动作要清楚但不吵"
+      ],
+      "imagery": [
+        "商品图和 editorial 图要共存",
+        "缩略图像 printed catalog 一样整齐",
+        "避免统一成普通电商卡片"
+      ],
+      "motion": [
+        "hover 轻量即可",
+        "重点是浏览节奏和目录感",
+        "不要让商店操作打断品牌阅读"
+      ],
+      "avoid": [
+        "做成大促首页",
+        "只有气质没有购买路径",
+        "商品和内容完全分裂成两个站"
+      ]
+    }
+  },
+  {
+    "id": "experimental-typographic-poster",
+    "slug": "typographic-poster",
+    "nameZh": "排印海报实验",
+    "titleEn": "Experimental Typographic Poster",
+    "summaryZh": "更像设计活动、展览专题、文化 campaign 和实验工作室首页的排印型家族，字体和版面本身就是主视觉，不需要靠普通产品 hero 讲故事。",
+    "cardUses": [
+      "设计活动",
+      "展览专题",
+      "文化 campaign"
+    ],
+    "lookLike": [
+      "字体是主视觉",
+      "海报感强",
+      "版面冲突可控",
+      "文化气质浓"
+    ],
+    "notFor": [
+      "后台工具",
+      "复杂目录",
+      "平静信任型官网"
+    ],
+    "filterTags": [
+      "bold-personality",
+      "magazine-publishing"
+    ],
+    "cover": "studio-feixen.png",
+    "coverAlt": "Studio Feixen screenshot",
+    "coverLabel": "Studio Feixen",
+    "demoHref": "https://www.studiofeixen.ch/",
+    "downloadPath": "/downloads/typographic-poster.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/typographic-poster",
+    "references": [
+      {
+        "label": "Studio Feixen",
+        "href": "https://www.studiofeixen.ch/",
+        "screenshot": "studio-feixen.png",
+        "alt": "Studio Feixen screenshot",
+        "note": "排印、节奏和文化活动感都很强。"
+      },
+      {
+        "label": "Bureau Borsche",
+        "href": "https://bureauborsche.com/",
+        "screenshot": "bureau-borsche.png",
+        "alt": "Bureau Borsche screenshot",
+        "note": "更强的实验排印与版面态度。"
+      },
+      {
+        "label": "Pentagram",
+        "href": "https://www.pentagram.com/",
+        "screenshot": "pentagram.png",
+        "alt": "Pentagram screenshot",
+        "note": "如果想让实验感更可控、更像成熟 identity，可以借它的秩序。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "设计活动",
+        "展览专题",
+        "字体项目",
+        "文化 campaign"
+      ],
+      "palette": [
+        "黑白是骨架",
+        "可以允许少量 punch 色",
+        "颜色必须服务排印冲击而不是装饰噪音"
+      ],
+      "typography": [
+        "字体本身就是主视觉",
+        "允许尺度对撞和版式冲突",
+        "但主阅读路径必须保留"
+      ],
+      "layout": [
+        "更像海报系统或活动识别",
+        "块面、字级和版面关系比传统卡片更重要",
+        "章节切换可以更戏剧化"
+      ],
+      "imagery": [
+        "可以少图甚至无图",
+        "图片出现时要像海报元素而不是产品配图",
+        "避免素材拼贴失控"
+      ],
+      "motion": [
+        "动效可以更有存在感",
+        "文字进场比图片 hover 更重要",
+        "不要为了实验牺牲基本可用性"
+      ],
+      "avoid": [
+        "每个模块都在尖叫",
+        "给严肃知识库硬套排印海报",
+        "排印实验没有节制导致不可读"
       ]
     }
   },

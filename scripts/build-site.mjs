@@ -23,6 +23,7 @@ import {
 } from "../src/atlas-taxonomy.mjs";
 import {
   atlasEcosystemCatalog,
+  currentWebSignalsCatalog,
   designSkillsRepoHref,
   extraStyleSources,
   styleReferenceCatalog,
@@ -410,6 +411,24 @@ const primaryVisualMap = {
     "xbox-series-x-live.png",
     "Xbox Series X",
     "Xbox Series X homepage"
+  ),
+  "institutional-program-grid": visualAsset("swiss-institute.png", "Swiss Institute", "Swiss Institute homepage"),
+  "report-storytelling-narrative": visualAsset(
+    "pair-guidebook.png",
+    "People + AI Guidebook",
+    "People + AI Guidebook page"
+  ),
+  "developer-infrastructure-aura": visualAsset("vercel.png", "Vercel", "Vercel homepage"),
+  "industrial-hardware-minimal": visualAsset(
+    "apple-macbook.png",
+    "Apple MacBook Pro",
+    "Apple MacBook Pro page"
+  ),
+  "experimental-typographic-poster": visualAsset("studio-feixen.png", "Studio Feixen", "Studio Feixen homepage"),
+  "editorial-commerce-catalog": visualAsset(
+    "gentlewoman-live.png",
+    "The Gentlewoman",
+    "The Gentlewoman homepage"
   )
 };
 
@@ -593,6 +612,18 @@ const styleMetaMap = {
     toneAxis: "quiet",
     orderAxis: "distinctive"
   },
+  "institutional-program-grid": {
+    slug: "institutional-grid",
+    nameZh: "机构项目网格",
+    cardUses: ["美术馆站", "机构项目", "节展计划"],
+    lookLike: ["清冷网格", "program 并列", "栏目克制", "机构感明确"],
+    notFor: ["强销售首页", "纯工具后台", "单一 hero 发布页"],
+    filterTags: ["minimal-black-white", "magazine-publishing"],
+    siteTypes: ["brand", "blog", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
   "product-precision-interface": {
     slug: "product-tool",
     nameZh: "产品工具",
@@ -602,6 +633,42 @@ const styleMetaMap = {
     filterTags: ["product-tool", "technology-future"],
     siteTypes: ["tool", "brand", "other"],
     audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "report-storytelling-narrative": {
+    slug: "report-storytelling",
+    nameZh: "报告叙事",
+    cardUses: ["年度报告", "研究专题", "影响力报告"],
+    lookLike: ["结论先行", "图表与章节并进", "滚动叙事", "证据模块化"],
+    notFor: ["模板市场", "轻量个人站", "沉浸发布页"],
+    filterTags: ["minimal-black-white", "product-tool"],
+    siteTypes: ["blog", "tool", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "developer-infrastructure-aura": {
+    slug: "developer-platform",
+    nameZh: "开发者平台",
+    cardUses: ["云平台", "开发者工具", "API 平台"],
+    lookLike: ["近黑平台感", "性能可信", "文档邻接", "代码感克制"],
+    notFor: ["生活方式品牌", "慢内容站", "工艺自然首页"],
+    filterTags: ["product-tool", "technology-future"],
+    siteTypes: ["tool", "brand", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "industrial-hardware-minimal": {
+    slug: "industrial-hardware",
+    nameZh: "工业硬件极简",
+    cardUses: ["硬件发布", "设备单品", "科技品牌"],
+    lookLike: ["物体主导", "材质克制", "说明很少但准", "工业留白"],
+    notFor: ["知识库", "模板目录", "文化资讯站"],
+    filterTags: ["technology-future", "minimal-black-white"],
+    siteTypes: ["launch", "brand", "other"],
+    audiences: ["general", "clients"],
     toneAxis: "quiet",
     orderAxis: "structured"
   },
@@ -651,6 +718,30 @@ const styleMetaMap = {
     siteTypes: ["brand", "blog", "portfolio"],
     audiences: ["fans", "general", "clients"],
     toneAxis: "quiet",
+    orderAxis: "distinctive"
+  },
+  "editorial-commerce-catalog": {
+    slug: "editorial-commerce",
+    nameZh: "编辑商店",
+    cardUses: ["设计商店", "刊物目录", "内容品牌零售"],
+    lookLike: ["内容与商品并列", "期刊感缩略图", "目录像 issue", "转化不吵"],
+    notFor: ["纯 SaaS 工具", "严肃研究档案", "霓虹发布页"],
+    filterTags: ["craft-natural", "magazine-publishing"],
+    siteTypes: ["brand", "blog", "other"],
+    audiences: ["general", "clients", "fans"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "experimental-typographic-poster": {
+    slug: "typographic-poster",
+    nameZh: "排印海报实验",
+    cardUses: ["设计活动", "展览专题", "文化 campaign"],
+    lookLike: ["字体是主视觉", "海报感强", "版面冲突可控", "文化气质浓"],
+    notFor: ["后台工具", "复杂目录", "平静信任型官网"],
+    filterTags: ["bold-personality", "magazine-publishing"],
+    siteTypes: ["launch", "brand", "portfolio", "other"],
+    audiences: ["fans", "general", "clients"],
+    toneAxis: "bold",
     orderAxis: "distinctive"
   },
   "playful-postmodern-anti-grid": {
@@ -767,14 +858,20 @@ const styleSkillSpecMap = styleSkillSpecCatalog;
 
 const styleOrder = [
   "swiss-typographic-grid",
+  "institutional-program-grid",
   "monochrome-studio-systems",
   "dark-studio-gallery",
   "humanist-modern-brand",
+  "report-storytelling-narrative",
+  "developer-infrastructure-aura",
+  "industrial-hardware-minimal",
   "creative-media-editorial",
   "neon-techno-futurist-interface",
   "magazine-editorial",
   "luxury-fashion-editorial",
   "quiet-lifestyle-editorial",
+  "editorial-commerce-catalog",
+  "experimental-typographic-poster",
   "playful-postmodern-anti-grid",
   "brutalist-raw-interface",
   "product-precision-interface",
@@ -3171,8 +3268,7 @@ function renderLandingHero() {
     "quiet-lifestyle-editorial",
     "neon-techno-futurist-interface",
     "template-market-library",
-    "networked-visual-board",
-    "dark-studio-gallery"
+    "networked-visual-board"
   ];
   const heroStyles = preferredIds.map((id) => styleFamilyMap.get(id)).filter(Boolean);
   const heroVisualMap = {
@@ -3186,8 +3282,7 @@ function renderLandingHero() {
       "Awwwards / Websites",
       "Awwwards websites directory"
     ),
-    "networked-visual-board": visualAsset("behance.png", "Behance", "Behance homepage"),
-    "dark-studio-gallery": visualAsset("studio-feixen.png", "Studio Feixen", "Studio Feixen homepage")
+    "networked-visual-board": visualAsset("behance.png", "Behance", "Behance homepage")
   };
   const heroCards = heroStyles.map((item) => ({
     item,
@@ -3499,6 +3594,35 @@ function renderAtlasEcosystemSection() {
   </section>`;
 }
 
+function styleFamilyBrowseHrefById(id) {
+  const item = styleFamilyMap.get(id);
+  return item ? browseHref(item.slug) : browseIndexHref();
+}
+
+function renderCurrentSignalsSection() {
+  return `<section class="section" id="current-signals">
+    ${renderSectionHead(
+      bilingualText("当前网页方向", "Current Web Signals"),
+      bilingualText("现在主流网站大致分成这些方向", "How current websites are clustering now"),
+      "这层不是历史流派，也不是工程底座。它回答的是：今天大家实际做出来的网站，大致正在往哪些方向收敛。"
+    )}
+    <div class="about-ecosystem-grid">
+      ${currentWebSignalsCatalog
+        .map(
+          (item) => `<article class="detail-card card-surface">
+            <div class="card-body">
+              <p class="card-kicker">${escapeHtml(bilingualText("当前信号", "Current Signal"))}</p>
+              <h3 class="card-title">${renderInlineEnglishTitle(item.titleZh, item.titleEn)}</h3>
+              <p class="card-summary">${escapeHtml(item.summaryZh)}</p>
+              ${renderLinkedPills(item.styleIds || [], styleFamilyMap, styleFamilyBrowseHrefById)}
+            </div>
+          </article>`
+        )
+        .join("")}
+    </div>
+  </section>`;
+}
+
 function renderAboutHero() {
   const cards = [
     {
@@ -3628,6 +3752,7 @@ function buildAboutPage() {
     body: [
       renderAboutHero(),
       renderAboutWorkflowSection(),
+      renderCurrentSignalsSection(),
       `<section class="section">
         ${renderSectionHead(
           bilingualText("公开 Skills 仓库", "Public Skills Repo"),
@@ -4092,6 +4217,16 @@ function buildAtlasEcosystemPayload() {
   }));
 }
 
+function buildCurrentSignalsPayload() {
+  return currentWebSignalsCatalog.map((item) => ({
+    id: item.id,
+    titleZh: item.titleZh,
+    titleEn: item.titleEn,
+    summaryZh: item.summaryZh,
+    styleIds: item.styleIds || []
+  }));
+}
+
 function build() {
   fs.rmSync(distRoot, { recursive: true, force: true });
   ensureDir(distRoot);
@@ -4120,6 +4255,7 @@ function build() {
 
   writeFile(path.join(distRoot, "data", "style-catalog.json"), JSON.stringify(buildStyleCatalogPayload(), null, 2));
   writeFile(path.join(distRoot, "data", "atlas-ecosystem.json"), JSON.stringify(buildAtlasEcosystemPayload(), null, 2));
+  writeFile(path.join(distRoot, "data", "current-signals.json"), JSON.stringify(buildCurrentSignalsPayload(), null, 2));
 
   assertNoDuplicateImagesPerPage();
 }

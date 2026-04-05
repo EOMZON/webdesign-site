@@ -1,0 +1,77 @@
+[
+  {
+    "id": "editorial-publishing",
+    "titleZh": "编辑出版",
+    "titleEn": "Editorial Publishing",
+    "summaryZh": "封面式首屏、图文主导、栏目节奏明确，适合内容品牌、文化媒体和专题型首页。",
+    "styleIds": [
+      "magazine-editorial",
+      "creative-media-editorial",
+      "luxury-fashion-editorial"
+    ]
+  },
+  {
+    "id": "black-white-grid",
+    "titleZh": "黑白网格",
+    "titleEn": "Black-and-White Grid",
+    "summaryZh": "排印主导、克制留白、项目索引清楚，是工作室、档案站和参考库最稳定的一条当代方向。",
+    "styleIds": [
+      "swiss-typographic-grid",
+      "monochrome-studio-systems",
+      "dark-studio-gallery"
+    ]
+  },
+  {
+    "id": "institutional-programs",
+    "titleZh": "机构项目",
+    "titleEn": "Institutional Programs",
+    "summaryZh": "介于文化机构首页、项目计划网和展讯入口之间，重点是同时容纳栏目、program、活动与档案。",
+    "styleIds": [
+      "institutional-program-grid",
+      "report-storytelling-narrative"
+    ]
+  },
+  {
+    "id": "developer-platforms",
+    "titleZh": "开发者平台",
+    "titleEn": "Developer Platforms",
+    "summaryZh": "产品说明、可信性能、文档邻接和生态证明同时出现，是 2025-2026 年非常稳定的一条技术网页方向。",
+    "styleIds": [
+      "developer-infrastructure-aura",
+      "product-precision-interface"
+    ]
+  },
+  {
+    "id": "template-discovery",
+    "titleZh": "模板与发现市场",
+    "titleEn": "Template Discovery",
+    "summaryZh": "截图优先、分类清楚、拿走路径短，既是一种站型，也是一整套分发生态。",
+    "styleIds": [
+      "template-market-library",
+      "curated-reference-directory",
+      "networked-visual-board"
+    ]
+  },
+  {
+    "id": "industrial-hardware",
+    "titleZh": "工业硬件极简",
+    "titleEn": "Industrial Hardware Minimal",
+    "summaryZh": "物体、材质和体块比长解释更重要，适合消费电子、设备旗舰页和工业设计品牌。",
+    "styleIds": [
+      "industrial-hardware-minimal",
+      "stage-driven-showcase",
+      "neon-techno-futurist-interface"
+    ]
+  },
+  {
+    "id": "culture-commerce",
+    "titleZh": "文化品牌零售",
+    "titleEn": "Editorial Commerce",
+    "summaryZh": "内容、刊物、会员和精选物件混在同一品牌世界里，靠目录感和策展感而不是促销噪音完成转化。",
+    "styleIds": [
+      "editorial-commerce-catalog",
+      "quiet-lifestyle-editorial",
+      "humanist-modern-brand"
+    ]
+  }
+]
