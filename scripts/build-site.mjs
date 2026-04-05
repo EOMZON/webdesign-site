@@ -4418,13 +4418,20 @@ function buildHomePage() {
     "showcase-discovery-index",
     "networked-visual-board"
   ];
-  const homeHeroVisualMap = assignUniqueVisuals(
+  const homeHeroPreferredMap = {
+    "swiss-typographic-grid": visualAsset("pentagram.png", "Pentagram", "Pentagram homepage"),
+    "architecture-space-minimal": visualAsset("snohetta.png", "Snohetta", "Snohetta homepage"),
+    "bento-product-launch": visualAsset("bolt-new.png", "Bolt", "Bolt homepage"),
+    "creative-media-editorial": visualAsset("itsnicethat-live.png", "It's Nice That", "It's Nice That homepage"),
+    "hospitality-scene-editorial": visualAsset("ace-hotel.png", "Ace Hotel", "Ace Hotel homepage"),
+    "neon-techno-futurist-interface": visualAsset("cyberpunk-net.png", "Cyberpunk", "Cyberpunk homepage"),
+    "showcase-discovery-index": visualAsset("siteinspire.png", "SiteInspire", "SiteInspire categories"),
+    "networked-visual-board": visualAsset("behance.png", "Behance", "Behance homepage")
+  };
+  const homeHeroVisualMap = buildVisualMap(
     homeHeroStyleIds.map((id) => styleFamilyMap.get(id)).filter(Boolean),
-    usedHomeScreenshots
+    { usedScreenshots: usedHomeScreenshots, preferredMap: homeHeroPreferredMap }
   );
-  homeHeroVisualMap.forEach((visual) => {
-    if (visual?.screenshot) usedHomeScreenshots.add(visual.screenshot);
-  });
   const defaultFieldStyle =
     styleFamilyMap.get("architecture-space-minimal") ||
     styleFamilies.find((item) => familyFieldMap[item.id]) ||
@@ -4457,6 +4464,28 @@ function buildHomePage() {
   ]
     .map((id) => styleFamilyMap.get(id))
     .filter(Boolean);
+  const homeGalleryPreferredMap = {
+    "swiss-typographic-grid": visualAsset("signal-a-studio.png", "Signal-A Studio", "Signal-A Studio homepage"),
+    "monochrome-studio-systems": visualAsset("fictivekin-home-live.png", "Fictive Kin", "Fictive Kin homepage"),
+    "dark-studio-gallery": visualAsset("studio-feixen.png", "Studio Feixen", "Studio Feixen homepage"),
+    "humanist-modern-brand": visualAsset("monocle.png", "Monocle", "Monocle homepage"),
+    "civic-service-clarity": visualAsset("govuk.png", "GOV.UK", "GOV.UK homepage"),
+    "architecture-space-minimal": visualAsset("snohetta.png", "Snohetta", "Snohetta homepage"),
+    "hospitality-scene-editorial": visualAsset("kinfolk-live.png", "Kinfolk", "Kinfolk homepage"),
+    "modern-commerce-minimal": visualAsset("everlane.png", "Everlane", "Everlane homepage"),
+    "photo-journal-archive": visualAsset("aperture.png", "Aperture", "Aperture homepage"),
+    "report-storytelling-narrative": visualAsset("pair-guidebook.png", "People + AI Guidebook", "People + AI Guidebook page"),
+    "design-system-foundation": visualAsset("atlassian-foundations.png", "Atlassian Foundations", "Atlassian Foundations page"),
+    "developer-infrastructure-aura": visualAsset("vercel.png", "Vercel", "Vercel homepage"),
+    "bento-product-launch": visualAsset("linear.png", "Linear", "Linear homepage"),
+    "creative-media-editorial": visualAsset("frieze.png", "Frieze", "Frieze homepage"),
+    "journal-frontpage": visualAsset("newyorker.png", "The New Yorker", "The New Yorker homepage"),
+    "luxury-fashion-editorial": visualAsset("gentlewoman.png", "The Gentlewoman", "The Gentlewoman homepage"),
+    "brutalist-raw-interface": visualAsset("gumroad-live.png", "Gumroad", "Gumroad homepage"),
+    "template-market-library": visualAsset("notion-templates-live.png", "Notion Templates", "Notion Templates page"),
+    "showcase-discovery-index": visualAsset("siteinspire-live.png", "SiteInspire", "SiteInspire listings"),
+    "networked-visual-board": visualAsset("arena-live.png", "Are.na / Board", "Are.na board screenshot")
+  };
   return layout({
     title: siteMeta.title,
     description: siteMeta.description,
@@ -4475,7 +4504,8 @@ function buildHomePage() {
         actionHref: browseIndexHref(),
         actionLabel: bilingualText(`查看全部 ${styleFamilies.length} 种风格`, `View all ${styleFamilies.length} styles`),
         stylesList: homeGalleryStyles,
-        visualMap: assignUniqueVisuals(homeGalleryStyles, usedHomeScreenshots)
+        preferredMap: homeGalleryPreferredMap,
+        usedScreenshots: usedHomeScreenshots
       })
     ].join("")
   });
