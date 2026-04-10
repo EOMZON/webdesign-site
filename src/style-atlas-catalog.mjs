@@ -612,6 +612,126 @@ export const extraStyleSources = [
     ],
     prompt:
       "Use an expert course marketplace family: trust-led hero, category and cohort browsing, instructor proof near every course card, syllabus snippets, and a browse-to-enroll flow that feels structured but not corporate."
+  },
+  {
+    id: "ai-companion-landing",
+    title: "AI Companion Landing",
+    titleZh: "AI 助手着陆页",
+    titleEn: "AI Companion Landing",
+    summary:
+      "Agent-native landing pages where the product is framed as a teammate, concierge, or autonomous operator, blending persona, workflow proof, and fast conversion into one clear first screen.",
+    summaryZh: "更像 Decagon、HappyRobot、Letta 这类 AI 助手与 agent 产品首页，核心不是普通 SaaS 功能罗列，而是 agent 角色、工作流能力和可信演示同时成立。",
+    ancestors: ["minimalism", "swiss-international-typography", "bauhaus-functional-modernism"],
+    movementIds: ["minimalism", "swiss-international-typography", "bauhaus-functional-modernism"],
+    structureIds: ["dossier", "workbench"],
+    samples: [
+      { screenshot: "decagon.png", alt: "Decagon homepage", label: "Decagon" },
+      { screenshot: "happyrobot.png", alt: "HappyRobot homepage", label: "HappyRobot" },
+      { screenshot: "letta.png", alt: "Letta homepage", label: "Letta" }
+    ],
+    references: [
+      { label: "Decagon", href: "https://www.decagon.ai/" },
+      { label: "HappyRobot", href: "https://www.happyrobot.ai/" },
+      { label: "Letta", href: "https://www.letta.com/" }
+    ],
+    prompt:
+      "Use an AI companion landing family: define the agent role immediately, show one high-trust workflow or operator scene, keep the demo and CTA close, and make the product feel like an active teammate instead of a generic software dashboard."
+  },
+  {
+    id: "docs-first-open-source",
+    title: "Docs-First Open Source Hybrid",
+    titleZh: "文档优先开源产品",
+    titleEn: "Docs-First Open Source Hybrid",
+    summary:
+      "Open-source product websites where install paths, docs adjacency, code credibility, and community proof are more important than dramatic marketing, with product trust built through structure and developer cues.",
+    summaryZh: "更像 Supabase、Astro、Bun 这类文档优先的开源产品首页，重点是安装路径、文档邻接、代码可信和社区证明，而不是重 marketing 氛围。",
+    ancestors: ["bauhaus-functional-modernism", "swiss-international-typography", "minimalism"],
+    movementIds: ["bauhaus-functional-modernism", "swiss-international-typography", "minimalism"],
+    structureIds: ["workbench", "dossier"],
+    samples: [
+      { screenshot: "supabase.png", alt: "Supabase homepage", label: "Supabase" },
+      { screenshot: "astro.png", alt: "Astro homepage", label: "Astro" },
+      { screenshot: "bun.png", alt: "Bun homepage", label: "Bun" }
+    ],
+    references: [
+      { label: "Supabase", href: "https://supabase.com/" },
+      { label: "Astro", href: "https://astro.build/" },
+      { label: "Bun", href: "https://bun.sh/" }
+    ],
+    prompt:
+      "Use a docs-first open-source family: show install or get-started cues early, keep docs and code proof near the hero, make community credibility visible, and let structure and developer trust do more of the persuasion than glossy brand theater."
+  },
+  {
+    id: "fintech-trust-platform",
+    title: "Fintech Trust Platform",
+    titleZh: "金融可信平台",
+    titleEn: "Fintech Trust Platform",
+    summary:
+      "Financial product websites where trust, compliance cues, transaction clarity, and product proof all need to coexist, often balancing strong conversion with visibly reliable interaction patterns.",
+    summaryZh: "更像 Plaid、Mercury、Wise 这类金融产品与支付平台首页，核心是可信感、交易清晰度、流程可靠性和产品证明同时成立。",
+    ancestors: ["swiss-international-typography", "minimalism", "bauhaus-functional-modernism"],
+    movementIds: ["swiss-international-typography", "minimalism", "bauhaus-functional-modernism"],
+    structureIds: ["workbench", "dossier"],
+    samples: [
+      { screenshot: "mercury.png", alt: "Mercury homepage", label: "Mercury" },
+      { screenshot: "wise.png", alt: "Wise homepage", label: "Wise" },
+      { screenshot: "plaid.png", alt: "Plaid homepage", label: "Plaid" }
+    ],
+    references: [
+      { label: "Mercury", href: "https://mercury.com/" },
+      { label: "Wise", href: "https://wise.com/" },
+      { label: "Plaid", href: "https://plaid.com/" }
+    ],
+    prompt:
+      "Use a fintech trust platform family: make trust visible in the first screen, keep transaction or account mechanics legible, pair conversion with product proof, and use structure and interface clarity to signal reliability rather than hype."
+  },
+  {
+    id: "health-care-soft-tech",
+    title: "Health & Care Soft-Tech",
+    titleZh: "医疗健康软科技",
+    titleEn: "Health & Care Soft-Tech",
+    summary:
+      "Health and care product websites where clinical trust, human warmth, and modern product framing need to work together without slipping into cold enterprise UI or vague wellness moodboards.",
+    summaryZh: "更像 Click Therapeutics、Superpower、Happy Ring 这类医疗健康与 care 科技首页，要同时处理临床可信、人味和现代产品感，不能冷得像企业后台，也不能虚到只剩 wellness 氛围。",
+    ancestors: ["mid-century-modern", "minimalism", "swiss-international-typography"],
+    movementIds: ["mid-century-modern", "minimalism", "swiss-international-typography"],
+    structureIds: ["dossier", "catalog-explorer"],
+    samples: [
+      { screenshot: "superpower.png", alt: "Superpower homepage", label: "Superpower" },
+      { screenshot: "click-therapeutics.png", alt: "Click Therapeutics homepage", label: "Click Therapeutics" },
+      { screenshot: "happyring.png", alt: "Happy Ring homepage", label: "Happy Ring" }
+    ],
+    references: [
+      { label: "Superpower", href: "https://superpower.com/" },
+      { label: "Click Therapeutics", href: "https://www.clicktherapeutics.com/" },
+      { label: "Happy Ring", href: "https://www.happyring.com/" }
+    ],
+    prompt:
+      "Use a health and care soft-tech family: balance clinical trust with human warmth, let the product outcome be clear fast, use supportive imagery without becoming vague wellness branding, and keep the interface evidence readable and calm."
+  },
+  {
+    id: "frontier-research-lab",
+    title: "Frontier Research Lab",
+    titleZh: "前沿研究实验室",
+    titleEn: "Frontier Research Lab",
+    summary:
+      "Research and frontier-science websites where thesis, institutional credibility, and a sense of serious exploration lead the page, often sitting between lab identity, publication, and product vision.",
+    summaryZh: "更像 Anthropic、Arc Institute、Normal 这类前沿研究与实验室型网站，首页更像 thesis、机构信誉和研究方向的入口，而不是普通品牌宣传页。",
+    ancestors: ["minimalism", "swiss-international-typography", "mid-century-modern"],
+    movementIds: ["minimalism", "swiss-international-typography", "mid-century-modern"],
+    structureIds: ["dossier", "archive-stack"],
+    samples: [
+      { screenshot: "anthropic.png", alt: "Anthropic homepage", label: "Anthropic" },
+      { screenshot: "arc-institute.png", alt: "Arc Institute homepage", label: "Arc Institute" },
+      { screenshot: "normal-computing.png", alt: "Normal homepage", label: "Normal" }
+    ],
+    references: [
+      { label: "Anthropic", href: "https://www.anthropic.com/" },
+      { label: "Arc Institute", href: "https://www.arcinstitute.org/" },
+      { label: "Normal", href: "https://www.normalcomputing.com/" }
+    ],
+    prompt:
+      "Use a frontier research lab family: lead with a thesis and research posture, make institutional credibility visible, support deeper reading into programs or publications, and let the page feel serious, exploratory, and modern without turning into generic corporate marketing."
   }
 ];
 
@@ -797,6 +917,31 @@ export const styleReferenceCatalog = {
     liveReference("maven.png", "Maven", "https://maven.com/", "最像 cohort course、专家平台和目录浏览并存的首页。"),
     liveReference("notion-templates-live.png", "Notion Templates", "https://www.notion.com/templates", "如果你想让课程平台更像高效 marketplace，可以借它。"),
     liveReference("pair-guidebook.png", "People + AI Guidebook", "https://pair.withgoogle.com/guidebook-v2/", "更偏知识深度和章节组织的一侧。")
+  ],
+  "ai-companion-landing": [
+    liveReference("decagon.png", "Decagon", "https://www.decagon.ai/", "AI concierge 角色和转化路径都很直接。"),
+    liveReference("happyrobot.png", "HappyRobot", "https://www.happyrobot.ai/", "更像 AI workforce 与 operator 系统的语气。"),
+    liveReference("letta.png", "Letta", "https://www.letta.com/", "把 agent memory 和产品界面一起放进首屏。")
+  ],
+  "docs-first-open-source": [
+    liveReference("supabase.png", "Supabase", "https://supabase.com/", "开源、文档、部署与社区证明一起成立。"),
+    liveReference("astro.png", "Astro", "https://astro.build/", "更轻、更清楚的 docs-first 产品首页。"),
+    liveReference("bun.png", "Bun", "https://bun.sh/", "大标题、性能和开发者导向都很鲜明。")
+  ],
+  "fintech-trust-platform": [
+    liveReference("mercury.png", "Mercury", "https://mercury.com/", "可信开户路径和产品界面一起出现。"),
+    liveReference("wise.png", "Wise", "https://wise.com/", "交易和成本清晰度非常强。"),
+    liveReference("plaid.png", "Plaid", "https://plaid.com/", "更偏平台级、数据与金融连接能力的一侧。")
+  ],
+  "health-care-soft-tech": [
+    liveReference("superpower.png", "Superpower", "https://superpower.com/", "人味、产品感和医疗可信一起成立。"),
+    liveReference("click-therapeutics.png", "Click Therapeutics", "https://www.clicktherapeutics.com/", "更临床、更研究导向的 care 科技表达。"),
+    liveReference("happyring.png", "Happy Ring", "https://www.happyring.com/", "可穿戴设备和 care 叙事的温和版本。")
+  ],
+  "frontier-research-lab": [
+    liveReference("anthropic.png", "Anthropic", "https://www.anthropic.com/", "研究姿态、公共论述和产品方向一起出现。"),
+    liveReference("arc-institute.png", "Arc Institute", "https://www.arcinstitute.org/", "机构信誉、项目与科学使命非常清楚。"),
+    liveReference("normal-computing.png", "Normal", "https://www.normalcomputing.com/", "更像未来实验室与 thesis brand 的方向。")
   ]
 };
 
@@ -1115,6 +1260,51 @@ export const styleSkillSpecCatalog = {
     imagery: ["卡片图和导师头像可以并用", "重点是信息结构不是大氛围图", "课程截图或提纲应比装饰图更重要"],
     motion: ["筛选和浏览反馈优先", "尽量少做戏剧化动效", "稳定浏览比视觉噱头更重要"],
     avoid: ["只有课程封面没有可信信息", "把教育平台做成泛 SaaS 官网", "报名路径隐藏太深"]
+  },
+  "ai-companion-landing": {
+    useWhen: ["AI agent 首页", "客服 AI", "自动化助手", "agent workforce 产品"],
+    palette: ["允许轻度未来感", "颜色应服务 agent 角色和 CTA", "不要滑向廉价赛博渐变"],
+    typography: ["标题要先说 agent 在替谁工作", "能力词必须比 slogan 更具体", "演示和 CTA 文字要很短很准"],
+    layout: ["首屏就给出 agent 角色", "把 demo、workflow proof 和 CTA 拉近", "不要做成普通 SaaS 功能长页"],
+    imagery: ["可以有人物化或界面化表达", "但必须回到 agent 工作流", "不要只有抽象宇宙图没有能力证明"],
+    motion: ["允许更明显的 hover 和 reveal", "节奏要短促", "不要用漫长特效拖慢理解"],
+    avoid: ["只有 AI 口号没有具体工作", "重后台说明压住首屏判断", "泛化成通用 product landing"]
+  },
+  "docs-first-open-source": {
+    useWhen: ["开源产品首页", "framework 官网", "开发者工具", "docs-native 平台"],
+    palette: ["中性深浅都可以", "强调色要服务安装和导航", "不要用营销色覆盖开发者判断"],
+    typography: ["大标题直接说明是什么", "安装、文档、社区这些词要单独成层", "代码或命令提示要很好扫"],
+    layout: ["首屏先给 get started", "文档和产品说明紧邻出现", "让社区、stars 或生态证明自然入场"],
+    imagery: ["界面、代码和架构图都可作为证据", "少用纯情绪摄影", "首图要说明产品形态而不是只定 mood"],
+    motion: ["交互反馈清楚就够", "避免娱乐化镜头动效", "让结构和可信感先成立"],
+    avoid: ["做成只会讲故事的品牌站", "把文档入口埋太深", "只有 feature slogan 没有开发者证据"]
+  },
+  "fintech-trust-platform": {
+    useWhen: ["支付平台", "银行产品", "财务工具", "金融基础设施官网"],
+    palette: ["高可信中性色优先", "可以有少量功能型亮色", "不要把金融站做成噪声很大的潮流页"],
+    typography: ["数字、费用、到账时间和安全信息都要清楚", "标题要稳，不要过度花哨", "说明文字像产品承诺而不是营销诗句"],
+    layout: ["首屏同时解释价值和可信路径", "产品画面要能证明流程可靠", "CTA 要近但不能压住清晰度"],
+    imagery: ["界面、交易流和账户信息比氛围图更重要", "图像应辅助理解金融动作", "避免只有品牌抽象图没有产品证据"],
+    motion: ["保持稳、短、可信", "反馈必须有节制", "不要用夸张动效破坏安全感"],
+    avoid: ["只剩炫目品牌图形", "金融信息藏得太深", "把 trust 站做成 AI 发布页"]
+  },
+  "health-care-soft-tech": {
+    useWhen: ["数字健康", "care 科技", "健康会员产品", "医疗科技品牌站"],
+    palette: ["允许温和色温", "颜色要传递支持感而不是软弱", "不要滑向泛 wellness 米黄模板"],
+    typography: ["用词要可信、温和、明确", "标题先说改善结果", "数据和医学信息必须单独成层"],
+    layout: ["首屏既要有人味也要有产品逻辑", "成果、检测或 care 路径要尽早出现", "不要只做情绪化 lifestyle 页"],
+    imagery: ["人物、产品和健康数据可以并用", "图片要支持可信与关怀", "避免无依据的空泛疗愈图像"],
+    motion: ["保持轻柔和稳定", "不要做过于科技化的闪烁动效", "引导感比戏剧性更重要"],
+    avoid: ["冷得像企业后台", "软到只剩 wellness 氛围", "把健康站做成普通 DTC 电商"]
+  },
+  "frontier-research-lab": {
+    useWhen: ["研究实验室", "AI research 机构", "科学平台公司", "thesis-led 技术品牌"],
+    palette: ["近黑、近白或自然中性色都可以", "色彩服务研究方向和信誉", "不要用廉价未来色把科学感做薄"],
+    typography: ["标题像 thesis 而不是营销口号", "项目、研究、使命需要清楚分层", "正文允许更像出版物"],
+    layout: ["首屏先给研究立场和机构身份", "研究项目、论文或 program 要可继续深读", "不能只做一屏概念图就结束"],
+    imagery: ["图像可以更抽象或材料化", "但要和研究方向有关", "让图像像研究线索而不是纯 moodboard"],
+    motion: ["允许更安静的 reveal", "不要做快节奏转化式动效", "让阅读和探索成立"],
+    avoid: ["把实验室站做成普通产品主页", "只有品牌神秘感没有研究入口", "过度企业化导致 thesis 消失"]
   }
 };
 
@@ -1223,6 +1413,20 @@ export const currentWebSignalsCatalog = [
     titleEn: "Expert Learning",
     summaryZh: "课程平台、creator education 和 cohort course 正在形成一类介于 marketplace、媒体和知识产品之间的稳定网页语言。",
     styleIds: ["expert-course-marketplace", "template-market-library", "report-storytelling-narrative"]
+  },
+  {
+    id: "ai-native-web",
+    titleZh: "AI 原生网页",
+    titleEn: "AI-Native Web",
+    summaryZh: "agent 产品、开源开发者工具和研究实验室正在形成更鲜明的 AI 原生站型，不再只是旧 SaaS 模板换一个词。",
+    styleIds: ["ai-companion-landing", "docs-first-open-source", "frontier-research-lab", "developer-infrastructure-aura"]
+  },
+  {
+    id: "trust-and-care",
+    titleZh: "可信与照护",
+    titleEn: "Trust And Care",
+    summaryZh: "金融、公共服务与健康产品都在强调可读、可信和完成路径，只是情绪温度和行业证据各不相同。",
+    styleIds: ["fintech-trust-platform", "health-care-soft-tech", "civic-service-clarity"]
   }
 ];
 

@@ -44,7 +44,7 @@ function buildReadme(catalog) {
 
   return `# design-skills
 
-中文优先的网站风格技能仓库。这里每个 ` + "`styles/<slug>/SKILL.md`" + ` 都和 [design.zondev.top](https://design.zondev.top/) 上的一个具体风格详情页一一对应。
+中文优先的网站风格技能仓库。这里每个 ` + "`styles/<slug>/SKILL.md`" + ` 都和 [webdesign.zondev.top](https://webdesign.zondev.top/) 上的一个具体风格详情页一一对应。
 
 ## 这个仓库解决什么
 
@@ -54,7 +54,7 @@ function buildReadme(catalog) {
 
 ## 如何使用
 
-1. 先在 [design.zondev.top/browse](https://design.zondev.top/browse) 找到接近的风格
+1. 先在 [webdesign.zondev.top/browse](https://webdesign.zondev.top/browse) 找到接近的风格
 2. 打开对应详情页，确认“适合做 / 不适合做 / 参考网站”
 3. 下载或复制这个仓库里的 ` + "`SKILL.md`" + `，放进你的 skills 目录
 4. 再把真实内容需求和这个 skill 一起给 AI
@@ -65,7 +65,7 @@ ${styleList}
 
 ## 同步规则
 
-- 站点浏览层：` + "`design-site`" + `
+- 站点浏览层：` + "`webdesign-site`" + `
 - 公共 skills 层：` + "`design-skills`" + `
 - 这两个仓库通过 ` + "`npm run build && npm run export:skills`" + ` 保持同步
 `;

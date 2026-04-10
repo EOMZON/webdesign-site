@@ -166,5 +166,28 @@
       "template-market-library",
       "report-storytelling-narrative"
     ]
+  },
+  {
+    "id": "ai-native-web",
+    "titleZh": "AI 原生网页",
+    "titleEn": "AI-Native Web",
+    "summaryZh": "agent 产品、开源开发者工具和研究实验室正在形成更鲜明的 AI 原生站型，不再只是旧 SaaS 模板换一个词。",
+    "styleIds": [
+      "ai-companion-landing",
+      "docs-first-open-source",
+      "frontier-research-lab",
+      "developer-infrastructure-aura"
+    ]
+  },
+  {
+    "id": "trust-and-care",
+    "titleZh": "可信与照护",
+    "titleEn": "Trust And Care",
+    "summaryZh": "金融、公共服务与健康产品都在强调可读、可信和完成路径，只是情绪温度和行业证据各不相同。",
+    "styleIds": [
+      "fintech-trust-platform",
+      "health-care-soft-tech",
+      "civic-service-clarity"
+    ]
   }
 ]

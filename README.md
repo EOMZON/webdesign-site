@@ -1,6 +1,6 @@
-# Design Site
+# Webdesign Site
 
-Static style-to-site atlas for `design.zondev.top`.
+Static style-to-site atlas for `webdesign.zondev.top`.
 
 ## Purpose
 
@@ -13,7 +13,7 @@ Static style-to-site atlas for `design.zondev.top`.
 ## Build
 
 ```bash
-cd /Users/zon/Desktop/CreationOS/design-site
+cd /Users/zon/Desktop/CreationOS/webdesign-site
 npm run build
 ```
 

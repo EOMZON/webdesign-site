@@ -1528,6 +1528,12 @@ code {
   transform: translate(-50%, -50%);
   color: inherit;
   z-index: 1;
+  transition: opacity 160ms ease;
+}
+
+.field-atlas:hover .field-point:not(.is-active),
+.field-atlas:focus-within .field-point:not(.is-active) {
+  opacity: 0.34;
 }
 
 .field-point-dot {
@@ -1546,6 +1552,10 @@ code {
   background: var(--ink);
   border-color: var(--ink);
   transform: scale(1.2);
+}
+
+.field-point.is-active {
+  z-index: 3;
 }
 
 .field-point-label {
@@ -1596,11 +1606,16 @@ code {
   gap: 10px;
 }
 
+.field-preview-reference,
 .field-preview-fit {
   color: var(--ink);
   font-family: var(--mono);
   font-size: 0.75rem;
   letter-spacing: 0.04em;
+}
+
+.field-preview-reference {
+  color: var(--muted);
 }
 
 .home-hero {

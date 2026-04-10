@@ -1047,6 +1047,66 @@ const styleMetaMap = {
     audiences: ["general", "clients", "fans"],
     toneAxis: "bold",
     orderAxis: "structured"
+  },
+  "ai-companion-landing": {
+    slug: "ai-companion",
+    nameZh: "AI 助手着陆页",
+    cardUses: ["agent 产品", "客服 AI", "自动化助手"],
+    lookLike: ["agent 角色先行", "workflow demo 很近", "CTA 很短", "转化与能力并列"],
+    notFor: ["普通 docs 首页", "纯研究档案站", "慢节奏生活方式页"],
+    filterTags: ["technology-future", "product-tool"],
+    siteTypes: ["tool", "brand", "launch", "other"],
+    audiences: ["general", "clients", "fans"],
+    toneAxis: "bold",
+    orderAxis: "structured"
+  },
+  "docs-first-open-source": {
+    slug: "docs-first-open-source",
+    nameZh: "文档优先开源产品",
+    cardUses: ["开源产品", "framework 官网", "开发者工具"],
+    lookLike: ["get started 很近", "文档邻接", "代码可信", "社区证明明确"],
+    notFor: ["纯大片品牌页", "无文档入口的营销站", "情绪型杂志首页"],
+    filterTags: ["product-tool", "technology-future", "minimal-black-white"],
+    siteTypes: ["tool", "other", "brand"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "fintech-trust-platform": {
+    slug: "fintech-trust",
+    nameZh: "金融可信平台",
+    cardUses: ["支付平台", "银行产品", "财务工具"],
+    lookLike: ["trust 很快出现", "交易路径清楚", "产品界面证明能力", "金融动作可读"],
+    notFor: ["海报式文化首页", "纯情绪发布页", "实验排印专题"],
+    filterTags: ["product-tool"],
+    siteTypes: ["tool", "brand", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "health-care-soft-tech": {
+    slug: "health-soft-tech",
+    nameZh: "医疗健康软科技",
+    cardUses: ["数字健康", "care 科技", "医疗品牌站"],
+    lookLike: ["关怀但可信", "产品结果明确", "人物与数据并用", "界面克制"],
+    notFor: ["冷硬开发者平台", "霓虹游戏页", "普通 DTC 商店页"],
+    filterTags: ["craft-natural", "product-tool"],
+    siteTypes: ["brand", "tool", "other"],
+    audiences: ["general", "clients", "fans"],
+    toneAxis: "quiet",
+    orderAxis: "structured"
+  },
+  "frontier-research-lab": {
+    slug: "frontier-research-lab",
+    nameZh: "前沿研究实验室",
+    cardUses: ["研究机构", "AI research", "科学平台公司"],
+    lookLike: ["thesis 先行", "机构信誉明确", "研究入口可深读", "像 lab 而不是 SaaS"],
+    notFor: ["纯销售型 landing page", "大众电商首页", "模板市场目录"],
+    filterTags: ["technology-future", "minimal-black-white"],
+    siteTypes: ["brand", "blog", "other"],
+    audiences: ["general", "clients", "self"],
+    toneAxis: "quiet",
+    orderAxis: "distinctive"
   }
 };
 
@@ -1066,9 +1126,14 @@ const styleOrder = [
   "photo-journal-archive",
   "report-storytelling-narrative",
   "design-system-foundation",
+  "docs-first-open-source",
   "expert-course-marketplace",
   "developer-infrastructure-aura",
+  "fintech-trust-platform",
   "bento-product-launch",
+  "ai-companion-landing",
+  "health-care-soft-tech",
+  "frontier-research-lab",
   "industrial-hardware-minimal",
   "creative-media-editorial",
   "journal-frontpage",
@@ -1158,12 +1223,17 @@ const manualFamilyFieldMap = {
   "swiss-typographic-grid": { x: 22, y: 70, shortZh: "瑞士网格", shortEn: "Swiss Grid" },
   "civic-service-clarity": { x: 16, y: 56, shortZh: "公共服务", shortEn: "Civic" },
   "evidence-dense-knowledge-surface": { x: 20, y: 48, shortZh: "证据知识", shortEn: "Evidence Dense" },
+  "fintech-trust-platform": { x: 24, y: 36, shortZh: "金融可信", shortEn: "Fintech Trust" },
   "product-precision-interface": { x: 30, y: 44, shortZh: "精密产品", shortEn: "Product Precision" },
+  "docs-first-open-source": { x: 26, y: 62, shortZh: "文档开源", shortEn: "Docs First" },
   "bento-product-launch": { x: 40, y: 34, shortZh: "Bento发布", shortEn: "Bento" },
+  "ai-companion-landing": { x: 46, y: 22, shortZh: "AI 助手", shortEn: "AI Companion" },
   "curated-reference-directory": { x: 42, y: 62, shortZh: "策展目录", shortEn: "Curated Directory" },
   "monochrome-studio-systems": { x: 44, y: 50, shortZh: "黑白工作室", shortEn: "Monochrome Studio" },
+  "health-care-soft-tech": { x: 46, y: 66, shortZh: "健康软科", shortEn: "Health Care" },
   "architecture-space-minimal": { x: 54, y: 74, shortZh: "建筑空间", shortEn: "Architecture" },
   "photo-journal-archive": { x: 58, y: 48, shortZh: "摄影期刊", shortEn: "Photo Journal" },
+  "frontier-research-lab": { x: 64, y: 36, shortZh: "前沿实验", shortEn: "Research Lab" },
   "modern-commerce-minimal": { x: 62, y: 58, shortZh: "零售极简", shortEn: "Commerce" },
   "quiet-lifestyle-editorial": { x: 50, y: 28, shortZh: "静奢生活", shortEn: "Quiet Lifestyle" },
   "hospitality-scene-editorial": { x: 68, y: 24, shortZh: "酒店场景", shortEn: "Hospitality" },
@@ -1816,7 +1886,7 @@ function renderSectionHead(kicker, title, summary = "", actionMarkup = "") {
 function renderTopbar() {
   return `<header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="/" aria-label="Design Zondev home">
+      <a class="brand" href="/" aria-label="Webdesign Zondev home">
         <span class="brand-mark">Design</span>
         <strong class="brand-name">Zondev</strong>
       </a>
@@ -1854,8 +1924,8 @@ function layout({ title, description, pathname = "/", body, pageClass = "" }) {
         <div class="footer-inner">
           <p>${escapeHtml(
             bilingualText(
-              "Design Atlas：看图选风格，拿 Prompt 建站。",
-              "Design Atlas: choose by image, leave with a prompt."
+              "Webdesign Atlas：看图选风格，拿 Prompt 建站。",
+              "Webdesign Atlas: choose by image, leave with a prompt."
             )
           )}</p>
           <p>Updated ${escapeHtml(siteMeta.updatedAt)} · ${escapeHtml(siteMeta.origin.replace(/^https?:\/\//, ""))}</p>
@@ -1942,6 +2012,7 @@ function renderBrowseModes() {
 function renderFieldPreviewPanel(item, visual = null) {
   if (!item) return "";
   const previewVisual = visual || pickUniqueVisual(item);
+  const referenceLabel = item.coverLabel || previewVisual.label || item.nameZh || item.titleZh || item.title || "";
   return `<article class="field-preview-panel card-surface" data-field-preview aria-live="polite">
     <a ${linkAttrs(browseHref(item.slug), "field-preview-media")} data-field-preview-link>
       ${renderImageFrame(previewVisual.screenshot, previewVisual.alt || item.coverAlt || item.nameZh)}
@@ -1950,6 +2021,7 @@ function renderFieldPreviewPanel(item, visual = null) {
       <p class="card-kicker">${escapeHtml(bilingualText("当前风格", "Current Style"))}</p>
       <h3 class="card-title" data-field-preview-title>${renderInlineEnglishTitle(item.nameZh, item.titleEn || item.title)}</h3>
       <p class="card-summary" data-field-preview-summary>${escapeHtml(item.summaryZh || item.summary || "")}</p>
+      <p class="field-preview-reference" data-field-preview-reference>${escapeHtml(`代表参考：${referenceLabel}`)}</p>
       <p class="field-preview-fit" data-field-preview-fit>${escapeHtml(`适合做：${item.cardUses.slice(0, 3).join(" · ")}`)}</p>
       <a ${linkAttrs(browseHref(item.slug), "text-link")} data-field-preview-cta>${escapeHtml(
         bilingualText("查看这个风格", "Open this style")
@@ -1983,6 +2055,8 @@ function renderFieldAtlas(options = {}) {
               item.summaryZh || item.summary || ""
             )}" data-field-point-cover="${escapeHtml(item.cover || "")}" data-field-point-alt="${escapeHtml(
               item.coverAlt || item.nameZh
+            )}" data-field-point-reference="${escapeHtml(
+              item.coverLabel || item.liveReferences?.[0]?.label || item.nameZh || item.titleZh || item.title || ""
             )}" data-field-point-fit="${escapeHtml(item.cardUses.slice(0, 3).join(" · "))}" data-field-point-href="${escapeHtml(
               browseHref(item.slug)
             )}" aria-label="${escapeHtml(`${item.nameZh}${item.titleEn ? ` (${item.titleEn})` : ""}，适合做：${item.cardUses
@@ -4168,7 +4242,7 @@ function renderAboutWorkflowSection() {
 function buildAboutPage() {
   return layout({
     title: `${bilingualText("关于", "About")} · ${siteMeta.title}`,
-    description: "About Design Atlas as a style-selection service for AI website building.",
+    description: "About Webdesign Atlas as a style-selection service for AI website building.",
     pathname: aboutHref(),
     pageClass: "about-page index-page",
     body: [
@@ -4452,8 +4526,13 @@ function buildHomePage() {
     "photo-journal-archive",
     "report-storytelling-narrative",
     "design-system-foundation",
+    "docs-first-open-source",
     "developer-infrastructure-aura",
+    "fintech-trust-platform",
     "bento-product-launch",
+    "ai-companion-landing",
+    "health-care-soft-tech",
+    "frontier-research-lab",
     "creative-media-editorial",
     "journal-frontpage",
     "luxury-fashion-editorial",
@@ -4476,8 +4555,13 @@ function buildHomePage() {
     "photo-journal-archive": visualAsset("aperture.png", "Aperture", "Aperture homepage"),
     "report-storytelling-narrative": visualAsset("pair-guidebook.png", "People + AI Guidebook", "People + AI Guidebook page"),
     "design-system-foundation": visualAsset("atlassian-foundations.png", "Atlassian Foundations", "Atlassian Foundations page"),
+    "docs-first-open-source": visualAsset("supabase.png", "Supabase", "Supabase homepage"),
     "developer-infrastructure-aura": visualAsset("vercel.png", "Vercel", "Vercel homepage"),
+    "fintech-trust-platform": visualAsset("mercury.png", "Mercury", "Mercury homepage"),
     "bento-product-launch": visualAsset("linear.png", "Linear", "Linear homepage"),
+    "ai-companion-landing": visualAsset("decagon.png", "Decagon", "Decagon homepage"),
+    "health-care-soft-tech": visualAsset("superpower.png", "Superpower", "Superpower homepage"),
+    "frontier-research-lab": visualAsset("anthropic.png", "Anthropic", "Anthropic homepage"),
     "creative-media-editorial": visualAsset("frieze.png", "Frieze", "Frieze homepage"),
     "journal-frontpage": visualAsset("newyorker.png", "The New Yorker", "The New Yorker homepage"),
     "luxury-fashion-editorial": visualAsset("gentlewoman.png", "The Gentlewoman", "The Gentlewoman homepage"),
@@ -4514,7 +4598,7 @@ function buildHomePage() {
 function buildFamiliesPage() {
   return layout({
     title: `${bilingualText("网页家族", "Web Families")} · ${siteMeta.title}`,
-    description: "Contemporary web families for the Design Zondev atlas.",
+    description: "Contemporary web families for the Webdesign Zondev atlas.",
     pathname: "/families",
     pageClass: "index-page families-page",
     body: [
@@ -4540,7 +4624,7 @@ function buildFamiliesPage() {
 function buildMovementsPage() {
   return layout({
     title: `${bilingualText("历史流派", "Historical Movements")} · ${siteMeta.title}`,
-    description: "Historical movements for the Design Zondev atlas.",
+    description: "Historical movements for the Webdesign Zondev atlas.",
     pathname: "/movements",
     pageClass: "index-page movements-page",
     body: [
@@ -4565,7 +4649,7 @@ function buildMovementsPage() {
 function buildStructuresPage() {
   return layout({
     title: `${bilingualText("信息结构", "Structure Patterns")} · ${siteMeta.title}`,
-    description: "Structure patterns for organizing information and interaction in the Design Zondev atlas.",
+    description: "Structure patterns for organizing information and interaction in the Webdesign Zondev atlas.",
     pathname: "/structures",
     pageClass: "index-page structures-page",
     body: [

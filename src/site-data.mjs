@@ -1,8 +1,8 @@
 export const siteMeta = {
-  title: "Design Zondev",
+  title: "Webdesign Zondev",
   description:
-    "A style-to-site atlas for AI builders: choose the right web direction, structure, references, and prompt packet.",
-  origin: process.env.DESIGN_SITE_ORIGIN || "https://design.zondev.top",
+    "A web-design style atlas for AI builders: choose the right web direction, structure, references, and prompt packet.",
+  origin: process.env.WEBDESIGN_SITE_ORIGIN || process.env.DESIGN_SITE_ORIGIN || "https://webdesign.zondev.top",
   updatedAt: "2026-04-03"
 };
 

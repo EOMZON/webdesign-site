@@ -173,6 +173,7 @@ function renderStyleFieldPreview(point) {
   const summary = point.dataset.fieldPointSummary || "";
   const cover = point.dataset.fieldPointCover || "";
   const alt = point.dataset.fieldPointAlt || titleZh;
+  const reference = point.dataset.fieldPointReference || "";
   const fit = point.dataset.fieldPointFit || "";
   const href = point.dataset.fieldPointHref || "/browse";
 
@@ -183,6 +184,7 @@ function renderStyleFieldPreview(point) {
     <p class="card-kicker">${escapeHtml(bilingualText("当前风格", "Current Style"))}</p>
     <h3 class="card-title" data-field-preview-title>${renderInlineEnglishTitle(titleZh, titleEn)}</h3>
     <p class="card-summary" data-field-preview-summary>${escapeHtml(summary)}</p>
+    <p class="field-preview-reference" data-field-preview-reference>${escapeHtml(`代表参考：${reference}`)}</p>
     <p class="field-preview-fit" data-field-preview-fit>${escapeHtml(`适合做：${fit}`)}</p>
     <a class="text-link" href="${escapeHtml(href)}" data-field-preview-cta>${escapeHtml(
       bilingualText("查看这个风格", "Open this style")

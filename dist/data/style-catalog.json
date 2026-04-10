@@ -1217,6 +1217,101 @@
     }
   },
   {
+    "id": "docs-first-open-source",
+    "slug": "docs-first-open-source",
+    "nameZh": "文档优先开源产品",
+    "titleEn": "Docs-First Open Source Hybrid",
+    "summaryZh": "更像 Supabase、Astro、Bun 这类文档优先的开源产品首页，重点是安装路径、文档邻接、代码可信和社区证明，而不是重 marketing 氛围。",
+    "cardUses": [
+      "开源产品",
+      "framework 官网",
+      "开发者工具"
+    ],
+    "lookLike": [
+      "get started 很近",
+      "文档邻接",
+      "代码可信",
+      "社区证明明确"
+    ],
+    "notFor": [
+      "纯大片品牌页",
+      "无文档入口的营销站",
+      "情绪型杂志首页"
+    ],
+    "filterTags": [
+      "product-tool",
+      "technology-future",
+      "minimal-black-white"
+    ],
+    "cover": "supabase.png",
+    "coverAlt": "Supabase screenshot",
+    "coverLabel": "Supabase",
+    "demoHref": "https://supabase.com/",
+    "downloadPath": "/downloads/docs-first-open-source.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/docs-first-open-source",
+    "references": [
+      {
+        "label": "Supabase",
+        "href": "https://supabase.com/",
+        "screenshot": "supabase.png",
+        "alt": "Supabase screenshot",
+        "note": "开源、文档、部署与社区证明一起成立。"
+      },
+      {
+        "label": "Astro",
+        "href": "https://astro.build/",
+        "screenshot": "astro.png",
+        "alt": "Astro screenshot",
+        "note": "更轻、更清楚的 docs-first 产品首页。"
+      },
+      {
+        "label": "Bun",
+        "href": "https://bun.sh/",
+        "screenshot": "bun.png",
+        "alt": "Bun screenshot",
+        "note": "大标题、性能和开发者导向都很鲜明。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "开源产品首页",
+        "framework 官网",
+        "开发者工具",
+        "docs-native 平台"
+      ],
+      "palette": [
+        "中性深浅都可以",
+        "强调色要服务安装和导航",
+        "不要用营销色覆盖开发者判断"
+      ],
+      "typography": [
+        "大标题直接说明是什么",
+        "安装、文档、社区这些词要单独成层",
+        "代码或命令提示要很好扫"
+      ],
+      "layout": [
+        "首屏先给 get started",
+        "文档和产品说明紧邻出现",
+        "让社区、stars 或生态证明自然入场"
+      ],
+      "imagery": [
+        "界面、代码和架构图都可作为证据",
+        "少用纯情绪摄影",
+        "首图要说明产品形态而不是只定 mood"
+      ],
+      "motion": [
+        "交互反馈清楚就够",
+        "避免娱乐化镜头动效",
+        "让结构和可信感先成立"
+      ],
+      "avoid": [
+        "做成只会讲故事的品牌站",
+        "把文档入口埋太深",
+        "只有 feature slogan 没有开发者证据"
+      ]
+    }
+  },
+  {
     "id": "expert-course-marketplace",
     "slug": "expert-course-marketplace",
     "nameZh": "专家课程平台",
@@ -1405,6 +1500,99 @@
     }
   },
   {
+    "id": "fintech-trust-platform",
+    "slug": "fintech-trust",
+    "nameZh": "金融可信平台",
+    "titleEn": "Fintech Trust Platform",
+    "summaryZh": "更像 Plaid、Mercury、Wise 这类金融产品与支付平台首页，核心是可信感、交易清晰度、流程可靠性和产品证明同时成立。",
+    "cardUses": [
+      "支付平台",
+      "银行产品",
+      "财务工具"
+    ],
+    "lookLike": [
+      "trust 很快出现",
+      "交易路径清楚",
+      "产品界面证明能力",
+      "金融动作可读"
+    ],
+    "notFor": [
+      "海报式文化首页",
+      "纯情绪发布页",
+      "实验排印专题"
+    ],
+    "filterTags": [
+      "product-tool"
+    ],
+    "cover": "mercury.png",
+    "coverAlt": "Mercury screenshot",
+    "coverLabel": "Mercury",
+    "demoHref": "https://mercury.com/",
+    "downloadPath": "/downloads/fintech-trust.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/fintech-trust",
+    "references": [
+      {
+        "label": "Mercury",
+        "href": "https://mercury.com/",
+        "screenshot": "mercury.png",
+        "alt": "Mercury screenshot",
+        "note": "可信开户路径和产品界面一起出现。"
+      },
+      {
+        "label": "Wise",
+        "href": "https://wise.com/",
+        "screenshot": "wise.png",
+        "alt": "Wise screenshot",
+        "note": "交易和成本清晰度非常强。"
+      },
+      {
+        "label": "Plaid",
+        "href": "https://plaid.com/",
+        "screenshot": "plaid.png",
+        "alt": "Plaid screenshot",
+        "note": "更偏平台级、数据与金融连接能力的一侧。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "支付平台",
+        "银行产品",
+        "财务工具",
+        "金融基础设施官网"
+      ],
+      "palette": [
+        "高可信中性色优先",
+        "可以有少量功能型亮色",
+        "不要把金融站做成噪声很大的潮流页"
+      ],
+      "typography": [
+        "数字、费用、到账时间和安全信息都要清楚",
+        "标题要稳，不要过度花哨",
+        "说明文字像产品承诺而不是营销诗句"
+      ],
+      "layout": [
+        "首屏同时解释价值和可信路径",
+        "产品画面要能证明流程可靠",
+        "CTA 要近但不能压住清晰度"
+      ],
+      "imagery": [
+        "界面、交易流和账户信息比氛围图更重要",
+        "图像应辅助理解金融动作",
+        "避免只有品牌抽象图没有产品证据"
+      ],
+      "motion": [
+        "保持稳、短、可信",
+        "反馈必须有节制",
+        "不要用夸张动效破坏安全感"
+      ],
+      "avoid": [
+        "只剩炫目品牌图形",
+        "金融信息藏得太深",
+        "把 trust 站做成 AI 发布页"
+      ]
+    }
+  },
+  {
     "id": "bento-product-launch",
     "slug": "bento-product-launch",
     "nameZh": "Bento 产品发布",
@@ -1495,6 +1683,288 @@
         "模块太多导致信息噪音",
         "只有漂亮卡片没有产品逻辑",
         "把 bento 当成纯装饰"
+      ]
+    }
+  },
+  {
+    "id": "ai-companion-landing",
+    "slug": "ai-companion",
+    "nameZh": "AI 助手着陆页",
+    "titleEn": "AI Companion Landing",
+    "summaryZh": "更像 Decagon、HappyRobot、Letta 这类 AI 助手与 agent 产品首页，核心不是普通 SaaS 功能罗列，而是 agent 角色、工作流能力和可信演示同时成立。",
+    "cardUses": [
+      "agent 产品",
+      "客服 AI",
+      "自动化助手"
+    ],
+    "lookLike": [
+      "agent 角色先行",
+      "workflow demo 很近",
+      "CTA 很短",
+      "转化与能力并列"
+    ],
+    "notFor": [
+      "普通 docs 首页",
+      "纯研究档案站",
+      "慢节奏生活方式页"
+    ],
+    "filterTags": [
+      "technology-future",
+      "product-tool"
+    ],
+    "cover": "decagon.png",
+    "coverAlt": "Decagon screenshot",
+    "coverLabel": "Decagon",
+    "demoHref": "https://www.decagon.ai/",
+    "downloadPath": "/downloads/ai-companion.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/ai-companion",
+    "references": [
+      {
+        "label": "Decagon",
+        "href": "https://www.decagon.ai/",
+        "screenshot": "decagon.png",
+        "alt": "Decagon screenshot",
+        "note": "AI concierge 角色和转化路径都很直接。"
+      },
+      {
+        "label": "HappyRobot",
+        "href": "https://www.happyrobot.ai/",
+        "screenshot": "happyrobot.png",
+        "alt": "HappyRobot screenshot",
+        "note": "更像 AI workforce 与 operator 系统的语气。"
+      },
+      {
+        "label": "Letta",
+        "href": "https://www.letta.com/",
+        "screenshot": "letta.png",
+        "alt": "Letta screenshot",
+        "note": "把 agent memory 和产品界面一起放进首屏。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "AI agent 首页",
+        "客服 AI",
+        "自动化助手",
+        "agent workforce 产品"
+      ],
+      "palette": [
+        "允许轻度未来感",
+        "颜色应服务 agent 角色和 CTA",
+        "不要滑向廉价赛博渐变"
+      ],
+      "typography": [
+        "标题要先说 agent 在替谁工作",
+        "能力词必须比 slogan 更具体",
+        "演示和 CTA 文字要很短很准"
+      ],
+      "layout": [
+        "首屏就给出 agent 角色",
+        "把 demo、workflow proof 和 CTA 拉近",
+        "不要做成普通 SaaS 功能长页"
+      ],
+      "imagery": [
+        "可以有人物化或界面化表达",
+        "但必须回到 agent 工作流",
+        "不要只有抽象宇宙图没有能力证明"
+      ],
+      "motion": [
+        "允许更明显的 hover 和 reveal",
+        "节奏要短促",
+        "不要用漫长特效拖慢理解"
+      ],
+      "avoid": [
+        "只有 AI 口号没有具体工作",
+        "重后台说明压住首屏判断",
+        "泛化成通用 product landing"
+      ]
+    }
+  },
+  {
+    "id": "health-care-soft-tech",
+    "slug": "health-soft-tech",
+    "nameZh": "医疗健康软科技",
+    "titleEn": "Health & Care Soft-Tech",
+    "summaryZh": "更像 Click Therapeutics、Superpower、Happy Ring 这类医疗健康与 care 科技首页，要同时处理临床可信、人味和现代产品感，不能冷得像企业后台，也不能虚到只剩 wellness 氛围。",
+    "cardUses": [
+      "数字健康",
+      "care 科技",
+      "医疗品牌站"
+    ],
+    "lookLike": [
+      "关怀但可信",
+      "产品结果明确",
+      "人物与数据并用",
+      "界面克制"
+    ],
+    "notFor": [
+      "冷硬开发者平台",
+      "霓虹游戏页",
+      "普通 DTC 商店页"
+    ],
+    "filterTags": [
+      "craft-natural",
+      "product-tool"
+    ],
+    "cover": "superpower.png",
+    "coverAlt": "Superpower screenshot",
+    "coverLabel": "Superpower",
+    "demoHref": "https://superpower.com/",
+    "downloadPath": "/downloads/health-soft-tech.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/health-soft-tech",
+    "references": [
+      {
+        "label": "Superpower",
+        "href": "https://superpower.com/",
+        "screenshot": "superpower.png",
+        "alt": "Superpower screenshot",
+        "note": "人味、产品感和医疗可信一起成立。"
+      },
+      {
+        "label": "Click Therapeutics",
+        "href": "https://www.clicktherapeutics.com/",
+        "screenshot": "click-therapeutics.png",
+        "alt": "Click Therapeutics screenshot",
+        "note": "更临床、更研究导向的 care 科技表达。"
+      },
+      {
+        "label": "Happy Ring",
+        "href": "https://www.happyring.com/",
+        "screenshot": "happyring.png",
+        "alt": "Happy Ring screenshot",
+        "note": "可穿戴设备和 care 叙事的温和版本。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "数字健康",
+        "care 科技",
+        "健康会员产品",
+        "医疗科技品牌站"
+      ],
+      "palette": [
+        "允许温和色温",
+        "颜色要传递支持感而不是软弱",
+        "不要滑向泛 wellness 米黄模板"
+      ],
+      "typography": [
+        "用词要可信、温和、明确",
+        "标题先说改善结果",
+        "数据和医学信息必须单独成层"
+      ],
+      "layout": [
+        "首屏既要有人味也要有产品逻辑",
+        "成果、检测或 care 路径要尽早出现",
+        "不要只做情绪化 lifestyle 页"
+      ],
+      "imagery": [
+        "人物、产品和健康数据可以并用",
+        "图片要支持可信与关怀",
+        "避免无依据的空泛疗愈图像"
+      ],
+      "motion": [
+        "保持轻柔和稳定",
+        "不要做过于科技化的闪烁动效",
+        "引导感比戏剧性更重要"
+      ],
+      "avoid": [
+        "冷得像企业后台",
+        "软到只剩 wellness 氛围",
+        "把健康站做成普通 DTC 电商"
+      ]
+    }
+  },
+  {
+    "id": "frontier-research-lab",
+    "slug": "frontier-research-lab",
+    "nameZh": "前沿研究实验室",
+    "titleEn": "Frontier Research Lab",
+    "summaryZh": "更像 Anthropic、Arc Institute、Normal 这类前沿研究与实验室型网站，首页更像 thesis、机构信誉和研究方向的入口，而不是普通品牌宣传页。",
+    "cardUses": [
+      "研究机构",
+      "AI research",
+      "科学平台公司"
+    ],
+    "lookLike": [
+      "thesis 先行",
+      "机构信誉明确",
+      "研究入口可深读",
+      "像 lab 而不是 SaaS"
+    ],
+    "notFor": [
+      "纯销售型 landing page",
+      "大众电商首页",
+      "模板市场目录"
+    ],
+    "filterTags": [
+      "technology-future",
+      "minimal-black-white"
+    ],
+    "cover": "anthropic.png",
+    "coverAlt": "Anthropic screenshot",
+    "coverLabel": "Anthropic",
+    "demoHref": "https://www.anthropic.com/",
+    "downloadPath": "/downloads/frontier-research-lab.md",
+    "githubSkillHref": "https://github.com/EOMZON/design-skills/tree/main/styles/frontier-research-lab",
+    "references": [
+      {
+        "label": "Anthropic",
+        "href": "https://www.anthropic.com/",
+        "screenshot": "anthropic.png",
+        "alt": "Anthropic screenshot",
+        "note": "研究姿态、公共论述和产品方向一起出现。"
+      },
+      {
+        "label": "Arc Institute",
+        "href": "https://www.arcinstitute.org/",
+        "screenshot": "arc-institute.png",
+        "alt": "Arc Institute screenshot",
+        "note": "机构信誉、项目与科学使命非常清楚。"
+      },
+      {
+        "label": "Normal",
+        "href": "https://www.normalcomputing.com/",
+        "screenshot": "normal-computing.png",
+        "alt": "Normal screenshot",
+        "note": "更像未来实验室与 thesis brand 的方向。"
+      }
+    ],
+    "skillSpec": {
+      "useWhen": [
+        "研究实验室",
+        "AI research 机构",
+        "科学平台公司",
+        "thesis-led 技术品牌"
+      ],
+      "palette": [
+        "近黑、近白或自然中性色都可以",
+        "色彩服务研究方向和信誉",
+        "不要用廉价未来色把科学感做薄"
+      ],
+      "typography": [
+        "标题像 thesis 而不是营销口号",
+        "项目、研究、使命需要清楚分层",
+        "正文允许更像出版物"
+      ],
+      "layout": [
+        "首屏先给研究立场和机构身份",
+        "研究项目、论文或 program 要可继续深读",
+        "不能只做一屏概念图就结束"
+      ],
+      "imagery": [
+        "图像可以更抽象或材料化",
+        "但要和研究方向有关",
+        "让图像像研究线索而不是纯 moodboard"
+      ],
+      "motion": [
+        "允许更安静的 reveal",
+        "不要做快节奏转化式动效",
+        "让阅读和探索成立"
+      ],
+      "avoid": [
+        "把实验室站做成普通产品主页",
+        "只有品牌神秘感没有研究入口",
+        "过度企业化导致 thesis 消失"
       ]
     }
   },
