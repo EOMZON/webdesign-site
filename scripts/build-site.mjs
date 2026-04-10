@@ -1589,10 +1589,12 @@ function aboutHref() {
   return sitePath("about");
 }
 
-const githubHref = designSkillsRepoHref;
+const designHubHref = "https://design.zondev.top";
+const skillsRepoHref = designSkillsRepoHref;
+const siteRepoHref = "https://github.com/EOMZON/webdesign-site";
 
 function styleSkillRepoHref(item) {
-  return `${githubHref}/tree/main/styles/${item.slug}`;
+  return `${skillsRepoHref}/tree/main/styles/${item.slug}`;
 }
 
 function linkAttrs(href, className = "") {
@@ -1887,14 +1889,15 @@ function renderTopbar() {
   return `<header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="/" aria-label="Webdesign Zondev home">
-        <span class="brand-mark">Design</span>
+        <span class="brand-mark">Webdesign</span>
         <strong class="brand-name">Zondev</strong>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="${escapeHtml(browseIndexHref())}">${escapeHtml(bilingualText("浏览", "Browse"))}</a>
         <a href="${escapeHtml(selectorHref())}">${escapeHtml(bilingualText("选型器", "Selector"))}</a>
         <a href="${escapeHtml(aboutHref())}">${escapeHtml(bilingualText("关于", "About"))}</a>
-        <a href="${escapeHtml(githubHref)}">${escapeHtml("GitHub ↗")}</a>
+        <a href="${escapeHtml(designHubHref)}">${escapeHtml("Design Hub ↗")}</a>
+        <a href="${escapeHtml(skillsRepoHref)}">${escapeHtml("Skills Repo ↗")}</a>
       </nav>
       <span class="status-pill">atlas v1.0</span>
     </div>
@@ -1957,7 +1960,7 @@ function renderHeroStage() {
         ${heroWall.map((item) => renderHeroTile(item)).join("")}
       </div>
       <aside class="hero-aside hero-aside-dark card-surface">
-        <p class="eyebrow">${escapeHtml(bilingualText("风格图谱首页", "Design Atlas"))}</p>
+        <p class="eyebrow">${escapeHtml(bilingualText("风格图谱首页", "Webdesign Atlas"))}</p>
         <h1 class="hero-title">${escapeHtml(hero.title)}</h1>
         <p class="hero-intro">先看图，再选类，再下钻到真实参考页。</p>
         <p class="hero-support">历史流派 / Historical Movements、网页家族 / Web Families、使用场景 / Use Cases 三条路径并行存在，不再被一种固定模板绑死。</p>
@@ -2077,7 +2080,7 @@ function renderHomeOverviewHero() {
   return `<section class="home-hero section" id="top">
     <div class="home-hero-inner">
       <div class="home-hero-copy">
-        <p class="eyebrow">${escapeHtml(bilingualText("AI 建站风格选型", "Style-To-Site Atlas"))}</p>
+        <p class="eyebrow">${escapeHtml(bilingualText("AI 建站风格选型", "Webdesign Atlas"))}</p>
         <h1 class="hero-title home-hero-title">
           <span class="home-hero-title-zh">
             <span>先选你要做的网站</span>
@@ -3788,7 +3791,7 @@ function renderLandingHero(options = {}) {
   return `<section class="landing-hero section" id="top">
     <div class="landing-hero-inner">
       <div class="landing-hero-copy">
-        <p class="landing-kicker">DESIGN ATLAS — AI 建站风格参考库</p>
+        <p class="landing-kicker">WEBDESIGN ATLAS — AI 建站风格参考库</p>
         <h1 class="landing-title">
           <span>不知道网站要做成什么样？</span>
           <span>先看图，再开始。</span>
@@ -4141,7 +4144,7 @@ function renderAboutHero() {
       titleZh: "拿 Prompt",
       titleEn: "Prompt / Skill",
       summary: "确认适合做什么，再复制 Prompt 或下载 Skill。",
-      href: githubHref,
+      href: skillsRepoHref,
       screenshot: "atlassian-foundations.png",
       alt: "Prompt preview"
     }
@@ -4157,10 +4160,11 @@ function renderAboutHero() {
         </h1>
         <div class="landing-copy about-hero-copy-text">
           <p>${escapeHtml("这个站解决的不是“设计风格叫什么”，而是“我现在要做一个网站，先选哪种方向，接下来怎么交给 AI 做出来”。")}</p>
-          <p>${escapeHtml("首页负责看图和缩小范围，浏览页负责比较，详情页负责拿 Prompt，GitHub 仓库负责公开保存这些 skills。")}</p>
+          <p>${escapeHtml("首页负责看图和缩小范围，浏览页负责比较，详情页负责拿 Prompt；而 design.zondev.top 只做整个设计生态的总入口，不再重复这些深内容。")}</p>
         </div>
         <div class="hero-actions landing-actions">
           <a ${linkAttrs(browseIndexHref(), "button")}>${escapeHtml(bilingualText("开始浏览", "Start Browsing"))}</a>
+          <a ${linkAttrs(designHubHref, "ghost-button")}>${escapeHtml("返回 Design Hub ↗")}</a>
         </div>
       </div>
       <div class="about-preview-grid">
@@ -4262,7 +4266,8 @@ function buildAboutPage() {
                 "仓库按风格分文件夹维护 SKILL.md。你可以先在站内看图选方向，再去 GitHub 拿对应 skill；也可以直接把 skill 放进 Codex / Cursor / OpenClaw 的 skills 目录复用。"
               )}</p>
               <div class="hero-actions">
-                <a ${linkAttrs(githubHref, "button")}>${escapeHtml("打开 GitHub 仓库 ↗")}</a>
+                <a ${linkAttrs(skillsRepoHref, "button")}>${escapeHtml("打开 Skills 仓库 ↗")}</a>
+                <a ${linkAttrs(siteRepoHref, "ghost-button")}>${escapeHtml("站点源码 ↗")}</a>
                 <a ${linkAttrs(browseIndexHref(), "ghost-button")}>${escapeHtml(
                   bilingualText("回到风格浏览", "Back to Browse")
                 )}</a>

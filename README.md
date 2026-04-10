@@ -18,3 +18,17 @@ npm run build
 ```
 
 Output goes to `dist/`.
+
+## Export skills
+
+```bash
+npm run export:skills
+```
+
+This command syncs generated style skills into the sibling repo at `../design-skills`.
+
+Important:
+
+- it writes into another repository
+- it refreshes `styles/` based on the current atlas catalog
+- it should be run intentionally after checking the current style set, not as an invisible side effect

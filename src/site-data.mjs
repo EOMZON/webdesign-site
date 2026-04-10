@@ -2,12 +2,12 @@ export const siteMeta = {
   title: "Webdesign Zondev",
   description:
     "A web-design style atlas for AI builders: choose the right web direction, structure, references, and prompt packet.",
-  origin: process.env.WEBDESIGN_SITE_ORIGIN || process.env.DESIGN_SITE_ORIGIN || "https://webdesign.zondev.top",
+  origin: process.env.WEBDESIGN_SITE_ORIGIN || "https://webdesign.zondev.top",
   updatedAt: "2026-04-03"
 };
 
 export const hero = {
-  eyebrow: "Style-To-Site Atlas",
+  eyebrow: "Webdesign Atlas",
   title: "先选你要做的网站，再决定风格和结构",
   intro:
     "这是给用 AI 做站的人用的风格选型工具，不是设计史百科首页。",
